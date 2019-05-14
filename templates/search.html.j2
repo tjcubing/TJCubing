@@ -1,0 +1,17 @@
+{% extends "helper/base.html.j2" %}
+{% block content %}
+
+<h1 class="display-1 mb-5"> Search </h1>
+
+{% for time, name, html, preview in entries%}
+  <div class="card mt-5" style="width: 20rem;">
+    <div class="card-body">
+      <h5 class="card-title"> {{ name|capitalize }} - TJ Cubing </h5>
+      <h6 class="card-subtitle mb-2 text-muted"> Last modified: {{ time[:20] }} </h6>
+      <!-- <p class="card-text"> I <i>would</i> put a little preview here, but the files are rendered. As such, this is the best I can do. </p> -->
+      <p class="card-text"> ... {{ preview }} ... <p>
+      <a href="{{ '/' + html[:-8] }}" class="card-link"> Link </a>
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}

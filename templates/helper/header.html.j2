@@ -19,39 +19,43 @@
    TJ Cubing
  </a>
 
- <!-- Mobile toggle of nav bar-->
+  <!-- Mobile toggle of nav bar-->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      {% for path, name in [("/", "Home"), ("/competitions", "Competitions")] %}
-        <li class="nav-item {% if request.path == path %}active{% endif %}">
-          <a class="nav-link" href="{{ path }}">{{ name }} {% if request.path == path %}<span class="sr-only">(current)</span>{% endif %}</a>
-        </li>
-      {% endfor %}
 
-      <!-- <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-      </li> -->
+    <!-- All of the pages specified by the Flask program -->
+    <ul class="navbar-nav mr-auto">
+      {% for path, name in pages %}
+        {% if path[0] == "/" %}
+          <li class="nav-item {% if request.path == path %}active{% endif %}">
+            <a class="nav-link" href="{{ path }}">{{ name|capitalize }} {% if request.path == path %}<span class="sr-only">(current)</span>{% endif %}</a>
+          </li>
+        <!-- Dropdown logic -->
+        {% else %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{ path|capitalize }}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              {% for entrypath, entryname in name %}
+                <!-- Hack but whatever, next webdev can make this entire nav system better -->
+                {% if entryname in ["result", "vote!"] %} <div class="dropdown-divider"></div> {% endif %}
+                <a class="dropdown-item" href="{{ entrypath }}">{{ entryname|capitalize }}</a>
+              {% endfor %}
+            </div>
+          </li>
+        {% endif %}
+      {% endfor %}
     </ul>
 
     <!-- Search bar -->
     <form class="form-inline my-2 my-lg-0" action="/search" method="post">
       <input class="form-control mr-sm-2" name="query" id="query" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
     </form>
+
   </div>
 </nav>

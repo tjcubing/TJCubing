@@ -1,0 +1,6 @@
+title: Computational Cube Theory
+author: Stephen Huan
+date: 04/20/2019
+pdf: cubetheory.pdf
+slides: Computational Cube Theory.pdf
+url: https://docs.google.com/presentation/d/1iRihHkXuySt3UQjYGrG1rVhdg87WOb4nCmTgMW9cxbg

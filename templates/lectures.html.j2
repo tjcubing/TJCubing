@@ -1,0 +1,33 @@
+{% extends "helper/base.html.j2" %}
+{% block content %}
+
+<h1 class="display-1 mb-5"> Lectures </h1>
+<p class="lead">  After discussing methods to attract recurring members with the esteemed Justin Choi we decided that having something more to do than just cubing (which could be done at any study hall) would be interesting. Therefore, we are piloting a guest lecture system. Message one of the <a href="/contact">officers</a> if you want to lecture. </p>
+<p> This is a list of all the past lectures. </p>
+
+{% set headers = ["#", "Date", "Title", "Author", "PDF", "URL", "Slides"] %}
+
+<table class="table table-hover">
+  <thead class="thead-dark">
+    <tr>
+      {% for header in headers %}
+        <th scope="col"> {{ header }} </th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for lecture in lectures %}
+      <tr>
+        <th scope="row"> {{ loop.index }} </th>
+        {% for header in headers[1:4] %}
+          <td> {{ lecture[header|lower] }} </td>
+        {% endfor %}
+        {% for header in headers[4:] %}
+          <td> <a href="{{ url_for('static', filename='pdfs/%s/%s'|format(lecture['title'], lecture[header|lower])) if header != "URL" else lecture[header|lower] }}"> {{ header }} </a> </td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

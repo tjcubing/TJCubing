@@ -1,0 +1,1334 @@
+{
+    "id": 152,
+    "name": "Rubiks Cube Club",
+    "description": "Have fun and learn how to solve the Rubiks cube",
+    "administrative": false,
+    "restricted": false,
+    "presign": false,
+    "one_a_day": false,
+    "both_blocks": false,
+    "sticky": false,
+    "special": false,
+    "scheduled_on": {
+        "3013": {
+            "roster": {
+                "id": 53951,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/53951"
+            },
+            "date": "2015-10-02",
+            "block_letter": "B",
+            "id": 3013,
+            "url": "https://ion.tjhsst.edu/api/blocks/3013"
+        },
+        "3015": {
+            "roster": {
+                "id": 53952,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/53952"
+            },
+            "date": "2015-10-05",
+            "block_letter": "B",
+            "id": 3015,
+            "url": "https://ion.tjhsst.edu/api/blocks/3015"
+        },
+        "3017": {
+            "roster": {
+                "id": 53953,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/53953"
+            },
+            "date": "2015-10-07",
+            "block_letter": "B",
+            "id": 3017,
+            "url": "https://ion.tjhsst.edu/api/blocks/3017"
+        },
+        "3019": {
+            "roster": {
+                "id": 53954,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/53954"
+            },
+            "date": "2015-10-16",
+            "block_letter": "B",
+            "id": 3019,
+            "url": "https://ion.tjhsst.edu/api/blocks/3019"
+        },
+        "3021": {
+            "roster": {
+                "id": 53955,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/53955"
+            },
+            "date": "2015-10-21",
+            "block_letter": "B",
+            "id": 3021,
+            "url": "https://ion.tjhsst.edu/api/blocks/3021"
+        },
+        "3025": {
+            "roster": {
+                "id": 54675,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/54675"
+            },
+            "date": "2015-11-06",
+            "block_letter": "B",
+            "id": 3025,
+            "url": "https://ion.tjhsst.edu/api/blocks/3025"
+        },
+        "3029": {
+            "roster": {
+                "id": 54676,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/54676"
+            },
+            "date": "2015-11-13",
+            "block_letter": "B",
+            "id": 3029,
+            "url": "https://ion.tjhsst.edu/api/blocks/3029"
+        },
+        "3040": {
+            "roster": {
+                "id": 54677,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/54677"
+            },
+            "date": "2015-12-04",
+            "block_letter": "B",
+            "id": 3040,
+            "url": "https://ion.tjhsst.edu/api/blocks/3040"
+        },
+        "3044": {
+            "roster": {
+                "id": 54678,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/54678"
+            },
+            "date": "2015-12-11",
+            "block_letter": "B",
+            "id": 3044,
+            "url": "https://ion.tjhsst.edu/api/blocks/3044"
+        },
+        "3052": {
+            "roster": {
+                "id": 54679,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/54679"
+            },
+            "date": "2016-01-08",
+            "block_letter": "B",
+            "id": 3052,
+            "url": "https://ion.tjhsst.edu/api/blocks/3052"
+        },
+        "3064": {
+            "roster": {
+                "id": 59625,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/59625"
+            },
+            "date": "2016-01-15",
+            "block_letter": "B",
+            "id": 3064,
+            "url": "https://ion.tjhsst.edu/api/blocks/3064"
+        },
+        "3068": {
+            "roster": {
+                "id": 59626,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/59626"
+            },
+            "date": "2016-01-22",
+            "block_letter": "B",
+            "id": 3068,
+            "url": "https://ion.tjhsst.edu/api/blocks/3068"
+        },
+        "3072": {
+            "roster": {
+                "id": 59627,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/59627"
+            },
+            "date": "2016-01-29",
+            "block_letter": "B",
+            "id": 3072,
+            "url": "https://ion.tjhsst.edu/api/blocks/3072"
+        },
+        "3078": {
+            "roster": {
+                "id": 59628,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/59628"
+            },
+            "date": "2016-02-12",
+            "block_letter": "B",
+            "id": 3078,
+            "url": "https://ion.tjhsst.edu/api/blocks/3078"
+        },
+        "3082": {
+            "roster": {
+                "id": 59629,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/59629"
+            },
+            "date": "2016-02-19",
+            "block_letter": "B",
+            "id": 3082,
+            "url": "https://ion.tjhsst.edu/api/blocks/3082"
+        },
+        "3086": {
+            "roster": {
+                "id": 59630,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/59630"
+            },
+            "date": "2016-02-26",
+            "block_letter": "B",
+            "id": 3086,
+            "url": "https://ion.tjhsst.edu/api/blocks/3086"
+        },
+        "3094": {
+            "roster": {
+                "id": 63917,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/63917"
+            },
+            "date": "2016-03-04",
+            "block_letter": "B",
+            "id": 3094,
+            "url": "https://ion.tjhsst.edu/api/blocks/3094"
+        },
+        "3098": {
+            "roster": {
+                "id": 63918,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/63918"
+            },
+            "date": "2016-03-11",
+            "block_letter": "B",
+            "id": 3098,
+            "url": "https://ion.tjhsst.edu/api/blocks/3098"
+        },
+        "3102": {
+            "roster": {
+                "id": 63919,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/63919"
+            },
+            "date": "2016-03-18",
+            "block_letter": "B",
+            "id": 3102,
+            "url": "https://ion.tjhsst.edu/api/blocks/3102"
+        },
+        "3104": {
+            "roster": {
+                "id": 63925,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/63925"
+            },
+            "date": "2016-03-30",
+            "block_letter": "B",
+            "id": 3104,
+            "url": "https://ion.tjhsst.edu/api/blocks/3104"
+        },
+        "3103": {
+            "roster": {
+                "id": 63924,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/63924"
+            },
+            "date": "2016-03-30",
+            "block_letter": "A",
+            "id": 3103,
+            "url": "https://ion.tjhsst.edu/api/blocks/3103"
+        },
+        "3106": {
+            "roster": {
+                "id": 63920,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/63920"
+            },
+            "date": "2016-04-01",
+            "block_letter": "B",
+            "id": 3106,
+            "url": "https://ion.tjhsst.edu/api/blocks/3106"
+        },
+        "3105": {
+            "roster": {
+                "id": 63926,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/63926"
+            },
+            "date": "2016-04-01",
+            "block_letter": "A",
+            "id": 3105,
+            "url": "https://ion.tjhsst.edu/api/blocks/3105"
+        },
+        "3110": {
+            "roster": {
+                "id": 63921,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/63921"
+            },
+            "date": "2016-04-08",
+            "block_letter": "B",
+            "id": 3110,
+            "url": "https://ion.tjhsst.edu/api/blocks/3110"
+        },
+        "3114": {
+            "roster": {
+                "id": 63922,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/63922"
+            },
+            "date": "2016-04-15",
+            "block_letter": "B",
+            "id": 3114,
+            "url": "https://ion.tjhsst.edu/api/blocks/3114"
+        },
+        "3123": {
+            "roster": {
+                "id": 63923,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/63923"
+            },
+            "date": "2016-04-29",
+            "block_letter": "B",
+            "id": 3123,
+            "url": "https://ion.tjhsst.edu/api/blocks/3123"
+        },
+        "3125": {
+            "roster": {
+                "id": 66297,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/66297"
+            },
+            "date": "2016-05-05",
+            "block_letter": "B",
+            "id": 3125,
+            "url": "https://ion.tjhsst.edu/api/blocks/3125"
+        },
+        "3130": {
+            "roster": {
+                "id": 66298,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/66298"
+            },
+            "date": "2016-05-13",
+            "block_letter": "B",
+            "id": 3130,
+            "url": "https://ion.tjhsst.edu/api/blocks/3130"
+        },
+        "3132": {
+            "roster": {
+                "id": 66299,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/66299"
+            },
+            "date": "2016-05-20",
+            "block_letter": "B",
+            "id": 3132,
+            "url": "https://ion.tjhsst.edu/api/blocks/3132"
+        },
+        "3136": {
+            "roster": {
+                "id": 66300,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/66300"
+            },
+            "date": "2016-05-27",
+            "block_letter": "B",
+            "id": 3136,
+            "url": "https://ion.tjhsst.edu/api/blocks/3136"
+        },
+        "3140": {
+            "roster": {
+                "id": 67657,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/67657"
+            },
+            "date": "2016-06-03",
+            "block_letter": "B",
+            "id": 3140,
+            "url": "https://ion.tjhsst.edu/api/blocks/3140"
+        },
+        "3142": {
+            "roster": {
+                "id": 67658,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/67658"
+            },
+            "date": "2016-06-08",
+            "block_letter": "B",
+            "id": 3142,
+            "url": "https://ion.tjhsst.edu/api/blocks/3142"
+        },
+        "3152": {
+            "roster": {
+                "id": 67659,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/67659"
+            },
+            "date": "2016-06-15",
+            "block_letter": "B",
+            "id": 3152,
+            "url": "https://ion.tjhsst.edu/api/blocks/3152"
+        },
+        "3209": {
+            "roster": {
+                "id": 72849,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/72849"
+            },
+            "date": "2016-07-04",
+            "block_letter": "B",
+            "id": 3209,
+            "url": "https://ion.tjhsst.edu/api/blocks/3209"
+        },
+        "3186": {
+            "roster": {
+                "id": 70116,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/70116"
+            },
+            "date": "2016-09-21",
+            "block_letter": "B",
+            "id": 3186,
+            "url": "https://ion.tjhsst.edu/api/blocks/3186"
+        },
+        "3161": {
+            "roster": {
+                "id": 70117,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/70117"
+            },
+            "date": "2016-09-30",
+            "block_letter": "B",
+            "id": 3161,
+            "url": "https://ion.tjhsst.edu/api/blocks/3161"
+        },
+        "3170": {
+            "roster": {
+                "id": 70118,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/70118"
+            },
+            "date": "2016-10-05",
+            "block_letter": "B",
+            "id": 3170,
+            "url": "https://ion.tjhsst.edu/api/blocks/3170"
+        },
+        "3172": {
+            "roster": {
+                "id": 70119,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/70119"
+            },
+            "date": "2016-10-12",
+            "block_letter": "B",
+            "id": 3172,
+            "url": "https://ion.tjhsst.edu/api/blocks/3172"
+        },
+        "3176": {
+            "roster": {
+                "id": 70120,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/70120"
+            },
+            "date": "2016-10-21",
+            "block_letter": "B",
+            "id": 3176,
+            "url": "https://ion.tjhsst.edu/api/blocks/3176"
+        },
+        "3180": {
+            "roster": {
+                "id": 70121,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/70121"
+            },
+            "date": "2016-10-28",
+            "block_letter": "B",
+            "id": 3180,
+            "url": "https://ion.tjhsst.edu/api/blocks/3180"
+        },
+        "3182": {
+            "roster": {
+                "id": 70122,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/70122"
+            },
+            "date": "2016-11-02",
+            "block_letter": "B",
+            "id": 3182,
+            "url": "https://ion.tjhsst.edu/api/blocks/3182"
+        },
+        "3193": {
+            "roster": {
+                "id": 72846,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/72846"
+            },
+            "date": "2016-11-16",
+            "block_letter": "B",
+            "id": 3193,
+            "url": "https://ion.tjhsst.edu/api/blocks/3193"
+        },
+        "3199": {
+            "roster": {
+                "id": 73387,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/73387"
+            },
+            "date": "2016-12-02",
+            "block_letter": "B",
+            "id": 3199,
+            "url": "https://ion.tjhsst.edu/api/blocks/3199"
+        },
+        "3203": {
+            "roster": {
+                "id": 72847,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/72847"
+            },
+            "date": "2016-12-09",
+            "block_letter": "B",
+            "id": 3203,
+            "url": "https://ion.tjhsst.edu/api/blocks/3203"
+        },
+        "3207": {
+            "roster": {
+                "id": 72848,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/72848"
+            },
+            "date": "2016-12-16",
+            "block_letter": "B",
+            "id": 3207,
+            "url": "https://ion.tjhsst.edu/api/blocks/3207"
+        },
+        "3213": {
+            "roster": {
+                "id": 79056,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/79056"
+            },
+            "date": "2017-01-11",
+            "block_letter": "B",
+            "id": 3213,
+            "url": "https://ion.tjhsst.edu/api/blocks/3213"
+        },
+        "3215": {
+            "roster": {
+                "id": 72850,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/72850"
+            },
+            "date": "2017-01-13",
+            "block_letter": "B",
+            "id": 3215,
+            "url": "https://ion.tjhsst.edu/api/blocks/3215"
+        },
+        "3217": {
+            "roster": {
+                "id": 79057,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/79057"
+            },
+            "date": "2017-01-18",
+            "block_letter": "B",
+            "id": 3217,
+            "url": "https://ion.tjhsst.edu/api/blocks/3217"
+        },
+        "3232": {
+            "roster": {
+                "id": 79058,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/79058"
+            },
+            "date": "2017-01-25",
+            "block_letter": "A",
+            "id": 3232,
+            "url": "https://ion.tjhsst.edu/api/blocks/3232"
+        },
+        "3233": {
+            "roster": {
+                "id": 79059,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/79059"
+            },
+            "date": "2017-01-25",
+            "block_letter": "B",
+            "id": 3233,
+            "url": "https://ion.tjhsst.edu/api/blocks/3233"
+        },
+        "3219": {
+            "roster": {
+                "id": 79060,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/79060"
+            },
+            "date": "2017-02-01",
+            "block_letter": "B",
+            "id": 3219,
+            "url": "https://ion.tjhsst.edu/api/blocks/3219"
+        },
+        "3230": {
+            "roster": {
+                "id": 79061,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/79061"
+            },
+            "date": "2017-02-08",
+            "block_letter": "B",
+            "id": 3230,
+            "url": "https://ion.tjhsst.edu/api/blocks/3230"
+        },
+        "3241": {
+            "roster": {
+                "id": 79062,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/79062"
+            },
+            "date": "2017-02-17",
+            "block_letter": "B",
+            "id": 3241,
+            "url": "https://ion.tjhsst.edu/api/blocks/3241"
+        },
+        "3248": {
+            "roster": {
+                "id": 79080,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/79080"
+            },
+            "date": "2017-03-03",
+            "block_letter": "A",
+            "id": 3248,
+            "url": "https://ion.tjhsst.edu/api/blocks/3248"
+        },
+        "3249": {
+            "roster": {
+                "id": 79063,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/79063"
+            },
+            "date": "2017-03-03",
+            "block_letter": "B",
+            "id": 3249,
+            "url": "https://ion.tjhsst.edu/api/blocks/3249"
+        },
+        "3253": {
+            "roster": {
+                "id": 81615,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/81615"
+            },
+            "date": "2017-03-10",
+            "block_letter": "B",
+            "id": 3253,
+            "url": "https://ion.tjhsst.edu/api/blocks/3253"
+        },
+        "3265": {
+            "roster": {
+                "id": 81996,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/81996"
+            },
+            "date": "2017-03-17",
+            "block_letter": "A",
+            "id": 3265,
+            "url": "https://ion.tjhsst.edu/api/blocks/3265"
+        },
+        "3266": {
+            "roster": {
+                "id": 81616,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/81616"
+            },
+            "date": "2017-03-17",
+            "block_letter": "B",
+            "id": 3266,
+            "url": "https://ion.tjhsst.edu/api/blocks/3266"
+        },
+        "3269": {
+            "roster": {
+                "id": 82530,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/82530"
+            },
+            "date": "2017-03-22",
+            "block_letter": "A",
+            "id": 3269,
+            "url": "https://ion.tjhsst.edu/api/blocks/3269"
+        },
+        "3274": {
+            "roster": {
+                "id": 81617,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/81617"
+            },
+            "date": "2017-03-31",
+            "block_letter": "B",
+            "id": 3274,
+            "url": "https://ion.tjhsst.edu/api/blocks/3274"
+        },
+        "3284": {
+            "roster": {
+                "id": 82043,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/82043"
+            },
+            "date": "2017-04-28",
+            "block_letter": "B",
+            "id": 3284,
+            "url": "https://ion.tjhsst.edu/api/blocks/3284"
+        },
+        "3283": {
+            "roster": {
+                "id": 85094,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/85094"
+            },
+            "date": "2017-04-28",
+            "block_letter": "A",
+            "id": 3283,
+            "url": "https://ion.tjhsst.edu/api/blocks/3283"
+        },
+        "3289": {
+            "roster": {
+                "id": 83953,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/83953"
+            },
+            "date": "2017-05-04",
+            "block_letter": "B",
+            "id": 3289,
+            "url": "https://ion.tjhsst.edu/api/blocks/3289"
+        },
+        "3294": {
+            "roster": {
+                "id": 83954,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/83954"
+            },
+            "date": "2017-05-12",
+            "block_letter": "B",
+            "id": 3294,
+            "url": "https://ion.tjhsst.edu/api/blocks/3294"
+        },
+        "3298": {
+            "roster": {
+                "id": 85535,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/85535"
+            },
+            "date": "2017-05-19",
+            "block_letter": "B",
+            "id": 3298,
+            "url": "https://ion.tjhsst.edu/api/blocks/3298"
+        },
+        "3299": {
+            "roster": {
+                "id": 85537,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/85537"
+            },
+            "date": "2017-05-24",
+            "block_letter": "B",
+            "id": 3299,
+            "url": "https://ion.tjhsst.edu/api/blocks/3299"
+        },
+        "3303": {
+            "roster": {
+                "id": 85536,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/85536"
+            },
+            "date": "2017-06-02",
+            "block_letter": "B",
+            "id": 3303,
+            "url": "https://ion.tjhsst.edu/api/blocks/3303"
+        },
+        "3308": {
+            "roster": {
+                "id": 86527,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/86527"
+            },
+            "date": "2017-06-12",
+            "block_letter": "B",
+            "id": 3308,
+            "url": "https://ion.tjhsst.edu/api/blocks/3308"
+        },
+        "3310": {
+            "roster": {
+                "id": 86529,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/86529"
+            },
+            "date": "2017-06-14",
+            "block_letter": "B",
+            "id": 3310,
+            "url": "https://ion.tjhsst.edu/api/blocks/3310"
+        },
+        "3312": {
+            "roster": {
+                "id": 86467,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/86467"
+            },
+            "date": "2017-06-16",
+            "block_letter": "B",
+            "id": 3312,
+            "url": "https://ion.tjhsst.edu/api/blocks/3312"
+        },
+        "3329": {
+            "roster": {
+                "id": 88915,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/88915"
+            },
+            "date": "2017-09-13",
+            "block_letter": "B",
+            "id": 3329,
+            "url": "https://ion.tjhsst.edu/api/blocks/3329"
+        },
+        "3335": {
+            "roster": {
+                "id": 88916,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/88916"
+            },
+            "date": "2017-09-20",
+            "block_letter": "B",
+            "id": 3335,
+            "url": "https://ion.tjhsst.edu/api/blocks/3335"
+        },
+        "3337": {
+            "roster": {
+                "id": 88917,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/88917"
+            },
+            "date": "2017-09-27",
+            "block_letter": "B",
+            "id": 3337,
+            "url": "https://ion.tjhsst.edu/api/blocks/3337"
+        },
+        "3341": {
+            "roster": {
+                "id": 88918,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/88918"
+            },
+            "date": "2017-10-04",
+            "block_letter": "B",
+            "id": 3341,
+            "url": "https://ion.tjhsst.edu/api/blocks/3341"
+        },
+        "3347": {
+            "roster": {
+                "id": 88919,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/88919"
+            },
+            "date": "2017-10-18",
+            "block_letter": "B",
+            "id": 3347,
+            "url": "https://ion.tjhsst.edu/api/blocks/3347"
+        },
+        "3353": {
+            "roster": {
+                "id": 88921,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/88921"
+            },
+            "date": "2017-10-27",
+            "block_letter": "B",
+            "id": 3353,
+            "url": "https://ion.tjhsst.edu/api/blocks/3353"
+        },
+        "3355": {
+            "roster": {
+                "id": 88920,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/88920"
+            },
+            "date": "2017-11-01",
+            "block_letter": "B",
+            "id": 3355,
+            "url": "https://ion.tjhsst.edu/api/blocks/3355"
+        },
+        "3366": {
+            "roster": {
+                "id": 93083,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/93083"
+            },
+            "date": "2017-11-10",
+            "block_letter": "B",
+            "id": 3366,
+            "url": "https://ion.tjhsst.edu/api/blocks/3366"
+        },
+        "3372": {
+            "roster": {
+                "id": 92414,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/92414"
+            },
+            "date": "2017-11-15",
+            "block_letter": "B",
+            "id": 3372,
+            "url": "https://ion.tjhsst.edu/api/blocks/3372"
+        },
+        "3376": {
+            "roster": {
+                "id": 92415,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/92415"
+            },
+            "date": "2017-11-29",
+            "block_letter": "B",
+            "id": 3376,
+            "url": "https://ion.tjhsst.edu/api/blocks/3376"
+        },
+        "3383": {
+            "roster": {
+                "id": 92428,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/92428"
+            },
+            "date": "2017-12-08",
+            "block_letter": "B",
+            "id": 3383,
+            "url": "https://ion.tjhsst.edu/api/blocks/3383"
+        },
+        "3385": {
+            "roster": {
+                "id": 92416,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/92416"
+            },
+            "date": "2017-12-13",
+            "block_letter": "B",
+            "id": 3385,
+            "url": "https://ion.tjhsst.edu/api/blocks/3385"
+        },
+        "3391": {
+            "roster": {
+                "id": 94224,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/94224"
+            },
+            "date": "2017-12-15",
+            "block_letter": "B",
+            "id": 3391,
+            "url": "https://ion.tjhsst.edu/api/blocks/3391"
+        },
+        "3387": {
+            "roster": {
+                "id": 92430,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/92430"
+            },
+            "date": "2018-01-03",
+            "block_letter": "B",
+            "id": 3387,
+            "url": "https://ion.tjhsst.edu/api/blocks/3387"
+        },
+        "3393": {
+            "roster": {
+                "id": 92417,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/92417"
+            },
+            "date": "2018-01-10",
+            "block_letter": "B",
+            "id": 3393,
+            "url": "https://ion.tjhsst.edu/api/blocks/3393"
+        },
+        "3395": {
+            "roster": {
+                "id": 94489,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/94489"
+            },
+            "date": "2018-01-12",
+            "block_letter": "B",
+            "id": 3395,
+            "url": "https://ion.tjhsst.edu/api/blocks/3395"
+        },
+        "3399": {
+            "roster": {
+                "id": 96546,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/96546"
+            },
+            "date": "2018-01-19",
+            "block_letter": "B",
+            "id": 3399,
+            "url": "https://ion.tjhsst.edu/api/blocks/3399"
+        },
+        "3408": {
+            "roster": {
+                "id": 96806,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/96806"
+            },
+            "date": "2018-01-31",
+            "block_letter": "B",
+            "id": 3408,
+            "url": "https://ion.tjhsst.edu/api/blocks/3408"
+        },
+        "3422": {
+            "roster": {
+                "id": 96502,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/96502"
+            },
+            "date": "2018-02-28",
+            "block_letter": "B",
+            "id": 3422,
+            "url": "https://ion.tjhsst.edu/api/blocks/3422"
+        },
+        "3425": {
+            "roster": {
+                "id": 96501,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/96501"
+            },
+            "date": "2018-03-02",
+            "block_letter": "B",
+            "id": 3425,
+            "url": "https://ion.tjhsst.edu/api/blocks/3425"
+        },
+        "3430": {
+            "roster": {
+                "id": 99663,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/99663"
+            },
+            "date": "2018-03-09",
+            "block_letter": "B",
+            "id": 3430,
+            "url": "https://ion.tjhsst.edu/api/blocks/3430"
+        },
+        "3432": {
+            "roster": {
+                "id": 99664,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/99664"
+            },
+            "date": "2018-03-14",
+            "block_letter": "B",
+            "id": 3432,
+            "url": "https://ion.tjhsst.edu/api/blocks/3432"
+        },
+        "3438": {
+            "roster": {
+                "id": 99665,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/99665"
+            },
+            "date": "2018-03-23",
+            "block_letter": "B",
+            "id": 3438,
+            "url": "https://ion.tjhsst.edu/api/blocks/3438"
+        },
+        "3440": {
+            "roster": {
+                "id": 99666,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/99666"
+            },
+            "date": "2018-04-04",
+            "block_letter": "B",
+            "id": 3440,
+            "url": "https://ion.tjhsst.edu/api/blocks/3440"
+        },
+        "3444": {
+            "roster": {
+                "id": 101252,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/101252"
+            },
+            "date": "2018-04-11",
+            "block_letter": "B",
+            "id": 3444,
+            "url": "https://ion.tjhsst.edu/api/blocks/3444"
+        },
+        "3446": {
+            "roster": {
+                "id": 101253,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/101253"
+            },
+            "date": "2018-04-18",
+            "block_letter": "B",
+            "id": 3446,
+            "url": "https://ion.tjhsst.edu/api/blocks/3446"
+        },
+        "3450": {
+            "roster": {
+                "id": 101254,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/101254"
+            },
+            "date": "2018-04-25",
+            "block_letter": "B",
+            "id": 3450,
+            "url": "https://ion.tjhsst.edu/api/blocks/3450"
+        },
+        "3452": {
+            "roster": {
+                "id": 101256,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/101256"
+            },
+            "date": "2018-04-27",
+            "block_letter": "B",
+            "id": 3452,
+            "url": "https://ion.tjhsst.edu/api/blocks/3452"
+        },
+        "3454": {
+            "roster": {
+                "id": 101255,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/101255"
+            },
+            "date": "2018-05-02",
+            "block_letter": "B",
+            "id": 3454,
+            "url": "https://ion.tjhsst.edu/api/blocks/3454"
+        },
+        "3459": {
+            "roster": {
+                "id": 102355,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/102355"
+            },
+            "date": "2018-05-10",
+            "block_letter": "B",
+            "id": 3459,
+            "url": "https://ion.tjhsst.edu/api/blocks/3459"
+        },
+        "3461": {
+            "roster": {
+                "id": 102379,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/102379"
+            },
+            "date": "2018-05-14",
+            "block_letter": "B",
+            "id": 3461,
+            "url": "https://ion.tjhsst.edu/api/blocks/3461"
+        },
+        "3463": {
+            "roster": {
+                "id": 102356,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/102356"
+            },
+            "date": "2018-05-16",
+            "block_letter": "B",
+            "id": 3463,
+            "url": "https://ion.tjhsst.edu/api/blocks/3463"
+        },
+        "3464": {
+            "roster": {
+                "id": 102380,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/102380"
+            },
+            "date": "2018-05-18",
+            "block_letter": "A",
+            "id": 3464,
+            "url": "https://ion.tjhsst.edu/api/blocks/3464"
+        },
+        "3467": {
+            "roster": {
+                "id": 102357,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/102357"
+            },
+            "date": "2018-05-23",
+            "block_letter": "B",
+            "id": 3467,
+            "url": "https://ion.tjhsst.edu/api/blocks/3467"
+        },
+        "3477": {
+            "roster": {
+                "id": 102358,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/102358"
+            },
+            "date": "2018-06-01",
+            "block_letter": "B",
+            "id": 3477,
+            "url": "https://ion.tjhsst.edu/api/blocks/3477"
+        },
+        "3499": {
+            "roster": {
+                "id": 104717,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/104717"
+            },
+            "date": "2018-09-12",
+            "block_letter": "B",
+            "id": 3499,
+            "url": "https://ion.tjhsst.edu/api/blocks/3499"
+        },
+        "3505": {
+            "roster": {
+                "id": 104718,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/104718"
+            },
+            "date": "2018-09-26",
+            "block_letter": "B",
+            "id": 3505,
+            "url": "https://ion.tjhsst.edu/api/blocks/3505"
+        },
+        "3509": {
+            "roster": {
+                "id": 105599,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/105599"
+            },
+            "date": "2018-10-03",
+            "block_letter": "B",
+            "id": 3509,
+            "url": "https://ion.tjhsst.edu/api/blocks/3509"
+        },
+        "3513": {
+            "roster": {
+                "id": 105600,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/105600"
+            },
+            "date": "2018-10-17",
+            "block_letter": "B",
+            "id": 3513,
+            "url": "https://ion.tjhsst.edu/api/blocks/3513"
+        },
+        "3519": {
+            "roster": {
+                "id": 105601,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/105601"
+            },
+            "date": "2018-10-26",
+            "block_letter": "B",
+            "id": 3519,
+            "url": "https://ion.tjhsst.edu/api/blocks/3519"
+        },
+        "3523": {
+            "roster": {
+                "id": 105602,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/105602"
+            },
+            "date": "2018-11-02",
+            "block_letter": "B",
+            "id": 3523,
+            "url": "https://ion.tjhsst.edu/api/blocks/3523"
+        },
+        "3533": {
+            "roster": {
+                "id": 109235,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/109235"
+            },
+            "date": "2018-11-28",
+            "block_letter": "B",
+            "id": 3533,
+            "url": "https://ion.tjhsst.edu/api/blocks/3533"
+        },
+        "3541": {
+            "roster": {
+                "id": 110410,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/110410"
+            },
+            "date": "2018-12-12",
+            "block_letter": "B",
+            "id": 3541,
+            "url": "https://ion.tjhsst.edu/api/blocks/3541"
+        },
+        "3543": {
+            "roster": {
+                "id": 110411,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/110411"
+            },
+            "date": "2018-12-19",
+            "block_letter": "B",
+            "id": 3543,
+            "url": "https://ion.tjhsst.edu/api/blocks/3543"
+        },
+        "3547": {
+            "roster": {
+                "id": 110412,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/110412"
+            },
+            "date": "2019-01-09",
+            "block_letter": "B",
+            "id": 3547,
+            "url": "https://ion.tjhsst.edu/api/blocks/3547"
+        },
+        "3555": {
+            "roster": {
+                "id": 112125,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/112125"
+            },
+            "date": "2019-01-16",
+            "block_letter": "B",
+            "id": 3555,
+            "url": "https://ion.tjhsst.edu/api/blocks/3555"
+        },
+        "3557": {
+            "roster": {
+                "id": 112126,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/112126"
+            },
+            "date": "2019-01-23",
+            "block_letter": "B",
+            "id": 3557,
+            "url": "https://ion.tjhsst.edu/api/blocks/3557"
+        },
+        "3562": {
+            "roster": {
+                "id": 112127,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/112127"
+            },
+            "date": "2019-01-30",
+            "block_letter": "B",
+            "id": 3562,
+            "url": "https://ion.tjhsst.edu/api/blocks/3562"
+        },
+        "3566": {
+            "roster": {
+                "id": 113340,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/113340"
+            },
+            "date": "2019-02-06",
+            "block_letter": "B",
+            "id": 3566,
+            "url": "https://ion.tjhsst.edu/api/blocks/3566"
+        },
+        "3580": {
+            "roster": {
+                "id": 113341,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/113341"
+            },
+            "date": "2019-02-27",
+            "block_letter": "B",
+            "id": 3580,
+            "url": "https://ion.tjhsst.edu/api/blocks/3580"
+        },
+        "3585": {
+            "roster": {
+                "id": 116274,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/116274"
+            },
+            "date": "2019-03-06",
+            "block_letter": "B",
+            "id": 3585,
+            "url": "https://ion.tjhsst.edu/api/blocks/3585"
+        },
+        "3589": {
+            "roster": {
+                "id": 116275,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/116275"
+            },
+            "date": "2019-03-13",
+            "block_letter": "B",
+            "id": 3589,
+            "url": "https://ion.tjhsst.edu/api/blocks/3589"
+        },
+        "3593": {
+            "roster": {
+                "id": 116822,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/116822"
+            },
+            "date": "2019-03-20",
+            "block_letter": "B",
+            "id": 3593,
+            "url": "https://ion.tjhsst.edu/api/blocks/3593"
+        },
+        "3597": {
+            "roster": {
+                "id": 116276,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/116276"
+            },
+            "date": "2019-03-27",
+            "block_letter": "B",
+            "id": 3597,
+            "url": "https://ion.tjhsst.edu/api/blocks/3597"
+        },
+        "3603": {
+            "roster": {
+                "id": 117235,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/117235"
+            },
+            "date": "2019-04-03",
+            "block_letter": "B",
+            "id": 3603,
+            "url": "https://ion.tjhsst.edu/api/blocks/3603"
+        },
+        "3607": {
+            "roster": {
+                "id": 117236,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/117236"
+            },
+            "date": "2019-04-10",
+            "block_letter": "B",
+            "id": 3607,
+            "url": "https://ion.tjhsst.edu/api/blocks/3607"
+        },
+        "3613": {
+            "roster": {
+                "id": 117237,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/117237"
+            },
+            "date": "2019-04-26",
+            "block_letter": "B",
+            "id": 3613,
+            "url": "https://ion.tjhsst.edu/api/blocks/3613"
+        },
+        "3615": {
+            "roster": {
+                "id": 117238,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/117238"
+            },
+            "date": "2019-05-01",
+            "block_letter": "B",
+            "id": 3615,
+            "url": "https://ion.tjhsst.edu/api/blocks/3615"
+        },
+        "3628": {
+            "roster": {
+                "id": 119177,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/119177"
+            },
+            "date": "2019-05-07",
+            "block_letter": "B",
+            "id": 3628,
+            "url": "https://ion.tjhsst.edu/api/blocks/3628"
+        },
+        "3636": {
+            "roster": {
+                "id": 119178,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/119178"
+            },
+            "date": "2019-05-17",
+            "block_letter": "B",
+            "id": 3636,
+            "url": "https://ion.tjhsst.edu/api/blocks/3636"
+        },
+        "3619": {
+            "roster": {
+                "id": 119179,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/119179"
+            },
+            "date": "2019-05-22",
+            "block_letter": "A",
+            "id": 3619,
+            "url": "https://ion.tjhsst.edu/api/blocks/3619"
+        },
+        "3620": {
+            "roster": {
+                "id": 119180,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/119180"
+            },
+            "date": "2019-05-22",
+            "block_letter": "B",
+            "id": 3620,
+            "url": "https://ion.tjhsst.edu/api/blocks/3620"
+        }
+    }
+}

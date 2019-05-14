@@ -1,0 +1,10 @@
+{% extends "helper/base.html.j2" %}
+{% block content %}
+
+<h1 class="display-1 mb-5"> History </h1>
+
+{% for header in headers[4:] %}
+  <td> <a href="{{ url_for('static', filename='pdfs/%s/%s'|format(lecture['title'], lecture[header|lower])) if header != "URL" else lecture[header|lower] }}"> {{ header }} </a> </td>
+{% endfor %}
+
+{% endblock %}

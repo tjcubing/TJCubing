@@ -1,55 +1,149 @@
-import json, pickle, time
+import json, pickle, time, os, secrets
+from datetime import datetime
 import requests
+import flask
+from requests_oauthlib import OAuth2Session
+from oauthlib.oauth2 import TokenExpiredError
 from bs4 import BeautifulSoup
 
 # Helper library to query the WCA for competitions and other miscellaneous tasks
 # TODO: mailing list, switch key to key from tjcubingofficers@gmail.com
+# TODO: Voting system
 
-with open("config.json") as f:
-    config = json.load(f)
+STR_FUNC = {"load": {"json": json.load, "pickle": pickle.load}, "dump": {"json": json.dump, "pickle": pickle.dump}}
+FUNC_EXT = {json.load: ".json", json.dump: ".json", pickle.load: ".pickle", pickle.dump: ".pickle"}
+EXT_MODE = {".json": "", ".pickle": "b"}
 
+def load_file(fname: str, func="json") -> dict:
+    """ Loads a file. """
+    func = STR_FUNC["load"][func]
+    ext = FUNC_EXT[func]
+    with open(fname + ext, "r" + EXT_MODE[ext]) as f:
+        return func(f)
+
+def dump_file(obj, fname: str, func="json") -> None:
+    """ Dumps an obj into a file. """
+    func = STR_FUNC["dump"][func]
+    ext = FUNC_EXT[func]
+    with open(fname + ext, "w" + EXT_MODE[ext]) as f:
+        func(obj, f, **({"index": 4} if func == json.dump else {}))
+
+config = load_file("config")
 URL = "https://www.worldcubeassociation.org/competitions"
+LECTURES = "static/pdfs/"
+FILE = ".html.j2"
+PREVIEW = 80
+WAIT = 2.628e6 #seconds in a month
 
-class Comp:
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' #turn off when it's legit, localhost is http
+ION = "https://ion.tjhsst.edu/"
+AUTHORIZATION_URL, TOKEN_URL = ION + "oauth/authorize/", ION + "oauth/token/"
 
-    def __str__(self):
-        return f"{self.name}"
+def gen_secret_key() -> str:
+    """ Generates a random secret key. """
+    return secrets.token_hex(16)
 
-    def __init__(self, url, name, location, venue, date):
-        self.url, self.name, self.location, self.venue, self.date = url, name, location, venue, date
-        self.gps = self.km = self.timestr = self.time = None
+def unix_to_human(time: float) -> str:
+    """ Returns a human-readable time from a UNIX timestamp. """
+    return datetime.fromtimestamp(time).strftime("%A, %B %d, %Y at %I:%M:%S.%f %p")
 
-def get_comps() -> list: #TODO: get events, TJ kids competing.
+def make_soup(url: str, params={}) -> BeautifulSoup:
+    """ Returns a soup from a url. """
+    return BeautifulSoup(requests.get(url, params=params).text, 'html.parser')
+
+#TODO: get events, TJ kids competing.
+def get_comps() -> list:
     """ Parses the WCA website and returns a list of competitors.
         Calls Google's distancematrix API to get distances to the competitions
     """
-    local_comps = []
-    soup = BeautifulSoup(requests.get(URL + "?region=USA&state=present&display=list").text, 'html.parser')
+    comps = []
+    soup = make_soup(URL, {"region": "USA", "state": "present", "display": "list"})
     for comp in soup("li", class_="list-group-item not-past"):
         info = list(filter(lambda x: x != len(x)*" ", comp.get_text().strip().split("\n")))
         if info[2].split(", ")[-1] in config["states"]:
-            local_comps.append(Comp(URL + comp.find("a").get('href')[13:], info[1], info[2], info[3], info[0]))
-            temp = BeautifulSoup(requests.get(local_comps[-1].url).text, 'html.parser')
-            local_comps[-1].gps = temp.find("dt", string="Address").next_sibling.next_sibling.find("a").get('href').split("/")[-1]
+            temp = {"url": URL + comp.find("a").get('href')[13:],
+                    "name": info[1],
+                    "location": info[2],
+                    "venue": info[3],
+                    "date": info[0],
+                   }
+            subsoup = make_soup(temp["url"])
+            temp["gps"] = subsoup.find("dt", string="Address").next_sibling.next_sibling.find("a").get('href').split("/")[-1]
+            comps.append(temp)
 
-    param = {'origins':config["origin"], 'destinations':"|".join([comp.gps for comp in local_comps]), 'key':config["key"], 'units':'imperial'}
+    param = {'origins': config["origin"], 'destinations': "|".join([comp["gps"] for comp in comps]), 'key': config["key"], 'units': 'imperial'}
 
     for i, thing in enumerate(requests.get("https://maps.googleapis.com/maps/api/distancematrix/json", params=param).json()['rows'][0]['elements']):
-        local_comps[i].km = thing['distance']['text']
-        local_comps[i].timestr = thing['duration']['text']
-        local_comps[i].time = thing['duration']['value']
+        comps[i]["mi"] = thing['distance']['text']
+        comps[i]["timestr"] = thing['duration']['text']
+        comps[i]["time"] = thing['duration']['value']
 
-    local_comps.sort(key=lambda comp: comp.time) #sort by time to travel
+    #TODO: sort by user-determined feature
+    comps.sort(key=lambda comp: comp["time"]) #sort by time to travel
+    dump_file((time.time(), comps), "comps", "pickle")
 
-    with open("comps.pickle", "wb") as f:
-        pickle.dump((time.time(), local_comps), f)
+    return comps
 
-    return local_comps
+def get_lectures() -> list:
+    """ Returns a list of past lectures. """
+    lectures = []
+    for lecture in os.listdir(LECTURES):
+        if os.path.isdir(LECTURES + lecture):
+            with open(LECTURES + lecture + "/desc.txt") as f:
+                lines = f.readlines()
+            lectures.append({line.split(":")[0]: ":".join(line.split(":")[1:]).strip() for line in lines})
 
-def get_cached_comps() -> tuple:
-    """ Returns a (time, list of comps) tuple from a disk file. """
-    with open("comps.pickle", "rb") as f:
-        return pickle.load(f)
+    lectures.sort(key=lambda l: datetime.strptime(l["date"], "%m/%d/%Y")) #sort by date
+    return lectures
+
+def get_preview(query: str, text: str) -> str:
+    """ Returns a preview of a larger string from a smaller string. """
+    i = text.lower().index(query)
+    preview = text[max(i - PREVIEW, 0):min(i + PREVIEW, len(text) - 1)] #avoid out of bounds
+    return " ".join(preview.split()[1:-1]) #removes fractions of words
+
+def parse_search(query: str) -> list:
+    """ Parses a user's search, returns a list of entries. """
+    query = query.strip().lower()
+    for html in os.listdir("templates/"):
+        if html[-len(FILE):] == FILE:
+            soup = BeautifulSoup(open(f"templates/{html}").read(), 'html.parser')
+            text = soup.get_text()
+            if query in text.lower():
+                yield (unix_to_human(os.path.getmtime(f"templates/{html}")), html if html != "index" + FILE else FILE, get_preview(query, text))
+
+def make_oauth(**kwargs) -> OAuth2Session:
+    """ Makes an OAuth2Session session. Should auto-refresh. """
+    args = {"client_id": config["client_id"], "client_secret": config["client_secret"]}
+    return OAuth2Session(config["client_id"], redirect_uri=config["redirect_uri"], scope=["read"], auto_refresh_url=TOKEN_URL, auto_refresh_kwargs=args, **kwargs)
+
+def make_api_call(oauth: OAuth2Session, call: str, short=True) -> dict:
+    """ Makes an API call and returns a dictionary. """
+    return json.loads(oauth.get(ION + f"api/{call}" if short else call).content.decode())
+
+def save_token(token: dict) -> None:
+    """ Saves a token to Flask. """
+    flask.session["token"] = token
+
+def get_club_result(oauth: OAuth2Session) -> list:
+    """ Returns the club's page. """
+    d = make_api_call(oauth, "activities")
+    while "next" in d and d["next"] is not None:
+        for result in d["results"]:
+            if "cube" in result["name"].lower():
+                return result
+        d = make_api_call(oauth, d["next"], False)
+
+#TODO: some sort of legit method of updating these beyond func calls
+#TODO: Admin page to do that
+
+def save_club_history(oauth: OAuth2Session) -> dict:
+    """ Returns the ION page describing the club. """
+    dump_file(make_api_call(oauth, config["club"]["url"], False), f)
+
+def get_activities(oauth: OAuth2Session) -> list:
+    """ Returns all of the user's activities. """
+    return
 
 # <?php
 # // Check for empty fields

@@ -9,6 +9,7 @@ verify_ssl = true
 flask = "*"
 requests = "*"
 beautifulsoup4 = "*"
+requests-oauthlib = "*"
 
 [requires]
 python_version = "3.7"

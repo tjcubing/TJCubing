@@ -1,13 +1,41 @@
-{% extends "base.html.j2" %}
+{% extends "helper/base.html.j2" %}
 {% block content %}
-  <img class="img-fluid mx-auto d-block" src="{{ url_for('static', filename='img/cubing.png')}}" width="300" height="300" alt="" title="Credits to Albert Chuang (c2015)">
+  <!-- TODO: mention FB group, email list via double columns perhaps -->
+  <a href="https://alg.cubing.net/?alg=y_D_L_D_B2_D-_U-_L_F-_D_F_D-_F_U2_R2_U-&type=reconstruction&view=playback"> <img class="img-fluid mx-auto d-block" src="{{ url_for('static', filename='img/cubing.png')}}" width="300" height="300" alt="" title="Credits to Albert Chuang (c2015)"> </a>
+
   <div style="text-align:center;">
-    <h1 class="mt-5">TJ Cubing</h1>
-      <hr style="width: 50%; background-color:black; height:3px;">
-    <p>Friday B</p>
+    <!-- classes documented at https://getbootstrap.com/docs/4.0/utilities/spacing/ and https://getbootstrap.com/docs/4.0/content/typography/-->
+    <h1 class="display-1 mt-4">TJ Cubing</h1>
+    <hr style="width: 50%; background-color:black; height:3px;">
+    <h2>Wednesday B</h2>
   </div>
 
-  <h1 class="mt-5">Sticky footer with fixed navbar</h1>
-  <p class="lead">Pin a footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>main &gt; .container</code>.</p>
-  <p>Back to <a href="/docs/4.3/examples/sticky-footer/">the default sticky footer</a> minus the navbar.</p>
+  <hr>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <h1> Club </h1>
+        <p> The TJ Cubing Club is a place for people of all experience levels. If you do not know how to solve a Rubik's Cube, we'll have an officer teach you. For those who already able to solve, we have experienced members who can give you insight on how to improve your times. Our club is a place where you can relax and have fun solving cubes. </p>
+      </div>
+      <div class="col-sm">
+        <h1> Team </h1>
+        <p> Each year, our club forms an 8-person team to compete at the annual <a href="https://www.youcandothecube.com/">You Can Do The Rubik's Cube competition</a>. This year, our team solved 25 cubes in <a href="https://www.youcandothecube.com/competitions/leaderboard-results/">46.252 seconds</a>, beating the world record. </p>
+
+        <p> In the spring, we will conduct tryouts to determine the speed of each aspiring team member. Our executive board will then select the team members based upon a holistic view, including tryout times, club commitment, and teamwork qualities. Each member is required to commit a couple weeks from their schedule to team practices and meetings, usually during the normal club meeting times and lunch. </p>
+      </div>
+      <div class="col-sm">
+        <h1> TJHSST Fall </h1>
+        <p> Our club also hosts an annual official WCA competition at TJ in the fall. The competition is run by the club, and anyone can help out. </p>
+        <p> The club organizes the schedule of the competition, including the events and prizes. Members of the club also volunteer by being judges, scramblers, runners, and more. </p>
+        Past competition links: <!-- TODO: automate getting past comp links from WCA search -->
+        <ui>
+          {% for year in range(year - 1, 2016 - 1, -1) %} <!-- don't include current year because comp may not be out yet, include 2016, go from most recent to least recent -->
+            <li> <a href={{"https://www.worldcubeassociation.org/competitions/TJHSSTFall" + year|string }}> {{year}} </a></li> <!-- assumes url is TJHSSTFallyyyy -->
+          {% endfor %}
+        </ui>
+      </div>
+    </div>
+  </div>
+
 {% endblock %}

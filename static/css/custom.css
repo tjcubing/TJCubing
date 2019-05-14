@@ -12,6 +12,10 @@ main > .container {
   padding-left: 15px;
 }
 
+li {
+  margin-left: 20px;
+}
+
 ul li {
   margin-left: 20px;
 }
