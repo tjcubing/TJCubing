@@ -1,4 +1,4 @@
-import json, pickle, time, os, secrets
+import json, pickle, time, os
 from datetime import datetime
 import markdown2
 import requests
@@ -12,18 +12,19 @@ from bs4 import BeautifulSoup
 # TODO: mailing list, switch key to key from tjcubingofficers@gmail.com
 # TODO: Database
 # TODO: selenium/requests style parsing to download rendered templates
+# switch to python 3.5.3
 
 STR_FUNC = {"load": {"json": json.load, "pickle": pickle.load}, "dump": {"json": json.dump, "pickle": pickle.dump}}
 EXT_MODE = {"json": "", "pickle": "b"}
 
 def load_file(fname: str, func: str="json", short: bool=True) -> dict:
     """ Loads a file. """
-    with open(f"files/{fname}.{func}" if short else fname, "r" + EXT_MODE[func]) as f:
+    with open("files/{}.{}".format(fname, func) if short else fname, "r" + EXT_MODE[func]) as f:
         return STR_FUNC["load"][func](f)
 
 def dump_file(obj, fname: str, func:str ="json", short: bool=True) -> None:
     """ Dumps an obj into a file. """
-    with open(f"files/{fname}.{func}" if short else fname, "w" + EXT_MODE[func]) as f:
+    with open("files/{}.{}".format(fname, func) if short else fname, "w" + EXT_MODE[func]) as f:
         STR_FUNC["dump"][func](obj, f, **({"indent": 4} if func == "json" else {}))
 
 CONFIG = load_file("config")
@@ -44,7 +45,7 @@ def add_dict(d1: dict, d2: dict) -> dict:
 
 def gen_secret_key() -> str:
     """ Generates a random secret key. """
-    return secrets.token_hex(16)
+    return os.urandom(16).hex()
 
 def get_year() -> int:
     """ Returns the year as a number """
@@ -104,7 +105,7 @@ def get_lectures() -> list:
     lectures = []
     for lecture in os.listdir(LECTURES):
         if os.path.isdir(LECTURES + lecture):
-            lectures.append(load_file(f"{LECTURES}{lecture}/desc.json", "json", False))
+            lectures.append(load_file("{}{}/desc.json".format(LECTURES, lecture), "json", False))
 
     lectures.sort(key=lambda l: datetime.strptime(l["date"], "%m/%d/%Y")) #sort by date
     return lectures
@@ -114,28 +115,15 @@ def open_admission() -> str:
     file = open("static/misc/admission.md").read()
     return markdown2.markdown(file)
 
-    """ TODO: remove, I want this piece of code not to be lost or else I'd think it was a waste of time.
-    lines = open("static/misc/admission.txt").readlines()
-    rtn = []
-    while "\n" in lines:
-        i = lines.index("\n")
-        rtn.append(add_tag("p", "\n".join(lines[:i])))
-        lines = lines[i + 1:]
-    rtn.append(add_tag("p", "\n".join(lines)))
-    rtn = "\n".join(rtn)
-    rtn = rtn.replace("\n", "<br>")
-    return rtn
-    """
-
 def get_sigs() -> list:
     """ Returns the signatures of the admission. """
     for file in os.listdir("static/misc"):
         if file[-4:] == ".asc":
-            yield (file, open(f"static/misc/{file}").read().replace("\n", "<br>"))
+            yield (file, open("static/misc/{}".format(file)).read().replace("\n", "<br>"))
 
 def add_tag(tag: str, s: str) -> str:
     """ Adds a tag on either side of a string. """
-    return f"<{tag}>{s}</{tag}>"
+    return "<{}>{}</{}>".format(tag, s, tag)
 
 def modify(word: str, text: str) -> str:
     """ Applies a HTML modifer to a subset of a string. """
@@ -153,10 +141,10 @@ def parse_search(query: str) -> list:
     query = query.strip().lower()
     for html in os.listdir("templates/"):
         if html[-len(FILE):] == FILE:
-            soup = BeautifulSoup(open(f"templates/{html}").read(), 'html.parser')
+            soup = BeautifulSoup(open("templates/{}".format(html)).read(), 'html.parser')
             text = soup.get_text()
             if query in text.lower():
-                yield (unix_to_human(os.path.getmtime(f"templates/{html}")), html if html != "index" + FILE else FILE, modify(query, get_preview(query, text)))
+                yield (unix_to_human(os.path.getmtime("templates/{}".format(html))), html if html != "index" + FILE else FILE, modify(query, get_preview(query, text)))
 
 def store_candidate(d: dict) -> None:
     """ Stores a candidate to vote.json. """
@@ -201,7 +189,7 @@ def make_oauth(**kwargs) -> OAuth2Session:
 def make_api_call(call: str, short=True) -> dict:
     """ Makes an API call and returns a dictionary. """
     oauth = make_oauth(**{"state": flask.session["oauth_state"]})
-    return json.loads(oauth.get(ION + f"api/{call}" if short else call).content.decode())
+    return json.loads(oauth.get(ION + "api/{}".format(call) if short else call).content.decode())
 
 def test_token():
     """ Tests whether or not the user is authenticated. """
@@ -290,26 +278,3 @@ def valid_runner() -> bool:
     if not flask.session.get("valid_runner", False):
         flask.session["valid_runner"] = True #why not?
     return flask.session["valid_runner"]
-
-# <?php
-# // Check for empty fields
-# if(empty($_POST['name'])  ||
-#    empty($_POST['email'])	||
-#    !filter_var($_POST['email'],FILTER_VALIDATE_EMAIL))
-#    {
-# 	echo "No arguments Provided!";
-# 	return false;
-#    }
-#
-# $name = $_POST['name'];
-# $email_address = $_POST['email'];
-#
-# // Create the email and send the message
-# $to = 'davidzhao058@gmail.com'; // Add your email address inbetween the '' replacing yourname@yourdomain.com - This is where the form will send a message to.
-# $email_subject = "ADD TO EMAIL LIST:  $name";
-# $email_body = "Name: $name\nEmail: $email_address";
-# $headers = "From: noreply@tjcubing.org\n"; // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
-# $headers .= "Reply-To: $email_address";
-# mail($to,$email_subject,$email_body,$headers);
-# return true;
-# ?>

@@ -31,7 +31,8 @@ def before_request():
 
 def competitions() -> dict:
     """ Gets the cached competitions, but will refresh if not updated recently. """
-    last, comps = cube.load_file("comps").values()
+    c = cube.load_file("comps")
+    last, comps = c["time"], c["comps"]
     if time.time() - last > cube.WAIT:
         comps = cube.get_comps()
 
@@ -59,9 +60,9 @@ def convert(order:list, prefix:str="/", new:list=[]) -> list:
     for name in order:
         if isinstance(name, list):
             addition, sublist = name
-            new.append((addition, convert(sublist, f"{prefix}{addition}/", [])))
+            new.append((addition, convert(sublist, "{}{}/".format(prefix, addition), [])))
         else:
-            new.append((f"{prefix}{name}", NAMES[name]))
+            new.append(("{}{}".format(prefix, name), NAMES[name]))
     return new
 
 params = cube.load_file("site")
@@ -92,13 +93,13 @@ def make_page(s: str, f=lambda: {}, methods=['GET']):
     func = lambda: flask.render_template((s if s != "" else "index") + cube.FILE, pages=NAV, active=cube.VOTE["vote_active"], title=NAMES[s.split("/")[-1]], **f())
     # Need distinct function names for Flask not to error
     func.__name__ = s if s != "" else "index"
-    return app.route(f"/{s}", methods=methods)(func)
+    return app.route("/{}".format(s), methods=methods)(func)
 
 def make_pages(d: dict, prefix="") -> None:
     """ Makes the entire site's pages. Recurs on nested dicts, taking file structure into account. """
     for key, value in d.items():
         if isinstance(value, dict):
-            make_pages(value, prefix + f"{key}/")
+            make_pages(value, prefix + "{}/".format(key))
         else:
             func, methods = ((value, ["GET"]) if not isinstance(value, tuple) else value)
             #don't need to store created function as it's already bound to the URL
@@ -148,7 +149,7 @@ def vote():
 
     if flask.request.method == "POST":
         cube.add_vote(cube.get_name(), flask.request.form["vote"])
-        return send_home(f"<strong>Congrats!</strong> You have voted for {flask.request.form['vote']}.")
+        return send_home("<strong>Congrats!</strong> You have voted for {}.".format(flask.request.form['vote']))
 
     return flask.render_template(flask.request.path + cube.FILE, pages=NAV, title="vote", active=cube.VOTE["vote_active"], **cube.VOTE, sorted_candidates=cube.get_candidates(), name=cube.get_name())
 
