@@ -1,33 +1,33 @@
 {
+    "position": "webmaster",
+    "vote_active": false,
     "min_meetings": 5,
     "ends_at": "05/15/19 10:47 PM",
-    "length": 200,
-    "position": "webmaster",
-    "candidates": {
-        "Stephen Huan": {
-            "annual_meetings": 24,
-            "meetings": 33,
-            "years": 3,
-            "name": "Stephen Huan",
-            "time": 1557974359.932775,
-            "description": "asdfamsdf",
-            "timestr": "Wednesday, May 15, 2019 at 10:39:19.932775 PM",
-            "year": 2019
-        },
-        "Justin Choi": {
-            "annual_meetings": 24,
-            "meetings": 33,
-            "years": 3,
-            "name": "Justin Choi",
-            "time": 1557969100.3282418,
-            "description": "woaj I'm the best cuber lmoa",
-            "timestr": "Wednesday, May 15, 2019 at 09:11:32.328243 PM",
-            "year": 2019
-        }
-    },
-    "vote_active": false,
     "votes": {
         "Stephen Huan": "Justin Choi",
         "Justin Choi": "Justin Choi"
+    },
+    "length": 200,
+    "candidates": {
+        "Stephen Huan": {
+            "timestr": "Wednesday, May 15, 2019 at 10:39:19.932775 PM",
+            "years": 3,
+            "year": 2019,
+            "description": "asdfamsdf",
+            "meetings": 33,
+            "time": 1557974359.932775,
+            "annual_meetings": 24,
+            "name": "Stephen Huan"
+        },
+        "Justin Choi": {
+            "timestr": "Wednesday, May 15, 2019 at 09:11:32.328243 PM",
+            "years": 3,
+            "year": 2019,
+            "description": "woaj I'm the best cuber lmoa",
+            "meetings": 33,
+            "time": 1557969100.3282418,
+            "annual_meetings": 24,
+            "name": "Justin Choi"
+        }
     }
 }
