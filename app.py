@@ -6,8 +6,11 @@ import cube
 
 #TODO: Gulp
 
+bp = flask.Blueprint('cubing', __name__, static_folder="static") #TODO: move from here
 app = flask.Flask(__name__)
+
 app.secret_key = cube.CONFIG["flask_secret_key"].encode()
+#app.config["APPLICATION_ROOT"] = "cubing/"
 #print([rule.endpoint for rule in app.url_map.iter_rules()])
 
 temp_session = {} #holds temp global data, without using globals. kinda a hack on mutability.
@@ -55,7 +58,7 @@ def search() -> dict:
         query = flask.request.args['query']
     return {"entries": [(time, NAMES[html[:-len(cube.FILE)]], html, preview) for time, html, preview in cube.parse_search(query)]}
 
-def convert(order:list, prefix:str="", new:list=[]) -> list:
+def convert(order:list, prefix:str=bp.name + ".", new:list=[]) -> list:
     """ Converts an order specification into a parsable (path, name) format by the nav header. """
     for name in order:
         if isinstance(name, list):
@@ -93,7 +96,7 @@ def make_page(s: str, f=lambda: {}, methods=['GET']):
     func = lambda: flask.render_template((s if s != "" else "index") + cube.FILE, pages=NAV, active=cube.VOTE["vote_active"], title=NAMES[s.split("/")[-1]], **f())
     # Need distinct function names for Flask not to error
     func.__name__ = s if s != "" else "index"
-    return app.route("/{}".format(s), methods=methods)(func)
+    return bp.route("/{}".format(s), methods=methods)(func)
 
 def make_pages(d: dict, prefix="") -> None:
     """ Makes the entire site's pages. Recurs on nested dicts, taking file structure into account. """
@@ -107,14 +110,14 @@ def make_pages(d: dict, prefix="") -> None:
 
 #TODO: update sitemap, update robots.txt with correct link
 # https://stackoverflow.com/questions/14048779/with-flask-how-can-i-serve-robots-txt-and-sitemap-xml-as-static-files
-@app.route("/sitemap.xml")
-@app.route("/robots.txt")
+@bp.route("/sitemap.xml")
+@bp.route("/robots.txt")
 def static_from_root():
     """ Serves a file from static, skipping the /static/. """
     return flask.send_from_directory(app.static_folder, flask.request.path[1:])
 
 # https://requests-oauthlib.readthedocs.io/en/latest/
-@app.route("/login")
+@bp.route("/login")
 def login():
     oauth = cube.make_oauth()
     authorization_url, state = oauth.authorization_url(cube.AUTHORIZATION_URL)
@@ -123,7 +126,7 @@ def login():
     flask.session["oauth_state"] = state
     return flask.redirect(authorization_url)
 
-@app.route("/callback")
+@bp.route("/callback")
 def callback():
     assert flask.request.args.get('state', None) == flask.session['oauth_state']
     code = flask.request.args.get('code', None)
@@ -135,7 +138,7 @@ def callback():
 
     return flask.redirect(temp_session["action"])
 
-@app.route("/vote/vote", methods=["GET", "POST"])
+@bp.route("/vote/vote", methods=["GET", "POST"])
 def vote():
     if not cube.test_token():
         temp_session["action"] = flask.request.path
@@ -153,7 +156,7 @@ def vote():
 
     return flask.render_template(flask.request.path + cube.FILE, pages=NAV, title="vote", active=cube.VOTE["vote_active"], **cube.VOTE, sorted_candidates=cube.get_candidates(), name=cube.get_name())
 
-@app.route("/vote/run", methods=["GET", "POST"])
+@bp.route("/vote/run", methods=["GET", "POST"])
 def run():
     if not cube.test_token():
         temp_session["action"] = flask.request.path
@@ -185,3 +188,4 @@ def page_not_found(e):
     return flask.render_template('error/404' + cube.FILE, title="404", pages=NAV), 404
 
 make_pages(PAGES)
+app.register_blueprint(bp, url_prefix='/cubing')
