@@ -1,0 +1,71 @@
+{
+    "time": 1557695222.230765,
+    "comps": [
+        {
+            "url": "https://www.worldcubeassociation.org/competitions/NorthernVirginiaSummer2019",
+            "name": "Northern Virginia Summer 2019",
+            "location": "United States, Fairfax, Virginia",
+            "venue": "George Mason University",
+            "date": "Jun 22 - 23, 2019",
+            "gps": "38.830611,-77.30462",
+            "mi": "8.8 mi",
+            "timestr": "20 mins",
+            "time": 1208
+        },
+        {
+            "url": "https://www.worldcubeassociation.org/competitions/RiverHillSpring2019",
+            "name": "River Hill Spring 2019",
+            "location": "United States, Clarksville, Maryland",
+            "venue": "River Hill High School",
+            "date": "Jun 2, 2019",
+            "gps": "39.215333,-76.928765",
+            "mi": "46.5 mi",
+            "timestr": "59 mins",
+            "time": 3512
+        },
+        {
+            "url": "https://www.worldcubeassociation.org/competitions/CubingUSANationals2019",
+            "name": "CubingUSA Nationals 2019",
+            "location": "United States, Baltimore, Maryland",
+            "venue": "Baltimore Convention Center",
+            "date": "Aug 1 - 4, 2019",
+            "gps": "39.28539,-76.617112",
+            "mi": "49.4 mi",
+            "timestr": "1 hour 2 mins",
+            "time": 3716
+        },
+        {
+            "url": "https://www.worldcubeassociation.org/competitions/RichmondSpring2019",
+            "name": "Richmond Spring 2019",
+            "location": "United States, Richmond, Virginia",
+            "venue": "Virginia Commonwealth University",
+            "date": "Jun 15, 2019",
+            "gps": "37.544579,-77.429654",
+            "mi": "98.0 mi",
+            "timestr": "1 hour 35 mins",
+            "time": 5723
+        },
+        {
+            "url": "https://www.worldcubeassociation.org/competitions/BalaBigandBlind2019",
+            "name": "Bala Big and Blind 2019",
+            "location": "United States, Bala Cynwyd, Pennsylvania",
+            "venue": "Bala Cynwyd Middle School",
+            "date": "May 18, 2019",
+            "gps": "40.013675,-75.242978",
+            "mi": "159 mi",
+            "timestr": "2 hours 44 mins",
+            "time": 9818
+        },
+        {
+            "url": "https://www.worldcubeassociation.org/competitions/PittsburghSummer2019",
+            "name": "Pittsburgh Summer 2019",
+            "location": "United States, Pittsburgh, Pennsylvania",
+            "venue": "David L. Lawrence Convention Center",
+            "date": "Jun 15 - 16, 2019",
+            "gps": "40.445799,-79.996162",
+            "mi": "248 mi",
+            "timestr": "4 hours 2 mins",
+            "time": 14533
+        }
+    ]
+}

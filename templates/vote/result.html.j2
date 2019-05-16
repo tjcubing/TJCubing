@@ -1,0 +1,15 @@
+{% extends "helper/base.html.j2" %}
+
+{% block content %}
+
+  {% if vote["vote_active"] %}
+    <p> The election has not ended yet. Check back here at {{ vote["ends_at"] }} to see the result... </p>
+  {% else %}
+    {% if result == None %}
+      <p> The election is tied! I don't know how to resolve this yet... </p>
+    {% else %}
+      <p> The winner is {{ result }}! Congratulations to them. </p>
+    {% endif %}
+  {% endif %}
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "helper/base.html.j2" %}
+
+{% block intro %} Starting the 2017-18 school year, we will be bringing back a Rubik's Cube Club tradition! Every club meeting, two or three officers will give tips on how to improve your times. For people who miss a meeting or are simply looking for tips, we will post the tips here weekly. If you have any questions about the tips or just in general, feel free to email anyone from the <a href="/contact">Contact</a> tab! {% endblock %}
+
+{% block content %}
+  {{ f.make_tip("10/4/2017", ["Using keyhole during F2L can improve your solutions for certain F2L pairs. For example, if a corner is already solved, use a D move, insert the corresponding edge, then do D' to solve the pair. However, be sure you do not damage other F2L pairs in the process."]) }}
+  {{ f.make_tip("9/27/2017", ["Use algorithms to <a href='https://www.youtube.com/watch?v=DptDU5rHLm4'>insert F2L pairs from multiple angles</a> to reduce rotations", "<a href='https://drive.google.com/file/d/1nzAXYUWZJ6H2wIOXaHdWXep3W57tArbR/view'>Algorithms and pictures</a>"]) }}
+  {{ f.make_tip("9/20/2017", ["Solving cross on the bottom layer makes transition into F2L/first layer easier, but be sure you know your color scheme well.", "Since all crosses can be solved with eight moves or less, try being efficient by solving multiple pieces at once."]) }}
+  {{ f.make_tip("9/13/2017", ["No tip this week! Look forward to next week's tip!"]) }}
+
+  <p> Due to lack of interest, we have indefinitely discontinued weekly tips. However, feel free to ask anyone on the TJ Cubing team for tips at any time! You can reach us through email, Facebook, in person, etc. </p>
+
+{% endblock %}

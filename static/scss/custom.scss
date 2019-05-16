@@ -2,6 +2,13 @@
 @import "../bootstrap/scss/variables";
 @import "../bootstrap/scss/mixins";
 
+// possible font change suggested by Akash Bhave
+// @import url('https://fonts.googleapis.com/css?family=Rubik');
+//
+//  main {
+//   font-family: "Rubik", sans-serif ;
+// }
+
 main > .container {
   padding: 60px 15px 0;
 }

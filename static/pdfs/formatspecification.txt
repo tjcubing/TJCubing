@@ -1,17 +1,7 @@
-Make a folder with some title.
-In that folder, put the PDFs and other associated files.
-Make a file called "desc.txt" which should include these key, value pairs:
+Make a folder with some name.
+Put the PDFs and other associated files in that folder.
+Make a file called "desc.json" which should include these key, value pairs:
 title, author, date, pdf, slides, url
 
-Each key, value should be specified like "key: value" and be on its own line.
-There should be no other lines.
-
-Example: /static/pdfs/Computational Cube Theory/desc.txt
-title: Computational Cube Theory
-author: Stephen Huan
-date: 04/20/2019
-pdf: cubetheory.pdf
-slides: Computational Cube Theory.pdf
-url: https://docs.google.com/presentation/d/1iRihHkXuySt3UQjYGrG1rVhdg87WOb4nCmTgMW9cxbg
-
-Note that the "title" value and folder name should be the same.
+(slides is a PDF version of the slides, URL is a link to google presentations)
+Folder name should be the same as the value from the title key.

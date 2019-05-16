@@ -10,6 +10,8 @@ flask = "*"
 requests = "*"
 beautifulsoup4 = "*"
 requests-oauthlib = "*"
+matplotlib = "*"
+markdown2 = "*"
 
 [requires]
 python_version = "3.7"

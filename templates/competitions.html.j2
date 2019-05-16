@@ -1,12 +1,11 @@
 {% extends "helper/base.html.j2" %}
+
+{% block subtitle %} Last updated: {{ last }} {% endblock %}
+{% block intro %} Aside from the Rubik's You Can Do The Rubik's Cube Competition, there is an official speedsolving organization, known as the <a href="https://www.worldcubeassociation.org/">World Cube Association</a> (WCA). The WCA is responsible for maintaining the integrity of all world records, such as Yusheng Du's <a href="https://www.youtube.com/watch?v=SB3ut65SFUURubik">3.47 world record 3x3 single solve</a>. Throughout the year, the WCA hosts hundreds of competitions throughout the world and we are fortunate enough to live in an area where competitions are very common. In fact, TJ hosts its own competition every November. Here, a Python program lists and automatically updates  upcoming WCA competitions. {% endblock %}
+{% block rest %} What's great about WCA competitions is that they are open to anyone of any speed! We highly recommend beginners to attend these competitions, as they are tons of fun and you are able to learn a lot. Many of our team members began attending competition with 30 second averages, but there are people with 5 minute averages attending! Competitions are a great way to get together with people with the same interest and have a great time! However, beginners should be familiar with <a href="https://www.worldcubeassociation.org/regulations/"> WCA Regulations</a> and you may want to look at the WCA's <a href="https://www.worldcubeassociation.org/files/WCA_Competition_Tutorial.pdf">Competitor Tutorial</a>. {% endblock %}
+{% block line %}{% endblock %}
+
 {% block content %}
-
-  <h1 class="display-1"> Competitions </h1>
-  <h3> <small class="text-muted">Last updated: {{ last }}</small> </h3>
-
-  <p class="lead mt-4"> Aside from the Rubik's You Can Do The Rubik's Cube Competition, there is an official speedsolving organization, known as the <a href="https://www.worldcubeassociation.org/">World Cube Association</a> (WCA). The WCA is responsible for maintaining the integrity of all world records, such as Yusheng Du's <a href="https://www.youtube.com/watch?v=SB3ut65SFUURubik">3.47 world record 3x3 single solve</a>. Throughout the year, the WCA hosts hundreds of competitions throughout the world and we are fortunate enough to live in an area where competitions are very common. In fact, TJ hosts its own competition every November. Here, a Python program lists and automatically updates  upcoming WCA competitions.
-
-  <p> What's great about WCA competitions is that they are open to anyone of any speed! We highly recommend beginners to attend these competitions, as they are tons of fun and you are able to learn a lot. Many of our team members began attending competition with 30 second averages, but there are people with 5 minute averages attending! Competitions are a great way to get together with people with the same interest and have a great time! However, beginners should be familiar with <a href="https://www.worldcubeassociation.org/regulations/"> WCA Regulations</a> and you may want to look at the WCA's <a href="https://www.worldcubeassociation.org/files/WCA_Competition_Tutorial.pdf">Competitor Tutorial</a>.</p>
 
   {% for comp in comps %}
     <hr style="border: solid 1px grey;">
@@ -14,7 +13,7 @@
     <ul>
       <li> Date: {{ comp['date'] }} </li>
       <li> Location: {{ comp['venue'] }} in {{ " ".join(comp['location'].split()[2:]) }} </li>
-      <li> Distance from TJ: {{ comp['mi'] }}, approximant time: {{ comp['timestr'] }} </li>
+      <li> Distance from TJ: {{ comp['mi'] }}, approximate time: {{ comp['timestr'] }} </li> <!-- Vishal Kanigicherla: "approximant" to "approximate"-->
     </ul>
   {% endfor %}
 

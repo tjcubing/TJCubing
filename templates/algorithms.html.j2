@@ -1,38 +1,26 @@
 {% extends "helper/base.html.j2" %}
+
+{% block intro %} An algorithm is a set of moves that move pieces around the Rubik's cube. It is important that you learn fast algorithms from the beginning because they are crucial to your times and are fairly difficult to change. Here are some of the suggested links and PDF's for common algorithm sets. {% endblock %}
+
 {% block content %}
-
-  <h1 class="display-1 mb-5"> Algorithms </h1>
-
-  <p class="lead"> An algorithm is a set of moves that move pieces around the Rubik's cube. It is important that you learn fast algorithms from the beginning because they are crucial to your times and are fairly difficult to change. Here are some of the suggested links and PDF's for common algorithm sets.</p>
-  <hr>
-
-  {% macro section(title, entries) %}
-    <h3> {{ title }} </h3>
-    <ul>
-      {% for url, name, desc in entries %}
-        <li> <a href="{{ url }}">{{ name }}</a>{{ ":" if name != "" else "" }} {{ desc }} </li>
-      {% endfor %}
-    </ul>
-  {% endmacro %}
-
-  {{ section("Sites for Everyone", [("http://algdb.net/", "algdb", "Probably the best website for algorithms of any sort. Includes many subsets aside from CFOP algs."),
-                                    ("https://www.cubeskills.com/", "CubeSkills", "Hosted by world-famous speedcuber, Feliks Zemdegs, this website includes tutorials for 3x3, 4x4, and One-Handed. The videos go very in depth, separated into 3-skill levels: Beginner, Intermediate, and Advanced. <strong>We highly recommend this website!</strong>"),
-                                    ("https://www.speedsolving.com/wiki/index.php/Main_Page", "Speedsolving Wiki", "An overall great place to look up algorithms, methods, and terms you don't understand. There is also a forum to ask questions."),
-                                   ]) }}
-  {{ section("Beginners", [("https://www.youtube.com/watch?v=1t1OL2zN0LQ", "TheCubicle's Tutorial", "A really great tutorial showing how to solve the Rubik's cube."),
-                           ("http://www.badmephisto.com/", "Badmephisto's Cubing Site", "An old, classic website with beginner's tutorials and introduction to CFOP."),
-                          ]) }}
-  {{ section("CFOP", [("", "", "Use algdb and CubeSkills listed above."),
-                      ("https://docs.google.com/spreadsheets/d/1lpsbSdoLloRtjz4VfH9j0163N1x9sNE_oXV7k44YR-8/edit?usp=sharing", "Stephen's Alg Spreadsheet", "Used for timing and tracking purposes, contains decent algs and a realistic comparision of the speeds of each alg.")
+  {{ f.section("Sites for Everyone", [("http://algdb.net/", "algdb", "Probably the best website for algorithms of any sort. Includes many subsets aside from CFOP algs."),
+                                      ("https://www.cubeskills.com/", "CubeSkills", "Hosted by world-famous speedcuber, Feliks Zemdegs, this website includes tutorials for 3x3, 4x4, and One-Handed. The videos go very in depth, separated into 3-skill levels: Beginner, Intermediate, and Advanced. <strong>We highly recommend this website!</strong>"),
+                                      ("https://www.speedsolving.com/wiki/index.php/Main_Page", "Speedsolving Wiki", "An overall great place to look up algorithms, methods, and terms you don't understand. There is also a forum to ask questions."),
+                                     ]) }}
+  {{ f.section("Beginners", [("https://www.youtube.com/watch?v=1t1OL2zN0LQ", "TheCubicle's Tutorial", "A really great tutorial showing how to solve the Rubik's cube."),
+                             ("http://www.badmephisto.com/", "Badmephisto's Cubing Site", "An old, classic website with beginner's tutorials and introduction to CFOP."),
+                            ]) }}
+  {{ f.section("CFOP", [("", "", "Use algdb and CubeSkills listed above."),
+                        ("https://docs.google.com/spreadsheets/d/1lpsbSdoLloRtjz4VfH9j0163N1x9sNE_oXV7k44YR-8/edit?usp=sharing", "Stephen's Alg Spreadsheet", "Used for timing and tracking purposes, contains decent algs and a realistic comparision of the speeds of each alg.")
+                       ]) }}
+  {{ f.section("Roux", [("https://sites.google.com/view/kianroux/home", "Kian Mansour's Website", "World's current fastest Roux user's CMLL, LSE, etc. algorithms."),
+                       ]) }}
+  {{ f.section("ZZ", [("https://www.youtube.com/watch?v=Q9f-uHyHeQs", "Phil Yu's Tutorial", "Phil Yu, cofounder of theCubicle, is a sub-10 ZZ user. His tutorial is very good (vary gud) for beginner's looking to learn ZZ."),
                      ]) }}
-  {{ section("Roux", [("https://sites.google.com/view/kianroux/home", "Kian Mansour's Website", "World's current fastest Roux user's CMLL, LSE, etc. algorithms."),
-                     ]) }}
-  {{ section("ZZ", [("https://www.youtube.com/watch?v=Q9f-uHyHeQs", "Phil Yu's Tutorial", "Phil Yu, cofounder of theCubicle, is a sub-10 ZZ user. His tutorial is very good (vary gud) for beginner's looking to learn ZZ."),
-                   ]) }}
-  {{ section("2x2", [("http://www.cyotheking.com/", "Chris Olson's Website", "Former world-record holder Chris Olson's 2x2 algorithms. Also includes some 3x3 algorithm subsets."),
-                    ]) }}
-  {{ section("3x3 One-Handed", [("https://sites.google.com/site/antoineccantin/Home", "Antoine Cantin's Website", "Former world-record holder Antoine Cantin's algorithms."),
-                                ("https://www.youtube.com/playlist?list=PLsPxB6KjzKdjwQtCIxwnJlflrz68CZpWa", "Antoine's OH PLLs", "Antoine shows how he fingertricks all of his OH PLLs."),
-                                ("https://www.youtube.com/playlist?list=PLsPxB6KjzKdjGgmbVQiABEYOpeoURd1YN", "Antoine's OH OLLs", "Antoine shows how he fingertricks all of his OH OLLs."),
-                               ]) }}
+  {{ f.section("2x2", [("http://www.cyotheking.com/", "Chris Olson's Website", "Former world-record holder Chris Olson's 2x2 algorithms. Also includes some 3x3 algorithm subsets."),
+                      ]) }}
+  {{ f.section("3x3 One-Handed", [("https://sites.google.com/site/antoineccantin/Home", "Antoine Cantin's Website", "Former world-record holder Antoine Cantin's algorithms."),
+                                  ("https://www.youtube.com/playlist?list=PLsPxB6KjzKdjwQtCIxwnJlflrz68CZpWa", "Antoine's OH PLLs", "Antoine shows how he fingertricks all of his OH PLLs."),
+                                  ("https://www.youtube.com/playlist?list=PLsPxB6KjzKdjGgmbVQiABEYOpeoURd1YN", "Antoine's OH OLLs", "Antoine shows how he fingertricks all of his OH OLLs."),
+                                 ]) }}
 {% endblock %}

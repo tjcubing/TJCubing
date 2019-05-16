@@ -6,7 +6,7 @@
   <!-- Bootstrap CSS -->
   <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
 
-  <title>TJ Cubing</title>
+  <title>{{ title|capitalize }} - TJ Cubing</title>
   <meta name="description" content="TJ's Rubik's Cube Clube website">
 	<meta name="author" content="Stephen Huan">
   <link rel="shortcut icon" href="{{ url_for('static', filename='img/cubing.ico') }}">
@@ -43,7 +43,7 @@
               {% for entrypath, entryname in name %}
                 <!-- Hack but whatever, next webdev can make this entire nav system better -->
                 {% if entryname in ["result", "vote!"] %} <div class="dropdown-divider"></div> {% endif %}
-                <a class="dropdown-item" href="{{ entrypath }}">{{ entryname|capitalize }}</a>
+                <a class="dropdown-item {{ 'disabled' if not active and entryname in ['run for office', 'vote!'] else '' }}" href="{{ entrypath }}">{{ entryname|capitalize }}</a>
               {% endfor %}
             </div>
           </li>
@@ -52,10 +52,25 @@
     </ul>
 
     <!-- Search bar -->
-    <form class="form-inline my-2 my-lg-0" action="/search" method="post">
+    <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
       <input class="form-control mr-sm-2" name="query" id="query" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
     </form>
-
   </div>
 </nav>
+
+<!-- Alerts -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for category, message in messages %}
+      <div class="alert {{ 'alert-' + category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}

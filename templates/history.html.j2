@@ -1,10 +1,40 @@
 {% extends "helper/base.html.j2" %}
+
+{% block rest %}
+  <blockquote class="blockquote">
+    <p class="mb-0">"If I have seen further it is by standing on the sholders of Giants."</p>
+    <footer class="blockquote-footer">Isaac Newton <cite title="Letter">  <a href="https://digitallibrary.hsp.org/index.php/Detail/objects/9792">Letter to Robert Hooke, 1675</a> </cite></footer>
+  </blockquote>
+{% endblock %}
+
 {% block content %}
+  <h4 class="mt-4"> Past Websites </h4>
+  <ul>
+    <li> <a href="http://davidzhao.me/TJCubing/">David Zhao's TJ Cubing</a>, <a href="https://github.com/davidbzhao/TJCubing">Source</a>. Inspiration for this site, and laid the groundwork for future sites to come. </li>
+    <li> <a href="https://sites.google.com/view/tjcubing/">Google Site</a> made by Justin Guo and Erick Tian. A lot of its content was <del>plagiarized</del> <em>utilized</em> in this site. </li>
+    <li> <a href="{{ url }}">This site</a>, <a href="https://github.com/stephen-huan/TJCubing">Source</a> made by Stephen Huan. Currently the official site.</li>
+  </ul>
 
-<h1 class="display-1 mb-5"> History </h1>
+  <h1 class="mt-5"> {{ name }} </h1>
+  <h2> <small class="text-muted"> {{ description }} </small> </h2>
 
-{% for header in headers[4:] %}
-  <td> <a href="{{ url_for('static', filename='pdfs/%s/%s'|format(lecture['title'], lecture[header|lower])) if header != "URL" else lecture[header|lower] }}"> {{ header }} </a> </td>
-{% endfor %}
+  <h4 class="mt-4 mb-2"> At a Glance </h4>
+  <ul>
+    <!-- TODO: average capacity, most popular block, most popular day -->
+    <li> Number of meetings: {{ blocks|length }} </li>
+  </ul>
+
+  <h4 class="mb-4 mt-5"> Every Meeting Ever </h4>
+  <ul>
+    {% for meeting in blocks %}
+      <li>
+        {{ meeting["title"] }}
+        <ul>
+            <li> Date: {{ meeting["date"] }} ({{ meeting["day"] + " " + meeting["block_letter"] }}) </li>
+            <li> <p> People attended: {{ meeting["count"] }}, capacity: {{ meeting["capacity"] }} = {{ '{:.2%}'.format(0 if meeting["capacity"] == 0 else meeting["count"]/meeting["capacity"] ) }} </p></li>
+        </ul>
+      </li>
+    {% endfor %}
+  </ul>
 
 {% endblock %}

@@ -1,0 +1,19 @@
+{% extends "helper/base.html.j2" %}
+
+{% block intro %} Voting is a civic responsibility. {% endblock %}
+{% block rest %} ...and with great responsibility comes (maybe) great power. {% endblock %}
+
+{% block content %}
+  <h2 class="mt-4"> Requirements to Vote </h2>
+  <ul>
+    <li> Must be attending <a href="https://tjhsst.fcps.edu/">TJHSST</a>. <em>Verification: Ion OAuth</em> </li>
+    <li> Attend {{ min_meetings }} or more meetings this year, or {{ 2*min_meetings }} or more meetings in total. <em>Verification: API call to https://ion.tjhsst.edu/api/signups/user/ </em> </li>
+  </ul>
+
+  <h2 class="mt-4"> Requirements to Run </h2>
+  <ul>
+    <li> Attend TJHSST. </li>
+    <li> Be technically capable. <em>Verification: Interview with the current webmaster</em> </li>
+  </ul>
+
+{% endblock %}

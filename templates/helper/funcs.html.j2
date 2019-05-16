@@ -1,0 +1,71 @@
+<!-- TODO: automate bulleted lists because those are my favorite appparently. -->
+
+{% macro bullet_list(users, func) %}
+    <ul>
+      {%- for user in users %}
+          <li> {{ func(user) }} </li>
+      {%- endfor %}
+    </ul>
+{% endmacro %}
+
+{% macro test(hi) %}
+  <p> {{ hi }} </p>
+{% endmacro %}
+
+{% macro make_card(width, title, subtitle, body, extra) %}
+  <div class="card mt-5" style="width: {{ width }}rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{ title }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{ subtitle }}</h6>
+      <p class="card-text">{{ body }}</p>
+      {{ extra }}
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro furl(filename) %}
+  {{ url_for('static', filename=filename) }}
+{% endmacro %}
+
+{% macro link(url, text) %}
+  <a href="{{ url }}">{{ text }}</a>
+{% endmacro %}
+
+<!-- Actual functions -->
+
+{% macro make_tip (date, tips) %}
+  <h4> {{ date }} </h4>
+  <ul>
+    {% for tip in tips %}
+      <li> {{ tip }} </li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
+
+{% macro section(title, entries) %}
+  <h3> {{ title }} </h3>
+  <ul>
+    {% for url, name, desc in entries %}
+      <li> <a href="{{ url }}">{{ name }}</a>{{ ":" if name != None else "" }} {{ desc }} </li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
+
+{% macro emails(list, extra="") %}
+  {% if list | length == 1 %}
+    <p> {{ list[0][0] }}: <a href="mailto:{{ list[0][1] }}">{{ list[0][1] }}</a>{{ extra }}</p>
+  {% else %}
+    {% for item in list %}
+      {{ emails([item]) }}
+    {% endfor %}
+  {% endif %}
+{% endmacro %}
+
+{% macro description(name, years, meetings, year, annual_meetings) %}
+  <ul>
+    {% if name != "" %} <li>Name: {{ name }}</li> {% endif %}
+    <li># Years of attending Rubik's Cube Club: {{ years }} </li>
+    <li>Total # of meetings attended: {{ meetings }} </li>
+    <li># of meetings attended in {{ year }}: {{ annual_meetings }} </li>
+  </ul>
+{% endmacro %}

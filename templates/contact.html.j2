@@ -1,33 +1,17 @@
 {% extends "helper/base.html.j2" %}
 {% block content %}
-
-  <h1 class="display-1 mb-5"> Contact </h1>
-  <hr>
-
-  {% macro emails(list, extra="") %}
-    {% if list | length == 1 %}
-      <p> {{ list[0][0] }}: <a href="mailto:{{ list[0][1] }}">{{ list[0][1] }}</a>{{ extra }}</p>
-    {% else %}
-      {% for item in list %}
-        {{ emails([item]) }}
-      {% endfor %}
-    {% endif %}
-  {% endmacro %}
-
   <div class="container">
     <div class="row">
       <div class="col-sm">
         <h3 class="mb-3"> Club Sponsor and Team Email </h3>
-        {{ emails([("Christine Conklin", "clconklin@fcps.edu"), ("Team Email", "tjcubingofficers@gmail.com")]) }}
+        {{ f.emails([("Christine Conklin", "clconklin@fcps.edu"), ("Team Email", "tjcubingofficers@gmail.com")]) }}
       </div>
       <div class="col-sm">
         <h3 class="mb-3"> Club Officers </h3>
-        {{ emails([("Justin Gou", "jgdingding@gmail.com"), ("Erick Tian", "ericktian@gmail.com"), ("Ray Bai", "raybai0001@yahoo.com")]) }}
-        {{ emails([("Webmaster Stephen Huan", "stephen03.huan@gmail.com")], " <a href='https://stephen-huan.github.io/assets/misc/A99DD60E.asc' style='color:green'> (A99DD60E) </a>") }}
-        <!-- TODO: determine who this guy is: Shreyan Jaiswal: shreyanj2000@gmail.com, add Justin Choi-->
+        {{ f.emails([("Justin Gou", "jgdingding@gmail.com"), ("Erick Tian", "ericktian@gmail.com"), ("Ray Bai", "raybai0001@yahoo.com"), ("Justin Choi", "justinjchoice@gmail.com")]) }}
+        {{ f.emails([("Webmaster Stephen Huan", "stephen03.huan@gmail.com")], " <a href='https://stephen-huan.github.io/assets/misc/A99DD60E.asc' class='text-success'> (A99DD60E) </a>") }}
       </div>
     </div>
   </div>
-
 
 {% endblock %}

@@ -1,0 +1,4925 @@
+{
+    "time": 1557874342.102528,
+    "id": 152,
+    "name": "Rubiks Cube Club",
+    "description": "Have fun and learn how to solve the Rubiks cube",
+    "administrative": false,
+    "restricted": false,
+    "presign": false,
+    "one_a_day": false,
+    "both_blocks": false,
+    "sticky": false,
+    "special": false,
+    "scheduled_on": {
+        "3013": {
+            "id": 3013,
+            "block_letter": "B",
+            "roster": {
+                "id": 53951,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/53951"
+            },
+            "date": "2015-10-02",
+            "url": "https://ion.tjhsst.edu/api/blocks/3013",
+            "subcall": {
+                "id": 53951,
+                "name": "Rubiks Cube Club - Interest Meeting",
+                "block": {
+                    "date": "2015-10-02",
+                    "id": 3013,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3013"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club - Interest Meeting",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33109,
+                            "full_name": "Jack Duvall",
+                            "username": "2019jduvall",
+                            "url": "https://ion.tjhsst.edu/api/profile/33109"
+                        }
+                    ],
+                    "count": 11,
+                    "viewable_count": 1
+                },
+                "capacity": 28
+            }
+        },
+        "3015": {
+            "id": 3015,
+            "block_letter": "B",
+            "roster": {
+                "id": 53952,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/53952"
+            },
+            "date": "2015-10-05",
+            "url": "https://ion.tjhsst.edu/api/blocks/3015",
+            "subcall": {
+                "id": 53952,
+                "name": "Rubiks Cube Club (Cancelled)",
+                "block": {
+                    "id": 3015,
+                    "date": "2015-10-05",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3015"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club (Cancelled)",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 0,
+                    "count": 0,
+                    "members": []
+                },
+                "capacity": 28
+            }
+        },
+        "3017": {
+            "id": 3017,
+            "block_letter": "B",
+            "roster": {
+                "id": 53953,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/53953"
+            },
+            "date": "2015-10-07",
+            "url": "https://ion.tjhsst.edu/api/blocks/3017",
+            "subcall": {
+                "id": 53953,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2015-10-07",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3017",
+                    "id": 3017
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 12,
+                    "viewable_count": 1
+                },
+                "capacity": 28
+            }
+        },
+        "3019": {
+            "id": 3019,
+            "block_letter": "B",
+            "roster": {
+                "id": 53954,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/53954"
+            },
+            "date": "2015-10-16",
+            "url": "https://ion.tjhsst.edu/api/blocks/3019",
+            "subcall": {
+                "id": 53954,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2015-10-16",
+                    "id": 3019,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3019"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33109,
+                            "full_name": "Jack Duvall",
+                            "username": "2019jduvall",
+                            "url": "https://ion.tjhsst.edu/api/profile/33109"
+                        }
+                    ],
+                    "count": 14,
+                    "viewable_count": 1
+                },
+                "capacity": 28
+            }
+        },
+        "3021": {
+            "id": 3021,
+            "block_letter": "B",
+            "roster": {
+                "id": 53955,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/53955"
+            },
+            "date": "2015-10-21",
+            "url": "https://ion.tjhsst.edu/api/blocks/3021",
+            "subcall": {
+                "id": 53955,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3021,
+                    "date": "2015-10-21",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3021"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 2,
+                    "members": [
+                        {
+                            "id": 33100,
+                            "full_name": "Alexey Didenkov",
+                            "username": "2019adidenko",
+                            "url": "https://ion.tjhsst.edu/api/profile/33100"
+                        },
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 14
+                },
+                "capacity": 28
+            }
+        },
+        "3025": {
+            "id": 3025,
+            "block_letter": "B",
+            "roster": {
+                "id": 54675,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/54675"
+            },
+            "date": "2015-11-06",
+            "url": "https://ion.tjhsst.edu/api/blocks/3025",
+            "subcall": {
+                "id": 54675,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "url": "https://ion.tjhsst.edu/api/blocks/3025",
+                    "date": "2015-11-06",
+                    "id": 3025
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 6,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3029": {
+            "id": 3029,
+            "block_letter": "B",
+            "roster": {
+                "id": 54676,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/54676"
+            },
+            "date": "2015-11-13",
+            "url": "https://ion.tjhsst.edu/api/blocks/3029",
+            "subcall": {
+                "id": 54676,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2015-11-13",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3029",
+                    "id": 3029
+                },
+                "activity": {
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 2,
+                    "members": [
+                        {
+                            "id": 33109,
+                            "full_name": "Jack Duvall",
+                            "username": "2019jduvall",
+                            "url": "https://ion.tjhsst.edu/api/profile/33109"
+                        },
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 7
+                },
+                "capacity": 28
+            }
+        },
+        "3040": {
+            "id": 3040,
+            "block_letter": "B",
+            "roster": {
+                "id": 54677,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/54677"
+            },
+            "date": "2015-12-04",
+            "url": "https://ion.tjhsst.edu/api/blocks/3040",
+            "subcall": {
+                "id": 54677,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2015-12-04",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3040",
+                    "id": 3040
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "count": 8,
+                    "viewable_count": 1,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 32
+            }
+        },
+        "3044": {
+            "id": 3044,
+            "block_letter": "B",
+            "roster": {
+                "id": 54678,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/54678"
+            },
+            "date": "2015-12-11",
+            "url": "https://ion.tjhsst.edu/api/blocks/3044",
+            "subcall": {
+                "id": 54678,
+                "name": "Rubiks Cube Club - Holiday Pyraminx",
+                "block": {
+                    "id": 3044,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3044",
+                    "date": "2015-12-11"
+                },
+                "activity": {
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club - Holiday Pyraminx"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 7,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 32
+            }
+        },
+        "3052": {
+            "id": 3052,
+            "block_letter": "B",
+            "roster": {
+                "id": 54679,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/54679"
+            },
+            "date": "2016-01-08",
+            "url": "https://ion.tjhsst.edu/api/blocks/3052",
+            "subcall": {
+                "id": 54679,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2016-01-08",
+                    "id": 3052,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3052"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 3,
+                    "viewable_count": 1
+                },
+                "capacity": 32
+            }
+        },
+        "3064": {
+            "id": 3064,
+            "block_letter": "B",
+            "roster": {
+                "id": 59625,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/59625"
+            },
+            "date": "2016-01-15",
+            "url": "https://ion.tjhsst.edu/api/blocks/3064",
+            "subcall": {
+                "id": 59625,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3064,
+                    "date": "2016-01-15",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3064"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 4,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3068": {
+            "id": 3068,
+            "block_letter": "B",
+            "roster": {
+                "id": 59626,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/59626"
+            },
+            "date": "2016-01-22",
+            "url": "https://ion.tjhsst.edu/api/blocks/3068",
+            "subcall": {
+                "id": 59626,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2016-01-22",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3068",
+                    "id": 3068
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 4,
+                    "viewable_count": 1
+                },
+                "capacity": 28
+            }
+        },
+        "3072": {
+            "id": 3072,
+            "block_letter": "B",
+            "roster": {
+                "id": 59627,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/59627"
+            },
+            "date": "2016-01-29",
+            "url": "https://ion.tjhsst.edu/api/blocks/3072",
+            "subcall": {
+                "id": 59627,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2016-01-29",
+                    "id": 3072,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3072"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 4,
+                    "viewable_count": 1
+                },
+                "capacity": 28
+            }
+        },
+        "3078": {
+            "id": 3078,
+            "block_letter": "B",
+            "roster": {
+                "id": 59628,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/59628"
+            },
+            "date": "2016-02-12",
+            "url": "https://ion.tjhsst.edu/api/blocks/3078",
+            "subcall": {
+                "id": 59628,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3078,
+                    "date": "2016-02-12",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3078"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 5
+                },
+                "capacity": 28
+            }
+        },
+        "3082": {
+            "id": 3082,
+            "block_letter": "B",
+            "roster": {
+                "id": 59629,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/59629"
+            },
+            "date": "2016-02-19",
+            "url": "https://ion.tjhsst.edu/api/blocks/3082",
+            "subcall": {
+                "id": 59629,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "url": "https://ion.tjhsst.edu/api/blocks/3082",
+                    "date": "2016-02-19",
+                    "id": 3082
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 5,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3086": {
+            "id": 3086,
+            "block_letter": "B",
+            "roster": {
+                "id": 59630,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/59630"
+            },
+            "date": "2016-02-26",
+            "url": "https://ion.tjhsst.edu/api/blocks/3086",
+            "subcall": {
+                "id": 59630,
+                "name": "Rubiks Cube Club - please sign up for another 8th period (Cancelled)",
+                "block": {
+                    "date": "2016-02-26",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3086",
+                    "id": 3086
+                },
+                "activity": {
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club - please sign up for another 8th period (Cancelled)",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 0,
+                    "members": [],
+                    "count": 0
+                },
+                "capacity": 0
+            }
+        },
+        "3094": {
+            "id": 3094,
+            "block_letter": "B",
+            "roster": {
+                "id": 63917,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/63917"
+            },
+            "date": "2016-03-04",
+            "url": "https://ion.tjhsst.edu/api/blocks/3094",
+            "subcall": {
+                "id": 63917,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2016-03-04",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3094",
+                    "id": 3094
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "count": 5,
+                    "viewable_count": 1,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3098": {
+            "id": 3098,
+            "block_letter": "B",
+            "roster": {
+                "id": 63918,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/63918"
+            },
+            "date": "2016-03-11",
+            "url": "https://ion.tjhsst.edu/api/blocks/3098",
+            "subcall": {
+                "id": 63918,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3098,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3098",
+                    "date": "2016-03-11"
+                },
+                "activity": {
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 4,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3102": {
+            "id": 3102,
+            "block_letter": "B",
+            "roster": {
+                "id": 63919,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/63919"
+            },
+            "date": "2016-03-18",
+            "url": "https://ion.tjhsst.edu/api/blocks/3102",
+            "subcall": {
+                "id": 63919,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2016-03-18",
+                    "id": 3102,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3102"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 7,
+                    "viewable_count": 1
+                },
+                "capacity": 28
+            }
+        },
+        "3104": {
+            "id": 3104,
+            "block_letter": "B",
+            "roster": {
+                "id": 63925,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/63925"
+            },
+            "date": "2016-03-30",
+            "url": "https://ion.tjhsst.edu/api/blocks/3104",
+            "subcall": {
+                "id": 63925,
+                "name": "Rubiks Cube Club - Cubing Team only",
+                "block": {
+                    "id": 3104,
+                    "date": "2016-03-30",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3104"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club - Cubing Team only",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 3,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3103": {
+            "id": 3103,
+            "block_letter": "A",
+            "roster": {
+                "id": 63924,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/63924"
+            },
+            "date": "2016-03-30",
+            "url": "https://ion.tjhsst.edu/api/blocks/3103",
+            "subcall": {
+                "id": 63924,
+                "name": "Rubiks Cube Club - Cubing Team only",
+                "block": {
+                    "date": "2016-03-30",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3103",
+                    "id": 3103
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club - Cubing Team only",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 3,
+                    "viewable_count": 1
+                },
+                "capacity": 28
+            }
+        },
+        "3106": {
+            "id": 3106,
+            "block_letter": "B",
+            "roster": {
+                "id": 63920,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/63920"
+            },
+            "date": "2016-04-01",
+            "url": "https://ion.tjhsst.edu/api/blocks/3106",
+            "subcall": {
+                "id": 63920,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2016-04-01",
+                    "id": 3106,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3106"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 7,
+                    "viewable_count": 1
+                },
+                "capacity": 28
+            }
+        },
+        "3105": {
+            "id": 3105,
+            "block_letter": "A",
+            "roster": {
+                "id": 63926,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/63926"
+            },
+            "date": "2016-04-01",
+            "url": "https://ion.tjhsst.edu/api/blocks/3105",
+            "subcall": {
+                "id": 63926,
+                "name": "Rubiks Cube Club - Cubing Team only",
+                "block": {
+                    "id": 3105,
+                    "date": "2016-04-01",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3105"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club - Cubing Team only",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 3
+                },
+                "capacity": 28
+            }
+        },
+        "3110": {
+            "id": 3110,
+            "block_letter": "B",
+            "roster": {
+                "id": 63921,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/63921"
+            },
+            "date": "2016-04-08",
+            "url": "https://ion.tjhsst.edu/api/blocks/3110",
+            "subcall": {
+                "id": 63921,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "url": "https://ion.tjhsst.edu/api/blocks/3110",
+                    "date": "2016-04-08",
+                    "id": 3110
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 7,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3114": {
+            "id": 3114,
+            "block_letter": "B",
+            "roster": {
+                "id": 63922,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/63922"
+            },
+            "date": "2016-04-15",
+            "url": "https://ion.tjhsst.edu/api/blocks/3114",
+            "subcall": {
+                "id": 63922,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2016-04-15",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3114",
+                    "id": 3114
+                },
+                "activity": {
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 7
+                },
+                "capacity": 28
+            }
+        },
+        "3123": {
+            "id": 3123,
+            "block_letter": "B",
+            "roster": {
+                "id": 63923,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/63923"
+            },
+            "date": "2016-04-29",
+            "url": "https://ion.tjhsst.edu/api/blocks/3123",
+            "subcall": {
+                "id": 63923,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2016-04-29",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3123",
+                    "id": 3123
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "count": 8,
+                    "viewable_count": 1,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3125": {
+            "id": 3125,
+            "block_letter": "B",
+            "roster": {
+                "id": 66297,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/66297"
+            },
+            "date": "2016-05-05",
+            "url": "https://ion.tjhsst.edu/api/blocks/3125",
+            "subcall": {
+                "id": 66297,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3125,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3125",
+                    "date": "2016-05-05"
+                },
+                "activity": {
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 8,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3130": {
+            "id": 3130,
+            "block_letter": "B",
+            "roster": {
+                "id": 66298,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/66298"
+            },
+            "date": "2016-05-13",
+            "url": "https://ion.tjhsst.edu/api/blocks/3130",
+            "subcall": {
+                "id": 66298,
+                "name": "Rubiks Cube Club - Note room today!",
+                "block": {
+                    "date": "2016-05-13",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3130",
+                    "id": 3130
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club - Note room today!",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 7,
+                    "viewable_count": 1
+                },
+                "capacity": 20
+            }
+        },
+        "3132": {
+            "id": 3132,
+            "block_letter": "B",
+            "roster": {
+                "id": 66299,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/66299"
+            },
+            "date": "2016-05-20",
+            "url": "https://ion.tjhsst.edu/api/blocks/3132",
+            "subcall": {
+                "id": 66299,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3132,
+                    "date": "2016-05-20",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3132"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 2,
+                    "members": [
+                        {
+                            "id": 33108,
+                            "full_name": "Timothy Duong",
+                            "username": "2019tduong",
+                            "url": "https://ion.tjhsst.edu/api/profile/33108"
+                        },
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 9
+                },
+                "capacity": 28
+            }
+        },
+        "3136": {
+            "id": 3136,
+            "block_letter": "B",
+            "roster": {
+                "id": 66300,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/66300"
+            },
+            "date": "2016-05-27",
+            "url": "https://ion.tjhsst.edu/api/blocks/3136",
+            "subcall": {
+                "id": 66300,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "url": "https://ion.tjhsst.edu/api/blocks/3136",
+                    "date": "2016-05-27",
+                    "id": 3136
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 5,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3140": {
+            "id": 3140,
+            "block_letter": "B",
+            "roster": {
+                "id": 67657,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/67657"
+            },
+            "date": "2016-06-03",
+            "url": "https://ion.tjhsst.edu/api/blocks/3140",
+            "subcall": {
+                "id": 67657,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2016-06-03",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3140",
+                    "id": 3140
+                },
+                "activity": {
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 6
+                },
+                "capacity": 28
+            }
+        },
+        "3142": {
+            "id": 3142,
+            "block_letter": "B",
+            "roster": {
+                "id": 67658,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/67658"
+            },
+            "date": "2016-06-08",
+            "url": "https://ion.tjhsst.edu/api/blocks/3142",
+            "subcall": {
+                "id": 67658,
+                "name": "Rubiks Cube Club (Cancelled)",
+                "block": {
+                    "date": "2016-06-08",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3142",
+                    "id": 3142
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club (Cancelled)",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "count": 0,
+                    "viewable_count": 0,
+                    "members": []
+                },
+                "capacity": 0
+            }
+        },
+        "3152": {
+            "id": 3152,
+            "block_letter": "B",
+            "roster": {
+                "id": 67659,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/67659"
+            },
+            "date": "2016-06-15",
+            "url": "https://ion.tjhsst.edu/api/blocks/3152",
+            "subcall": {
+                "id": 67659,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3152,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3152",
+                    "date": "2016-06-15"
+                },
+                "activity": {
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 8,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3209": {
+            "id": 3209,
+            "block_letter": "B",
+            "roster": {
+                "id": 72849,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/72849"
+            },
+            "date": "2016-07-04",
+            "url": "https://ion.tjhsst.edu/api/blocks/3209",
+            "subcall": {
+                "id": 72849,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2016-07-04",
+                    "id": 3209,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3209"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 3,
+                    "viewable_count": 1
+                },
+                "capacity": 28
+            }
+        },
+        "3186": {
+            "id": 3186,
+            "block_letter": "B",
+            "roster": {
+                "id": 70116,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/70116"
+            },
+            "date": "2016-09-21",
+            "url": "https://ion.tjhsst.edu/api/blocks/3186",
+            "subcall": {
+                "id": 70116,
+                "name": "Rubiks Cube Club - Interest Meeting",
+                "block": {
+                    "id": 3186,
+                    "date": "2016-09-21",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3186"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club - Interest Meeting",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 22,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3161": {
+            "id": 3161,
+            "block_letter": "B",
+            "roster": {
+                "id": 70117,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/70117"
+            },
+            "date": "2016-09-30",
+            "url": "https://ion.tjhsst.edu/api/blocks/3161",
+            "subcall": {
+                "id": 70117,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2016-09-30",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3161",
+                    "id": 3161
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 22,
+                    "viewable_count": 1
+                },
+                "capacity": 28
+            }
+        },
+        "3170": {
+            "id": 3170,
+            "block_letter": "B",
+            "roster": {
+                "id": 70118,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/70118"
+            },
+            "date": "2016-10-05",
+            "url": "https://ion.tjhsst.edu/api/blocks/3170",
+            "subcall": {
+                "id": 70118,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2016-10-05",
+                    "id": 3170,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3170"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 25,
+                    "viewable_count": 1
+                },
+                "capacity": 28
+            }
+        },
+        "3172": {
+            "id": 3172,
+            "block_letter": "B",
+            "roster": {
+                "id": 70119,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/70119"
+            },
+            "date": "2016-10-12",
+            "url": "https://ion.tjhsst.edu/api/blocks/3172",
+            "subcall": {
+                "id": 70119,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "url": "https://ion.tjhsst.edu/api/blocks/3172",
+                    "date": "2016-10-12",
+                    "id": 3172
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 2,
+                    "count": 23,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 33788,
+                            "full_name": "Ralph Nester",
+                            "username": "2020hnester",
+                            "url": "https://ion.tjhsst.edu/api/profile/33788"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3176": {
+            "id": 3176,
+            "block_letter": "B",
+            "roster": {
+                "id": 70120,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/70120"
+            },
+            "date": "2016-10-21",
+            "url": "https://ion.tjhsst.edu/api/blocks/3176",
+            "subcall": {
+                "id": 70120,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2016-10-21",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3176",
+                    "id": 3176
+                },
+                "activity": {
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 18
+                },
+                "capacity": 28
+            }
+        },
+        "3180": {
+            "id": 3180,
+            "block_letter": "B",
+            "roster": {
+                "id": 70121,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/70121"
+            },
+            "date": "2016-10-28",
+            "url": "https://ion.tjhsst.edu/api/blocks/3180",
+            "subcall": {
+                "id": 70121,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2016-10-28",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3180",
+                    "id": 3180
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "count": 19,
+                    "viewable_count": 2,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 33794,
+                            "full_name": "Sarah O'Shay",
+                            "username": "2019soshay",
+                            "url": "https://ion.tjhsst.edu/api/profile/33794"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3182": {
+            "id": 3182,
+            "block_letter": "B",
+            "roster": {
+                "id": 70122,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/70122"
+            },
+            "date": "2016-11-02",
+            "url": "https://ion.tjhsst.edu/api/blocks/3182",
+            "subcall": {
+                "id": 70122,
+                "name": "Rubiks Cube Club - Note room change for today!",
+                "block": {
+                    "date": "2016-11-02",
+                    "id": 3182,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3182"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club - Note room change for today!",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [],
+                    "count": 15,
+                    "viewable_count": 0
+                },
+                "capacity": 28
+            }
+        },
+        "3193": {
+            "id": 3193,
+            "block_letter": "B",
+            "roster": {
+                "id": 72846,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/72846"
+            },
+            "date": "2016-11-16",
+            "url": "https://ion.tjhsst.edu/api/blocks/3193",
+            "subcall": {
+                "id": 72846,
+                "name": "Rubiks Cube Club - Event planning meeting",
+                "block": {
+                    "id": 3193,
+                    "date": "2016-11-16",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3193"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club - Event planning meeting",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 7,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3199": {
+            "id": 3199,
+            "block_letter": "B",
+            "roster": {
+                "id": 73387,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/73387"
+            },
+            "date": "2016-12-02",
+            "url": "https://ion.tjhsst.edu/api/blocks/3199",
+            "subcall": {
+                "id": 73387,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2016-12-02",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3199",
+                    "id": 3199
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 14,
+                    "viewable_count": 1
+                },
+                "capacity": 28
+            }
+        },
+        "3203": {
+            "id": 3203,
+            "block_letter": "B",
+            "roster": {
+                "id": 72847,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/72847"
+            },
+            "date": "2016-12-09",
+            "url": "https://ion.tjhsst.edu/api/blocks/3203",
+            "subcall": {
+                "id": 72847,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3203,
+                    "date": "2016-12-09",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3203"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 13
+                },
+                "capacity": 28
+            }
+        },
+        "3207": {
+            "id": 3207,
+            "block_letter": "B",
+            "roster": {
+                "id": 72848,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/72848"
+            },
+            "date": "2016-12-16",
+            "url": "https://ion.tjhsst.edu/api/blocks/3207",
+            "subcall": {
+                "id": 72848,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2016-12-16",
+                    "id": 3207,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3207"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33108,
+                            "full_name": "Timothy Duong",
+                            "username": "2019tduong",
+                            "url": "https://ion.tjhsst.edu/api/profile/33108"
+                        },
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 12,
+                    "viewable_count": 2
+                },
+                "capacity": 35
+            }
+        },
+        "3213": {
+            "id": 3213,
+            "block_letter": "B",
+            "roster": {
+                "id": 79056,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/79056"
+            },
+            "date": "2017-01-11",
+            "url": "https://ion.tjhsst.edu/api/blocks/3213",
+            "subcall": {
+                "id": 79056,
+                "name": "Rubiks Cube Club - moved to Friday",
+                "block": {
+                    "url": "https://ion.tjhsst.edu/api/blocks/3213",
+                    "date": "2017-01-11",
+                    "id": 3213
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club - moved to Friday",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 0,
+                    "count": 0,
+                    "members": []
+                },
+                "capacity": 0
+            }
+        },
+        "3215": {
+            "id": 3215,
+            "block_letter": "B",
+            "roster": {
+                "id": 72850,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/72850"
+            },
+            "date": "2017-01-13",
+            "url": "https://ion.tjhsst.edu/api/blocks/3215",
+            "subcall": {
+                "id": 72850,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2017-01-13",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3215",
+                    "id": 3215
+                },
+                "activity": {
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 12
+                },
+                "capacity": 28
+            }
+        },
+        "3217": {
+            "id": 3217,
+            "block_letter": "B",
+            "roster": {
+                "id": 79057,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/79057"
+            },
+            "date": "2017-01-18",
+            "url": "https://ion.tjhsst.edu/api/blocks/3217",
+            "subcall": {
+                "id": 79057,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3217,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3217",
+                    "date": "2017-01-18"
+                },
+                "activity": {
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club"
+                },
+                "signups": {
+                    "viewable_count": 0,
+                    "count": 9,
+                    "members": []
+                },
+                "capacity": 28
+            }
+        },
+        "3232": {
+            "id": 3232,
+            "block_letter": "A",
+            "roster": {
+                "id": 79058,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/79058"
+            },
+            "date": "2017-01-25",
+            "url": "https://ion.tjhsst.edu/api/blocks/3232",
+            "subcall": {
+                "id": 79058,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2017-01-25",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3232",
+                    "id": 3232
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "count": 3,
+                    "viewable_count": 2,
+                    "members": [
+                        {
+                            "id": 33108,
+                            "full_name": "Timothy Duong",
+                            "username": "2019tduong",
+                            "url": "https://ion.tjhsst.edu/api/profile/33108"
+                        },
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3233": {
+            "id": 3233,
+            "block_letter": "B",
+            "roster": {
+                "id": 79059,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/79059"
+            },
+            "date": "2017-01-25",
+            "url": "https://ion.tjhsst.edu/api/blocks/3233",
+            "subcall": {
+                "id": 79059,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2017-01-25",
+                    "id": 3233,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3233"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 8,
+                    "viewable_count": 1
+                },
+                "capacity": 28
+            }
+        },
+        "3219": {
+            "id": 3219,
+            "block_letter": "B",
+            "roster": {
+                "id": 79060,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/79060"
+            },
+            "date": "2017-02-01",
+            "url": "https://ion.tjhsst.edu/api/blocks/3219",
+            "subcall": {
+                "id": 79060,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3219,
+                    "date": "2017-02-01",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3219"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 8,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3230": {
+            "id": 3230,
+            "block_letter": "B",
+            "roster": {
+                "id": 79061,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/79061"
+            },
+            "date": "2017-02-08",
+            "url": "https://ion.tjhsst.edu/api/blocks/3230",
+            "subcall": {
+                "id": 79061,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2017-02-08",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3230",
+                    "id": 3230
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [],
+                    "count": 5,
+                    "viewable_count": 0
+                },
+                "capacity": 28
+            }
+        },
+        "3241": {
+            "id": 3241,
+            "block_letter": "B",
+            "roster": {
+                "id": 79062,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/79062"
+            },
+            "date": "2017-02-17",
+            "url": "https://ion.tjhsst.edu/api/blocks/3241",
+            "subcall": {
+                "id": 79062,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3241,
+                    "date": "2017-02-17",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3241"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 2,
+                    "members": [
+                        {
+                            "id": 33108,
+                            "full_name": "Timothy Duong",
+                            "username": "2019tduong",
+                            "url": "https://ion.tjhsst.edu/api/profile/33108"
+                        },
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 9
+                },
+                "capacity": 28
+            }
+        },
+        "3248": {
+            "id": 3248,
+            "block_letter": "A",
+            "roster": {
+                "id": 79080,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/79080"
+            },
+            "date": "2017-03-03",
+            "url": "https://ion.tjhsst.edu/api/blocks/3248",
+            "subcall": {
+                "id": 79080,
+                "name": "Rubiks Cube Club - YCDTRC Team",
+                "block": {
+                    "date": "2017-03-03",
+                    "id": 3248,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3248"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club - YCDTRC Team",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 4,
+                    "viewable_count": 1
+                },
+                "capacity": 8
+            }
+        },
+        "3249": {
+            "id": 3249,
+            "block_letter": "B",
+            "roster": {
+                "id": 79063,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/79063"
+            },
+            "date": "2017-03-03",
+            "url": "https://ion.tjhsst.edu/api/blocks/3249",
+            "subcall": {
+                "id": 79063,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "url": "https://ion.tjhsst.edu/api/blocks/3249",
+                    "date": "2017-03-03",
+                    "id": 3249
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 10,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3253": {
+            "id": 3253,
+            "block_letter": "B",
+            "roster": {
+                "id": 81615,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/81615"
+            },
+            "date": "2017-03-10",
+            "url": "https://ion.tjhsst.edu/api/blocks/3253",
+            "subcall": {
+                "id": 81615,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2017-03-10",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3253",
+                    "id": 3253
+                },
+                "activity": {
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 2,
+                    "members": [
+                        {
+                            "id": 33108,
+                            "full_name": "Timothy Duong",
+                            "username": "2019tduong",
+                            "url": "https://ion.tjhsst.edu/api/profile/33108"
+                        },
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 11
+                },
+                "capacity": 28
+            }
+        },
+        "3265": {
+            "id": 3265,
+            "block_letter": "A",
+            "roster": {
+                "id": 81996,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/81996"
+            },
+            "date": "2017-03-17",
+            "url": "https://ion.tjhsst.edu/api/blocks/3265",
+            "subcall": {
+                "id": 81996,
+                "name": "Rubiks Cube Club - YCDTRC Team practice",
+                "block": {
+                    "id": 3265,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3265",
+                    "date": "2017-03-17"
+                },
+                "activity": {
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club - YCDTRC Team practice"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 3,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3266": {
+            "id": 3266,
+            "block_letter": "B",
+            "roster": {
+                "id": 81616,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/81616"
+            },
+            "date": "2017-03-17",
+            "url": "https://ion.tjhsst.edu/api/blocks/3266",
+            "subcall": {
+                "id": 81616,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2017-03-17",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3266",
+                    "id": 3266
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "count": 7,
+                    "viewable_count": 0,
+                    "members": []
+                },
+                "capacity": 28
+            }
+        },
+        "3269": {
+            "id": 3269,
+            "block_letter": "A",
+            "roster": {
+                "id": 82530,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/82530"
+            },
+            "date": "2017-03-22",
+            "url": "https://ion.tjhsst.edu/api/blocks/3269",
+            "subcall": {
+                "id": 82530,
+                "name": "Rubiks Cube Club - TEAM practice only",
+                "block": {
+                    "date": "2017-03-22",
+                    "id": 3269,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3269"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club - TEAM practice only",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 5,
+                    "viewable_count": 1
+                },
+                "capacity": 9
+            }
+        },
+        "3274": {
+            "id": 3274,
+            "block_letter": "B",
+            "roster": {
+                "id": 81617,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/81617"
+            },
+            "date": "2017-03-31",
+            "url": "https://ion.tjhsst.edu/api/blocks/3274",
+            "subcall": {
+                "id": 81617,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3274,
+                    "date": "2017-03-31",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3274"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 2,
+                    "count": 16,
+                    "members": [
+                        {
+                            "id": 33108,
+                            "full_name": "Timothy Duong",
+                            "username": "2019tduong",
+                            "url": "https://ion.tjhsst.edu/api/profile/33108"
+                        },
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3284": {
+            "id": 3284,
+            "block_letter": "B",
+            "roster": {
+                "id": 82043,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/82043"
+            },
+            "date": "2017-04-28",
+            "url": "https://ion.tjhsst.edu/api/blocks/3284",
+            "subcall": {
+                "id": 82043,
+                "name": "Rubiks Cube Club - moved to A block (Cancelled)",
+                "block": {
+                    "date": "2017-04-28",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3284",
+                    "id": 3284
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club - moved to A block (Cancelled)",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [],
+                    "count": 1,
+                    "viewable_count": 0
+                },
+                "capacity": 0
+            }
+        },
+        "3283": {
+            "id": 3283,
+            "block_letter": "A",
+            "roster": {
+                "id": 85094,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/85094"
+            },
+            "date": "2017-04-28",
+            "url": "https://ion.tjhsst.edu/api/blocks/3283",
+            "subcall": {
+                "id": 85094,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3283,
+                    "date": "2017-04-28",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3283"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 0,
+                    "members": [],
+                    "count": 0
+                },
+                "capacity": 28
+            }
+        },
+        "3289": {
+            "id": 3289,
+            "block_letter": "B",
+            "roster": {
+                "id": 83953,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/83953"
+            },
+            "date": "2017-05-04",
+            "url": "https://ion.tjhsst.edu/api/blocks/3289",
+            "subcall": {
+                "id": 83953,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "url": "https://ion.tjhsst.edu/api/blocks/3289",
+                    "date": "2017-05-04",
+                    "id": 3289
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 2,
+                    "count": 10,
+                    "members": [
+                        {
+                            "id": 33108,
+                            "full_name": "Timothy Duong",
+                            "username": "2019tduong",
+                            "url": "https://ion.tjhsst.edu/api/profile/33108"
+                        },
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3294": {
+            "id": 3294,
+            "block_letter": "B",
+            "roster": {
+                "id": 83954,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/83954"
+            },
+            "date": "2017-05-12",
+            "url": "https://ion.tjhsst.edu/api/blocks/3294",
+            "subcall": {
+                "id": 83954,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3294,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3294",
+                    "date": "2017-05-12"
+                },
+                "activity": {
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club"
+                },
+                "signups": {
+                    "viewable_count": 2,
+                    "count": 14,
+                    "members": [
+                        {
+                            "id": 33108,
+                            "full_name": "Timothy Duong",
+                            "username": "2019tduong",
+                            "url": "https://ion.tjhsst.edu/api/profile/33108"
+                        },
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3298": {
+            "id": 3298,
+            "block_letter": "B",
+            "roster": {
+                "id": 85535,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/85535"
+            },
+            "date": "2017-05-19",
+            "url": "https://ion.tjhsst.edu/api/blocks/3298",
+            "subcall": {
+                "id": 85535,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2017-05-19",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3298",
+                    "id": 3298
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "count": 11,
+                    "viewable_count": 1,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3299": {
+            "id": 3299,
+            "block_letter": "B",
+            "roster": {
+                "id": 85537,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/85537"
+            },
+            "date": "2017-05-24",
+            "url": "https://ion.tjhsst.edu/api/blocks/3299",
+            "subcall": {
+                "id": 85537,
+                "name": "Rubiks Cube Club - YCDTRC Team only",
+                "block": {
+                    "date": "2017-05-24",
+                    "id": 3299,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3299"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club - YCDTRC Team only",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 4,
+                    "viewable_count": 1
+                },
+                "capacity": 28
+            }
+        },
+        "3303": {
+            "id": 3303,
+            "block_letter": "B",
+            "roster": {
+                "id": 85536,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/85536"
+            },
+            "date": "2017-06-02",
+            "url": "https://ion.tjhsst.edu/api/blocks/3303",
+            "subcall": {
+                "id": 85536,
+                "name": "Rubiks Cube Club - Pyraminx Party",
+                "block": {
+                    "id": 3303,
+                    "date": "2017-06-02",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3303"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club - Pyraminx Party",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 2,
+                    "count": 13,
+                    "members": [
+                        {
+                            "id": 33108,
+                            "full_name": "Timothy Duong",
+                            "username": "2019tduong",
+                            "url": "https://ion.tjhsst.edu/api/profile/33108"
+                        },
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3308": {
+            "id": 3308,
+            "block_letter": "B",
+            "roster": {
+                "id": 86527,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/86527"
+            },
+            "date": "2017-06-12",
+            "url": "https://ion.tjhsst.edu/api/blocks/3308",
+            "subcall": {
+                "id": 86527,
+                "name": "Rubiks Cube Club - Pyraminx 2",
+                "block": {
+                    "date": "2017-06-12",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3308",
+                    "id": 3308
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club - Pyraminx 2",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 33228,
+                            "full_name": "Omkar Kulkarni",
+                            "username": "2019okulkarn",
+                            "url": "https://ion.tjhsst.edu/api/profile/33228"
+                        }
+                    ],
+                    "count": 12,
+                    "viewable_count": 2
+                },
+                "capacity": 28
+            }
+        },
+        "3310": {
+            "id": 3310,
+            "block_letter": "B",
+            "roster": {
+                "id": 86529,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/86529"
+            },
+            "date": "2017-06-14",
+            "url": "https://ion.tjhsst.edu/api/blocks/3310",
+            "subcall": {
+                "id": 86529,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3310,
+                    "date": "2017-06-14",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3310"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 3
+                },
+                "capacity": 28
+            }
+        },
+        "3312": {
+            "id": 3312,
+            "block_letter": "B",
+            "roster": {
+                "id": 86467,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/86467"
+            },
+            "date": "2017-06-16",
+            "url": "https://ion.tjhsst.edu/api/blocks/3312",
+            "subcall": {
+                "id": 86467,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "url": "https://ion.tjhsst.edu/api/blocks/3312",
+                    "date": "2017-06-16",
+                    "id": 3312
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 10,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3329": {
+            "id": 3329,
+            "block_letter": "B",
+            "roster": {
+                "id": 88915,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/88915"
+            },
+            "date": "2017-09-13",
+            "url": "https://ion.tjhsst.edu/api/blocks/3329",
+            "subcall": {
+                "id": 88915,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2017-09-13",
+                    "id": 3329,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3329"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 23,
+                    "viewable_count": 1
+                },
+                "capacity": 28
+            }
+        },
+        "3335": {
+            "id": 3335,
+            "block_letter": "B",
+            "roster": {
+                "id": 88916,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/88916"
+            },
+            "date": "2017-09-20",
+            "url": "https://ion.tjhsst.edu/api/blocks/3335",
+            "subcall": {
+                "id": 88916,
+                "name": "Rubiks Cube Club - Note room change!",
+                "block": {
+                    "id": 3335,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3335",
+                    "date": "2017-09-20"
+                },
+                "activity": {
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club - Note room change!"
+                },
+                "signups": {
+                    "viewable_count": 2,
+                    "count": 20,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 34849,
+                            "full_name": "Helena Liu",
+                            "username": "2021hliu",
+                            "url": "https://ion.tjhsst.edu/api/profile/34849"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3337": {
+            "id": 3337,
+            "block_letter": "B",
+            "roster": {
+                "id": 88917,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/88917"
+            },
+            "date": "2017-09-27",
+            "url": "https://ion.tjhsst.edu/api/blocks/3337",
+            "subcall": {
+                "id": 88917,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2017-09-27",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3337",
+                    "id": 3337
+                },
+                "activity": {
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 2,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 34849,
+                            "full_name": "Helena Liu",
+                            "username": "2021hliu",
+                            "url": "https://ion.tjhsst.edu/api/profile/34849"
+                        }
+                    ],
+                    "count": 21
+                },
+                "capacity": 28
+            }
+        },
+        "3341": {
+            "id": 3341,
+            "block_letter": "B",
+            "roster": {
+                "id": 88918,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/88918"
+            },
+            "date": "2017-10-04",
+            "url": "https://ion.tjhsst.edu/api/blocks/3341",
+            "subcall": {
+                "id": 88918,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2017-10-04",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3341",
+                    "id": 3341
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "count": 21,
+                    "viewable_count": 3,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 34638,
+                            "full_name": "Emily Song",
+                            "username": "2021esong",
+                            "url": "https://ion.tjhsst.edu/api/profile/34638"
+                        },
+                        {
+                            "id": 34849,
+                            "full_name": "Helena Liu",
+                            "username": "2021hliu",
+                            "url": "https://ion.tjhsst.edu/api/profile/34849"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3347": {
+            "id": 3347,
+            "block_letter": "B",
+            "roster": {
+                "id": 88919,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/88919"
+            },
+            "date": "2017-10-18",
+            "url": "https://ion.tjhsst.edu/api/blocks/3347",
+            "subcall": {
+                "id": 88919,
+                "name": "Rubiks Cube Club - Note the room change for today!",
+                "block": {
+                    "date": "2017-10-18",
+                    "id": 3347,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3347"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club - Note the room change for today!",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ],
+                    "count": 18,
+                    "viewable_count": 2
+                },
+                "capacity": 35
+            }
+        },
+        "3353": {
+            "id": 3353,
+            "block_letter": "B",
+            "roster": {
+                "id": 88921,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/88921"
+            },
+            "date": "2017-10-27",
+            "url": "https://ion.tjhsst.edu/api/blocks/3353",
+            "subcall": {
+                "id": 88921,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3353,
+                    "date": "2017-10-27",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3353"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 9,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3355": {
+            "id": 3355,
+            "block_letter": "B",
+            "roster": {
+                "id": 88920,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/88920"
+            },
+            "date": "2017-11-01",
+            "url": "https://ion.tjhsst.edu/api/blocks/3355",
+            "subcall": {
+                "id": 88920,
+                "name": "Rubiks Cube Club (Cancelled)",
+                "block": {
+                    "date": "2017-11-01",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3355",
+                    "id": 3355
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club (Cancelled)",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [],
+                    "count": 0,
+                    "viewable_count": 0
+                },
+                "capacity": 0
+            }
+        },
+        "3366": {
+            "id": 3366,
+            "block_letter": "B",
+            "roster": {
+                "id": 93083,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/93083"
+            },
+            "date": "2017-11-10",
+            "url": "https://ion.tjhsst.edu/api/blocks/3366",
+            "subcall": {
+                "id": 93083,
+                "name": "Rubiks Cube Club - Executive board meeting",
+                "block": {
+                    "id": 3366,
+                    "date": "2017-11-10",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3366"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club - Executive board meeting",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 0,
+                    "members": [],
+                    "count": 2
+                },
+                "capacity": 28
+            }
+        },
+        "3372": {
+            "id": 3372,
+            "block_letter": "B",
+            "roster": {
+                "id": 92414,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/92414"
+            },
+            "date": "2017-11-15",
+            "url": "https://ion.tjhsst.edu/api/blocks/3372",
+            "subcall": {
+                "id": 92414,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "url": "https://ion.tjhsst.edu/api/blocks/3372",
+                    "date": "2017-11-15",
+                    "id": 3372
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 2,
+                    "count": 18,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3376": {
+            "id": 3376,
+            "block_letter": "B",
+            "roster": {
+                "id": 92415,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/92415"
+            },
+            "date": "2017-11-29",
+            "url": "https://ion.tjhsst.edu/api/blocks/3376",
+            "subcall": {
+                "id": 92415,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2017-11-29",
+                    "id": 3376,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3376"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 34849,
+                            "full_name": "Helena Liu",
+                            "username": "2021hliu",
+                            "url": "https://ion.tjhsst.edu/api/profile/34849"
+                        }
+                    ],
+                    "count": 12,
+                    "viewable_count": 2
+                },
+                "capacity": 28
+            }
+        },
+        "3383": {
+            "id": 3383,
+            "block_letter": "B",
+            "roster": {
+                "id": 92428,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/92428"
+            },
+            "date": "2017-12-08",
+            "url": "https://ion.tjhsst.edu/api/blocks/3383",
+            "subcall": {
+                "id": 92428,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3383,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3383",
+                    "date": "2017-12-08"
+                },
+                "activity": {
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 6,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3385": {
+            "id": 3385,
+            "block_letter": "B",
+            "roster": {
+                "id": 92416,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/92416"
+            },
+            "date": "2017-12-13",
+            "url": "https://ion.tjhsst.edu/api/blocks/3385",
+            "subcall": {
+                "id": 92416,
+                "name": "Rubiks Cube Club - Holiday - moved for Fri (Cancelled)",
+                "block": {
+                    "date": "2017-12-13",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3385",
+                    "id": 3385
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club - Holiday - moved for Fri (Cancelled)",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "count": 0,
+                    "viewable_count": 0,
+                    "members": []
+                },
+                "capacity": 28
+            }
+        },
+        "3391": {
+            "id": 3391,
+            "block_letter": "B",
+            "roster": {
+                "id": 94224,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/94224"
+            },
+            "date": "2017-12-15",
+            "url": "https://ion.tjhsst.edu/api/blocks/3391",
+            "subcall": {
+                "id": 94224,
+                "name": "Rubiks Cube Club - Holiday",
+                "block": {
+                    "date": "2017-12-15",
+                    "id": 3391,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3391"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club - Holiday",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33108,
+                            "full_name": "Timothy Duong",
+                            "username": "2019tduong",
+                            "url": "https://ion.tjhsst.edu/api/profile/33108"
+                        },
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        },
+                        {
+                            "id": 34849,
+                            "full_name": "Helena Liu",
+                            "username": "2021hliu",
+                            "url": "https://ion.tjhsst.edu/api/profile/34849"
+                        }
+                    ],
+                    "count": 21,
+                    "viewable_count": 4
+                },
+                "capacity": 28
+            }
+        },
+        "3387": {
+            "id": 3387,
+            "block_letter": "B",
+            "roster": {
+                "id": 92430,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/92430"
+            },
+            "date": "2018-01-03",
+            "url": "https://ion.tjhsst.edu/api/blocks/3387",
+            "subcall": {
+                "id": 92430,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3387,
+                    "date": "2018-01-03",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3387"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 12,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3393": {
+            "id": 3393,
+            "block_letter": "B",
+            "roster": {
+                "id": 92417,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/92417"
+            },
+            "date": "2018-01-10",
+            "url": "https://ion.tjhsst.edu/api/blocks/3393",
+            "subcall": {
+                "id": 92417,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2018-01-10",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3393",
+                    "id": 3393
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 10,
+                    "viewable_count": 1
+                },
+                "capacity": 35
+            }
+        },
+        "3395": {
+            "id": 3395,
+            "block_letter": "B",
+            "roster": {
+                "id": 94489,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/94489"
+            },
+            "date": "2018-01-12",
+            "url": "https://ion.tjhsst.edu/api/blocks/3395",
+            "subcall": {
+                "id": 94489,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3395,
+                    "date": "2018-01-12",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3395"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 0,
+                    "members": [],
+                    "count": 8
+                },
+                "capacity": 28
+            }
+        },
+        "3399": {
+            "id": 3399,
+            "block_letter": "B",
+            "roster": {
+                "id": 96546,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/96546"
+            },
+            "date": "2018-01-19",
+            "url": "https://ion.tjhsst.edu/api/blocks/3399",
+            "subcall": {
+                "id": 96546,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "url": "https://ion.tjhsst.edu/api/blocks/3399",
+                    "date": "2018-01-19",
+                    "id": 3399
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 2,
+                    "count": 8,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ]
+                },
+                "capacity": 30
+            }
+        },
+        "3408": {
+            "id": 3408,
+            "block_letter": "B",
+            "roster": {
+                "id": 96806,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/96806"
+            },
+            "date": "2018-01-31",
+            "url": "https://ion.tjhsst.edu/api/blocks/3408",
+            "subcall": {
+                "id": 96806,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3408,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3408",
+                    "date": "2018-01-31"
+                },
+                "activity": {
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club"
+                },
+                "signups": {
+                    "viewable_count": 0,
+                    "count": 15,
+                    "members": []
+                },
+                "capacity": 28
+            }
+        },
+        "3422": {
+            "id": 3422,
+            "block_letter": "B",
+            "roster": {
+                "id": 96502,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/96502"
+            },
+            "date": "2018-02-28",
+            "url": "https://ion.tjhsst.edu/api/blocks/3422",
+            "subcall": {
+                "id": 96502,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2018-02-28",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3422",
+                    "id": 3422
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "count": 9,
+                    "viewable_count": 2,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3425": {
+            "id": 3425,
+            "block_letter": "B",
+            "roster": {
+                "id": 96501,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/96501"
+            },
+            "date": "2018-03-02",
+            "url": "https://ion.tjhsst.edu/api/blocks/3425",
+            "subcall": {
+                "id": 96501,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2018-03-02",
+                    "id": 3425,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3425"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [],
+                    "count": 0,
+                    "viewable_count": 0
+                },
+                "capacity": 28
+            }
+        },
+        "3430": {
+            "id": 3430,
+            "block_letter": "B",
+            "roster": {
+                "id": 99663,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/99663"
+            },
+            "date": "2018-03-09",
+            "url": "https://ion.tjhsst.edu/api/blocks/3430",
+            "subcall": {
+                "id": 99663,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3430,
+                    "date": "2018-03-09",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3430"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 0,
+                    "count": 3,
+                    "members": []
+                },
+                "capacity": 28
+            }
+        },
+        "3432": {
+            "id": 3432,
+            "block_letter": "B",
+            "roster": {
+                "id": 99664,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/99664"
+            },
+            "date": "2018-03-14",
+            "url": "https://ion.tjhsst.edu/api/blocks/3432",
+            "subcall": {
+                "id": 99664,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2018-03-14",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3432",
+                    "id": 3432
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [],
+                    "count": 2,
+                    "viewable_count": 0
+                },
+                "capacity": 28
+            }
+        },
+        "3438": {
+            "id": 3438,
+            "block_letter": "B",
+            "roster": {
+                "id": 99665,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/99665"
+            },
+            "date": "2018-03-23",
+            "url": "https://ion.tjhsst.edu/api/blocks/3438",
+            "subcall": {
+                "id": 99665,
+                "name": "Rubiks Cube Club (Cancelled)",
+                "block": {
+                    "id": 3438,
+                    "date": "2018-03-23",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3438"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club (Cancelled)",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 0,
+                    "members": [],
+                    "count": 0
+                },
+                "capacity": 0
+            }
+        },
+        "3440": {
+            "id": 3440,
+            "block_letter": "B",
+            "roster": {
+                "id": 99666,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/99666"
+            },
+            "date": "2018-04-04",
+            "url": "https://ion.tjhsst.edu/api/blocks/3440",
+            "subcall": {
+                "id": 99666,
+                "name": "Rubiks Cube Club (Cancelled)",
+                "block": {
+                    "url": "https://ion.tjhsst.edu/api/blocks/3440",
+                    "date": "2018-04-04",
+                    "id": 3440
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club (Cancelled)",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 0,
+                    "count": 0,
+                    "members": []
+                },
+                "capacity": 0
+            }
+        },
+        "3444": {
+            "id": 3444,
+            "block_letter": "B",
+            "roster": {
+                "id": 101252,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/101252"
+            },
+            "date": "2018-04-11",
+            "url": "https://ion.tjhsst.edu/api/blocks/3444",
+            "subcall": {
+                "id": 101252,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2018-04-11",
+                    "id": 3444,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3444"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [],
+                    "count": 9,
+                    "viewable_count": 0
+                },
+                "capacity": 28
+            }
+        },
+        "3446": {
+            "id": 3446,
+            "block_letter": "B",
+            "roster": {
+                "id": 101253,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/101253"
+            },
+            "date": "2018-04-18",
+            "url": "https://ion.tjhsst.edu/api/blocks/3446",
+            "subcall": {
+                "id": 101253,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2018-04-18",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3446",
+                    "id": 3446
+                },
+                "activity": {
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 0,
+                    "members": [],
+                    "count": 3
+                },
+                "capacity": 28
+            }
+        },
+        "3450": {
+            "id": 3450,
+            "block_letter": "B",
+            "roster": {
+                "id": 101254,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/101254"
+            },
+            "date": "2018-04-25",
+            "url": "https://ion.tjhsst.edu/api/blocks/3450",
+            "subcall": {
+                "id": 101254,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3450,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3450",
+                    "date": "2018-04-25"
+                },
+                "activity": {
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 8,
+                    "members": [
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3452": {
+            "id": 3452,
+            "block_letter": "B",
+            "roster": {
+                "id": 101256,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/101256"
+            },
+            "date": "2018-04-27",
+            "url": "https://ion.tjhsst.edu/api/blocks/3452",
+            "subcall": {
+                "id": 101256,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2018-04-27",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3452",
+                    "id": 3452
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "count": 0,
+                    "viewable_count": 0,
+                    "members": []
+                },
+                "capacity": 28
+            }
+        },
+        "3454": {
+            "id": 3454,
+            "block_letter": "B",
+            "roster": {
+                "id": 101255,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/101255"
+            },
+            "date": "2018-05-02",
+            "url": "https://ion.tjhsst.edu/api/blocks/3454",
+            "subcall": {
+                "id": 101255,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2018-05-02",
+                    "id": 3454,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3454"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 5,
+                    "viewable_count": 1
+                },
+                "capacity": 28
+            }
+        },
+        "3459": {
+            "id": 3459,
+            "block_letter": "B",
+            "roster": {
+                "id": 102355,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/102355"
+            },
+            "date": "2018-05-10",
+            "url": "https://ion.tjhsst.edu/api/blocks/3459",
+            "subcall": {
+                "id": 102355,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3459,
+                    "date": "2018-05-10",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3459"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 0,
+                    "count": 3,
+                    "members": []
+                },
+                "capacity": 28
+            }
+        },
+        "3461": {
+            "id": 3461,
+            "block_letter": "B",
+            "roster": {
+                "id": 102379,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/102379"
+            },
+            "date": "2018-05-14",
+            "url": "https://ion.tjhsst.edu/api/blocks/3461",
+            "subcall": {
+                "id": 102379,
+                "name": "Rubiks Cube Club - Officers",
+                "block": {
+                    "date": "2018-05-14",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3461",
+                    "id": 3461
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club - Officers",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [],
+                    "count": 3,
+                    "viewable_count": 0
+                },
+                "capacity": 28
+            }
+        },
+        "3463": {
+            "id": 3463,
+            "block_letter": "B",
+            "roster": {
+                "id": 102356,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/102356"
+            },
+            "date": "2018-05-16",
+            "url": "https://ion.tjhsst.edu/api/blocks/3463",
+            "subcall": {
+                "id": 102356,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3463,
+                    "date": "2018-05-16",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3463"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 0,
+                    "members": [],
+                    "count": 12
+                },
+                "capacity": 28
+            }
+        },
+        "3464": {
+            "id": 3464,
+            "block_letter": "A",
+            "roster": {
+                "id": 102380,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/102380"
+            },
+            "date": "2018-05-18",
+            "url": "https://ion.tjhsst.edu/api/blocks/3464",
+            "subcall": {
+                "id": 102380,
+                "name": "Rubiks Cube Club - Officers",
+                "block": {
+                    "url": "https://ion.tjhsst.edu/api/blocks/3464",
+                    "date": "2018-05-18",
+                    "id": 3464
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club - Officers",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 0,
+                    "count": 0,
+                    "members": []
+                },
+                "capacity": 28
+            }
+        },
+        "3467": {
+            "id": 3467,
+            "block_letter": "B",
+            "roster": {
+                "id": 102357,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/102357"
+            },
+            "date": "2018-05-23",
+            "url": "https://ion.tjhsst.edu/api/blocks/3467",
+            "subcall": {
+                "id": 102357,
+                "name": "Rubiks Cube Club - Senior send off!",
+                "block": {
+                    "date": "2018-05-23",
+                    "id": 3467,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3467"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club - Senior send off!",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ],
+                    "count": 8,
+                    "viewable_count": 2
+                },
+                "capacity": 28
+            }
+        },
+        "3477": {
+            "id": 3477,
+            "block_letter": "B",
+            "roster": {
+                "id": 102358,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/102358"
+            },
+            "date": "2018-06-01",
+            "url": "https://ion.tjhsst.edu/api/blocks/3477",
+            "subcall": {
+                "id": 102358,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2018-06-01",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3477",
+                    "id": 3477
+                },
+                "activity": {
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 0,
+                    "members": [],
+                    "count": 5
+                },
+                "capacity": 28
+            }
+        },
+        "3499": {
+            "id": 3499,
+            "block_letter": "B",
+            "roster": {
+                "id": 104717,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/104717"
+            },
+            "date": "2018-09-12",
+            "url": "https://ion.tjhsst.edu/api/blocks/3499",
+            "subcall": {
+                "id": 104717,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3499,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3499",
+                    "date": "2018-09-12"
+                },
+                "activity": {
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 31,
+                    "members": [
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ]
+                },
+                "capacity": 35
+            }
+        },
+        "3505": {
+            "id": 3505,
+            "block_letter": "B",
+            "roster": {
+                "id": 104718,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/104718"
+            },
+            "date": "2018-09-26",
+            "url": "https://ion.tjhsst.edu/api/blocks/3505",
+            "subcall": {
+                "id": 104718,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2018-09-26",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3505",
+                    "id": 3505
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "count": 29,
+                    "viewable_count": 1,
+                    "members": [
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ]
+                },
+                "capacity": 35
+            }
+        },
+        "3509": {
+            "id": 3509,
+            "block_letter": "B",
+            "roster": {
+                "id": 105599,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/105599"
+            },
+            "date": "2018-10-03",
+            "url": "https://ion.tjhsst.edu/api/blocks/3509",
+            "subcall": {
+                "id": 105599,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2018-10-03",
+                    "id": 3509,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3509"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ],
+                    "count": 10,
+                    "viewable_count": 1
+                },
+                "capacity": 35
+            }
+        },
+        "3513": {
+            "id": 3513,
+            "block_letter": "B",
+            "roster": {
+                "id": 105600,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/105600"
+            },
+            "date": "2018-10-17",
+            "url": "https://ion.tjhsst.edu/api/blocks/3513",
+            "subcall": {
+                "id": 105600,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3513,
+                    "date": "2018-10-17",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3513"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 14,
+                    "members": [
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3519": {
+            "id": 3519,
+            "block_letter": "B",
+            "roster": {
+                "id": 105601,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/105601"
+            },
+            "date": "2018-10-26",
+            "url": "https://ion.tjhsst.edu/api/blocks/3519",
+            "subcall": {
+                "id": 105601,
+                "name": "Rubiks Cube Club - Note room change",
+                "block": {
+                    "date": "2018-10-26",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3519",
+                    "id": 3519
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club - Note room change",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ],
+                    "count": 4,
+                    "viewable_count": 1
+                },
+                "capacity": 28
+            }
+        },
+        "3523": {
+            "id": 3523,
+            "block_letter": "B",
+            "roster": {
+                "id": 105602,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/105602"
+            },
+            "date": "2018-11-02",
+            "url": "https://ion.tjhsst.edu/api/blocks/3523",
+            "subcall": {
+                "id": 105602,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3523,
+                    "date": "2018-11-02",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3523"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "members": [
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ],
+                    "count": 9
+                },
+                "capacity": 28
+            }
+        },
+        "3533": {
+            "id": 3533,
+            "block_letter": "B",
+            "roster": {
+                "id": 109235,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/109235"
+            },
+            "date": "2018-11-28",
+            "url": "https://ion.tjhsst.edu/api/blocks/3533",
+            "subcall": {
+                "id": 109235,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "url": "https://ion.tjhsst.edu/api/blocks/3533",
+                    "date": "2018-11-28",
+                    "id": 3533
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 2,
+                    "members": [
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ]
+                },
+                "capacity": 50
+            }
+        },
+        "3541": {
+            "id": 3541,
+            "block_letter": "B",
+            "roster": {
+                "id": 110410,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/110410"
+            },
+            "date": "2018-12-12",
+            "url": "https://ion.tjhsst.edu/api/blocks/3541",
+            "subcall": {
+                "id": 110410,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2018-12-12",
+                    "id": 3541,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3541"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ],
+                    "count": 8,
+                    "viewable_count": 1
+                },
+                "capacity": 28
+            }
+        },
+        "3543": {
+            "id": 3543,
+            "block_letter": "B",
+            "roster": {
+                "id": 110411,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/110411"
+            },
+            "date": "2018-12-19",
+            "url": "https://ion.tjhsst.edu/api/blocks/3543",
+            "subcall": {
+                "id": 110411,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2018-12-19",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3543",
+                    "id": 3543
+                },
+                "activity": {
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "members": [
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ],
+                    "count": 11
+                },
+                "capacity": 28
+            }
+        },
+        "3547": {
+            "id": 3547,
+            "block_letter": "B",
+            "roster": {
+                "id": 110412,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/110412"
+            },
+            "date": "2019-01-09",
+            "url": "https://ion.tjhsst.edu/api/blocks/3547",
+            "subcall": {
+                "id": 110412,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3547,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3547",
+                    "date": "2019-01-09"
+                },
+                "activity": {
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 9,
+                    "members": [
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3555": {
+            "id": 3555,
+            "block_letter": "B",
+            "roster": {
+                "id": 112125,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/112125"
+            },
+            "date": "2019-01-16",
+            "url": "https://ion.tjhsst.edu/api/blocks/3555",
+            "subcall": {
+                "id": 112125,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2019-01-16",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3555",
+                    "id": 3555
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "count": 5,
+                    "viewable_count": 1,
+                    "members": [
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3557": {
+            "id": 3557,
+            "block_letter": "B",
+            "roster": {
+                "id": 112126,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/112126"
+            },
+            "date": "2019-01-23",
+            "url": "https://ion.tjhsst.edu/api/blocks/3557",
+            "subcall": {
+                "id": 112126,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2019-01-23",
+                    "id": 3557,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3557"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ],
+                    "count": 7,
+                    "viewable_count": 1
+                },
+                "capacity": 28
+            }
+        },
+        "3562": {
+            "id": 3562,
+            "block_letter": "B",
+            "roster": {
+                "id": 112127,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/112127"
+            },
+            "date": "2019-01-30",
+            "url": "https://ion.tjhsst.edu/api/blocks/3562",
+            "subcall": {
+                "id": 112127,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3562,
+                    "date": "2019-01-30",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3562"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 7,
+                    "members": [
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3566": {
+            "id": 3566,
+            "block_letter": "B",
+            "roster": {
+                "id": 113340,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/113340"
+            },
+            "date": "2019-02-06",
+            "url": "https://ion.tjhsst.edu/api/blocks/3566",
+            "subcall": {
+                "id": 113340,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2019-02-06",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3566",
+                    "id": 3566
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ],
+                    "count": 15,
+                    "viewable_count": 2
+                },
+                "capacity": 28
+            }
+        },
+        "3580": {
+            "id": 3580,
+            "block_letter": "B",
+            "roster": {
+                "id": 113341,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/113341"
+            },
+            "date": "2019-02-27",
+            "url": "https://ion.tjhsst.edu/api/blocks/3580",
+            "subcall": {
+                "id": 113341,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3580,
+                    "date": "2019-02-27",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3580"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 2,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ],
+                    "count": 20
+                },
+                "capacity": 28
+            }
+        },
+        "3585": {
+            "id": 3585,
+            "block_letter": "B",
+            "roster": {
+                "id": 116274,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/116274"
+            },
+            "date": "2019-03-06",
+            "url": "https://ion.tjhsst.edu/api/blocks/3585",
+            "subcall": {
+                "id": 116274,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "url": "https://ion.tjhsst.edu/api/blocks/3585",
+                    "date": "2019-03-06",
+                    "id": 3585
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 2,
+                    "count": 9,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3589": {
+            "id": 3589,
+            "block_letter": "B",
+            "roster": {
+                "id": 116275,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/116275"
+            },
+            "date": "2019-03-13",
+            "url": "https://ion.tjhsst.edu/api/blocks/3589",
+            "subcall": {
+                "id": 116275,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2019-03-13",
+                    "id": 3589,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3589"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ],
+                    "count": 9,
+                    "viewable_count": 2
+                },
+                "capacity": 28
+            }
+        },
+        "3593": {
+            "id": 3593,
+            "block_letter": "B",
+            "roster": {
+                "id": 116822,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/116822"
+            },
+            "date": "2019-03-20",
+            "url": "https://ion.tjhsst.edu/api/blocks/3593",
+            "subcall": {
+                "id": 116822,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2019-03-20",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3593",
+                    "id": 3593
+                },
+                "activity": {
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "members": [
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ],
+                    "count": 6
+                },
+                "capacity": 28
+            }
+        },
+        "3597": {
+            "id": 3597,
+            "block_letter": "B",
+            "roster": {
+                "id": 116276,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/116276"
+            },
+            "date": "2019-03-27",
+            "url": "https://ion.tjhsst.edu/api/blocks/3597",
+            "subcall": {
+                "id": 116276,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3597,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3597",
+                    "date": "2019-03-27"
+                },
+                "activity": {
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club"
+                },
+                "signups": {
+                    "viewable_count": 2,
+                    "count": 8,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3603": {
+            "id": 3603,
+            "block_letter": "B",
+            "roster": {
+                "id": 117235,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/117235"
+            },
+            "date": "2019-04-03",
+            "url": "https://ion.tjhsst.edu/api/blocks/3603",
+            "subcall": {
+                "id": 117235,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2019-04-03",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3603",
+                    "id": 3603
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "count": 15,
+                    "viewable_count": 2,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3607": {
+            "id": 3607,
+            "block_letter": "B",
+            "roster": {
+                "id": 117236,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/117236"
+            },
+            "date": "2019-04-10",
+            "url": "https://ion.tjhsst.edu/api/blocks/3607",
+            "subcall": {
+                "id": 117236,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2019-04-10",
+                    "id": 3607,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3607"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ],
+                    "count": 6,
+                    "viewable_count": 2
+                },
+                "capacity": 28
+            }
+        },
+        "3613": {
+            "id": 3613,
+            "block_letter": "B",
+            "roster": {
+                "id": 117237,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/117237"
+            },
+            "date": "2019-04-26",
+            "url": "https://ion.tjhsst.edu/api/blocks/3613",
+            "subcall": {
+                "id": 117237,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3613,
+                    "date": "2019-04-26",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3613"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 5,
+                    "members": [
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3615": {
+            "id": 3615,
+            "block_letter": "B",
+            "roster": {
+                "id": 117238,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/117238"
+            },
+            "date": "2019-05-01",
+            "url": "https://ion.tjhsst.edu/api/blocks/3615",
+            "subcall": {
+                "id": 117238,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "date": "2019-05-01",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3615",
+                    "id": 3615
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ],
+                    "count": 9,
+                    "viewable_count": 2
+                },
+                "capacity": 28
+            }
+        },
+        "3628": {
+            "id": 3628,
+            "block_letter": "B",
+            "roster": {
+                "id": 119177,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/119177"
+            },
+            "date": "2019-05-07",
+            "url": "https://ion.tjhsst.edu/api/blocks/3628",
+            "subcall": {
+                "id": 119177,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "id": 3628,
+                    "date": "2019-05-07",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3628"
+                },
+                "activity": {
+                    "id": 152,
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "viewable_count": 2,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ],
+                    "count": 10
+                },
+                "capacity": 28
+            }
+        },
+        "3636": {
+            "id": 3636,
+            "block_letter": "B",
+            "roster": {
+                "id": 119178,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/119178"
+            },
+            "date": "2019-05-17",
+            "url": "https://ion.tjhsst.edu/api/blocks/3636",
+            "subcall": {
+                "id": 119178,
+                "name": "Rubiks Cube Club",
+                "block": {
+                    "url": "https://ion.tjhsst.edu/api/blocks/3636",
+                    "date": "2019-05-17",
+                    "id": 3636
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club",
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 1,
+                    "count": 2,
+                    "members": [
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ]
+                },
+                "capacity": 28
+            }
+        },
+        "3619": {
+            "id": 3619,
+            "block_letter": "A",
+            "roster": {
+                "id": 119179,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/119179"
+            },
+            "date": "2019-05-22",
+            "url": "https://ion.tjhsst.edu/api/blocks/3619",
+            "subcall": {
+                "id": 119179,
+                "name": "Rubiks Cube Club - Officers only",
+                "block": {
+                    "date": "2019-05-22",
+                    "id": 3619,
+                    "url": "https://ion.tjhsst.edu/api/blocks/3619"
+                },
+                "activity": {
+                    "title": "Rubiks Cube Club - Officers only",
+                    "id": 152,
+                    "url": "https://ion.tjhsst.edu/api/activities/152"
+                },
+                "signups": {
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        }
+                    ],
+                    "count": 1,
+                    "viewable_count": 1
+                },
+                "capacity": 28
+            }
+        },
+        "3620": {
+            "id": 3620,
+            "block_letter": "B",
+            "roster": {
+                "id": 119180,
+                "url": "https://ion.tjhsst.edu/api/signups/scheduled_activity/119180"
+            },
+            "date": "2019-05-22",
+            "url": "https://ion.tjhsst.edu/api/blocks/3620",
+            "subcall": {
+                "id": 119180,
+                "name": "Rubiks Cube Club - Members 3>3 G Perm",
+                "block": {
+                    "date": "2019-05-22",
+                    "url": "https://ion.tjhsst.edu/api/blocks/3620",
+                    "id": 3620
+                },
+                "activity": {
+                    "url": "https://ion.tjhsst.edu/api/activities/152",
+                    "title": "Rubiks Cube Club - Members 3>3 G Perm",
+                    "id": 152
+                },
+                "signups": {
+                    "viewable_count": 2,
+                    "members": [
+                        {
+                            "id": 33140,
+                            "full_name": "Justin Gou",
+                            "username": "2019jgou",
+                            "url": "https://ion.tjhsst.edu/api/profile/33140"
+                        },
+                        {
+                            "id": 34780,
+                            "full_name": "Stephen Huan",
+                            "username": "2021shuan",
+                            "url": "https://ion.tjhsst.edu/api/profile/34780"
+                        }
+                    ],
+                    "count": 5
+                },
+                "capacity": 28
+            }
+        }
+    }
+}

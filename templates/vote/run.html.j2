@@ -1,3 +1,42 @@
 {% extends "helper/base.html.j2" %}
+
+{% block intro %} This is for running for office. TODO: write stuff here. {% endblock %}
+{% block rest %} Hello, {{ name }}! {% endblock %}
+{% block line %}{% endblock %}
+
 {% block content %}
+    {{ f.description(name, years, meetings, year, annual_meetings) }}
+
+    <p> Write a description: </p>
+    <!-- https://www.bootply.com/uGGf9Tf4LS# -->
+    <div class="col-sm-4 well">
+        <form accept-charset="UTF-8" action="{{ request.path }}" method="POST">
+            <textarea class="form-control" maxlength="{{ length }}" name="description" id="description" placeholder="Type in your message" rows="5"></textarea>
+            <h6 class="float-right mt-3" id="count_message"></h6>
+            <button class="btn btn-info mt-3" type="submit">Send Candidacy</button>
+        </form>
+    </div>
+
+    <script>
+      var text_max = {{ length }};
+      $('#count_message').html(text_max + ' remaining');
+
+      $('#description').keyup(function() {
+        var text_length = $('#description').val().length;
+        var text_remaining = text_max - text_length;
+
+        $('#count_message').html(text_remaining + ' remaining');
+        $('#count_message').removeClass("text-success text-danger text-warning")
+        if (text_remaining == 0) {
+          $('#count_message').addClass("text-danger")
+        }
+        else if (text_remaining < {{ length/2 }}) {
+          $('#count_message').addClass("text-warning")
+        }
+        else {
+          $('#count_message').addClass("text-success")
+        }
+      });
+    </script>
+
 {% endblock %}

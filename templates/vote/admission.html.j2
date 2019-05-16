@@ -1,0 +1,14 @@
+{% extends "helper/base.html.j2" %}
+
+{% block pageheader %}{% endblock %}
+
+{% block content %}
+
+  Source: <a href="{{ f.furl('misc/admission.md') }}">admission.md</a>
+  {{ admission }}
+
+  {% for path, sig in sigs %}
+    {{ f.make_card(50, path[:8], "Run <code>gpg --verify {} admission.md</code> to verify this signature".format(path), sig, "<a href='{}' class='card-link'>Source</a>".format(f.furl('misc/' + path))) }}
+  {% endfor %}
+
+{% endblock %}
