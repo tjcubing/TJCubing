@@ -55,14 +55,14 @@ def search() -> dict:
         query = flask.request.args['query']
     return {"entries": [(time, NAMES[html[:-len(cube.FILE)]], html, preview) for time, html, preview in cube.parse_search(query)]}
 
-def convert(order:list, prefix:str="/", new:list=[]) -> list:
+def convert(order:list, prefix:str="", new:list=[]) -> list:
     """ Converts an order specification into a parsable (path, name) format by the nav header. """
     for name in order:
         if isinstance(name, list):
             addition, sublist = name
-            new.append((addition, convert(sublist, "{}{}/".format(prefix, addition), [])))
+            new.append(("*" + addition, convert(sublist, "{}{}/".format(prefix, addition), [])))
         else:
-            new.append(("{}{}".format(prefix, name), NAMES[name]))
+            new.append(("{}{}".format(prefix, name if name != "" else "index"), NAMES[name]))
     return new
 
 params = cube.load_file("site")

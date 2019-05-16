@@ -51,6 +51,10 @@ def get_year() -> int:
     """ Returns the year as a number """
     return datetime.today().year
 
+def footer_time() -> float:
+    """ Returns the current time in the footer format. """
+    return time.strftime("%Y-%m-%d %X %z", time.localtime())
+
 def ion_date(date: str) -> datetime:
     """ Converts an ION formatted date to a datetime object. """
     return datetime.strptime(date, "%Y-%m-%d")
