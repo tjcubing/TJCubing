@@ -10,7 +10,7 @@ app = flask.Flask(__name__)
 app.secret_key = cube.CONFIG["flask_secret_key"].encode()
 #print([rule.endpoint for rule in app.url_map.iter_rules()])
 
-temp_session = {} #holds temp global data, without using globals. kinda a hack on mutability.
+# flask.session = {} #holds temp global data, without using globals. kinda a hack on mutability.
 #might be glitchy with multiple users not sure.
 
 def send_home(msg, category="success"):
@@ -135,12 +135,12 @@ def callback():
     token = oauth.fetch_token(cube.TOKEN_URL, code=code, client_secret=cube.CONFIG["client_secret"])
     cube.save_token(token)
 
-    return flask.redirect(temp_session["action"])
+    return flask.redirect(["action"])
 
 @app.route("/vote/vote", methods=["GET", "POST"])
 def vote():
     if not cube.test_token():
-        temp_session["action"] = flask.request.path
+        flask.session["action"] = flask.request.path
         return flask.redirect(flask.url_for("login"))
 
     if not cube.valid_voter():
@@ -158,7 +158,7 @@ def vote():
 @app.route("/vote/run", methods=["GET", "POST"])
 def run():
     if not cube.test_token():
-        temp_session["action"] = flask.request.path
+        flask.session["action"] = flask.request.path
         return flask.redirect(flask.url_for("login"))
 
     if not cube.valid_runner():
