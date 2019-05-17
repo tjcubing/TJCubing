@@ -12,6 +12,7 @@ beautifulsoup4 = "*"
 requests-oauthlib = "*"
 matplotlib = "*"
 markdown2 = "*"
+scikit-learn = "*"
 
 [requires]
 python_version = "3.5"

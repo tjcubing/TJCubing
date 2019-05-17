@@ -20,9 +20,10 @@ def send_home(msg, category="success"):
 
 @app.before_request
 def before_request():
-    if time.time() > cube.short_date(cube.VOTE["ends_at"]):
-        cube.VOTE["vote_active"] = False
-        cube.dump_file(cube.VOTE, "vote")
+    vote = cube.load_file("vote")
+    if time.time() > cube.short_date(vote["ends_at"]):
+        vote["vote_active"] = False
+        cube.dump_file(vote, "vote")
 
 # @app.after_request
 # def do_something_whenever_a_request_has_been_handled(response):
@@ -44,7 +45,7 @@ def lectures() -> dict:
 
 def result() -> dict:
     """ Displays the result of the election. """
-    return {"result": cube.get_winner(), "vote": cube.VOTE}
+    return {"result": cube.get_winner(), "vote": cube.load_file("vote")}
 
 def search() -> dict:
     """ Parses the user's search. Can be POST or GET method. """
@@ -83,18 +84,18 @@ PAGES = {"": lambda: {"year": cube.get_year()},
              },
          "vote":
              {
-                "eligibility": lambda: cube.VOTE,
+                "eligibility": lambda: cube.load_file("vote"),
                 "admission": lambda: {"admission": cube.open_admission(), "sigs": cube.get_sigs()},
                 "result": result,
              },
          "search": (search, ['POST', 'GET'])
         }
 
-GLOBAL = {"pages": NAV, "active": cube.VOTE["vote_active"], "URL": params["url"]}
+GLOBAL = {"pages": NAV, "URL": params["url"]}
 
 def make_page(s: str, f=lambda: {}, methods=['GET']):
     """ Takes in a string which specifies both the url and the file name, as well as a function which provides the kwargs for render_template. """
-    func = lambda: flask.render_template((s if s != "" else "index") + cube.FILE, **GLOBAL, title=NAMES[s.split("/")[-1]], **f())
+    func = lambda: flask.render_template((s if s != "" else "index") + cube.FILE, **GLOBAL, active=cube.load_file("vote")["vote_active"], title=NAMES[s.split("/")[-1]], **f())
     # Need distinct function names for Flask not to error
     func.__name__ = s.split("/")[-1] if s != "" else "index"
     return app.route("/{}".format(s), methods=methods)(func)
@@ -145,17 +146,19 @@ def vote():
         flask.session["action"] = flask.request.path
         return flask.redirect(flask.url_for("login"))
 
+    vote = cube.load_file("vote")
+
     if not cube.valid_voter():
         return send_home("You do not fullfill the requirements to be able to vote.", "warning")
 
-    if not cube.VOTE["vote_active"]:
+    if not vote["vote_active"]:
         return send_home("Stop trying to subvert democracy!!!", "danger")
 
     if flask.request.method == "POST":
         cube.add_vote(cube.get_name(), flask.request.form["vote"])
         return send_home("<strong>Congrats!</strong> You have voted for {}.".format(flask.request.form['vote']))
 
-    return flask.render_template(flask.request.path + cube.FILE, **GLOBAL, **cube.VOTE, sorted_candidates=cube.get_candidates(), name=cube.get_name(), title="vote")
+    return flask.render_template(flask.request.path + cube.FILE, **GLOBAL, active=vote["vote_active"], **vote, sorted_candidates=cube.get_candidates(), name=cube.get_name(), title="vote")
 
 @app.route("/vote/run", methods=["GET", "POST"])
 def run():
@@ -163,10 +166,12 @@ def run():
         flask.session["action"] = flask.request.path
         return flask.redirect(flask.url_for("login"))
 
+    vote = cube.load_file("vote")
+
     if not cube.valid_runner():
         return send_home("You do not fullfill the requirements to be able to run.", "warning")
 
-    if not cube.VOTE["vote_active"]:
+    if not vote["vote_active"]:
         return send_home("Stop trying to subvert democracy!!!", "danger")
 
     signups = cube.get_signups()
@@ -181,7 +186,7 @@ def run():
         cube.store_candidate(cube.add_dict({"description": flask.request.form['description']}, params))
         return send_home("<strong>Congrats!</strong> Your application has been registered.")
 
-    return flask.render_template(flask.request.path + cube.FILE, **GLOBAL, **cube.VOTE, **params, title="run")
+    return flask.render_template(flask.request.path + cube.FILE, **GLOBAL, active=vote["vote_active"], **vote, **params, title="run")
 
 #http://flask.pocoo.org/docs/1.0/patterns/errorpages/
 @app.errorhandler(404)

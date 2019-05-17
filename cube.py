@@ -1,8 +1,12 @@
 import json, pickle, time, os
 from datetime import datetime
 import markdown2
-import requests
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import linear_model
+from sklearn.metrics import r2_score
 import flask
+import requests
 from requests_oauthlib import OAuth2Session
 from oauthlib.oauth2 import TokenExpiredError
 from bs4 import BeautifulSoup
@@ -28,7 +32,6 @@ def dump_file(obj, fname: str, func:str ="json", short: bool=True) -> None:
         STR_FUNC["dump"][func](obj, f, **({"indent": 4} if func == "json" else {}))
 
 CONFIG = load_file("config")
-VOTE = load_file("vote")
 URL = "https://www.worldcubeassociation.org/competitions"
 LECTURES = "static/pdfs/"
 FILE = ".html.j2"
@@ -152,27 +155,29 @@ def parse_search(query: str) -> list:
 
 def store_candidate(d: dict) -> None:
     """ Stores a candidate to vote.json. """
+    vote = load_file("vote")
     d["time"] = time.time()
     d["timestr"] = unix_to_human(time.time())
-    d["description"] = d["description"][:VOTE["length"]] #"client side validation big stupid" - Darin Mao
-    VOTE["candidates"][d["name"]] = d
-    dump_file(VOTE, "vote")
+    d["description"] = d["description"][:vote["length"]] #"client side validation big stupid" - Darin Mao
+    vote["candidates"][d["name"]] = d
+    dump_file(vote, "vote")
 
 def get_candidates() -> list:
     """ Returns a list of candidates, sorted by entry time. """
-    candidates = list(VOTE["candidates"].values())
+    candidates = list(load_file("vote")["candidates"].values())
     candidates.sort(key=lambda d: d["time"])
     return candidates
 
 def add_vote(name: str, candidate: str) -> None:
     """ Adds a vote from name to candidate. """
-    VOTE["votes"][name] = candidate
-    dump_file(VOTE, "vote")
+    vote = load_file("vote")
+    vote["votes"][name] = candidate
+    dump_file(vote, "vote")
 
 def get_winner() -> str:
     """ Returns the winner of the election. """
     count = {}
-    for vote in VOTE["votes"].values():
+    for vote in load_file("vote")["votes"].values():
         count[vote] = count.get(vote, 0) + 1
     winner = max(count, key=lambda v: count[v])
     votes = count[winner]
@@ -235,22 +240,47 @@ def parse_block(block):
             "block_letter": block["block_letter"],
            }
 
-#TODO: matplotlib graphs
-#4-column bar (Wed A Wed B Fri A Fri B)
-#Capacity as a line graph over time
-
 def parse_club():
     """ Makes a smaller representation of the club.json file. """
     club = load_file("club")
     parsed = {"name": club["name"], "description": club["description"], "blocks": []}
     parsed["blocks"] = list(map(parse_block, club["scheduled_on"].values()))
+    parsed["blocks"].sort(key=lambda b: ion_date(b["date"]))
     return parsed
 
-def graph_blocks():
-    pass
+def graph_blocks(s):
+    """ Graphs frequency of Wednesday/Friday A/B. """
+    funcs = {"by_x": lambda x: 10*days.index(x[0].split()[0]) + "AB".index(x[0].split()[1]), "by_y": lambda x: x[-1]}
+    days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+    counts = {day + " " + block: 0 for day in days for block in "AB"}
+    for block in parse_club()["blocks"]:
+        key = block["day"] + " " + block["block_letter"]
+        counts[key] += 1
+    x, y = zip(*sorted(counts.items(), key=funcs.get(s, None)))
+    plt.figure(figsize=(15, 5))
+    plt.bar(x, y)
+    plt.title("Block Frequency")
+    plt.xlabel("Day and Block")
+    plt.ylabel("Frequency (number)")
+    plt.savefig("static/img/blocks{}.png".format(s))
 
-def graph_capacity():
-    pass
+def graph_capacity() -> None:
+    """ Graphs actual over capacity over time. """
+    x, y = zip(*[(ion_date(block["date"]), 100*block["count"]/block["capacity"]) for block in parse_club()["blocks"] if block["capacity"] != 0])
+
+    xp = np.array(list(map(lambda d: d.timestamp(), x))).reshape(-1, 1)
+    regr = linear_model.LinearRegression()
+    regr.fit(xp, y)
+    yp = regr.predict(xp)
+
+    fig, ax = plt.subplots()
+    ax.plot(x, y)
+    ax.plot(x, yp, label="Line of best fit\n{}\n{}".format(r"$r^2 = {}$".format(round(r2_score(y, yp), 4)), r"$m = {}$".format(round(regr.coef_[0], 4))))
+    ax.legend(loc="upper right")
+    plt.title("Rubik's Cube Club Attendance Over Time")
+    plt.xlabel("Time")
+    plt.ylabel("Percentage of People Attending (%)")
+    plt.savefig("static/img/capacity.png")
 
 def get_signups() -> list:
     """ Returns all of the user's 8th pd signups at a specific club. """
@@ -274,7 +304,8 @@ def valid_voter() -> bool:
     if not flask.session.get("valid_voter", False):
         signups = get_signups()
         total, annual = count_meetings(signups, datetime.min, datetime.max), count_meetings(signups)
-        flask.session["valid_voter"] = annual >= VOTE["min_meetings"] or total >= 2*VOTE["min_meetings"]
+        cutoff = load_file("vote")["min_meetings"]
+        flask.session["valid_voter"] = annual >= cutoff or total >= 2*cutoff
     return flask.session["valid_voter"]
 
 def valid_runner() -> bool:

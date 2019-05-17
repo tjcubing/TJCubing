@@ -59,7 +59,7 @@
 
 {% macro description(name, years, meetings, year, annual_meetings) %}
   <ul>
-    {% if name != "" %} <li>Name: {{ name }}</li> {% endif %}
+    {% if name != None %} <li>Name: {{ name }}</li> {% endif %}
     <li># Years of attending Rubik's Cube Club: {{ years }} </li>
     <li>Total # of meetings attended: {{ meetings }} </li>
     <li># of meetings attended in {{ year }}: {{ annual_meetings }} </li>
