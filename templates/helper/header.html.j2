@@ -43,7 +43,7 @@
               {% for entrypath, entryname in name %}
                 <!-- Hack but whatever, next webdev can make this entire nav system better -->
                 {% if entryname in ["result", "vote!"] %} <div class="dropdown-divider"></div> {% endif %}
-                <a class="dropdown-item {{ 'disabled' if not active and entryname in ['run for office', 'vote!'] else '' }}" href="{{ entrypath }}">{{ entryname|capitalize }}</a>
+                <a class="dropdown-item {{ 'disabled' if not active and entryname in ['run for office', 'vote!'] else '' }}" href="{{ furl_for(entrypath) }}">{{ entryname|capitalize }}</a>
               {% endfor %}
             </div>
           </li>
