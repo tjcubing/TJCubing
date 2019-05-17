@@ -28,7 +28,7 @@
 {% endmacro %}
 
 {% macro furl_for(mode, filename=None) %}
-  {{ "/" if mode == "index" else (url_for(mode, filename=filename) if filename != None else url_for(mode))[1:] }}
+  {{ "http://cubing.sites.tjhsst.edu" if mode == "index" else (url_for(mode, filename=filename) if filename != None else url_for(mode))[1:] }}
 {% endmacro %}
 
 {% macro link(url, text) %}
