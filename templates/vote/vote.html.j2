@@ -5,7 +5,7 @@
     <p class="lead"> The candidates are running for {{ position|capitalize }}. You can vote until {{ ends_at }}.</p>
 
     {% set button %}
-      <form class="form-inline my-2 my-lg-0" action="{{ furl_for(requests.path[1:]) }}" method="POST">
+      <form class="form-inline my-2 my-lg-0" action="{{ furl_for(request.path[1:]) }}" method="POST">
         <button class="btn btn-outline-primary my-2 my-sm-0" name="vote" id="vote" value="{}" type="submit">Vote</button>
       </form>
     {% endset %}
