@@ -148,7 +148,7 @@ def parse_search(query: str) -> list:
             soup = BeautifulSoup(open("templates/{}".format(html)).read(), 'html.parser')
             text = soup.get_text()
             if query in text.lower():
-                yield (unix_to_human(os.path.getmtime("templates/{}".format(html))), html if html != "index" + FILE else FILE, modify(query, get_preview(query, text)))
+                yield (unix_to_human(os.path.getmtime("templates/{}".format(html))), html[:-len(FILE)] if html != "index" + FILE else "", modify(query, get_preview(query, text)))
 
 def store_candidate(d: dict) -> None:
     """ Stores a candidate to vote.json. """

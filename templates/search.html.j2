@@ -1,6 +1,6 @@
 {% extends "helper/base.html.j2" %}
 {% block content %}
   {% for time, name, html, preview in entries%}
-    {{ f.make_card(20, name|capitalize, time[:20], preview, "<a href='{}' class='card-link'> Link </a>".format(furl_for(html[:-8]))) }}
+    {{ f.make_card(20, name|capitalize, time[:20], preview, "<a href='{}' class='card-link'> Link </a>".format(furl_for(html))) }}
   {% endfor %}
 {% endblock %}

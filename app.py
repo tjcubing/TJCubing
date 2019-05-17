@@ -53,14 +53,15 @@ def search() -> dict:
         query = flask.request.form['query']
     elif flask.request.args.get('query', None) is not None:
         query = flask.request.args['query']
-    return {"entries": [(time, NAMES[html[:-len(cube.FILE)]], html, preview) for time, html, preview in cube.parse_search(query)]}
+    return {"entries": [(time, NAMES[html], html, preview) for time, html, preview in cube.parse_search(query)]}
 
 def convert(order:list, prefix:str="", new:list=[]) -> list:
     """ Converts an order specification into a parsable (path, name) format by the nav header. """
     for name in order:
         if isinstance(name, list):
             addition, sublist = name
-            new.append(("*" + addition, convert(sublist, "{}{}/".format(prefix, addition), [])))
+            new.append(("*" + addition, convert(sublist, "{}".format(prefix), [])))
+            #new.append(("*" + addition, convert(sublist, "{}{}/".format(prefix, addition), [])))
         else:
             new.append(("{}{}".format(prefix, name if name != "" else "index"), NAMES[name]))
     return new
@@ -90,11 +91,13 @@ PAGES = {"": lambda: {"year": cube.get_year()},
 
 GLOBAL = {"pages": NAV, "active": cube.VOTE["vote_active"], "URL": params["url"]}
 
+print(NAV)
+
 def make_page(s: str, f=lambda: {}, methods=['GET']):
     """ Takes in a string which specifies both the url and the file name, as well as a function which provides the kwargs for render_template. """
     func = lambda: flask.render_template((s if s != "" else "index") + cube.FILE, **GLOBAL, title=NAMES[s.split("/")[-1]], **f())
     # Need distinct function names for Flask not to error
-    func.__name__ = s if s != "" else "index"
+    func.__name__ = s.split("/")[-1] if s != "" else "index"
     return app.route("/{}".format(s), methods=methods)(func)
 
 def make_pages(d: dict, prefix="") -> None:
