@@ -74,6 +74,7 @@ PAGES = {"": lambda: {"year": cube.get_year()},
          "competitions": competitions,
          "algorithms": None,
          "lectures": lectures,
+         "inhouse": None,
          "history": lambda: cube.add_dict(cube.parse_club(), {"url": params["url"]}),
          "contact": None,
          "archive":
@@ -90,8 +91,6 @@ PAGES = {"": lambda: {"year": cube.get_year()},
         }
 
 GLOBAL = {"pages": NAV, "active": cube.VOTE["vote_active"], "URL": params["url"]}
-
-print(NAV)
 
 def make_page(s: str, f=lambda: {}, methods=['GET']):
     """ Takes in a string which specifies both the url and the file name, as well as a function which provides the kwargs for render_template. """
