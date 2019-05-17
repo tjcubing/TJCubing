@@ -135,7 +135,7 @@ def callback():
     token = oauth.fetch_token(cube.TOKEN_URL, code=code, client_secret=cube.CONFIG["client_secret"])
     cube.save_token(token)
 
-    return flask.redirect(["action"])
+    return flask.redirect(flask.session["action"])
 
 @app.route("/vote/vote", methods=["GET", "POST"])
 def vote():
