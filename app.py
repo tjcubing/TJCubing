@@ -88,9 +88,11 @@ PAGES = {"": lambda: {"year": cube.get_year()},
          "search": (search, ['POST', 'GET'])
         }
 
+GLOBAL = {"pages": NAV, "active": cube.VOTE["vote_active"], "URL": params["url"]}
+
 def make_page(s: str, f=lambda: {}, methods=['GET']):
     """ Takes in a string which specifies both the url and the file name, as well as a function which provides the kwargs for render_template. """
-    func = lambda: flask.render_template((s if s != "" else "index") + cube.FILE, pages=NAV, active=cube.VOTE["vote_active"], title=NAMES[s.split("/")[-1]], **f())
+    func = lambda: flask.render_template((s if s != "" else "index") + cube.FILE, **GLOBAL, title=NAMES[s.split("/")[-1]], **f())
     # Need distinct function names for Flask not to error
     func.__name__ = s if s != "" else "index"
     return app.route("/{}".format(s), methods=methods)(func)
@@ -151,7 +153,7 @@ def vote():
         cube.add_vote(cube.get_name(), flask.request.form["vote"])
         return send_home("<strong>Congrats!</strong> You have voted for {}.".format(flask.request.form['vote']))
 
-    return flask.render_template(flask.request.path + cube.FILE, pages=NAV, title="vote", active=cube.VOTE["vote_active"], **cube.VOTE, sorted_candidates=cube.get_candidates(), name=cube.get_name())
+    return flask.render_template(flask.request.path + cube.FILE, **GLOBAL, **cube.VOTE, sorted_candidates=cube.get_candidates(), name=cube.get_name(), title="vote")
 
 @app.route("/vote/run", methods=["GET", "POST"])
 def run():
@@ -177,7 +179,7 @@ def run():
         cube.store_candidate(cube.add_dict({"description": flask.request.form['description']}, params))
         return send_home("<strong>Congrats!</strong> Your application has been registered.")
 
-    return flask.render_template(flask.request.path + cube.FILE, pages=NAV, active=cube.VOTE["vote_active"], title="run", **cube.VOTE, **params)
+    return flask.render_template(flask.request.path + cube.FILE, **GLOBAL, **cube.VOTE, **params, title="run")
 
 #http://flask.pocoo.org/docs/1.0/patterns/errorpages/
 @app.errorhandler(404)

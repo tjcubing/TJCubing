@@ -23,7 +23,7 @@
             <td> {{ lecture[header|lower] }} </td>
           {% endfor %}
           {% for header in headers[4:] %}
-            <td> <a href="{{ f.furl('pdfs/{}/{}'.format(lecture['title'], lecture[header|lower])) if header != "URL" else lecture[header|lower] }}"> {{ header }} </a> </td>
+            <td> <a href="{{ furl('pdfs/{}/{}'.format(lecture['title'], lecture[header|lower])) if header != "URL" else lecture[header|lower] }}"> {{ header }} </a> </td>
           {% endfor %}
         </tr>
       {% endfor %}

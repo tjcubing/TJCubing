@@ -23,14 +23,6 @@
   </div>
 {% endmacro %}
 
-{% macro furl(filename) %}
-  {{ url_for('static', filename=filename)[1:] }}
-{% endmacro %}
-
-{% macro furl_for(mode, filename=None) %}
-  {{ "http://cubing.sites.tjhsst.edu" if mode == "index" else (url_for(mode, filename=filename) if filename != None else url_for(mode))[1:] }}
-{% endmacro %}
-
 {% macro link(url, text) %}
   <a href="{{ url }}">{{ text }}</a>
 {% endmacro %}
