@@ -4,18 +4,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
+  <link href="{{ f.furl('css/custom.css') }}" rel="stylesheet">
 
   <title>{{ title|capitalize }} - TJ Cubing</title>
   <meta name="description" content="TJ's Rubik's Cube Clube website">
 	<meta name="author" content="Stephen Huan">
-  <link rel="shortcut icon" href="{{ url_for('static', filename='img/cubing.ico') }}">
+  <link rel="shortcut icon" href="{{ f.furl('img/cubing.ico') }}">
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <!-- Image logo -->
   <a class="navbar-brand" href="/">
-   <img src="{{ url_for('static', filename='img/cubing.png') }}" width="30" height="30" class="d-inline-block align-top" alt="">
+   <img src="{{ f.furl('img/cubing.png') }}" width="30" height="30" class="d-inline-block align-top" alt="">
    TJ Cubing
  </a>
 
@@ -31,7 +31,7 @@
       {% for path, name in pages %}
         {% if path[0] != "*" %}
           <li class="nav-item {% if request.path == path %}active{% endif %}">
-            <a class="nav-link" href="{{ url_for(path) }}">{{ name|capitalize }} {% if request.path == path %}<span class="sr-only">(current)</span>{% endif %}</a>
+            <a class="nav-link" href="{{ f.furl_for(path) }}">{{ name|capitalize }} {% if request.path == path %}<span class="sr-only">(current)</span>{% endif %}</a>
           </li>
         <!-- Dropdown logic -->
         {% else %}
