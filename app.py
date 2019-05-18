@@ -1,4 +1,4 @@
-import time, os
+import time, os, logging
 from datetime import datetime
 import flask
 from flask_sitemap import Sitemap
@@ -210,3 +210,9 @@ def page_not_found(e):
     return flask.render_template('error/404' + cube.FILE, **GLOBAL, title="404"), 404
 
 make_pages(PAGES)
+
+# https://medium.com/@trstringer/logging-flask-and-gunicorn-the-manageable-way-2e6f0b8beb2f
+if __name__ != '__main__':
+    gunicorn_logger = logging.getLogger('gunicorn.error')
+    app.logger.handlers = gunicorn_logger.handlers
+    app.logger.setLevel(gunicorn_logger.level)

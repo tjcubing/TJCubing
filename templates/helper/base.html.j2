@@ -2,7 +2,7 @@
 <!doctype html>
 
 {% macro furl(filename) %}{{ URL + url_for('static', filename=filename) }}{% endmacro %}
-{% macro furl_for(mode, filename=None) %}{{ URL + (url_for(mode, filename=filename) if filename != None else url_for(mode)) }}{% endmacro %}
+{% macro furl_for(mode, filename=None) %}{{ URL + (url_for(mode, filename=filename) if filename != None else ("/" if mode == "" else url_for(mode))) }}{% endmacro %}
 
 <html lang="en" class="h-100">
   {% include 'helper/header.html.j2' %}
