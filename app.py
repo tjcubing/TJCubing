@@ -1,17 +1,15 @@
-import time, json
+import time
 from datetime import datetime
 import flask
-#from requests_oauthlib import OAuth2Session
 import cube
 
 #TODO: Gulp
+#TODO: fix navbar on mobile, move history to archive, add photos, make weekly subbar
+#TODO: fix nav bar highlighting
 
 app = flask.Flask(__name__)
 app.secret_key = cube.CONFIG["flask_secret_key"].encode()
 #print([rule.endpoint for rule in app.url_map.iter_rules()])
-
-# flask.session = {} #holds temp global data, without using globals. kinda a hack on mutability.
-#might be glitchy with multiple users not sure.
 
 def send_home(msg, category="success"):
     """ Redirects the user back to home with an alert. """
@@ -54,6 +52,8 @@ def search() -> dict:
         query = flask.request.form['query']
     elif flask.request.args.get('query', None) is not None:
         query = flask.request.args['query']
+    else:
+        return {}
     return {"entries": [(time, NAMES[html], html, preview) for time, html, preview in cube.parse_search(query)]}
 
 def convert(order:list, prefix:str="", new:list=[]) -> list:
@@ -68,18 +68,21 @@ def convert(order:list, prefix:str="", new:list=[]) -> list:
     return new
 
 params = cube.load_file("site")
+TSLASH = "/" if params["tailing_slash"] else ""
 NAMES = params["names"]
 NAV = convert(params["order"])
 
 PAGES = {"": lambda: {"year": cube.get_year()},
          "competitions": competitions,
          "algorithms": None,
-         "lectures": lectures,
-         "inhouse": None,
-         "history": lambda: cube.add_dict(cube.parse_club(), {"url": params["url"]}),
+         "weekly": {
+             "lectures": lectures,
+             "inhouse": None,
+             },
          "contact": None,
          "archive":
              {
+                "history": lambda: cube.add_dict(cube.parse_club(), {"url": params["url"]}),
                 "tips": None,
              },
          "vote":
@@ -95,10 +98,11 @@ GLOBAL = {"pages": NAV, "URL": params["url"]}
 
 def make_page(s: str, f=lambda: {}, methods=['GET']):
     """ Takes in a string which specifies both the url and the file name, as well as a function which provides the kwargs for render_template. """
-    func = lambda: flask.render_template((s if s != "" else "index") + cube.FILE, **GLOBAL, active=cube.load_file("vote")["vote_active"], title=NAMES[s.split("/")[-1]], **f())
+    title = s.split("/")[-1]
+    func = lambda: flask.render_template((s if s != "" else "index") + cube.FILE, **GLOBAL, active=cube.load_file("vote")["vote_active"], title=NAMES[title], **f())
     # Need distinct function names for Flask not to error
-    func.__name__ = s.split("/")[-1] if s != "" else "index"
-    return app.route("/{}".format(s), methods=methods)(func)
+    func.__name__ = title if s != "" else "index"
+    return app.route(("/{}" + TSLASH).format(s), methods=methods)(func)
 
 def make_pages(d: dict, prefix="") -> None:
     """ Makes the entire site's pages. Recurs on nested dicts, taking file structure into account. """
@@ -130,6 +134,8 @@ def login():
 
 @app.route("/callback")
 def callback():
+    if 'oauth_state' not in flask.session:
+        return "You shouldn't be here..."
     assert flask.request.args.get('state', None) == flask.session['oauth_state']
     code = flask.request.args.get('code', None)
     if flask.request.args.get('error', None) is not None or code is None:
@@ -191,6 +197,6 @@ def run():
 #http://flask.pocoo.org/docs/1.0/patterns/errorpages/
 @app.errorhandler(404)
 def page_not_found(e):
-    return flask.render_template('error/404' + cube.FILE, title="404", pages=NAV), 404
+    return flask.render_template('error/404' + cube.FILE, **GLOBAL, title="404"), 404
 
 make_pages(PAGES)

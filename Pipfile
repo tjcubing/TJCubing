@@ -13,6 +13,7 @@ requests-oauthlib = "*"
 matplotlib = "*"
 markdown2 = "*"
 scikit-learn = "*"
+frozen-flask = "*"
 
 [requires]
 python_version = "3.5"
