@@ -30,13 +30,15 @@
     <ul class="navbar-nav mr-auto">
       {% for path, name in pages %}
         {% if path[0] != "*" %}
-          <li class="nav-item {% if request.path == path %}active{% endif %}">
-            <a class="nav-link" href="{{ furl_for(path) }}">{{ name|capitalize }} {% if request.path == path %}<span class="sr-only">(current)</span>{% endif %}</a>
+          {% set active = request.path == '/' + furl_for(path).split('/')[-1] %}
+          <li class="nav-item {{ 'active' if active else '' }}">
+            <a class="nav-link" href="{{ furl_for(path) }}">{{ name|capitalize }} {% if active %}<span class="sr-only">(current)</span>{% endif %}</a>
           </li>
         <!-- Dropdown logic -->
         {% else %}
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <!-- See if child is active -->
+            <a class="nav-link dropdown-toggle {% for entrypath, entryname in name if request.path.split('/')[-1] == entrypath %}active{% endfor %}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{ path[1:]|capitalize }}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">

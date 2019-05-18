@@ -1,15 +1,22 @@
-import time
+import time, os
 from datetime import datetime
 import flask
+from flask_sitemap import Sitemap
 import cube
 
-#TODO: Gulp
-#TODO: fix navbar on mobile, move history to archive, add photos, make weekly subbar
-#TODO: fix nav bar highlighting
+# TODO: Gulp
+# TODO: fix navbar on mobile, move history to archive, add photos, make weekly subbar
+# print([rule.endpoint for rule in app.url_map.iter_rules()])
 
 app = flask.Flask(__name__)
-app.secret_key = cube.CONFIG["flask_secret_key"].encode()
-#print([rule.endpoint for rule in app.url_map.iter_rules()])
+
+# config: one default (public), the other private
+app.config.from_object('settings')
+os.environ["FLASK_SETTINGS"] = cube.CONFIG["flask_config"]
+app.config.from_envvar("FLASK_SETTINGS")
+
+# generate sitemap
+ext = Sitemap(app=app)
 
 def send_home(msg, category="success"):
     """ Redirects the user back to home with an alert. """
@@ -18,10 +25,14 @@ def send_home(msg, category="success"):
 
 @app.before_request
 def before_request():
-    vote = cube.load_file("vote")
-    if time.time() > cube.short_date(vote["ends_at"]):
-        vote["vote_active"] = False
-        cube.dump_file(vote, "vote")
+    try:
+        vote = cube.load_file("vote")
+    except: #sometimes fails, not sure why
+        app.logger.warning("Error in parsing JSON file")
+    else:
+        if time.time() > cube.short_date(vote["ends_at"]):
+            vote["vote_active"] = False
+            cube.dump_file(vote, "vote")
 
 # @app.after_request
 # def do_something_whenever_a_request_has_been_handled(response):
@@ -114,7 +125,6 @@ def make_pages(d: dict, prefix="") -> None:
             #don't need to store created function as it's already bound to the URL
             make_page(prefix + key, func if func is not None else lambda: {}, methods)
 
-#TODO: update sitemap, update robots.txt with correct link
 # https://stackoverflow.com/questions/14048779/with-flask-how-can-i-serve-robots-txt-and-sitemap-xml-as-static-files
 @app.route("/sitemap.xml")
 @app.route("/robots.txt")
@@ -194,7 +204,7 @@ def run():
 
     return flask.render_template(flask.request.path + cube.FILE, **GLOBAL, active=vote["vote_active"], **vote, **params, title="run")
 
-#http://flask.pocoo.org/docs/1.0/patterns/errorpages/
+# http://flask.pocoo.org/docs/1.0/patterns/errorpages/
 @app.errorhandler(404)
 def page_not_found(e):
     return flask.render_template('error/404' + cube.FILE, **GLOBAL, title="404"), 404

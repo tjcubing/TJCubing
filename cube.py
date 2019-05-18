@@ -12,11 +12,8 @@ from oauthlib.oauth2 import TokenExpiredError
 from bs4 import BeautifulSoup
 
 # Helper library to query the WCA for competitions and other miscellaneous tasks
-# 05/30/19 12:00 PM
 # TODO: mailing list, switch key to key from tjcubingofficers@gmail.com
 # TODO: Database
-# TODO: selenium/requests style parsing to download rendered templates
-# switch to python 3.5.3
 
 STR_FUNC = {"load": {"json": json.load, "pickle": pickle.load}, "dump": {"json": json.dump, "pickle": pickle.dump}}
 EXT_MODE = {"json": "", "pickle": "b"}
@@ -143,15 +140,16 @@ def get_preview(query: str, text: str) -> str:
     preview = text[max(i - PREVIEW, 0):min(i + PREVIEW, len(text) - 1)] #avoid out of bounds
     return " ".join(preview.split()[1:-1]) #removes fractions of words
 
+#TODO: take in tag information
 def parse_search(query: str) -> list:
     """ Parses a user's search, returns a list of entries. """
+    path = "rendered_templates/"
     query = query.strip().lower()
-    for html in os.listdir("templates/"):
-        if html[-len(FILE):] == FILE:
-            soup = BeautifulSoup(open("templates/{}".format(html)).read(), 'html.parser')
-            text = soup.get_text()
-            if query in text.lower():
-                yield (unix_to_human(os.path.getmtime("templates/{}".format(html))), html[:-len(FILE)] if html != "index" + FILE else "", modify(query, get_preview(query, text)))
+    for html in os.listdir(path):
+        soup = BeautifulSoup(open(path + html).read(), 'html.parser')
+        text = soup.get_text()
+        if query in text.lower():
+            yield (unix_to_human(os.path.getmtime(path + html)), html[:-5] if html != "index.html" else "", modify(query, get_preview(query, text)))
 
 def store_candidate(d: dict) -> None:
     """ Stores a candidate to vote.json. """
