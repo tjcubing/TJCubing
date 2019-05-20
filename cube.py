@@ -33,7 +33,7 @@ URL = "https://www.worldcubeassociation.org/competitions"
 LECTURES = "static/pdfs/"
 FILE = ".html.j2"
 PREVIEW = 80
-WAIT = 2.628e6 #seconds in a month
+WAIT = CONFIG["time"]
 
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' #turn off when it's legit, localhost is http
 ION = "https://ion.tjhsst.edu/"
