@@ -15,6 +15,7 @@ markdown2 = "*"
 scikit-learn = "*"
 frozen-flask = "*"
 flask-sitemap = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.5"

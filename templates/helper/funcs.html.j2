@@ -12,6 +12,21 @@
   <p> {{ hi }} </p>
 {% endmacro %}
 
+{% macro link(url, text) %}
+  <a href="{{ url }}">{{ text }}</a>
+{% endmacro %}
+
+<!-- Actual functions -->
+{% macro rbr() %}
+  <span class="d-block d-sm-none"></span>
+{% endmacro %}
+
+{% macro split_lines(s) %}
+  {% for line in s.split("|") %}
+    {{ line + ("." if not loop.last else "") }}{{ rbr() }}
+  {% endfor %}
+{% endmacro %}
+
 {% macro make_card(width, title, subtitle, body, extra) %}
   <div class="card mt-5" style="width: {{ width }}rem;">
     <div class="card-body">
@@ -22,12 +37,6 @@
     </div>
   </div>
 {% endmacro %}
-
-{% macro link(url, text) %}
-  <a href="{{ url }}">{{ text }}</a>
-{% endmacro %}
-
-<!-- Actual functions -->
 
 {% macro make_tip (date, tips) %}
   <h4> {{ date }} </h4>

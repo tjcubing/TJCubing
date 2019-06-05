@@ -25,9 +25,7 @@ Website primarily made through [Bootstrap](https://getbootstrap.com).
     Instead use: 
     
     ```bash
-    export FLASK_APP=app.py
-    export FLASK_ENV=development
-    pipenv run flask run
+    pipenv run flask run --host='0.0.0.0'
     ```
 
 - /cube.py: Miscellaneous helper library.

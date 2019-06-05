@@ -12,8 +12,9 @@ from oauthlib.oauth2 import TokenExpiredError
 from bs4 import BeautifulSoup
 
 # Helper library to query the WCA for competitions and other miscellaneous tasks
-# TODO: mailing list, switch key to key from tjcubingofficers@gmail.com
-# TODO: Database
+# TODO: mailing list (email tjcubingofficers@gmail.com)
+# TODO: Database: Postgres?
+# TODO: WCA OAuth
 
 STR_FUNC = {"load": {"json": json.load, "pickle": pickle.load}, "dump": {"json": json.dump, "pickle": pickle.dump}}
 EXT_MODE = {"json": "", "pickle": "b"}
@@ -35,7 +36,10 @@ FILE = ".html.j2"
 PREVIEW = 80
 WAIT = CONFIG["time"]
 
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' #turn off when it's legit, localhost is http
+https = load_file("site")["url"][:5] == "https"
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = str(int(not https))
+os.environ['FLASK_ENV'] = "development"
+
 ION = "https://ion.tjhsst.edu/"
 AUTHORIZATION_URL, TOKEN_URL = ION + "oauth/authorize/", ION + "oauth/token/"
 
