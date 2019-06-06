@@ -4,9 +4,9 @@ import flask
 from flask_sitemap import Sitemap
 import cube
 
-# TODO: Gulp
 # TODO: add photos
 # TODO: fix sitemap.xml: displaying localhost
+# TODO: comps page
 # print([rule.endpoint for rule in app.url_map.iter_rules()])
 
 app = flask.Flask(__name__)

@@ -15,6 +15,7 @@ from bs4 import BeautifulSoup
 # TODO: mailing list (email tjcubingofficers@gmail.com)
 # TODO: Database: Postgres?
 # TODO: WCA OAuth
+# TODO: remove header and footer from search consideration
 
 STR_FUNC = {"load": {"json": json.load, "pickle": pickle.load}, "dump": {"json": json.dump, "pickle": pickle.dump}}
 EXT_MODE = {"json": "", "pickle": "b"}
