@@ -8,7 +8,7 @@ from sklearn.metrics import r2_score
 import flask
 import requests
 from requests_oauthlib import OAuth2Session
-from oauthlib.oauth2 import TokenExpiredError
+# from oauthlib.oauth2 import TokenExpiredError
 from bs4 import BeautifulSoup
 
 # Helper library to query the WCA for competitions and other miscellaneous tasks
@@ -36,6 +36,9 @@ LECTURES = "static/pdfs/"
 FILE = ".html.j2"
 PREVIEW = 80
 WAIT = CONFIG["time"]
+PARSER = "html.parser"
+SITEMAP = "static/sitemap.xml"
+TJ = "https://activities.tjhsst.edu/cubing/"
 
 https = load_file("site")["url"][:5] == "https"
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = str(int(not https))
@@ -74,7 +77,7 @@ def unix_to_human(time: float) -> str:
 
 def make_soup(url: str, params={}) -> BeautifulSoup:
     """ Returns a soup from a url. """
-    return BeautifulSoup(requests.get(url, params=params).text, 'html.parser')
+    return BeautifulSoup(requests.get(url, params=params).text, PARSER)
 
 #TODO: get events, TJ kids competing.
 def get_comps() -> list:
@@ -151,7 +154,7 @@ def parse_search(query: str) -> list:
     path = "rendered_templates/"
     query = query.strip().lower()
     for html in os.listdir(path):
-        soup = BeautifulSoup(open(path + html).read(), 'html.parser')
+        soup = BeautifulSoup(open(path + html), PARSER)
         text = soup.get_text()
         if query in text.lower():
             yield (unix_to_human(os.path.getmtime(path + html)), html[:-5] if html != "index.html" else "", modify(query, get_preview(query, text)))
@@ -316,3 +319,46 @@ def valid_runner() -> bool:
     if not flask.session.get("valid_runner", False):
         flask.session["valid_runner"] = True #why not?
     return flask.session["valid_runner"]
+
+def add_xmltag(soup, element, seen, name, default, update=False):
+    """ Adds a new tag to an element. """
+    tag = soup.new_tag(name)
+    seen[name] = seen.get(name, default) if not update else default
+    tag.append(str(seen[name]))
+    element.append(tag)
+
+def edit_sitemap(use_json=True) -> None:
+    """ Changes the URL on the sitemap and modification times. """
+    soup = BeautifulSoup(open(SITEMAP), "xml")
+    seen = load_file("sitemap") if use_json else {}
+    for child in soup.find_all("url"):
+        loc = child.find("loc")
+        path = "/".join(loc.text.split("/")[3:]).strip()
+        if path not in seen or use_json:
+            if not use_json:
+                seen[path] = {}
+
+            seen[path]["loc"] = seen[path].get("loc", TJ + path)
+            loc.string.replace_with(seen[path]["loc"])
+            fname = "templates/" + path + FILE
+            if not os.path.isfile(fname):
+                if path in ["robots.txt", "sitemap.xml"]:
+                    fname = "static/" + path
+                elif path in [""]:
+                    fname = "templates/index" + FILE
+                else:
+                    fname = None
+
+            if fname is not None:
+                add_xmltag(soup, child, seen[path], "lastmod", datetime.fromtimestamp(os.path.getmtime(fname)).isoformat(), True)
+
+            add_xmltag(soup, child, seen[path], "changefreq", "yearly")
+            add_xmltag(soup, child, seen[path], "priority", 0.0)
+
+        else:
+            child.decompose()
+
+    with open(SITEMAP, "w") as f:
+        f.write(soup.prettify())
+
+    dump_file(seen, "sitemap")

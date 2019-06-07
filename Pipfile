@@ -16,6 +16,7 @@ scikit-learn = "*"
 frozen-flask = "*"
 flask-sitemap = "*"
 python-dotenv = "*"
+lxml = "*"
 
 [requires]
 python_version = "3.5"

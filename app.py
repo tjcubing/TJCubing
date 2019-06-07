@@ -5,7 +5,6 @@ from flask_sitemap import Sitemap
 import cube
 
 # TODO: add photos
-# TODO: fix sitemap.xml: displaying localhost
 # TODO: comps page
 # print([rule.endpoint for rule in app.url_map.iter_rules()])
 
@@ -17,7 +16,7 @@ os.environ["FLASK_SETTINGS"] = cube.CONFIG["flask_config"]
 app.config.from_envvar("FLASK_SETTINGS")
 
 # generate sitemap
-ext = Sitemap(app=app)
+# ext = Sitemap(app=app)
 
 def send_home(msg, category="success"):
     """ Redirects the user back to home with an alert. """
