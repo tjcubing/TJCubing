@@ -380,7 +380,7 @@ def github_commit_time() -> str:
 def get_pfp(name: str, client: Client=None) -> Client:
     """ Gets the Facebook profile picture of a person. """
     client = Client(CONFIG["email"], getpass.getpass()) if client is None else client
-    with open("static/img/pfps/{}.png".format(name), "wb") as f:
+    with open("static/img/pfps/{}.png".format(name.replace(" ", "")), "wb") as f:
         f.write(requests.get(client.searchForUsers(name)[0].photo).content)
     return client
 

@@ -7,7 +7,7 @@
 {% macro emails(list, extra="") %}
   {% if list | length == 1 %}
     <div class="media">
-      <img src="{{ furl('img/pfps/{}.png'.format(list[0][0])) }}" class="mr-3" onerror="this.src='{{ furl('img/default.png') }}'" alt="...">
+      <img src="{{ furl('img/pfps/{}.png'.format(list[0][0].replace(' ', ''))) }}" class="mr-3" onerror="this.src='{{ furl('img/default.png') }}'" alt="...">
       <div class="media-body">
         <h5 class="mt-0">{{ list[0][0] }}</h5>
         <a href="mailto:{{ list[0][1] }}">{{ list[0][1] }}</a>{{ extra }}
