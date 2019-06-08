@@ -7,7 +7,11 @@
 {% macro emails(list, extra="") %}
   {% if list | length == 1 %}
     <div class="media">
-      <img src="{{ furl('img/pfps/{}.png'.format(list[0][0].replace(' ', ''))) }}" class="mr-3" onerror="this.src='{{ furl('img/default.png') }}'" alt="...">
+      <span class="border border-white rounded-circle mr-3">
+        <a href="{{ fb.get(list[0][0], request.path) }}">
+          <img src="{{ furl('img/pfps/{}.png'.format(list[0][0].replace(' ', ''))) }}" class="rounded-circle" onerror="this.src='{{ furl('img/default.png') }}'" alt="...">
+        </a>
+      </span>
       <div class="media-body">
         <h5 class="mt-0">{{ list[0][0] }}</h5>
         <a href="mailto:{{ list[0][1] }}">{{ list[0][1] }}</a>{{ extra }}
@@ -32,6 +36,16 @@
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+
+    <!-- KaTeX rendering -->
+    <link rel="stylesheet" href="{{ furl('css/katex.min.css') }}">
+    <script src="{{ furl('js/katex.min.js') }}"></script>
+    <script defer src="{{ furl('js/auto-render.min.js') }}" onload="renderMathInElement(document.body);"></script>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script> -->
+
     <main role="main" class="flex-shrink-0">
       <div class="container">
         {% block pageheader %}

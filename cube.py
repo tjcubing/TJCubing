@@ -393,10 +393,14 @@ def github_commit_time() -> str:
     return arrow.get(mtime["datetime"]).to('US/Eastern').format('YYYY-MM-DD HH:mm:ss ZZ')
 
 def get_pfp(name: str, client: Client=None) -> Client:
-    """ Gets the Facebook profile picture of a person. """
+    """ Gets the Facebook profile picture of a person, and saves the profile location. """
     client = Client(CONFIG["email"], getpass.getpass()) if client is None else client
+    user = client.searchForUsers(name)[0]
+    d = load_file("fb")
+    d[name] = user.url
+    dump_file(d, "fb")
     with open("static/img/pfps/{}.png".format(name.replace(" ", "")), "wb") as f:
-        f.write(requests.get(client.searchForUsers(name)[0].photo).content)
+        f.write(requests.get(user.photo).content)
     return client
 
 def get_pfps(names: list) -> None:

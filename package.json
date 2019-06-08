@@ -18,5 +18,6 @@
   "homepage": "https://github.com/stephen-huan/TJCubing#readme",
   "devDependencies": {
     "gulp": "^4.0.2"
-  }
+  },
+  "dependencies": {}
 }

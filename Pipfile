@@ -19,6 +19,7 @@ python-dotenv = "*"
 lxml = "*"
 arrow = "*"
 fbchat = "*"
+flask-uploads = "*"
 
 [requires]
 python_version = "3.5"

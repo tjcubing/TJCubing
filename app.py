@@ -90,7 +90,7 @@ PAGES = {"": lambda: {"year": cube.get_year()},
              "lectures": lectures,
              "inhouse": None,
              },
-         "contact": None,
+         "contact": lambda: {"fb": cube.load_file("fb")},
          "archive":
              {
                 "history": lambda: cube.parse_club(),
@@ -101,6 +101,10 @@ PAGES = {"": lambda: {"year": cube.get_year()},
                 "eligibility": lambda: cube.load_file("vote"),
                 "admission": lambda: {"admission": cube.open_admission(), "sigs": cube.get_sigs()},
                 "result": result,
+             },
+         "misc":
+             {
+                "stats": None,
              },
          "search": (search, ['POST', 'GET'])
         }
