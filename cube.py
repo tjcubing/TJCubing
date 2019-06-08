@@ -1,4 +1,4 @@
-import json, pickle, time, os
+import json, pickle, time, os, getpass
 from datetime import datetime
 import arrow
 import markdown2
@@ -6,11 +6,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import linear_model
 from sklearn.metrics import r2_score
-import flask
+from fbchat import Client
 import requests
+from bs4 import BeautifulSoup
+import flask
 from requests_oauthlib import OAuth2Session
 # from oauthlib.oauth2 import TokenExpiredError
-from bs4 import BeautifulSoup
 
 # Helper library to query the WCA for competitions and other miscellaneous tasks
 # TODO: mailing list (email tjcubingofficers@gmail.com)
@@ -19,8 +20,10 @@ from bs4 import BeautifulSoup
 # TODO: remove header and footer from search consideration
 # TODO: switch all times to arrow times
 
-STR_FUNC = {"load": {"json": json.load, "pickle": pickle.load}, "dump": {"json": json.dump, "pickle": pickle.dump}}
-EXT_MODE = {"json": "", "pickle": "b"}
+STR_FUNC = {"load": {"json": json.load, "pickle": pickle.load, "text": lambda f: f.read()},
+            "dump": {"json": json.dump, "pickle": pickle.dump, "text": lambda f, obj: f.write(obj)}
+           }
+EXT_MODE = {"json": "", "pickle": "b", "text": ""}
 
 def load_file(fname: str, func: str="json", short: bool=True) -> dict:
     """ Loads a file. """
@@ -78,9 +81,14 @@ def unix_to_human(time: float) -> str:
     """ Returns a human-readable time from a UNIX timestamp. """
     return datetime.fromtimestamp(time).strftime("%A, %B %d, %Y at %I:%M:%S.%f %p")
 
-def make_soup(url: str, params={}) -> BeautifulSoup:
-    """ Returns a soup from a url. """
-    return BeautifulSoup(requests.get(url, params=params).text, PARSER)
+def make_soup(text: str, mode: str="url", parser: str=PARSER) -> BeautifulSoup:
+    """ Returns a soup. """
+    if mode == "url" or isinstance(mode, dict):
+        params = mode if isinstance(mode, dict) else {}
+        text = requests.get(text, params=params).text
+    elif mode == "file":
+        text = open(text)
+    return BeautifulSoup(text, parser)
 
 #TODO: get events, TJ kids competing.
 def get_comps() -> list:
@@ -126,9 +134,8 @@ def get_lectures() -> list:
     return lectures
 
 def open_admission() -> str:
-    """ Parses the admission text and converts it into html """
-    file = open("static/misc/admission.md").read()
-    return markdown2.markdown(file)
+    """ Parses the admission text and converts it into HTML. """
+    return markdown2.markdown(load_file("static/misc/admission.md", "text", False))
 
 def get_sigs() -> list:
     """ Returns the signatures of the admission. """
@@ -157,7 +164,7 @@ def parse_search(query: str) -> list:
     path = "rendered_templates/"
     query = query.strip().lower()
     for html in os.listdir(path):
-        soup = BeautifulSoup(open(path + html), PARSER)
+        soup = make_soup(path + html, "file")
         text = soup.get_text()
         if query in text.lower():
             yield (unix_to_human(os.path.getmtime(path + html)), html[:-5] if html != "index.html" else "", modify(query, get_preview(query, text)))
@@ -332,7 +339,7 @@ def add_xmltag(soup, element, seen, name, default, update=False):
 
 def edit_sitemap(use_json=True) -> None:
     """ Changes the URL on the sitemap and modification times. """
-    soup = BeautifulSoup(open(SITEMAP), "xml")
+    soup = make_soup(SITEMAP, "file", "xml")
     seen = load_file("sitemap") if use_json else {}
     for child in soup.find_all("url"):
         loc = child.find("loc")
@@ -352,11 +359,9 @@ def edit_sitemap(use_json=True) -> None:
                 else:
                     fname = None
 
-            if fname is not None:
-                add_xmltag(soup, child, seen[path], "lastmod", datetime.fromtimestamp(os.path.getmtime(fname)).isoformat(), True)
-
-            add_xmltag(soup, child, seen[path], "changefreq", "yearly")
-            add_xmltag(soup, child, seen[path], "priority", 0.0)
+            mtime = datetime.fromtimestamp(os.path.getmtime(fname)).isoformat() if fname is not None else None
+            for args in [("lastmod", mtime, True), ("changefreq", "yearly", False), ("priority", 0.0, False)]:
+                add_xmltag(soup, child, seen[path], *args)
 
         else:
             child.decompose()
@@ -371,3 +376,16 @@ def github_commit_time() -> str:
     soup = make_soup(REPO + "/commits/master")
     mtime = soup.find("relative-time")
     return arrow.get(mtime["datetime"]).to('US/Eastern').format('YYYY-MM-DD HH:mm:ss ZZ')
+
+def get_pfp(name: str, client: Client=None) -> Client:
+    """ Gets the Facebook profile picture of a person. """
+    client = Client(CONFIG["email"], getpass.getpass()) if client is None else client
+    with open("static/img/pfps/{}.png".format(name), "wb") as f:
+        f.write(requests.get(client.searchForUsers(name)[0].photo).content)
+    return client
+
+def get_pfps(names: list) -> None:
+    """ Gets multiple profile pictures at a time, saving the same client object. """
+    client = get_pfp(names[0])
+    for name in names[1:]:
+        get_pfp(name, client)

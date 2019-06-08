@@ -56,16 +56,6 @@
   </ul>
 {% endmacro %}
 
-{% macro emails(list, extra="") %}
-  {% if list | length == 1 %}
-    <p> {{ list[0][0] }}: <a href="mailto:{{ list[0][1] }}">{{ list[0][1] }}</a>{{ extra }}</p>
-  {% else %}
-    {% for item in list %}
-      {{ emails([item]) }}
-    {% endfor %}
-  {% endif %}
-{% endmacro %}
-
 {% macro description(name, years, meetings, year, annual_meetings) %}
   <ul>
     {% if name != None %} <li>Name: {{ name }}</li> {% endif %}
