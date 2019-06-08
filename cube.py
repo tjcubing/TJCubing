@@ -1,5 +1,6 @@
 import json, pickle, time, os
 from datetime import datetime
+import arrow
 import markdown2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -16,6 +17,7 @@ from bs4 import BeautifulSoup
 # TODO: Database: Postgres?
 # TODO: WCA OAuth
 # TODO: remove header and footer from search consideration
+# TODO: switch all times to arrow times
 
 STR_FUNC = {"load": {"json": json.load, "pickle": pickle.load}, "dump": {"json": json.dump, "pickle": pickle.dump}}
 EXT_MODE = {"json": "", "pickle": "b"}
@@ -36,9 +38,10 @@ LECTURES = "static/pdfs/"
 FILE = ".html.j2"
 PREVIEW = 80
 WAIT = CONFIG["time"]
-PARSER = "html.parser"
+PARSER = "lxml"
 SITEMAP = "static/sitemap.xml"
-TJ = "https://activities.tjhsst.edu/cubing/"
+REPO = "https://github.com/stephen-huan/TJCubing"
+TJ = "https://activities.tjhsst.edu/cubing/" #alternatively http://cubing.sites.tjhsst.edu
 
 https = load_file("site")["url"][:5] == "https"
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = str(int(not https))
@@ -362,3 +365,9 @@ def edit_sitemap(use_json=True) -> None:
         f.write(soup.prettify())
 
     dump_file(seen, "sitemap")
+
+def github_commit_time() -> str:
+    """ Returns the time of the last Github commit. """
+    soup = make_soup(REPO + "/commits/master")
+    mtime = soup.find("relative-time")
+    return arrow.get(mtime["datetime"]).to('US/Eastern').format('YYYY-MM-DD HH:mm:ss ZZ')

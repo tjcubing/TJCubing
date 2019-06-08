@@ -51,7 +51,7 @@
   <h3> {{ title }} </h3>
   <ul>
     {% for url, name, desc in entries %}
-      <li> <a href="{{ url }}">{{ name }}</a>{{ ":" if name != None else "" }} {{ desc }} </li>
+      <li> <a href="{{ url }}">{{ name }}</a>{{ ":" if name != "" else "" }} {{ desc }} </li>
     {% endfor %}
   </ul>
 {% endmacro %}

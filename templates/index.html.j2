@@ -33,8 +33,10 @@
         <p> The club organizes the schedule of the competition, including the events and prizes. Members of the club also volunteer by being judges, scramblers, runners, and more. </p>
         Past competition links: <!-- TODO: automate getting past comp links from WCA search -->
         <ui>
-          {% for year in range(year - 1, 2016 - 1, -1) %} <!-- don't include current year because comp may not be out yet, include 2016, go from most recent to least recent -->
-            <li> <a href={{"https://www.worldcubeassociation.org/competitions/TJHSSTFall" + year|string }}> {{year}} </a></li> <!-- assumes url is TJHSSTFallyyyy -->
+          <!-- don't include current year because comp may not be out yet, include 2016, go from most recent to least recent -->
+          {% for year in range(year - 1, 2016 - 1, -1) %}
+            <!-- assumes url is TJHSSTFallyyyy -->
+            <li> <a href={{"https://www.worldcubeassociation.org/competitions/TJHSSTFall" + year|string }}> {{year}} </a></li>
           {% endfor %}
         </ui>
       </div>

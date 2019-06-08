@@ -93,7 +93,7 @@ PAGES = {"": lambda: {"year": cube.get_year()},
          "contact": None,
          "archive":
              {
-                "history": lambda: cube.add_dict(cube.parse_club(), {"url": params["url"]}),
+                "history": lambda: cube.parse_club(),
                 "tips": None,
              },
          "vote":
@@ -105,7 +105,12 @@ PAGES = {"": lambda: {"year": cube.get_year()},
          "search": (search, ['POST', 'GET'])
         }
 
-GLOBAL = {"pages": NAV, "URL": params["url"]}
+GLOBAL = {"pages": NAV,
+          "URL": params["url"],
+          "repo": cube.REPO,
+          "TJ": cube.TJ,
+          "updated": cube.github_commit_time(),
+         }
 
 def make_page(s: str, f=lambda: {}, methods=['GET']):
     """ Takes in a string which specifies both the url and the file name, as well as a function which provides the kwargs for render_template. """

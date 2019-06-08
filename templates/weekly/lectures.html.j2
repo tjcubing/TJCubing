@@ -7,27 +7,29 @@
 {% block content %}
   {% set headers = ["#", "Date", "Title", "Author", "PDF", "URL", "Slides"] %}
 
-  <table class="table table-hover">
-    <thead class="thead-dark">
-      <tr>
-        {% for header in headers %}
-          <th scope="col"> {{ header }} </th>
-        {% endfor %}
-      </tr>
-    </thead>
-    <tbody>
-      {% for lecture in lectures %}
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead class="thead-dark">
         <tr>
-          <th scope="row"> {{ loop.index }} </th>
-          {% for header in headers[1:4] %}
-            <td> {{ lecture[header|lower] }} </td>
-          {% endfor %}
-          {% for header in headers[4:] %}
-            <td> <a href="{{ furl('pdfs/{}/{}'.format(lecture['title'], lecture[header|lower])) if header != "URL" else lecture[header|lower] }}"> {{ header }} </a> </td>
+          {% for header in headers %}
+            <th scope="col"> {{ header }} </th>
           {% endfor %}
         </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        {% for lecture in lectures %}
+          <tr>
+            <th scope="row"> {{ loop.index }} </th>
+            {% for header in headers[1:4] %}
+              <td> {{ lecture[header|lower] }} </td>
+            {% endfor %}
+            {% for header in headers[4:] %}
+              <td> <a href="{{ furl('pdfs/{}/{}'.format(lecture['title'], lecture[header|lower])) if header != "URL" else lecture[header|lower] }}"> {{ header }} </a> </td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
 {% endblock %}

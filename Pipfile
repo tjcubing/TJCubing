@@ -17,6 +17,7 @@ frozen-flask = "*"
 flask-sitemap = "*"
 python-dotenv = "*"
 lxml = "*"
+arrow = "*"
 
 [requires]
 python_version = "3.5"
