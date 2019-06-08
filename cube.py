@@ -17,7 +17,6 @@ from requests_oauthlib import OAuth2Session
 # TODO: mailing list (email tjcubingofficers@gmail.com)
 # TODO: Database: Postgres?
 # TODO: WCA OAuth
-# TODO: remove header and footer from search consideration
 # TODO: switch all times to arrow times
 
 STR_FUNC = {"load": {"json": json.load, "pickle": pickle.load, "text": lambda f: f.read()},
@@ -155,19 +154,35 @@ def modify(word: str, text: str) -> str:
 def get_preview(query: str, text: str) -> str:
     """ Returns a preview of a larger string from a smaller string. """
     i = text.lower().index(query)
-    preview = text[max(i - PREVIEW, 0):min(i + PREVIEW, len(text) - 1)] #avoid out of bounds
-    return " ".join(preview.split()[1:-1]) #removes fractions of words
+    # avoids out of bounds
+    preview = text[max(i - PREVIEW, 0):min(i + PREVIEW, len(text))]
+    # removes fractions of words
+    # removed = " ".join(preview.split()[1:-1])
+    # return removed if query in removed.lower() else preview
+    return preview
 
-#TODO: take in tag information
 def parse_search(query: str) -> list:
     """ Parses a user's search, returns a list of entries. """
     path = "rendered_templates/"
     query = query.strip().lower()
+    if query == "":
+        return
+
     for html in os.listdir(path):
         soup = make_soup(path + html, "file")
-        text = soup.get_text()
-        if query in text.lower():
-            yield (unix_to_human(os.path.getmtime(path + html)), html[:-5] if html != "index.html" else "", modify(query, get_preview(query, text)))
+        body = soup.find("body")
+        for element in ["nav", "footer"]:
+            body.find(element).decompose()
+
+        lowest = None
+        for element in body.find_all():
+            if query in element.text.lower():
+                lowest = element
+
+        if lowest is not None:
+            yield (unix_to_human(os.path.getmtime(path + html)),
+                   html[:-5] if html != "index.html" else "",
+                   modify(query, get_preview(query, lowest.text)))
 
 def store_candidate(d: dict) -> None:
     """ Stores a candidate to vote.json. """
@@ -235,9 +250,9 @@ def get_club_result() -> list:
                 return result
         d = make_api_call(d["next"], False)
 
-#TODO: some sort of legit method of updating these beyond func calls
-#TODO: Admin page to do that: prob just function_name (description): [button to run function]
-#TODO: take into account existing club.json file (i.e cuts down on API calls)
+# TODO: some sort of legit method of updating these beyond func calls
+# TODO: Admin page to do that: prob just function_name (description): [button to run function]
+# TODO: take into account existing club.json file (i.e cuts down on API calls)
 def save_club_history() -> dict:
     """ Returns the ION page describing the club. """
     page = make_api_call(CONFIG["club"]["url"], False)
