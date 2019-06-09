@@ -1,6 +1,6 @@
-@import "../bootstrap/scss/functions";
-@import "../bootstrap/scss/variables";
-@import "../bootstrap/scss/mixins";
+@import "./bootstrap/functions";
+@import "./bootstrap/variables";
+@import "./bootstrap/mixins";
 
 // possible font change suggested by Akash Bhave
 // @import url('https://fonts.googleapis.com/css?family=Rubik');
@@ -56,4 +56,4 @@ html {
   }
 }
 
-@import "../bootstrap/scss/bootstrap";
+@import "./bootstrap/bootstrap";

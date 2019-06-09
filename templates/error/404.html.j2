@@ -1,6 +1,9 @@
 {% extends "helper/base.html.j2" %}
 {% block content %}
-  <h1>Page Not Found</h1>
-  <p>What you were looking for is just not there.
-  <p><a href="{{ url_for('index') }}">go somewhere nice</a>
+  <h3>Page Not Found</h3>
+  <p>ごめんなさい! What you are searching for does not exist. 小林 (a fellow Python progammer!) will be right on it!</p>
+  <div class="embed-responsive embed-responsive-16by9">
+      <video class="embed-responsive-item" src="https://preview.redd.it/eaj29r2z5ua21.gif?format=mp4&s=2b1d068384789ad8b018ee6c4b90f4747e873dad" type="video/mp4" autoplay loop playsinline></video>
+  </div>
+  <a href="{{ url_for('index') }}">Back to home</a>
 {% endblock %}

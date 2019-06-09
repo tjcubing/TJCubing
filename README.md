@@ -10,6 +10,8 @@ Styling is done through [Sass](https://sass-lang.com/). Compile the custom sass 
 
 Website primarily made through [Bootstrap](https://getbootstrap.com).
 
+[Gulp](https://gulpjs.com/) is used in a hacky way to copy files from `node_modules` to `static/`. Run `gulp build` to copy all the files. 
+
 [TJ Oauth](https://ion.readthedocs.io/en/latest/developing/oauth.html) is used for the voting system.
 
 ## File Structure

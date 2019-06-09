@@ -13,9 +13,11 @@
   <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/oL1cWfA9J6k?rel=0" allowfullscreen></iframe>
 </div>
 
-<form method=post enctype=multipart/form-data>
-    <input type=file name=file>
+<form method="POST" enctype="multipart/form-data">
+  <div class="form-group">
+    <input type="file" name="file" id="file" class="form-control-file">
     <input type=submit value=Upload>
+  </div>
 </form>
 
 {% endblock %}
