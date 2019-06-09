@@ -2,7 +2,9 @@ import time, os, logging
 from datetime import datetime
 import flask
 from flask_sitemap import Sitemap
-import cube
+import flask_uploads
+from werkzeug.utils import secure_filename
+import cube, statistics
 
 # TODO: add photos
 # TODO: comps page
@@ -18,10 +20,14 @@ app.config.from_envvar("FLASK_SETTINGS")
 # generate sitemap
 # ext = Sitemap(app=app)
 
-def send_home(msg, category="success"):
-    """ Redirects the user back to home with an alert. """
+# Create an upload set
+TIMES = flask_uploads.UploadSet("times")
+flask_uploads.configure_uploads(app, (TIMES))
+
+def alert(msg: str, category: str="success", loc: str="index"):
+    """ Redirects the user with an alert. """
     flask.flash(msg, category)
-    return flask.redirect(flask.url_for("index"))
+    return flask.redirect(flask.url_for(loc) if loc != "self" else flask.request.path)
 
 @app.before_request
 def before_request():
@@ -55,6 +61,20 @@ def lectures() -> dict:
 def result() -> dict:
     """ Displays the result of the election. """
     return {"result": cube.get_winner(), "vote": cube.load_file("vote")}
+
+# http://flask.pocoo.org/docs/1.0/patterns/fileuploads/
+def stats() -> dict:
+    """ Parses a user's .csv / textfile and returns statistics. """
+    if flask.request.method == "POST":
+        if "file" not in flask.request.files:
+            return alert("No file part.", "warning", "self")
+        file = flask.request.files['file']
+        if file.filename == "":
+            return alert("No selected file.", "warning", "self")
+        if file and TIMES.file_allowed(file, secure_filename(file.filename)):
+            descr, mean, best = statistics.parse(file)
+            return {"file": True, "descr": descr, "mean": mean, "best": best}
+    return {"file": False}
 
 def search() -> dict:
     """ Parses the user's search. Can be POST or GET method. """
@@ -104,7 +124,7 @@ PAGES = {"": lambda: {"year": cube.get_year()},
              },
          "misc":
              {
-                "stats": None,
+                "stats": (stats, ['POST', 'GET']),
              },
          "search": (search, ['POST', 'GET'])
         }
@@ -119,7 +139,12 @@ GLOBAL = {"pages": NAV,
 def make_page(s: str, f=lambda: {}, methods=['GET']):
     """ Takes in a string which specifies both the url and the file name, as well as a function which provides the kwargs for render_template. """
     title = s.split("/")[-1]
-    func = lambda: flask.render_template((s if s != "" else "index") + cube.FILE, **GLOBAL, active=cube.load_file("vote")["vote_active"], title=NAMES[title], **f())
+    def func():
+        val = f()
+        if isinstance(val, dict):
+            return flask.render_template((s if s != "" else "index") + cube.FILE, **GLOBAL, active=cube.load_file("vote")["vote_active"], title=NAMES[title], **val)
+        return val
+    # func = lambda: flask.render_template((s if s != "" else "index") + cube.FILE, **GLOBAL, active=cube.load_file("vote")["vote_active"], title=NAMES[title], **f())
     # Need distinct function names for Flask not to error
     func.__name__ = title if s != "" else "index"
     return app.route(("/{}" + TSLASH).format(s), methods=methods)(func)
@@ -158,7 +183,7 @@ def callback():
     assert flask.request.args.get('state', None) == flask.session['oauth_state']
     code = flask.request.args.get('code', None)
     if flask.request.args.get('error', None) is not None or code is None:
-        return send_home("You must allow Ion OAuth access to vote!", "danger")
+        return alert("You must allow Ion OAuth access to vote!", "danger")
     oauth = cube.make_oauth(state=flask.session['oauth_state'])
     token = oauth.fetch_token(cube.TOKEN_URL, code=code, client_secret=cube.CONFIG["client_secret"])
     cube.save_token(token)
@@ -174,14 +199,14 @@ def vote():
     vote = cube.load_file("vote")
 
     if not cube.valid_voter():
-        return send_home("You do not fullfill the requirements to be able to vote.", "warning")
+        return alert("You do not fullfill the requirements to be able to vote.", "warning")
 
     if not vote["vote_active"]:
-        return send_home("Stop trying to subvert democracy!!!", "danger")
+        return alert("Stop trying to subvert democracy!!!", "danger")
 
     if flask.request.method == "POST":
         cube.add_vote(cube.get_name(), flask.request.form["vote"])
-        return send_home("<strong>Congrats!</strong> You have voted for {}.".format(flask.request.form['vote']))
+        return alert("<strong>Congrats!</strong> You have voted for {}.".format(flask.request.form['vote']))
 
     return flask.render_template(flask.request.path + cube.FILE, **GLOBAL, active=vote["vote_active"], **vote, sorted_candidates=cube.get_candidates(), name=cube.get_name(), title="vote")
 
@@ -194,10 +219,10 @@ def run():
     vote = cube.load_file("vote")
 
     if not cube.valid_runner():
-        return send_home("You do not fullfill the requirements to be able to run.", "warning")
+        return alert("You do not fullfill the requirements to be able to run.", "warning")
 
     if not vote["vote_active"]:
-        return send_home("Stop trying to subvert democracy!!!", "danger")
+        return alert("Stop trying to subvert democracy!!!", "danger")
 
     signups = cube.get_signups()
     params = {"name": cube.get_name(),
@@ -209,7 +234,7 @@ def run():
 
     if flask.request.method == "POST":
         cube.store_candidate(cube.add_dict({"description": flask.request.form['description']}, params))
-        return send_home("<strong>Congrats!</strong> Your application has been registered.")
+        return alert("<strong>Congrats!</strong> Your application has been registered.")
 
     return flask.render_template(flask.request.path + cube.FILE, **GLOBAL, active=vote["vote_active"], **vote, **params, title="run")
 

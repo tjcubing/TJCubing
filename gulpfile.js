@@ -23,6 +23,8 @@ exports.build = parallel(copyFile('bootstrap-JS', 'node_modules/bootstrap/dist/j
                          copyFile('bootstrap-SCSS', 'node_modules/bootstrap/scss/**/*', 'static/scss/bootstrap'),
                          copyFile('KaTeX-JS', 'node_modules/katex/dist/katex.min.js', JS),
                          copyFile('KaTeX-CSS', 'node_modules/katex/dist/katex.min.css', CSS),
-                         copyFile('KaTeX-auto-render', 'node_modules/katex/dist/contrib/auto-render.min.js', JS)
+                         copyFile('KaTeX-fonts', 'node_modules/katex/dist/fonts/*', 'static/css/fonts'),
+                         copyFile('KaTeX-auto-render', 'node_modules/katex/dist/contrib/auto-render.min.js', JS),
+                         copyFile('jQuery', 'node_modules/jquery/dist/jquery.slim.min.js', JS),
                         )
 exports.default = defaultTask

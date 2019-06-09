@@ -20,6 +20,7 @@ lxml = "*"
 arrow = "*"
 fbchat = "*"
 flask-uploads = "*"
+pandas = "*"
 
 [requires]
 python_version = "3.5"

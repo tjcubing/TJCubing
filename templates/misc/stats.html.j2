@@ -1,9 +1,9 @@
 {% extends "helper/base.html.j2" %}
 
-{% block intro %} Want to know your global? Who nemesizes you? Various other stastistics? {% endblock %}
+{% block intro %} Want to know your global? Who nemesises you? Various other statistics? {% endblock %}
 {% block rest %} <p> A global is the time you expect to get (also known as the expected value). Why compute ao100s?</p>
 <p>The central limit theorem states that for samples from an arbitrary distribution as the sample size approaches infinity the distribution of the sample means has to be Gaussian. Then, maximum likelihood estimation (MLE) can be applied. Suppose \( X \sim \mathcal{N}(\mu, \, \sigma^{2}) \) independently and identically. The probably density function (PDF) of a Gaussian is \( f(x) = \frac{1}{\sqrt{2\pi}} e^{-\frac{(x - \mu)^2}{2\sigma^2}} \). Suppose our sample \( X \) has \( n \) elements, indexed by \( i \). Then, the probability of our particular sample is the multiplication of the probability of each value in our sample, or \( \prod_{i=1}^{n} f(x_i) = \prod_{i=1}^{n} \frac{1}{\sqrt{2\pi}} e^{-\frac{(x_i - \mu)^2}{2\sigma^2}} \).</p>
-<p> MLE attempts to maximize the chance that a particular sample occurs. As \( \ln{x} \) is monotonically increasing, maximizing \( \ln{x} \) is the same as maximizing \( x \). Taking the natural log of the probability yields \( \sum_{i = 1}^n -\frac{(x_i - \mu)^2}{2\sigma^2} \) plus \( \ln{\frac{1}{\sqrt{2\pi}}} \). Calling this \( P(x) \), we maximize \( P(x) \) by differentiating with respsect to \( \mu \) and assume \( \sigma \) is constant. \( \frac{\partial P}{\partial \mu} = \sum_{i = 1}^n  \frac{-2(x_i - \mu) \cdot -1 }{2\sigma^2} = \sum_{i = 1}^n  \frac{x_i - \mu}{\sigma^2} = 0 \). Therefore, \( \sum_{i = 1}^n (x_i) - n \mu = 0 \) so \( \mu = \frac{\sum_{i = 1}^n x_i}{n} \), which is equavilent to the sample mean \( \bar{x} \) </p>
+<p> MLE attempts to maximize the chance that a particular sample occurs. As \( \ln{x} \) is monotonically increasing, maximizing \( \ln{x} \) is the same as maximizing \( x \). Taking the natural log of the probability yields \( \sum_{i = 1}^n -\frac{(x_i - \mu)^2}{2\sigma^2} \) plus \( \ln{\frac{1}{\sqrt{2\pi}}} \). Calling this \( P(x) \), we maximize \( P(x) \) by differentiating with respect to \( \mu \) and assume \( \sigma \) is constant. \( \frac{\partial P}{\partial \mu} = \sum_{i = 1}^n  \frac{-2(x_i - \mu) \cdot -1 }{2\sigma^2} = \sum_{i = 1}^n  \frac{x_i - \mu}{\sigma^2} = 0 \). Therefore, \( \sum_{i = 1}^n (x_i) - n \mu = 0 \) so \( \mu = \frac{\sum_{i = 1}^n x_i}{n} \), which is equivalent to the sample mean \( \bar{x} \) </p>
 <p> A similar argument exists for \( \sigma \), however the definition of \( \sigma \) depends on \( \mu \), making the derivation significantly more nontrivial. As such, it is left as an exercise for the reader. In conclusion, doing mo10ao5s is basically applying MLE on the ao5 solve distribution and hoping it's Gaussian. </p>
 {% endblock %}
 
@@ -13,11 +13,33 @@
   <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/oL1cWfA9J6k?rel=0" allowfullscreen></iframe>
 </div>
 
-<form method="POST" enctype="multipart/form-data">
-  <div class="form-group">
-    <input type="file" name="file" id="file" class="form-control-file">
-    <input type=submit value=Upload>
+<h1 class="mt-5"> Calculate Mo(x)Ao5 </h1>
+
+<form method="POST" action="{{ request.path }}" enctype="multipart/form-data">
+  <div class="input-group mt-3">
+    <div class="input-group-prepend">
+      <button class="input-group-text" type="submit">Upload</button>
+    </div>
+    <div class="custom-file">
+      <input type="file" id="file" name="file" class="custom-file-input" aria-describedby="custom-file-input">
+      <label id="custom-file-label" class="custom-file-label" for="file">Choose file</label>
+    </div>
   </div>
 </form>
+
+<!-- https://www.w3schools.com/bootstrap4/bootstrap_forms_custom.asp -->
+<script>
+$("#file").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $("#custom-file-label").html(fileName);
+});
+</script>
+
+{% if file %}
+  <h3 class="mt-3"> Calculated {{ descr }}: </h3>
+  {{ mean }}
+  <h3 class="mt-3"> Best ao5 (nonrolling): </h3>
+  {{ best }}
+{% endif %}
 
 {% endblock %}
