@@ -1,0 +1,6 @@
+{% extends "helper/base.html.j2" %}
+{% block content %}
+  <h5>{{ descr }}</h5>
+  <p>{% block message %}{% endblock %}</p>
+  {% block page %}{% endblock %}
+{% endblock %}

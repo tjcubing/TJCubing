@@ -7,6 +7,9 @@ DNF = float("INF")
 
 def parse_time(s: str) -> float:
     """ Parses a string to a time. """
+    if s[0] == "(":
+        s = s[1:-1]
+
     if s[-1] == "+":
         return parse_time(s[:-1])
     elif "DNF" in s:
@@ -34,9 +37,31 @@ def block(l: list, k: int=5, roll=False) -> list:
         bucket.append(l[i])
     return times
 
-def parse(text: str):
-    """ Parses a CStimer CSV file. """
-    session = pd.read_csv(text, sep=";")
-    times = list(map(parse_time, session["Time"]))
+def process(times: list) -> tuple:
+    """ Returns the statistics given a time list. """
     avgs = list(map(ao, block(times)))
     return "mo{}ao5".format(len(avgs)), mean(avgs), min(avgs)
+
+def parse(text: str) -> list:
+    """ Parses a CStimer CSV file. """
+    session = pd.read_csv(text, sep=";")
+    return list(map(parse_time, session["Time"].apply(str)))
+
+def parse_cstimer_text(text: str) -> list:
+    """ Parses csTimer text. """
+    return [parse_time(line.split()[1]) for line in text.split("\n")[4:]]
+
+def parse_dctimer_text(text: str) -> list:
+    """ Parses DCTimer text. """
+    return list(map(parse_time, text.split("\n")[5].split(", ")))
+
+def parse_text(text: str) -> list:
+    """ Parses a text file. """
+    try:
+        mode = text.split()[2]
+        parsers = {"csTimer": parse_cstimer_text,
+                   "DCTimer": parse_dctimer_text,
+                  }
+        return parsers[mode](text.strip())
+    except:
+        return []

@@ -6,11 +6,11 @@ Currently the official [website for Rubik's Cube Club](https://activities.tjhsst
 This project uses [Flask](http://flask.pocoo.org/) as a Python backend.  
 Install [Pipenv](https://docs.pipenv.org/en/latest/install/#installing-pipenv) and then run `pipenv install` to install all of the Python depdendancies.
 
-Styling is done through [Sass](https://sass-lang.com/). Compile the custom sass (.SCSS) file into CSS via `sass --watch static/scss/custom.scss static/css/custom.css`.
+Styling is done through [Sass](https://sass-lang.com/). Compile the custom sass (.SCSS) file into CSS via `gulp watch`.
 
 Website primarily made through [Bootstrap](https://getbootstrap.com).
 
-[Gulp](https://gulpjs.com/) is used in a hacky way to copy files from `node_modules` to `static/`. Run `gulp build` to copy all the files. 
+[Gulp](https://gulpjs.com/) is used in a hacky way to copy files from `node_modules` to `static/`. Run `gulp copy` to copy all the files. 
 
 [TJ Oauth](https://ion.readthedocs.io/en/latest/developing/oauth.html) is used for the voting system.
 

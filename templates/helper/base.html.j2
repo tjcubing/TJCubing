@@ -28,7 +28,7 @@
 <html lang="en">
   {% include 'helper/header.html.j2' %}
 
-  <body class="d-flex flex-column min-vh-100">
+  <body class="d-flex flex-column">
     <!-- Optional JavaScript -->
     <script src="{{ furl('js/jquery.slim.min.js') }}"></script>
     <!-- <script src="{{ furl('js/popper.min.js') }}"></script> -->
@@ -42,8 +42,10 @@
     <main role="main" class="flex-shrink-0">
       <div class="container">
         {% block pageheader %}
-          <div class="d-sm-none"><h1 class="display-5 text-break"> {{ title|capitalize }}</h1></div>
-          <div class="d-none d-sm-block"><h1 class="display-1 text-break"> {{ title|capitalize }}</h1></div>
+          {% set ns = namespace(title=title) %}
+          {% block format scoped %}  {% set ns.title = title|capitalize %}  {% endblock %}
+          <div class="d-sm-none"><h1 class="display-5 text-break"> {{ ns.title }}</h1></div>
+          <div class="d-none d-sm-block"><h1 class="display-1 text-break"> {{ ns.title }}</h1></div>
           <h3> <small class="text-muted">{% block subtitle %}{% endblock %}</small> </h3>
           <p class="lead mt-5">{% block intro %}{% endblock %} </p>
           <p> {% block rest %}{% endblock %} </p>

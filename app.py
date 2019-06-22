@@ -6,8 +6,7 @@ import flask_uploads
 from werkzeug.utils import secure_filename
 import cube, statistics
 
-# TODO: add photos
-# TODO: comps page
+# TODO: in house comps page
 # print([rule.endpoint for rule in app.url_map.iter_rules()])
 
 app = flask.Flask(__name__)
@@ -64,17 +63,25 @@ def result() -> dict:
 
 # http://flask.pocoo.org/docs/1.0/patterns/fileuploads/
 def stats() -> dict:
-    """ Parses a user's .csv / textfile and returns statistics. """
+    """ Parses a user's .csv / .txt file and returns statistics. """
     if flask.request.method == "POST":
-        if "file" not in flask.request.files:
-            return alert("No file part.", "warning", "self")
-        file = flask.request.files['file']
-        if file.filename == "":
-            return alert("No selected file.", "warning", "self")
-        if file and TIMES.file_allowed(file, secure_filename(file.filename)):
-            descr, mean, best = statistics.parse(file)
-            return {"file": True, "descr": descr, "mean": mean, "best": best}
-    return {"file": False}
+        times = None
+        if "times" in flask.request.form:
+            times = statistics.parse_text(flask.request.form["times"])
+        else:
+            if "file" not in flask.request.files:
+                return alert("No file part.", "warning", "self")
+            file = flask.request.files['file']
+            if file.filename == "":
+                return alert("No selected file.", "warning", "self")
+            if file and TIMES.file_allowed(file, secure_filename(file.filename)):
+                times = statistics.parse(file)
+
+        if times:
+            descr, mean, best = statistics.process(times)
+            return {"display": True, "descr": descr, "mean": mean, "best": best}
+
+    return {"display": False}
 
 def search() -> dict:
     """ Parses the user's search. Can be POST or GET method. """
@@ -144,7 +151,6 @@ def make_page(s: str, f=lambda: {}, methods=['GET']):
         if isinstance(val, dict):
             return flask.render_template((s if s != "" else "index") + cube.FILE, **GLOBAL, active=cube.load_file("vote")["vote_active"], title=NAMES[title], **val)
         return val
-    # func = lambda: flask.render_template((s if s != "" else "index") + cube.FILE, **GLOBAL, active=cube.load_file("vote")["vote_active"], title=NAMES[title], **f())
     # Need distinct function names for Flask not to error
     func.__name__ = title if s != "" else "index"
     return app.route(("/{}" + TSLASH).format(s), methods=methods)(func)
@@ -239,10 +245,20 @@ def run():
     return flask.render_template(flask.request.path + cube.FILE, **GLOBAL, active=vote["vote_active"], **vote, **params, title="run")
 
 # http://flask.pocoo.org/docs/1.0/patterns/errorpages/
-@app.errorhandler(404)
-def page_not_found(e):
-    return flask.render_template('error/404' + cube.FILE, **GLOBAL, title="404"), 404
+def make_error_page(error: int):
+    """ Makes an error page. """
+    def f(e):
+        body = e.get_body().strip().split("\n")
+        title, descr = body[1][7:-8], body[-1][3:-4]
+        return flask.render_template('error/{}{}'.format(error, cube.FILE), **GLOBAL, title=title, descr=descr), error
+    return f
 
+def make_error_pages(errors: list) -> None:
+    """ Makes error pages. """
+    for error in errors:
+        app.errorhandler(error)(make_error_page(error))
+
+make_error_pages(cube.get_errors())
 make_pages(PAGES)
 
 # https://medium.com/@trstringer/logging-flask-and-gunicorn-the-manageable-way-2e6f0b8beb2f

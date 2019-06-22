@@ -27,6 +27,16 @@
   </div>
 </form>
 
+<h5 class="mt-3"> Or if you prefer, copy paste a CSTimer / DCTimer average </h3>
+
+<div class="mt-3 col-sm-4">
+    <form accept-charset="UTF-8" action="{{ furl_for('stats') }}" method="POST">
+        <textarea class="form-control" maxlength="{{ length }}" name="times" id="times" placeholder="Paste in your times" rows="5"></textarea>
+        <h6 class="float-right mt-3" id="count_message"></h6>
+        <button class="btn btn-info mt-3" type="submit">Upload</button>
+    </form>
+</div>
+
 <!-- https://www.w3schools.com/bootstrap4/bootstrap_forms_custom.asp -->
 <script>
 $("#file").on("change", function() {
@@ -35,7 +45,7 @@ $("#file").on("change", function() {
 });
 </script>
 
-{% if file %}
+{% if display %}
   <h3 class="mt-3"> Calculated {{ descr }}: </h3>
   {{ mean }}
   <h3 class="mt-3"> Best ao5 (nonrolling): </h3>

@@ -408,3 +408,7 @@ def get_pfps(names: list) -> None:
     client = get_pfp(names[0])
     for name in names[1:]:
         get_pfp(name, client)
+
+def get_errors() -> list:
+    """ Returns the defined HTTP status errors. """
+    return [int(fname.split(FILE)[0]) for fname in os.listdir("templates/error")]

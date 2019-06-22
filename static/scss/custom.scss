@@ -9,12 +9,29 @@
 //   font-family: "Rubik", sans-serif ;
 // }
 
-main > .container {
-  padding: 60px 15px 0;
+/* Make footer sticky */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
 }
 
 .footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  // line-height: 60px; /* Vertically center the text there */
   background-color: #f5f5f5;
+}
+
+main > .container {
+  padding: 60px 15px 60px;
 }
 
 .footer > .container {
@@ -22,6 +39,7 @@ main > .container {
   padding-left: 15px;
 }
 
+/* Indent bulleted lists */
 li {
   margin-left: 20px;
 }
@@ -34,6 +52,7 @@ code {
   font-size: 80%;
 }
 
+/* Responsive font sizes */
 html {
   font-size: 1rem;
 }
