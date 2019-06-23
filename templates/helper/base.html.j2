@@ -1,6 +1,7 @@
 {% import 'helper/funcs.html.j2' as f %} <!-- Library of helper functions -->
 <!doctype html>
 
+{% set URL = URL if URL[:5] == "https" else request.url_root[:-1] %}
 {% macro furl(filename) %}{{ URL + url_for('static', filename=filename) }}{% endmacro %}
 {% macro furl_for(mode, filename=None) %}{{ URL + (url_for(mode, filename=filename) if filename != None else ("/" if mode == "" else url_for(mode))) }}{% endmacro %}
 
@@ -30,13 +31,9 @@
 
   <body class="d-flex flex-column">
     <!-- Optional JavaScript -->
-    <script src="{{ furl('js/jquery.slim.min.js') }}"></script>
-    <!-- <script src="{{ furl('js/popper.min.js') }}"></script> -->
-    <script src="{{ furl('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ furl('js/main.min.js') }}"></script>
 
     <!-- KaTeX rendering -->
-    <link rel="stylesheet" href="{{ furl('css/katex.min.css') }}">
-    <script src="{{ furl('js/katex.min.js') }}"></script>
     <script defer src="{{ furl('js/auto-render.min.js') }}" onload="renderMathInElement(document.body);"></script>
 
     <main role="main" class="flex-shrink-0">

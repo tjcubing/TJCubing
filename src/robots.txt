@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://activities.tjhsst.edu/cubing/sitemap.xml

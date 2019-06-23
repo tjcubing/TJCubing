@@ -4,9 +4,12 @@ import flask
 from flask_sitemap import Sitemap
 import flask_uploads
 from werkzeug.utils import secure_filename
+from werkzeug.exceptions import InternalServerError
 import cube, statistics
 
 # TODO: in house comps page
+# TODO: partial highlighting on mobile
+# TODO: 413 not being rendered in actual site
 # print([rule.endpoint for rule in app.url_map.iter_rules()])
 
 app = flask.Flask(__name__)
@@ -55,6 +58,7 @@ def competitions() -> dict:
 
 def lectures() -> dict:
     """ Returns the lectures. """
+    flask.abort(500)
     return {"lectures": cube.get_lectures()}
 
 def result() -> dict:
@@ -244,7 +248,13 @@ def run():
 
     return flask.render_template(flask.request.path + cube.FILE, **GLOBAL, active=vote["vote_active"], **vote, **params, title="run")
 
+
 # http://flask.pocoo.org/docs/1.0/patterns/errorpages/
+# Catch-all exception handler
+@app.errorhandler(Exception)
+def exception_handler(e):
+    return make_error_page(500)(InternalServerError())
+
 def make_error_page(error: int):
     """ Makes an error page. """
     def f(e):
