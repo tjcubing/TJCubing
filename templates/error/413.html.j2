@@ -1,5 +1,5 @@
 {% extends "helper/error.html.j2" %}
 {% block message %} Files uploaded cannot exceed 16 MB of data. {% endblock %}
 {% block page %}
-  <a href="{{ request.base_url }}">Back to the page</a>
+  <a href="{{ URL + request.path }}">Back to the page</a>
 {% endblock %}
