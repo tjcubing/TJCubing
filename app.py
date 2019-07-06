@@ -58,7 +58,6 @@ def competitions() -> dict:
 
 def lectures() -> dict:
     """ Returns the lectures. """
-    flask.abort(500)
     return {"lectures": cube.get_lectures()}
 
 def result() -> dict:
