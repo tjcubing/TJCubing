@@ -3,4 +3,5 @@
   <h5>{{ descr }}</h5>
   <p>{% block message %}{% endblock %}</p>
   {% block page %}{% endblock %}
+  {% block url %}<p> <a href="{{ URL + request.path }}">Back to the page</a> </p> {% endblock %}
 {% endblock %}
