@@ -4,4 +4,4 @@ Make a file called "desc.json" which should include these key, value pairs:
 title, author, date, pdf, slides, url
 
 (slides is a PDF version of the slides, URL is a link to google presentations)
-Folder name should be the same as the value from the title key.
+Folder name should be the same as the value from the title key with spaces removed.
