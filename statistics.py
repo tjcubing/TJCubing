@@ -53,7 +53,14 @@ def parse_cstimer_text(text: str) -> list:
 
 def parse_dctimer_text(text: str) -> list:
     """ Parses DCTimer text. """
-    return list(map(parse_time, text.split("\n")[5].split(", ")))
+    i = None
+    for j, line in enumerate(text.split("\n")):
+        if "," in line:
+            i = j
+            break
+    if i is None:
+        return []
+    return list(map(parse_time, text.split("\n")[i].split(":")[-1].split(", ")))
 
 def parse_text(text: str) -> list:
     """ Parses a text file. """
