@@ -372,7 +372,7 @@ def run():
 # Catch-all exception handler
 @app.errorhandler(Exception)
 def exception_handler(e):
-    app.logger.error(e)
+    app.logger.error('{}: {}'.format(type(e).__name__, e))
     return make_error_page(500)(InternalServerError())
 
 def make_error_page(error: int):
