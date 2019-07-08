@@ -17,6 +17,42 @@
 {% endmacro %}
 
 <!-- Actual functions -->
+{% macro active(path, furl_for) %}
+  {{ 'active' if request.path.split('/')[-1] == furl_for(path).split('/')[-1].strip() else '' }}
+{% endmacro %}
+
+{% macro disable(name, vote_active, disabled=['run for office', 'vote!']) %}
+  {{ 'disabled' if not vote_active and name in disabled else '' }}
+{% endmacro %}
+
+{% macro pactive(children, furl_for) %}
+ {% for path, name in children if active(path, furl_for).strip() == 'active' %}
+  active
+ {% endfor %}
+{% endmacro %}
+
+{% macro dropdown(self, children, dividers, furl_for, vote_active=False, extra='', img='') %}
+  <li class="nav-item dropdown">
+    <!-- See if child is active -->
+    <a class="nav-link dropdown-toggle {{ pactive(children, furl_for) }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{ img }}
+      {{ self[1:]|capitalize }}
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+      {% for path, name in children %}
+        <!-- Hack but whatever, next webdev can make this entire nav system better -->
+        {% if name in dividers %} <div class="dropdown-divider"></div> {% endif %}
+        <a class="dropdown-item {{ disable(name, vote_active) }} {{ active(path, furl_for) }}" href="{{ furl_for(path) }}">{{ name|capitalize }}</a>
+      {% endfor %}
+      {{ extra }}
+    </div>
+  </li>
+{% endmacro %}
+
+{% macro button(name="submit", text="Submit", classes="btn btn-primary", value="") %}
+  <button class="btn {{ classes }}" name="{{ name }}" id="{{ name }}" value="{{ value }}" type="submit">{{ text }}</button>
+{% endmacro %}
+
 {% macro rbr() %}
   <span class="d-block d-sm-none"></span>
 {% endmacro %}

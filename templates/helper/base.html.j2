@@ -3,7 +3,16 @@
 
 {% set URL = URL if URL[:5] == "https" else request.url_root[:-1] %}
 {% macro furl(filename) %}{{ URL + url_for('static', filename=filename) }}{% endmacro %}
-{% macro furl_for(mode, filename=None) %}{{ URL + (url_for(mode, filename=filename) if filename != None else ("/" if mode == "" else url_for(mode))) }}{% endmacro %}
+{% macro furl_for(mode, filename=None) %}{{ URL + (url_for(mode, filename=filename) if filename != None else ("/" if mode == "" else url_for(mode, **kwargs))) }}{% endmacro %}
+
+{% macro img(size, border=True) %}
+  {% set format = 'class="{} rounded" style="width: {}px; height: {}px;"'.format('border' if border else '', size, size) %}
+  {% if pfp != None %}
+    <img {{ format }} src="{{ pfp }}"></img>
+  {% else %}
+    <i {{ format }} data-feather="user"></i>
+  {% endif %}
+{% endmacro %}
 
 {% macro emails(list, extra="") %}
   {% if list | length == 1 %}
@@ -51,6 +60,10 @@
         {% block content %}{% endblock %}
       </div>
     </main>
+    <!-- Render feather icons -->
+    <script>
+      feather.replace()
+    </script>
   </body>
 
   {% include 'helper/footer.html.j2' %}

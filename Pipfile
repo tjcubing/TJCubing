@@ -21,6 +21,7 @@ arrow = "*"
 fbchat = "*"
 flask-uploads = "*"
 pandas = "*"
+passlib = "*"
 
 [requires]
 python_version = "3.5"

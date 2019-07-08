@@ -5,3 +5,4 @@ venv/
 build/
 rendered_templates/
 node_modules
+uploads/

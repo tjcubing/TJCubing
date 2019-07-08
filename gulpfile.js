@@ -40,7 +40,7 @@ gulp.task('watch', gulp.parallel('browser-sync', function () {
 }));
 
 gulp.task('clean', function () {
-  return del(['static'])
+  return del(['static', 'uploads'])
 });
 
 gulp.task('clear', function (cb) {
@@ -66,6 +66,8 @@ gulp.task('scripts', function() {
   return gulp.src(['node_modules/jquery/dist/jquery.slim.min.js',
                    'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
                    'node_modules/katex/dist/katex.min.js',
+                   'node_modules/feather-icons/dist/feather.min.js',
+                   'node_modules/bootbox/dist/bootbox.min.js'
                    // 'node_modules/katex/dist/contrib/auto-render.min.js'
                   ])
     .pipe(concat('main.min.js'))

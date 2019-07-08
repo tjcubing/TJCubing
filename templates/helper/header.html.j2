@@ -17,7 +17,7 @@
   <a class="navbar-brand" href="{{ TJ }}">
    <img src="{{ furl('img/cubing.png') }}" width="30" height="30" class="d-inline-block align-top" alt="">
    TJ Cubing
- </a>
+  </a>
 
   <!-- Mobile toggle of nav bar-->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,28 +30,26 @@
     <ul class="navbar-nav mr-auto">
       {% for path, name in pages %}
         {% if path[0] != "*" %}
-          {% set active = request.path == '/' + furl_for(path).split('/')[-1] %}
-          <li class="nav-item {{ 'active' if active else '' }}">
-            <a class="nav-link" href="{{ furl_for(path) }}">{{ name|capitalize }} {% if active %}<span class="sr-only">(current)</span>{% endif %}</a>
+          <li class="nav-item {{ f.active(path, furl_for) }}">
+            <a class="nav-link" href="{{ furl_for(path) }}">{{ name|capitalize }} {% if f.active(path, furl_for).strip() == 'active' %}<span class="sr-only">(current)</span>{% endif %}</a>
           </li>
         <!-- Dropdown logic -->
         {% else %}
-          <li class="nav-item dropdown">
-            <!-- See if child is active -->
-            <a class="nav-link dropdown-toggle {% for entrypath, entryname in name if request.path.split('/')[-1] == entrypath %}active{% endfor %}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              {{ path[1:]|capitalize }}
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              {% for entrypath, entryname in name %}
-                <!-- Hack but whatever, next webdev can make this entire nav system better -->
-                {% set color = request.path.split('/')[-1] == entrypath %}
-                {% if entryname in ["result", "vote!"] %} <div class="dropdown-divider"></div> {% endif %}
-                <a class="dropdown-item {{ 'disabled' if not active and entryname in ['run for office', 'vote!'] else '' }} {{ 'active' if color else '' }}" href="{{ furl_for(entrypath) }}">{{ entryname|capitalize }}</a>
-              {% endfor %}
-            </div>
-          </li>
+          {{ f.dropdown(path, name, ["result", "vote!"], furl_for, active) }}
         {% endif %}
       {% endfor %}
+    </ul>
+
+    <!-- Profile -->
+    <ul class="navbar-nav navbar-right">
+      {% if 'account' in session %}
+        {% set children = [('profile', 'profile'), ('settings', 'settings')] %}
+        {{ f.dropdown("* ", children, [], furl_for, False, '<div class="dropdown-divider"></div><form action={} method="POST">{}</form>'.format(furl_for('profile'), f.button("logout", "Logout", "btn")), img(30, False)) }}
+      {% else %}
+        <li class="nav-item">
+          <a class="btn btn-outline-light {{ f.active('profile', furl_for) }} mr-4" href="{{ furl_for('profile') }}" role="button">Sign in</a>
+        </li>
+      {% endif %}
     </ul>
 
     <!-- Search bar -->

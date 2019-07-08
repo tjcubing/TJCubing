@@ -1,0 +1,88 @@
+{% extends "helper/base.html.j2" %}
+
+{% block pageheader %}{% endblock %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-2">
+        <ul class="nav flex-column nav-pills">
+          <li class="nav-item list-group-item-secondary">
+            <a class="nav-link">Settings</a>
+          </li>
+          {% for tab in ["profile", "account", "security"] %}
+            <li class="nav-item list-group-item">
+              <a class="nav-link {{ 'active' if tab == request.args.get('tab', 'profile') else '' }}" href="{{ furl_for('settings', tab=tab) }}">{{ tab | capitalize }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="col-6">
+        {% set tab = request.args.get("tab", "profile") %}
+        {% if tab == "profile" %}
+          <h3> Public profile </h3>
+          <hr>
+          <div class="container">
+            <div class="row">
+              <div class="col-10">
+                <form>
+                  <div class="form-group">
+                    <label for="name"><h6>Name</h6></label>
+                    <input type="text" class="form-control" id="name" aria-describedby="nameHelp" value="{{ session.get('name', 'anonymous')}}">
+                    <small id="nameHelp" class="form-text text-muted">You are able to remove this at any time.</small>
+                  </div>
+                </form>
+              </div>
+              <div class="col-2">
+                <figure class="figure">
+                  <figcaption class="mt-2"><h6>Profile picture</h6></figcaption>
+                      <a class="link-unstyled" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="svgcontainer">
+                          <i class="svg-icon" fill="white" stroke="white" data-feather="edit-3"></i>
+                          {{ img(250) }}
+                        </div>
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <form method="POST" enctype="multipart/form-data">
+                          <label class="dropdown-item">
+                              Upload a photo <input type="file" name="photo" style="display: none;" onchange="form.submit()">
+                          </label>
+                        </form>
+                        <form id="removeform" method="POST">
+                          {{ f.button("remove", "Remove photo", "dropdown-item show-alert") }}
+                        </form>
+                      </div>
+                </figure>
+              </div>
+            </div>
+          </div>
+        {% elif tab == "account" %}
+          <h3> Account </h3>
+          <hr>
+        {% else %}
+          <h3> Security </h3>
+          <hr>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <script>
+      $(document).on("click", ".show-alert", function(e) {
+          bootbox.confirm("Are you sure you want to remove your profile picture?", function(result) {
+              window.result = result;
+              if (result) {
+                document.getElementById("remove").click();
+                window.result = false;
+              }
+          });
+      });
+
+      $("#removeform").submit(function( event ) {
+        if (window.result) {
+          return;
+        }
+        event.preventDefault();
+      });
+
+  </script>
+{% endblock %}

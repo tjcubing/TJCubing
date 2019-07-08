@@ -1,0 +1,88 @@
+{% extends "helper/base.html.j2" %}
+{% block pageheader %}{% endblock %}
+
+{% macro boxes() %}
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" class="form-control" id="username" name="username" aria-describedby="usernameHelp" placeholder="Enter username">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+  </div>
+{% endmacro %}
+
+{% block content %}
+  {% if "account" in session %}
+    <div class="container">
+      <div class="row">
+        <div class="col-3">
+          <figure class="figure" data-toggle="tooltip" data-placement="top" title="Change your profile picture">
+            <a href="{{ furl_for('settings') }}" class="link-unstyled">{{ img(250) }}</a>
+            <figcaption class="mt-2"><h3>{{ session.get("name", "") }}</h3>
+                                     <h3><small class="text-muted">{{ session['account'] }}</small></h3>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="col-6">
+          <ul class="nav nav-tabs">
+            {% for group in tabs %}
+              {% if scopes[session.get("scope", "default")] >= loop.index - 1%}
+                {% for tab in group %}
+                  <li class="nav-item">
+                    <a class="nav-link {{ 'active' if tab == request.args.get('tab', 'overview') else '' }}" href="{{ furl_for('profile', tab=tab) }}">{{ tab | capitalize }}</a>
+                  </li>
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <form id="deleteform" method="POST">{{ f.button("delete", "Delete account", "btn-danger show-alert") }}</form>
+
+    <!-- Confirm delete -->
+    <script>
+        $(document).on("click", ".show-alert", function(e) {
+            bootbox.confirm("Are you sure you want to delete your account?", function(result) {
+                window.result = result;
+                if (result) {
+                  document.getElementById("delete").click();
+                  window.result = false;
+                }
+            });
+        });
+
+        $("#deleteform").submit(function( event ) {
+          if (window.result) {
+            return;
+          }
+          event.preventDefault();
+        });
+
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+
+  {% else %}
+    {% if request.args.get("mode") == "register"  %}
+      <form method="POST">
+        {{ boxes() }}
+        <div class="form-group">
+          <label for="checkpassword">Confirm Password</label>
+          <input type="password" class="form-control" id="checkpassword" name="checkpassword" placeholder="Retype the password">
+        </div>
+        {{ f.button() }}
+      </form>
+    {% else %}
+      <form method="POST">
+        {{ boxes() }}
+        {{ f.button() }}
+        ...or register a new account <a href="{{ furl_for('profile', mode='register') }}"> here </a>
+      </form>
+    {% endif %}
+  {% endif %}
+{% endblock %}

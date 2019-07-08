@@ -6,6 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import linear_model
 from sklearn.metrics import r2_score
+from passlib.hash import pbkdf2_sha512
 from fbchat import Client
 import requests
 from bs4 import BeautifulSoup
@@ -412,3 +413,16 @@ def get_pfps(names: list) -> None:
 def get_errors() -> list:
     """ Returns the defined HTTP status errors. """
     return [int(fname.split(FILE)[0]) for fname in os.listdir("templates/error")]
+
+def register(username: str, password: str):
+    """ Registers a new user account. """
+    users = load_file("users")
+    user = users[username] = {}
+    user["hash"] = pbkdf2_sha512.hash(password)
+    user["scope"] = "default"
+    dump_file(users, "users")
+
+def check(username: str, password: str):
+    """ Determines whether a login is legitimate or not. """
+    user = load_file("users").get(username, None)
+    return user is not None and pbkdf2_sha512.verify(password, user["hash"])

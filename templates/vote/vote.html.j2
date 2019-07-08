@@ -4,15 +4,13 @@
     <h3 class="mt-4 md-5"> Hello, {{ name }}! </h3>
     <p class="lead"> The candidates are running for {{ position|capitalize }}. You can vote until {{ ends_at }}.</p>
 
-    {% set button %}
-      <form class="form-inline my-2 my-lg-0" action="{{ furl_for('vote') }}" method="POST">
-        <button class="btn btn-outline-primary my-2 my-sm-0" name="vote" id="vote" value="{}" type="submit">Vote</button>
-      </form>
-    {% endset %}
-
     {% for candidate in sorted_candidates %}
       {% set description = f.description(None, candidate["years"], candidate["meetings"], candidate["year"], candidate["annual_meetings"]) %}
-      {{ f.make_card(36, candidate["name"], candidate["timestr"], description + candidate["description"], button.format(candidate['name'])) }}
+      {{ f.make_card(36, candidate["name"], candidate["timestr"], description + candidate["description"],
+      '<form class="form-inline my-2 my-lg-0" method="POST">' +
+      f.button("vote", "Vote", "btn-outline-primary my-2 my-sm-0", candidate['name']))
+      + '</form>'
+      }}
     {% endfor %}
 
 {% endblock %}

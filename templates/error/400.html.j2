@@ -1,0 +1,11 @@
+{% extends "helper/error.html.j2" %}
+{% block message %} W-what kind of request is that {{ session.get("name", session.get("account", "user")).split()[-1] }}-senpai?? B-baka! {% endblock %}
+{% block page %}
+<figure class="figure">
+  <img src="{{ furl('img/tsundere.jpg') }}" class="figure-img img-fluid" alt="A typical tsundere.">
+  <figcaption class="figure-caption">"tsundere" by <a href="https://www.flickr.com/photos/24802828@N04/">ryunosuke00</a>. Licensed under the
+   <a href="https://creativecommons.org/licenses/by/2.0/legalcode">Creative Commons Attribution 2.0 Generic</a> license.
+   No modification from the <a href="https://www.flickr.com/photos/24802828@N04/2401298996/">source</a>.
+  </figcaption>
+</figure>
+{% endblock %}

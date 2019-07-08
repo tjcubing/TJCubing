@@ -52,6 +52,53 @@ code {
   font-size: 80%;
 }
 
+/* https://codepen.io/scottloway/pen/grgJgB
+Unstyle a link
+*/
+.link-unstyled {
+  &,
+  &:visited,
+  &:hover,
+  &:active,
+  &:focus,
+  &:active:hover {
+    font-style: inherit;
+    color: inherit;
+    background-color: transparent;
+    font-size: inherit;
+    text-decoration: none;
+    font-variant: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    font-family: inherit;
+    border-radius: inherit;
+    border: inherit;
+    outline: inherit;
+    box-shadow: inherit;
+    padding: inherit;
+    vertical-align: inherit;
+  }
+}
+
+/* SVG things */
+.svg-icon {
+    background-color: black;
+}
+
+.svgcontainer, .svgcontainer svg {
+  position: relative;
+
+}
+.svgcontainer svg {
+  z-index: 1;
+}
+.svgcontainer svg:first-child {
+  position: absolute;
+  top: 220px;
+  left: 5px;
+  z-index: 0;
+}
+
 /* Responsive font sizes */
 html {
   font-size: 1rem;
