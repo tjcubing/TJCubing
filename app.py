@@ -29,6 +29,9 @@ app.config.from_envvar("FLASK_SETTINGS")
 TIMES = flask_uploads.UploadSet("times")
 PHOTOS = flask_uploads.UploadSet("photos", flask_uploads.IMAGES)
 flask_uploads.configure_uploads(app, (TIMES, PHOTOS))
+# Strange glitch with TJ servers - if you look at the source code this
+# *should* happen already...
+app.register_blueprint(flask_uploads.uploads_mod)
 
 ### Jinja filters ###
 
