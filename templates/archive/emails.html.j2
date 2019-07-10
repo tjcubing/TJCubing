@@ -4,7 +4,7 @@
 
 {% block content %}
   {% for email in emails %}
-    {{ f.make_card(20, email["subject"], arrow.get(email["time"]).humanize(), email["body"]) }}
+    {{ f.make_card(50, email["subject"], arrow.get(email["time"]).humanize(), email["body"]) }}
   {% endfor %}
 
 {% endblock %}
