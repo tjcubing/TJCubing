@@ -376,7 +376,7 @@ def cookie() -> dict:
     if "account" in flask.session:
         user = users[flask.session["account"]]
         if len(user["keys"]) > 0:
-            return str(cube.gpg.encrypt(flask.json.dumps(data), [k["fingerprint"] for k in user["keys"]]))
+            return str(cube.gpg.encrypt(flask.json.dumps(data), [k["fingerprint"] for k in user["keys"]], always_trust=True))
     return data
 
 @app.route("/email")
