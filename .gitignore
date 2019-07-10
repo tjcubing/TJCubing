@@ -1,9 +1,11 @@
-config.json
 __pycache__/
-files/
 venv/
+node_modules/
+
+static/
 build/
 rendered_templates/
-node_modules
+
+files/
 uploads/
 .gnupg/
