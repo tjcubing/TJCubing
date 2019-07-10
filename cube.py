@@ -57,7 +57,7 @@ os.environ['FLASK_ENV'] = "development"
 ION = "https://ion.tjhsst.edu/"
 AUTHORIZATION_URL, TOKEN_URL = ION + "oauth/authorize/", ION + "oauth/token/"
 
-gpg = gnupg.GPG()
+gpg = gnupg.GPG(gnupghome=".gnupg")
 
 def add_dict(d1: dict, d2: dict) -> dict:
     """ Adds two dictionaries together, assuming no conflicts. """
