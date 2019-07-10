@@ -155,7 +155,9 @@
             bootbox.confirm("Are you sure you want to send the email?", function(result) {
                 window.result = result;
                 if (result) {
+                  $("#send").removeClass("prompt");
                   document.getElementById("send").click();
+                  $("#send").addClass("prompt");
                   window.result = false;
                 }
             });

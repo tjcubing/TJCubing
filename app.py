@@ -122,35 +122,37 @@ def profile() -> dict:
     """ Allows the user to login as well as register a new account. """
     if flask.request.method == "POST":
         users = cube.load_file("users")
+        form = flask.request.form
 
-        if "logout" in flask.request.form:
+        if "logout" in form:
             del flask.session["account"]
             return {}
 
-        if "delete" in flask.request.form:
+        if "delete" in form:
             del users[flask.session["account"]]
             del flask.session["account"]
             cube.dump_file(users, "users")
             return alert("Account deleted!", "success", "self")
 
-        if "clear" in flask.request.form:
+        if "clear" in form:
             flask.session.clear()
             return {}
 
-        if "http" in flask.request.form:
-            flask.abort(int(flask.request.form["http"]))
+        if "http" in form:
+            flask.abort(int(form["http"]))
 
-        if "email" in flask.request.form:
-            body = cube.markdown2.markdown(flask.request.form["email"]).replace("\n", "")
-            cube.send_email(cube.load_file("emails")["emails"], flask.request.form["subject"], body)
+        if "email" in form:
+            body = cube.markdown2.markdown(form["email"]).replace("\n", "")
+            cube.send_email(cube.load_file("emails")["emails"], form["subject"], body)
+            cube.save_email(form["subject"], form["email"])
             return alert("Mail sent.", "success", "meta")
 
-        if "submit" in flask.request.form:
-            username, password = flask.request.form["username"], flask.request.form["password"]
-            if "checkpassword" in flask.request.form:
+        if "submit" in form:
+            username, password = form["username"], form["password"]
+            if "checkpassword" in form:
                 if username in cube.load_file("users"):
                     return alert("Username is taken.", "info", "meta")
-                if password != flask.request.form["checkpassword"] :
+                if password != form["checkpassword"] :
                     return alert("Passwords do not match.", "info", "meta")
                 cube.register(username, password)
                 return alert("Account registered!", "success", "self")
@@ -272,6 +274,10 @@ PAGES = {"": (index, ["POST", "GET"]),
          "contact": lambda: {"fb": cube.load_file("fb")},
          "archive":
              {
+                "emails": lambda: {"emails": [{k: v if k != "body" else cube.markdown2.markdown(v) for k, v in email.items()}
+                                              for email in cube.load_file("mails.json", "json", False)
+                                             ]
+                                  },
                 "history": lambda: cube.parse_club(),
                 "tips": None,
              },

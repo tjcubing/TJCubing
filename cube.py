@@ -18,7 +18,6 @@ from requests_oauthlib import OAuth2Session
 # from oauthlib.oauth2 import TokenExpiredError
 
 # Helper library to query the WCA for competitions and other miscellaneous tasks
-# TODO: mailing list (email tjcubingofficers@gmail.com)
 # TODO: Database: Postgres?
 # TODO: WCA OAuth
 # TODO: switch all times to arrow times
@@ -33,7 +32,7 @@ def load_file(fname: str, func: str="json", short: bool=True) -> dict:
     with open("files/{}.{}".format(fname, func) if short else fname, "r" + EXT_MODE[func]) as f:
         return STR_FUNC["load"][func](f)
 
-def dump_file(obj, fname: str, func:str ="json", short: bool=True) -> None:
+def dump_file(obj, fname: str, func:str="json", short: bool=True) -> None:
     """ Dumps an obj into a file. """
     with open("files/{}.{}".format(fname, func) if short else fname, "w" + EXT_MODE[func]) as f:
         STR_FUNC["dump"][func](obj, f, **({"indent": 4, "sort_keys": True} if func == "json" else {}))
@@ -58,6 +57,11 @@ ION = "https://ion.tjhsst.edu/"
 AUTHORIZATION_URL, TOKEN_URL = ION + "oauth/authorize/", ION + "oauth/token/"
 
 gpg = gnupg.GPG(gnupghome=".gnupg")
+
+# Overwrite markdown2.markdown function to include extras
+markdown = markdown2.markdown
+temp = lambda s: markdown(s, extras=["cuddled-lists"])
+markdown2.markdown = temp
 
 def add_dict(d1: dict, d2: dict) -> dict:
     """ Adds two dictionaries together, assuming no conflicts. """
@@ -458,3 +462,9 @@ def send_email(recipients: list, subject: str, body: str) -> None:
     """ Sends an email. """
     yag = yagmail.SMTP(CONFIG["clubmail"], oauth2_file=os.getcwd() + "/files/oauth2_creds.json")
     yag.send(to=recipients, subject=subject, contents=body)
+
+def save_email(subject: str, body: str) -> None:
+    """ Saves an email to disk. """
+    mails = load_file("mails.json", "json", False)
+    mails.append({"subject": subject, "body": body, "time": time.time()})
+    dump_file(mails, "mails.json", "json", False)

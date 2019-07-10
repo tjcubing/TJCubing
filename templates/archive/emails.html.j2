@@ -1,0 +1,10 @@
+{% extends "helper/base.html.j2" %}
+{% block subtitle %} The better cubing newsletter {% endblock %}
+{% block intro %} A list of all the past emails sent to the newsletter. {% endblock %}
+
+{% block content %}
+  {% for email in emails %}
+    {{ f.make_card(20, email["subject"], arrow.get(email["time"]).humanize(), email["body"]) }}
+  {% endfor %}
+
+{% endblock %}
