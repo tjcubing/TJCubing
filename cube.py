@@ -60,7 +60,7 @@ gpg = gnupg.GPG(gnupghome=".gnupg")
 
 # Overwrite markdown2.markdown function to include extras
 markdown = markdown2.markdown
-temp = lambda s: markdown(s, extras=["cuddled-lists"])
+temp = lambda s: markdown(s, extras=["cuddled-lists", "strike"])
 markdown2.markdown = temp
 
 def add_dict(d1: dict, d2: dict) -> dict:
