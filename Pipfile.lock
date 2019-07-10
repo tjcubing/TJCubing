@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c088e8ad35dda6e9b991b58e2362a63d02445aff8624d72c0c27b61656ab02b3"
+            "sha256": "592c4a9736ea39453a3d5d5221cfb1e2eb1b895d948eb8f5011721a2b0937894"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -92,11 +92,11 @@
         },
         "flask": {
             "hashes": [
-                "sha256:a31adc27de06034c657a8dc091cc5fcb0227f2474798409bff0e9674de31a026",
-                "sha256:b5ae63812021cb04174fcff05d560a98387a44d9cccd4652a2bfa131ba4e4c9b"
+                "sha256:13f9f196f330c7c2c5d7a5cf91af894110ca0215ac051b5844701f2bfd934d52",
+                "sha256:45eb5a6fd193d6cf7e0cf5d8a5b31f83d5faae0293695626f539a823e93b13f6"
             ],
             "index": "pypi",
-            "version": "==1.1.0"
+            "version": "==1.1.1"
         },
         "flask-sitemap": {
             "hashes": [
@@ -120,6 +120,13 @@
             ],
             "index": "pypi",
             "version": "==0.15"
+        },
+        "humanize": {
+            "hashes": [
+                "sha256:a43f57115831ac7c70de098e6ac46ac13be00d69abbf60bdcac251344785bb19"
+            ],
+            "index": "pypi",
+            "version": "==0.5.1"
         },
         "idna": {
             "hashes": [
@@ -363,6 +370,14 @@
             "index": "pypi",
             "version": "==0.10.3"
         },
+        "python-gnupg": {
+            "hashes": [
+                "sha256:45daf020b370bda13a1429c859fcdff0b766c0576844211446f9266cae97fb0e",
+                "sha256:85c231850a0275c9722f06e34b45a22510b83a6a6e88f93b5ae32ba04c95056c"
+            ],
+            "index": "pypi",
+            "version": "==0.4.4"
+        },
         "pytz": {
             "hashes": [
                 "sha256:303879e36b721603cc54604edcac9d20401bdbe31e1e4fdee5b9f98d5d31dfda",
@@ -456,6 +471,14 @@
                 "sha256:a0b915f0815982fb2a09161cb8f31708052d0951c3ba433ccc5e1aa276507ca6"
             ],
             "version": "==0.15.4"
+        },
+        "yagmail": {
+            "hashes": [
+                "sha256:7e8a3e5ae7aaf71440f977c08cd5bd18d1c68cba90f3a82db4ab0d28538d5b7a",
+                "sha256:d75e98c8bc17336efe67cb943406c1b5cf6620e4d165158309d70eb5b1881e2a"
+            ],
+            "index": "pypi",
+            "version": "==0.11.220"
         }
     },
     "develop": {}

@@ -1,4 +1,9 @@
 {% extends "helper/base.html.j2" %}
+{% block pageheader %}
+  <div class="d-sm-none"><h1 class="display-5 text-break"> {{ title }}</h1></div>
+  <div class="d-none d-sm-block"><h1 class="display-2 text-break"> {{ title }}</h1></div>
+  <hr>
+{% endblock %}
 {% block content %}
   <h5>{{ descr }}</h5>
   <p>{% block message %}{% endblock %}</p>

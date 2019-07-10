@@ -85,6 +85,14 @@ Unstyle a link
     background-color: black;
 }
 
+.svg-text {
+    height: 1em;
+    margin-top: -4px;
+    pointer-events: none;
+    vertical-align: middle;
+    width: 1em;
+}
+
 .svgcontainer, .svgcontainer svg {
   position: relative;
 

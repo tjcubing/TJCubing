@@ -3,11 +3,10 @@
 {% block pageheader %}{% endblock %}
 
 {% block content %}
-  <!-- TODO: mention FB group, email list via double columns perhaps -->
   <a href="https://alg.cubing.net/?alg=y_D_L_D_B2_D-_U-_L_F-_D_F_D-_F_U2_R2_U-&type=reconstruction&view=playback"> <img class="img-fluid mx-auto d-block" src="{{ furl('img/cubing.png')}}" width="300" height="300" alt="" title="Credits to Albert Chuang (c2015)"> </a>
 
   <div style="text-align:center;">
-    <!-- classes documented at https://getbootstrap.com/docs/4.0/utilities/spacing/ and https://getbootstrap.com/docs/4.0/content/typography/-->
+    <!-- Classes documented at https://getbootstrap.com/docs/4.0/utilities/spacing/ and https://getbootstrap.com/docs/4.0/content/typography/-->
     <h1 class="display-1 mt-4">TJ Cubing</h1>
     <hr style="width: 50%; background-color:black; height:3px;">
     <h2>Wednesday B</h2>
@@ -33,14 +32,35 @@
         <p> The club organizes the schedule of the competition, including the events and prizes. Members of the club also volunteer by being judges, scramblers, runners, and more. </p>
         Past competition links: <!-- TODO: automate getting past comp links from WCA search -->
         <ui>
-          <!-- don't include current year because comp may not be out yet, include 2016, go from most recent to least recent -->
+          <!-- Don't include current year because comp may not be out yet, include 2016, go from most recent to least recent -->
           {% for year in range(year - 1, 2016 - 1, -1) %}
-            <!-- assumes url is TJHSSTFallyyyy -->
+            <!-- Assumes url is TJHSSTFallyyyy -->
             <li> <a href={{"https://www.worldcubeassociation.org/competitions/TJHSSTFall" + year|string }}> {{year}} </a></li>
           {% endfor %}
         </ui>
       </div>
     </div>
+  </div>
+
+  <hr>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <h1> Facebook Group </h1>
+        <p> We also have a <a href="https://www.facebook.com/groups/467954316685561/">Facebook group</a> that you can request to join. </p>
+      </div>
+      <div class="col-sm">
+        <h1> Mailing List </h1>
+        <p> To stay updated, consider joining our mailing list! </p>
+        <form method="POST">
+          <div class="form-group">
+            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+          </div>
+        </form>
+      </div>
   </div>
 
 {% endblock %}

@@ -1,39 +1,7 @@
-{% import 'helper/funcs.html.j2' as f %} <!-- Library of helper functions -->
+{% import 'helper/funcs.html.j2' as f with context %} <!-- Library of helper functions -->
 <!doctype html>
 
 {% set URL = URL if URL[:5] == "https" else request.url_root[:-1] %}
-{% macro furl(filename) %}{{ URL + url_for('static', filename=filename) }}{% endmacro %}
-{% macro furl_for(mode, filename=None) %}{{ URL + (url_for(mode, filename=filename) if filename != None else ("/" if mode == "" else url_for(mode, **kwargs))) }}{% endmacro %}
-
-{% macro img(size, border=True) %}
-  {% set format = 'class="{} rounded" style="width: {}px; height: {}px;"'.format('border' if border else '', size, size) %}
-  {% if pfp != None %}
-    <img {{ format }} src="{{ pfp }}"></img>
-  {% else %}
-    <i {{ format }} data-feather="user"></i>
-  {% endif %}
-{% endmacro %}
-
-{% macro emails(list, extra="") %}
-  {% if list | length == 1 %}
-    <div class="media">
-      <span class="border border-white rounded-circle mr-3">
-        <a href="{{ fb.get(list[0][0], request.path) }}">
-          <img src="{{ furl('img/pfps/{}.png'.format(list[0][0].replace(' ', ''))) }}" class="rounded-circle" onerror="this.src='{{ furl('img/default.png') }}'" alt="...">
-        </a>
-      </span>
-      <div class="media-body">
-        <h5 class="mt-0">{{ list[0][0] }}</h5>
-        <a href="mailto:{{ list[0][1] }}">{{ list[0][1] }}</a>{{ extra }}
-        <p> {{ list[0][2] if list[0] | length > 2 else "" }} </p>
-      </div>
-    </div>
-  {% else %}
-    {% for item in list %}
-      {{ emails([item]) }}
-    {% endfor %}
-  {% endif %}
-{% endmacro %}
 
 <html lang="en">
   {% include 'helper/header.html.j2' %}

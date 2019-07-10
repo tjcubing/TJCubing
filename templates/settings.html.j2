@@ -4,26 +4,26 @@
 {% block content %}
   <div class="container">
     <div class="row">
-      <div class="col-2">
+      <div class="col-3">
         <ul class="nav flex-column nav-pills">
           <li class="nav-item list-group-item-secondary">
             <a class="nav-link">Settings</a>
           </li>
-          {% for tab in ["profile", "account", "security"] %}
+          {% for tab in ["profile", "account", "security", "emails", "GPG keys"] %}
             <li class="nav-item list-group-item">
               <a class="nav-link {{ 'active' if tab == request.args.get('tab', 'profile') else '' }}" href="{{ furl_for('settings', tab=tab) }}">{{ tab | capitalize }}</a>
             </li>
           {% endfor %}
         </ul>
       </div>
-      <div class="col-6">
+      <div class="col-9">
         {% set tab = request.args.get("tab", "profile") %}
         {% if tab == "profile" %}
           <h3> Public profile </h3>
           <hr>
           <div class="container">
             <div class="row">
-              <div class="col-10">
+              <div class="col-8">
                 <form>
                   <div class="form-group">
                     <label for="name"><h6>Name</h6></label>
@@ -38,7 +38,7 @@
                       <a class="link-unstyled" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="svgcontainer">
                           <i class="svg-icon" fill="white" stroke="white" data-feather="edit-3"></i>
-                          {{ img(250) }}
+                          {{ f.img(250) }}
                         </div>
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -58,9 +58,59 @@
         {% elif tab == "account" %}
           <h3> Account </h3>
           <hr>
-        {% else %}
-          <h3> Security </h3>
+        {% elif tab == "GPG keys" %}
+          <h3> GPG Keys
+            <button class="btn btn-success float-right" type="button" data-toggle="collapse" id="toggle" data-target="#newgpg" aria-expanded="false" aria-controls="collapseExample">
+              New GPG key
+            </button>
+          </h3>
           <hr>
+
+          <div class="collapse" id="newgpg">
+            <form method="POST">
+              <div class="form-group">
+                <label for="gpgkey">Key</label>
+                <textarea class="form-control" name="gpgkey" id="gpgkey" rows="10" placeholder="Begins with '-----BEGIN PGP PUBLIC KEY BLOCK-----'"></textarea>
+              </div>
+              <button type="submit" class="btn btn-success">Add GPG key</button>
+            </form>
+          </div>
+
+          <div id="list">
+            {% if user["keys"] | length > 0 %}
+              <p> This is a list of GPG keys associated with your account. Remove any keys that you do not recognize. </p>
+            {% else %}
+              <p> You have no GPG keys associated with your account. </p>
+            {% endif %}
+
+            {% for key in user["keys"] %}
+              <div class="card mt-4" style="width: 50rem;">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-10">
+                      <div class="media">
+                        <figure class="figure">
+                          {{ f.svg("key", "black", 50, False, "align-self-center mr-3 figure-img img-fluid") }}
+                          <figcaption class="figure-caption text-left">GPG</figcaption>
+                        </figure>
+                        <div class="media-body">
+                          <p class="mb-1"><strong>Email addresses:</strong> {{ key["fuids"] | e }} </p>
+                          <p class="mb-1"><strong>Fingerprint:</strong> {{ key["fingerprint"][-16:] }} </p>
+                          <p class="mb-1"><strong>Subkeys:</strong> {{ ", ".join(key["subkey_info"].keys() | sort) }} </p>
+                          <h6><small class="text-muted">Created {{  arrow.get(key["date"]).humanize() }} </small></h6>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-2">
+                      <form method="POST">{{ f.button("delete", "Delete", "btn btn-outline-danger align-self-center", loop.index - 1)}}</form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+        {% else %}
         {% endif %}
       </div>
     </div>
@@ -82,6 +132,11 @@
           return;
         }
         event.preventDefault();
+      });
+
+      $("#toggle").on("click", function(e) {
+        b = document.getElementById("newgpg").classList.contains("show");
+        document.getElementById("list").style.display = (b ? "" : "none");
       });
 
   </script>

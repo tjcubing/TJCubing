@@ -11,10 +11,19 @@ import cube, statistics
 # TODO: partial highlighting on mobile
 # TODO: fix mobile login/profile UI
 # TODO: 413 not being rendered in actual site
-# TODO: rename 'active' to 'vote_active'
-# TODO: change all single qoutes to double qoutes
+# TODO: prevent CSRF + general security
+# TODO: enable autoescaping
 # print([rule.endpoint for rule in app.url_map.iter_rules()])
 
+def select_jinja_autoescape(self, filename: str) -> bool:
+    """ Overwrites Flask's default behavior to autoescape on custom file endings. """
+    if filename is None:
+        return False
+    if filename.endswith(cube.FILE):
+        return True
+    return flask.Flask.select_jinja_autoescape(self, filename)
+
+# flask.Flask.select_jinja_autoescape = select_jinja_autoescape
 app = flask.Flask(__name__)
 
 # config: one default (public), the other private
@@ -32,14 +41,6 @@ flask_uploads.configure_uploads(app, (TIMES, PHOTOS))
 # Strange glitch with TJ servers - if you look at the source code this
 # *should* happen already...
 app.register_blueprint(flask_uploads.uploads_mod)
-
-### Jinja filters ###
-
-@app.template_filter()
-def capitalize(s: str):
-    """ Capitalizes the first character while keeping the rest the same case.
-        Replaces Jinja's default filter. """
-    return s[0].upper() + s[1:]
 
 def alert(msg: str, category: str="success", loc: str="index"):
     """ Redirects the user with an alert. """
@@ -69,6 +70,14 @@ def before_request():
 # def do_something_whenever_a_request_has_been_handled(response):
 #     # we have a response to manipulate, always return one
 #     return response
+
+def index() -> dict:
+    """ Gives the year to list past TJHSST competitions, handles email signups. """
+    if flask.request.method == "POST":
+        cube.prompt_email(flask.request.form["email"])
+        return alert("Check your email for a verification message.", "success")
+
+    return {"year": cube.get_year()}
 
 def competitions() -> dict:
     """ Gets the cached competitions, but will refresh if not updated recently. """
@@ -124,24 +133,37 @@ def profile() -> dict:
             cube.dump_file(users, "users")
             return alert("Account deleted!", "success", "self")
 
-        username, password = flask.request.form["username"], flask.request.form["password"]
-        if "checkpassword" in flask.request.form:
-            if username in cube.load_file("users"):
-                return alert("Username is taken.", "info", "meta")
-            if password != flask.request.form["checkpassword"] :
-                return alert("Passwords do not match.", "info", "meta")
-            cube.register(username, password)
-            return alert("Account registered!", "success", "self")
+        if "clear" in flask.request.form:
+            flask.session.clear()
+            return {}
 
-        if not cube.check(username, password):
-            return alert("Username or password is incorrect.", "info", "self")
+        if "http" in flask.request.form:
+            flask.abort(int(flask.request.form["http"]))
 
-        # Save login to cookies
-        flask.session["account"] = username
-        flask.session["scope"] = users[username]["scope"]
+        if "email" in flask.request.form:
+            body = cube.markdown2.markdown(flask.request.form["email"]).replace("\n", "")
+            cube.send_email(cube.load_file("emails")["emails"], flask.request.form["subject"], body)
+            return alert("Mail sent.", "success", "meta")
+
+        if "submit" in flask.request.form:
+            username, password = flask.request.form["username"], flask.request.form["password"]
+            if "checkpassword" in flask.request.form:
+                if username in cube.load_file("users"):
+                    return alert("Username is taken.", "info", "meta")
+                if password != flask.request.form["checkpassword"] :
+                    return alert("Passwords do not match.", "info", "meta")
+                cube.register(username, password)
+                return alert("Account registered!", "success", "self")
+
+            if not cube.check(username, password):
+                return alert("Username or password is incorrect.", "info", "self")
+
+            # Save login to cookies
+            flask.session["account"] = username
+            flask.session["scope"] = users[username]["scope"]
 
     if "account" in flask.session:
-        tabs = [["overview", "API"], ["refresh"], ["edit"]]
+        tabs = [["overview", "API"], ["email", "refresh", "develop"], ["edit"]]
         scopes = {"default": 0, "privileged": 1, "admin": 2}
         tab = flask.request.args.get('tab', 'overview')
 
@@ -154,7 +176,7 @@ def profile() -> dict:
         if i > scopes[flask.session["scope"]]:
             return alert("User does not have the valid scope. This incident will be logged.", "danger", "self")
 
-        return {"tabs": tabs, "scopes": scopes}
+        return {"tabs": tabs, "scopes": scopes, "clubmailpassword": cube.load_file("secrets")["clubmailpassword"]}
 
     return {}
 
@@ -168,7 +190,7 @@ def delete_photo() -> None:
         pass
 
     try:
-        os.remove(app.config["UPLOADS_DEFAULT_DEST"] + "/photos/" + user["pfpfilename"])
+        os.remove(PHOTOS.path(user["pfpfilename"]))
         del user["pfpfilename"]
     except (KeyError, FileNotFoundError):
         pass
@@ -180,16 +202,31 @@ def settings() -> dict:
     if "account" not in flask.session:
         return flask.redirect("profile")
 
+    users = cube.load_file("users")
+    user = users[flask.session["account"]]
+
     if flask.request.method == "POST":
         if "remove" in flask.request.form:
             delete_photo()
             return alert("Profile picture removed.", "success", "profile")
 
-        if 'photo' in flask.request.files:
+        if "gpgkey" in flask.request.form:
+            key = cube.gpg.import_keys(flask.request.form["gpgkey"])
+            user["keys"] += cube.gpg.list_keys(keys=[key.fingerprints[0]])
+            curr = user["keys"][-1]
+            curr["fuids"] = ", ".join([uid.split()[-1][1:-1] for uid in curr["uids"]])
+            cube.dump_file(users, "users")
+            return alert("GPG key added.", "success", "meta")
+
+        if "delete" in flask.request.form:
+            del user["keys"][int(flask.request.form["delete"])]
+            cube.dump_file(users, "users")
+
+        if "photo" in flask.request.files:
             try:
                 users = cube.load_file("users")
-                filename = PHOTOS.save(flask.request.files['photo'])
                 delete_photo() #old profile picture not necessary anymore
+                filename = PHOTOS.save(flask.request.files["photo"])
                 users[flask.session["account"]]["pfp"] = PHOTOS.url(filename)
                 users[flask.session["account"]]["pfpfilename"] = filename
                 cube.dump_file(users, "users")
@@ -225,7 +262,7 @@ TSLASH = "/" if params["tailing_slash"] else ""
 NAMES = params["names"]
 NAV = convert(params["order"])
 
-PAGES = {"": lambda: {"year": cube.get_year()},
+PAGES = {"": (index, ["POST", "GET"]),
          "competitions": competitions,
          "algorithms": None,
          "weekly": {
@@ -246,12 +283,37 @@ PAGES = {"": lambda: {"year": cube.get_year()},
              },
          "misc":
              {
-                "stats": (stats, ['POST', 'GET']),
+                "stats": (stats, ["POST", "GET"]),
              },
-         "profile": (profile, ['POST', 'GET']),
-         "settings": (settings, ['POST', 'GET']),
-         "search": (search, ['POST', 'GET'])
+         "profile": (profile, ["POST", "GET"]),
+         "settings": (settings, ["POST", "GET"]),
+         "search": (search, ["POST", "GET"])
         }
+
+### Jinja ###
+
+@app.template_filter()
+def capitalize(s: str) -> str:
+    """ Capitalizes the first character while keeping the rest the same case.
+        Replaces Jinja's default filter. """
+    return s[0].upper() + s[1:]
+
+def URL() -> str:
+    """ Dynamically generates a URL based on the request. """
+    return params["url"] if cube.https else flask.request.url_root[:-1]
+
+def furl_for(endpoint: str, filename: str=None, **kwargs: dict) -> str:
+    """ Replacement for url_for. """
+    return URL() + (flask.url_for(endpoint, filename=filename) if filename != None else ("/" if endpoint == "" else flask.url_for(endpoint, **kwargs)))
+
+def furl(filename: str) -> str:
+    """ Assumes a static endpoint. """
+    return furl_for('static', filename)
+
+def expose(d: dict, l: list) -> None:
+    """ Adds functions to a dictionary. """
+    for f in l:
+        d[f.__name__] = f
 
 # Basically a cache of variables that don't change
 GLOBAL = {"pages": NAV,
@@ -259,15 +321,23 @@ GLOBAL = {"pages": NAV,
           "repo": cube.REPO,
           "TJ": cube.TJ,
           "updated": cube.github_commit_time(),
+          "humanize": cube.humanize,
+          "arrow": cube.arrow,
+          "clubmail": cube.CONFIG["clubmail"],
          }
 
+expose(GLOBAL, [furl, furl_for])
+
+@app.context_processor
 def GLOBALS() -> dict:
     """ Returns all the global variables passed to every template. """
     user = cube.load_file("users").get(flask.session.get("account", None), {})
-    vars = {"active": cube.load_file("vote")["vote_active"],
-            "pfp": user.get("pfp", None),
+    vars = {"vote_active": cube.load_file("vote")["vote_active"],
+            "user": user
            }
     return cube.add_dict(GLOBAL, vars)
+
+### Pages ###
 
 def make_page(s: str, f=lambda: {}, methods=['GET']):
     """ Takes in a string which specifies both the url and the file name, as well as a function which provides the kwargs for render_template. """
@@ -275,7 +345,7 @@ def make_page(s: str, f=lambda: {}, methods=['GET']):
     def func():
         val = f()
         if isinstance(val, dict):
-            return flask.render_template((s if s != "" else "index") + cube.FILE, **GLOBALS(), title=NAMES[title], **val)
+            return flask.render_template((s if s != "" else "index") + cube.FILE, title=NAMES[title], **val)
         return val
     # Need distinct function names for Flask not to error
     func.__name__ = title if s != "" else "index"
@@ -297,6 +367,32 @@ def make_pages(d: dict, prefix="") -> None:
 def static_from_root():
     """ Serves a file from static, skipping the /static/. """
     return flask.send_from_directory(app.static_folder, flask.request.path[1:])
+
+@app.route("/cookie")
+def cookie() -> dict:
+    """ Returns the user's cookies. """
+    data = dict(flask.session)
+    users = cube.load_file("users")
+    if "account" in flask.session:
+        user = users[flask.session["account"]]
+        if len(user["keys"]) > 0:
+            return str(cube.gpg.encrypt(flask.json.dumps(data), [k["fingerprint"] for k in user["keys"]]))
+    return data
+
+@app.route("/email")
+def email():
+    """ After requesting to be added to the email list, see if nonce matches. """
+    emails = cube.load_file("emails")
+    requests = emails["requests"]
+    nonce = flask.request.args.get("nonce", None)
+    if nonce in requests:
+        email = requests[nonce]
+        # Remove previous attempts
+        emails["requests"] = {nonce: value for nonce, value in requests.items() if value != email}
+        cube.dump_file(emails, "emails")
+        cube.register_email(email)
+        return alert("You have been added to the email list.", "success")
+    return alert("Wrong nonce. Try registering again?", "danger")
 
 # https://requests-oauthlib.readthedocs.io/en/latest/
 @app.route("/login")
@@ -320,7 +416,7 @@ def callback():
     token = oauth.fetch_token(cube.TOKEN_URL, code=code, client_secret=cube.CONFIG["client_secret"])
     cube.save_token(token)
 
-    return flask.redirect(flask.session["action"])
+    return flask.redirect(flask.session.get("action", "profile"))
 
 @app.route("/vote/vote", methods=["GET", "POST"])
 def vote():
@@ -340,7 +436,7 @@ def vote():
         cube.add_vote(cube.get_name(), flask.request.form["vote"])
         return alert("<strong>Congrats!</strong> You have voted for {}.".format(flask.request.form['vote']))
 
-    return flask.render_template(flask.request.path + cube.FILE, **GLOBALS(), **vote, sorted_candidates=cube.get_candidates(), name=cube.get_name(), title="vote")
+    return flask.render_template(flask.request.path + cube.FILE, **vote, sorted_candidates=cube.get_candidates(), name=cube.get_name(), title="vote")
 
 @app.route("/vote/run", methods=["GET", "POST"])
 def run():
@@ -368,7 +464,7 @@ def run():
         cube.store_candidate(cube.add_dict({"description": flask.request.form['description']}, params))
         return alert("<strong>Congrats!</strong> Your application has been registered.")
 
-    return flask.render_template(flask.request.path + cube.FILE, **GLOBALS(), **vote, **params, title="run")
+    return flask.render_template(flask.request.path + cube.FILE, **vote, **params, title="run")
 
 
 # http://flask.pocoo.org/docs/1.0/patterns/errorpages/
@@ -383,7 +479,7 @@ def make_error_page(error: int):
     def f(e):
         body = e.get_body().strip().split("\n")
         title, descr = body[1][7:-8], body[-1][3:-4]
-        return flask.render_template('error/{}{}'.format(error, cube.FILE), **GLOBALS(), title=title, descr=descr), error
+        return flask.render_template('error/{}{}'.format(error, cube.FILE), title=title, descr=descr), error
     return f
 
 def make_error_pages(errors: list) -> None:

@@ -22,6 +22,9 @@ fbchat = "*"
 flask-uploads = "*"
 pandas = "*"
 passlib = "*"
+humanize = "*"
+python-gnupg = "*"
+yagmail = "*"
 
 [requires]
 python_version = "3.5"

@@ -17,7 +17,7 @@
 {% endmacro %}
 
 <!-- Actual functions -->
-{% macro active(path, furl_for) %}
+{% macro active(path) %}
   {{ 'active' if request.path.split('/')[-1] == furl_for(path).split('/')[-1].strip() else '' }}
 {% endmacro %}
 
@@ -25,16 +25,16 @@
   {{ 'disabled' if not vote_active and name in disabled else '' }}
 {% endmacro %}
 
-{% macro pactive(children, furl_for) %}
- {% for path, name in children if active(path, furl_for).strip() == 'active' %}
+{% macro pactive(children) %}
+ {% for path, name in children if active(path).strip() == 'active' %}
   active
  {% endfor %}
 {% endmacro %}
 
-{% macro dropdown(self, children, dividers, furl_for, vote_active=False, extra='', img='') %}
+{% macro dropdown(self, children, dividers, vote_active=False, extra='', img='') %}
   <li class="nav-item dropdown">
     <!-- See if child is active -->
-    <a class="nav-link dropdown-toggle {{ pactive(children, furl_for) }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="nav-link dropdown-toggle {{ pactive(children) }}" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       {{ img }}
       {{ self[1:]|capitalize }}
     </a>
@@ -42,7 +42,7 @@
       {% for path, name in children %}
         <!-- Hack but whatever, next webdev can make this entire nav system better -->
         {% if name in dividers %} <div class="dropdown-divider"></div> {% endif %}
-        <a class="dropdown-item {{ disable(name, vote_active) }} {{ active(path, furl_for) }}" href="{{ furl_for(path) }}">{{ name|capitalize }}</a>
+        <a class="dropdown-item {{ disable(name, vote_active) }} {{ active(path) }}" href="{{ furl_for(path) }}">{{ name|capitalize }}</a>
       {% endfor %}
       {{ extra }}
     </div>
@@ -99,4 +99,46 @@
     <li>Total # of meetings attended: {{ meetings }} </li>
     <li># of meetings attended in {{ year }}: {{ annual_meetings }} </li>
   </ul>
+{% endmacro %}
+
+{% macro img(size, border=True) %}
+  {% set format = 'class="{} rounded" style="width: {}px; height: {}px;"'.format('border' if border else '', size, size) %}
+  {% if "pfp" in user %}
+    <img {{ format }} src="{{ user['pfp'] }}"></img>
+  {% else %}
+    <i {{ format }} data-feather="user"></i>
+  {% endif %}
+{% endmacro %}
+
+{% macro svg(icon, stroke="black", size="scale", border=False, classes="") %}
+  {% if size == "scale" %}
+    <i stroke="{{ stroke }}" class="{{ 'border' if border else '' }} rounded svg-text {{ classes }}" data-feather="{{ icon }}"></i>
+  {% else %}
+    <i stroke="{{ stroke }}" class="{{ 'border' if border else '' }} rounded {{ classes }}" style="width: {{ size }}px; height: {{ size }}px;" data-feather="{{ icon }}"></i>
+  {% endif %}
+{% endmacro %}
+
+{% macro check(bool) %}
+  {{ svg("check", "green") if bool else svg("x", "red") }}
+{% endmacro %}
+
+{% macro emails(list, extra="") %}
+  {% if list | length == 1 %}
+    <div class="media">
+      <span class="border border-white rounded-circle mr-3">
+        <a href="{{ fb.get(list[0][0], request.path) }}">
+          <img src="{{ furl('img/pfps/{}.png'.format(list[0][0].replace(' ', ''))) }}" class="rounded-circle" onerror="this.src='{{ furl('img/default.png') }}'" alt="...">
+        </a>
+      </span>
+      <div class="media-body">
+        <h5 class="mt-0">{{ list[0][0] }}</h5>
+        <a href="mailto:{{ list[0][1] }}">{{ list[0][1] }}</a>{{ extra }}
+        <p> {{ list[0][2] if list[0] | length > 2 else "" }} </p>
+      </div>
+    </div>
+  {% else %}
+    {% for item in list %}
+      {{ emails([item]) }}
+    {% endfor %}
+  {% endif %}
 {% endmacro %}

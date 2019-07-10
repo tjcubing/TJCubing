@@ -30,12 +30,12 @@
     <ul class="navbar-nav mr-auto">
       {% for path, name in pages %}
         {% if path[0] != "*" %}
-          <li class="nav-item {{ f.active(path, furl_for) }}">
-            <a class="nav-link" href="{{ furl_for(path) }}">{{ name|capitalize }} {% if f.active(path, furl_for).strip() == 'active' %}<span class="sr-only">(current)</span>{% endif %}</a>
+          <li class="nav-item {{ f.active(path) }}">
+            <a class="nav-link" href="{{ furl_for(path) }}">{{ name|capitalize }} {% if f.active(path).strip() == 'active' %}<span class="sr-only">(current)</span>{% endif %}</a>
           </li>
         <!-- Dropdown logic -->
         {% else %}
-          {{ f.dropdown(path, name, ["result", "vote!"], furl_for, active) }}
+          {{ f.dropdown(path, name, ["result", "vote!"], vote_active) }}
         {% endif %}
       {% endfor %}
     </ul>
@@ -44,10 +44,10 @@
     <ul class="navbar-nav navbar-right">
       {% if 'account' in session %}
         {% set children = [('profile', 'profile'), ('settings', 'settings')] %}
-        {{ f.dropdown("* ", children, [], furl_for, False, '<div class="dropdown-divider"></div><form action={} method="POST">{}</form>'.format(furl_for('profile'), f.button("logout", "Logout", "btn")), img(30, False)) }}
+        {{ f.dropdown("* ", children, [], False, '<div class="dropdown-divider"></div><form action={} method="POST">{}</form>'.format(furl_for('profile'), f.button("logout", "Logout", "btn")), f.img(30, False)) }}
       {% else %}
         <li class="nav-item">
-          <a class="btn btn-outline-light {{ f.active('profile', furl_for) }} mr-4" href="{{ furl_for('profile') }}" role="button">Sign in</a>
+          <a class="btn btn-outline-light {{ f.active('profile') }} mr-4" href="{{ furl_for('profile') }}" role="button">Sign in</a>
         </li>
       {% endif %}
     </ul>

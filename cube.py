@@ -1,12 +1,15 @@
 import json, pickle, time, os, getpass
 from datetime import datetime
 import arrow
+import humanize
 import markdown2
+import yagmail
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import linear_model
 from sklearn.metrics import r2_score
 from passlib.hash import pbkdf2_sha512
+import gnupg
 from fbchat import Client
 import requests
 from bs4 import BeautifulSoup
@@ -33,7 +36,7 @@ def load_file(fname: str, func: str="json", short: bool=True) -> dict:
 def dump_file(obj, fname: str, func:str ="json", short: bool=True) -> None:
     """ Dumps an obj into a file. """
     with open("files/{}.{}".format(fname, func) if short else fname, "w" + EXT_MODE[func]) as f:
-        STR_FUNC["dump"][func](obj, f, **({"indent": 4} if func == "json" else {}))
+        STR_FUNC["dump"][func](obj, f, **({"indent": 4, "sort_keys": True} if func == "json" else {}))
 
 CONFIG = load_file("config")
 URL = "https://www.worldcubeassociation.org/competitions"
@@ -44,7 +47,8 @@ WAIT = CONFIG["time"]
 PARSER = "lxml"
 SITEMAP = "static/sitemap.xml"
 REPO = "https://github.com/stephen-huan/TJCubing"
-TJ = "https://activities.tjhsst.edu/cubing/" #alternatively http://cubing.sites.tjhsst.edu
+#alternatively http://cubing.sites.tjhsst.edu
+TJ = "https://activities.tjhsst.edu/cubing/"
 
 https = load_file("site")["url"][:5] == "https"
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = str(int(not https))
@@ -53,13 +57,15 @@ os.environ['FLASK_ENV'] = "development"
 ION = "https://ion.tjhsst.edu/"
 AUTHORIZATION_URL, TOKEN_URL = ION + "oauth/authorize/", ION + "oauth/token/"
 
+gpg = gnupg.GPG()
+
 def add_dict(d1: dict, d2: dict) -> dict:
     """ Adds two dictionaries together, assuming no conflicts. """
     return {**d1, **d2}
 
-def gen_secret_key() -> str:
+def gen_secret(length=16) -> str:
     """ Generates a random secret key. """
-    return os.urandom(16).hex()
+    return os.urandom(length).hex()
 
 def get_year() -> int:
     """ Returns the year as a number """
@@ -232,7 +238,7 @@ def make_api_call(call: str, short=True) -> dict:
     oauth = make_oauth(**{"state": flask.session["oauth_state"]})
     return json.loads(oauth.get(ION + "api/{}".format(call) if short else call).content.decode())
 
-def test_token():
+def test_token() -> bool:
     """ Tests whether or not the user is authenticated. """
     return "token" in flask.session
 
@@ -262,7 +268,7 @@ def save_club_history() -> dict:
     page["time"] = time.time()
     dump_file(page, "club")
 
-def parse_block(block):
+def parse_block(block) -> dict:
     """ Parses an individual block. """
     return {"title": block["subcall"]["name"],
             "count": block["subcall"]["signups"]["count"],
@@ -272,7 +278,7 @@ def parse_block(block):
             "block_letter": block["block_letter"],
            }
 
-def parse_club():
+def parse_club() -> dict:
     """ Makes a smaller representation of the club.json file. """
     club = load_file("club")
     parsed = {"name": club["name"], "description": club["description"], "blocks": []}
@@ -280,7 +286,7 @@ def parse_club():
     parsed["blocks"].sort(key=lambda b: ion_date(b["date"]))
     return parsed
 
-def graph_blocks(s):
+def graph_blocks(s) -> None:
     """ Graphs frequency of Wednesday/Friday A/B. """
     funcs = {"by_x": lambda x: 10*days.index(x[0].split()[0]) + "AB".index(x[0].split()[1]), "by_y": lambda x: x[-1]}
     days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
@@ -414,15 +420,41 @@ def get_errors() -> list:
     """ Returns the defined HTTP status errors. """
     return [int(fname.split(FILE)[0]) for fname in os.listdir("templates/error")]
 
-def register(username: str, password: str):
+def register(username: str, password: str) -> None:
     """ Registers a new user account. """
     users = load_file("users")
     user = users[username] = {}
     user["hash"] = pbkdf2_sha512.hash(password)
     user["scope"] = "default"
+    user["keys"] = []
+    user["encrypt"] = True
     dump_file(users, "users")
 
-def check(username: str, password: str):
+def check(username: str, password: str) -> bool:
     """ Determines whether a login is legitimate or not. """
     user = load_file("users").get(username, None)
     return user is not None and pbkdf2_sha512.verify(password, user["hash"])
+
+def prompt_email(email: str) -> None:
+    """ Sends a email asking for verification. """
+    emails = load_file("emails")
+    nonce = gen_secret()
+    emails["requests"][nonce] = email
+    dump_file(emails, "emails")
+    body = """Please click on this link to be added to the mailing list.
+<a href="{}">Add</a>
+
+<p><small>If you did not request this email, discard this message.</small><p>""".format(load_file("site")["url"] + "/email?nonce={}".format(nonce))
+    send_email(email, "Request to join mailing list", body)
+
+def register_email(email: str) -> None:
+    """ Stores an email in the mailing list. """
+    emails = load_file("emails")
+    if email not in emails["emails"]:
+        emails["emails"].append(email)
+    dump_file(emails, "emails")
+
+def send_email(recipients: list, subject: str, body: str) -> None:
+    """ Sends an email. """
+    yag = yagmail.SMTP(CONFIG["clubmail"], oauth2_file=os.getcwd() + "/files/oauth2_creds.json")
+    yag.send(to=recipients, subject=subject, contents=body)
