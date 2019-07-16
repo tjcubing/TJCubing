@@ -142,9 +142,11 @@ def profile() -> dict:
             flask.abort(int(form["http"]))
 
         if "email" in form:
+            recipients = form["recipients"].split(", ") if form["recipients"] != "" else cube.load_file("emails")["emails"]
             body = cube.markdown2.markdown(form["email"]).replace("\n", "")
-            cube.send_email(cube.load_file("emails")["emails"], form["subject"], body)
-            cube.save_email(form["subject"], form["email"])
+            cube.send_email(recipients, form["subject"], body)
+            if "log" in form:
+                cube.save_email(form["subject"], form["email"])
             return alert("Mail sent.", "success", "meta")
 
         if "submit" in form:
@@ -178,7 +180,11 @@ def profile() -> dict:
         if i > scopes[flask.session["scope"]]:
             return alert("User does not have the valid scope. This incident will be logged.", "danger", "self")
 
-        return {"tabs": tabs, "scopes": scopes, "clubmailpassword": cube.load_file("secrets")["clubmailpassword"]}
+        return {"tabs": tabs,
+                "scopes": scopes,
+                "clubmailpassword": cube.load_file("secrets")["clubmailpassword"],
+                "emails": cube.load_file("emails")["emails"],
+               }
 
     return {}
 

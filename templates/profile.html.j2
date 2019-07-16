@@ -96,11 +96,20 @@
                 <div class="col-6">
                   <form method="POST" id="mdform">
                     <div class="form-group">
+                      <textarea class="form-control" name="recipients" rows="1" placeholder="Recipients: {{ ', '.join(emails) }}" value="hi!"></textarea> 
+                    </div>
+                    <div class="form-group">
                       <label for="mdemail">Markdown</label>
                       <input type="text" class="form-control mb-2" name="subject" id="mdsubject" placeholder="Subject"</input>
-                      <textarea class="form-control" name="email" id="mdemail" rows="10" placeholder="Write the email here"></textarea>
-                      {{ f.button("send", "Send email", "btn btn-primary mt-3 prompt") }}
                     </div>
+                    <div class="form-group">
+                      <textarea class="form-control" name="email" id="mdemail" rows="10" placeholder="Write the email here"></textarea>
+                    </div>
+                    <div class="form-group form-check">
+                      <input type="checkbox" class="form-check-input" id="log" name="log" checked>
+                      <label class="form-check-label" for="log">Log to archive?</label>
+                    </div>
+                    {{ f.button("send", "Send email", "btn btn-primary prompt") }}
                   </form>
                 </div>
                 <!-- HTML replaced by markdown render -->
