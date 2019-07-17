@@ -44,7 +44,7 @@
     <ul class="navbar-nav navbar-right">
       {% if 'account' in session %}
         {% set children = [('profile', 'profile'), ('settings', 'settings')] %}
-        {{ f.dropdown("* ", children, [], False, '<div class="dropdown-divider"></div><form action={} method="POST">{}</form>'.format(furl_for('profile'), f.button("logout", "Logout", "btn")), f.img(30, False)) }}
+        {{ f.dropdown("* ", children, [], False, '<div class="dropdown-divider"></div><form action={} method="POST">{}{}</form>'.format(furl_for('profile'), btnform.csrf_token, f.button("logout", "Logout", "btn")), f.img(30, False)) }}
       {% else %}
         <li class="nav-item">
           <a class="btn btn-outline-light {{ f.active('profile') }} mr-4" href="{{ furl_for('profile') }}" role="button">Sign in</a>
@@ -65,12 +65,7 @@
   {% if messages %}
     <ul class=flashes>
     {% for category, message in messages %}
-      <div class="alert {{ 'alert-' + category }} alert-dismissible fade show" role="alert">
-        {{ message }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+      {{ f.alert(message, category) }}
     {% endfor %}
     </ul>
   {% endif %}

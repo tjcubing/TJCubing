@@ -7,14 +7,10 @@
 {% block content %}
     {{ f.description(name, years, meetings, year, annual_meetings) }}
 
-    <p> Write a description: </p>
+    <p class="mb-0"> Write a description: </p>
     <!-- https://www.bootply.com/uGGf9Tf4LS# -->
     <div class="col-sm-4 well">
-        <form accept-charset="UTF-8" method="POST">
-            <textarea class="form-control" maxlength="{{ length }}" name="description" id="description" placeholder="Type in your message" rows="5"></textarea>
-            <h6 class="float-right mt-3" id="count_message"></h6>
-            {{ f.button('', 'Send Candidacy', 'btn-info mt-3')}}
-        </form>
+        {{ f.render_form(form, ["description"], '<h6 class="float-right mt-3" id="count_message"></h6>', f.button(text="Send Candidacy")) }}
     </div>
 
     <script>

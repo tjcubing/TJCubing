@@ -16,26 +16,19 @@
 <h1 class="mt-5"> Calculate Mo(x)Ao5 </h1>
 
 <form method="POST" enctype="multipart/form-data">
+  {{ file.csrf_token }}
   <div class="input-group mt-3">
     <div class="input-group-prepend">
       <button class="input-group-text" type="submit">Upload</button>
     </div>
     <div class="custom-file">
-      <input type="file" id="file" name="file" class="custom-file-input" aria-describedby="custom-file-input">
-      <label id="custom-file-label" class="custom-file-label" for="file">Choose file</label>
+      {{ f.render_field(file.file, class="custom-file-input") }}
     </div>
   </div>
 </form>
 
 <h5 class="mt-3"> Or if you prefer, copy paste a CSTimer / DCTimer average </h3>
-
-<div class="mt-3 col-sm-4">
-    <form accept-charset="UTF-8" method="POST">
-        <textarea class="form-control" maxlength="{{ length }}" name="times" id="times" placeholder="Paste in your times" rows="5"></textarea>
-        <h6 class="float-right mt-3" id="count_message"></h6>
-        {{ f.button("submit", "Upload", "btn-info mt-3")}}
-    </form>
-</div>
+{{ f.render_form(form, ["times"], f.button(text="Upload")) }}
 
 <!-- https://www.w3schools.com/bootstrap4/bootstrap_forms_custom.asp -->
 <script>
@@ -45,7 +38,7 @@ $("#file").on("change", function() {
 });
 </script>
 
-{% if display %}
+{% if mean %}
   <h3 class="mt-3"> Calculated {{ descr }}: </h3>
   {{ mean }}
   <h3 class="mt-3"> Best ao5 (nonrolling): </h3>

@@ -52,14 +52,8 @@
       </div>
       <div class="col-sm">
         <h1> Mailing List </h1>
-        <p> To stay updated, consider joining our mailing list! </p>
-        <form method="POST">
-          <div class="form-group">
-            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            <button type="submit" class="btn btn-primary mt-3">Submit</button>
-          </div>
-        </form>
+        <p class="mb-0"> To stay updated, consider joining our mailing list! </p>
+        {{ f.render_form(form, ["email"], '<small id="emailHelp" class="form-text text-muted">We\'ll never share your email with anyone else.</small>', f.button()) }}
       </div>
   </div>
 

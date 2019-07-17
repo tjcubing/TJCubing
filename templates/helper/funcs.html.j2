@@ -17,6 +17,55 @@
 {% endmacro %}
 
 <!-- Actual functions -->
+
+{% macro render_field(field) %}
+  {% set label={"class": "custom-file-label", "id": "custom-file-label"} if "custom-file-input" in kwargs["class"] else {} %}
+  {% if field.type == "BooleanField" %}
+    {{ field(**kwargs)|safe }} {{ field.label(**label) }}
+  {% else %}
+    {% if field.label.text %}
+      {{ field.label(**label) }}
+    {% endif %}
+    {{ field(**kwargs)|safe }}
+  {% endif %}
+  {# Most errors are tooltipped but some can only be shown through alerts #}
+  {% for error in field.errors %}
+    {% if "files" in error %}
+      {{ alert(error, "warning", "sticky-top") }}
+    {% endif %}
+  {% endfor %}
+{% endmacro %}
+
+{% macro render_form(form, fields) %}
+<form accept-charset="UTF-8" method="POST" id="{{ kwargs.get('id', '') }}">
+    {{ form.csrf_token }}
+    {% for field in fields %}
+      <div class="form-group">
+        {{ render_field(form[field], **kwargs.get(field, {})) }}
+      </div>
+    {% endfor %}
+    {% for arg in varargs %}
+      {{ arg }}
+    {% endfor %}
+</form>
+{% endmacro %}
+
+{% macro btn_form() %}
+<form method="POST">
+  {{ btnform.csrf_token }}
+  {{ f.button(*args) }}
+</form>
+{% endmacro %}
+
+{% macro alert(message, category="primary", classes="") %}
+<div class="alert {{ 'alert-' + category }} alert-dismissible fade show {{ classes }}" role="alert">
+  {{ message }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endmacro %}
+
 {% macro active(path) %}
   {{ 'active' if request.path.split('/')[-1] == furl_for(path).split('/')[-1].strip() else '' }}
 {% endmacro %}
@@ -49,7 +98,7 @@
   </li>
 {% endmacro %}
 
-{% macro button(name="submit", text="Submit", classes="btn btn-primary", value="") %}
+{% macro button(name="submit", text="Submit", classes="btn-primary mt-3", value="") %}
   <button class="btn {{ classes }}" name="{{ name }}" id="{{ name }}" value="{{ value }}" type="submit">{{ text }}</button>
 {% endmacro %}
 

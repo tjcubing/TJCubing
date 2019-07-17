@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "592c4a9736ea39453a3d5d5221cfb1e2eb1b895d948eb8f5011721a2b0937894"
+            "sha256": "24f3525e14dd1a3fc1e5c948df6739b00deb6f2a01114fb0de5f2a92e1a4d903"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -18,11 +18,11 @@
     "default": {
         "aenum": {
             "hashes": [
-                "sha256:3df9b84cce5dc9ed77c337079f97b66c44c0053eb87d6f4d46b888dc45801e38",
-                "sha256:7a77c205c4bc9d7fe9bd73b3193002d724aebf5909fa0d297534208953891ec8",
-                "sha256:a3208e4b28db3a7b232ff69b934aef2ea1bf27286d9978e1e597d46f490e4687"
+                "sha256:0644e5d19627beaaf01ca1a8349371f9de962eeb63c2b2c28045b2e674975b8c",
+                "sha256:241d523b8c7179f959e9292c0ab4f7222793625a9b09798f9e8117f7b4263abf",
+                "sha256:d3f0432d237b90f03ceeb41582c177ab7079dcf2f990488d943dcb9da3b74ad5"
             ],
-            "version": "==2.1.2"
+            "version": "==2.1.4"
         },
         "arrow": {
             "hashes": [
@@ -106,12 +106,28 @@
             "index": "pypi",
             "version": "==0.3.0"
         },
+        "flask-talisman": {
+            "hashes": [
+                "sha256:468131464a249274ed226efc21b372518f442487e58918ccab8357eaa638fd1f",
+                "sha256:eaa754f4b771dfbe473843391d69643b79e3a38c865790011ac5e4179c68e3ec"
+            ],
+            "index": "pypi",
+            "version": "==0.7.0"
+        },
         "flask-uploads": {
             "hashes": [
                 "sha256:53ecbd6033667d50ae02b63adebbaa33c7fc56c09e5293025810cf9d841ecb02"
             ],
             "index": "pypi",
             "version": "==0.2.1"
+        },
+        "flask-wtf": {
+            "hashes": [
+                "sha256:5d14d55cfd35f613d99ee7cba0fc3fbbe63ba02f544d349158c14ca15561cc36",
+                "sha256:d9a9e366b32dcbb98ef17228e76be15702cd2600675668bca23f63a7947fd5ac"
+            ],
+            "index": "pypi",
+            "version": "==0.14.2"
         },
         "frozen-flask": {
             "hashes": [
@@ -471,6 +487,13 @@
                 "sha256:a0b915f0815982fb2a09161cb8f31708052d0951c3ba433ccc5e1aa276507ca6"
             ],
             "version": "==0.15.4"
+        },
+        "wtforms": {
+            "hashes": [
+                "sha256:0cdbac3e7f6878086c334aa25dc5a33869a3954e9d1e015130d65a69309b3b61",
+                "sha256:e3ee092c827582c50877cdbd49e9ce6d2c5c1f6561f849b3b068c1b8029626f1"
+            ],
+            "version": "==2.2.1"
         },
         "yagmail": {
             "hashes": [

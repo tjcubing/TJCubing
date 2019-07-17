@@ -25,6 +25,8 @@ passlib = "*"
 humanize = "*"
 python-gnupg = "*"
 yagmail = "*"
+flask-talisman = "*"
+flask-wtf = "*"
 
 [requires]
 python_version = "3.5"

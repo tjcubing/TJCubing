@@ -5,7 +5,10 @@ from flask_sitemap import Sitemap
 import flask_uploads
 from werkzeug.utils import secure_filename
 from werkzeug.exceptions import InternalServerError
-import cube, statistics
+from werkzeug.wrappers.response import Response
+from flask_talisman import Talisman
+from flask_wtf.csrf import CSRFProtect
+import cube, forms, statistics
 
 # TODO: in house comps page
 # TODO: partial highlighting on mobile
@@ -31,18 +34,22 @@ app.config.from_object('settings')
 os.environ["FLASK_SETTINGS"] = cube.CONFIG["flask_config"]
 app.config.from_envvar("FLASK_SETTINGS")
 
+# Security
+csp = {
+    "default-src": "'self'",
+}
+Talisman(app, content_security_policy=None)
+# explicit CSRF protection for all forms
+CSRFProtect(app)
+
 # generate sitemap
 # ext = Sitemap(app=app)
 
-# Create an upload set
-TIMES = flask_uploads.UploadSet("times")
-PHOTOS = flask_uploads.UploadSet("photos", flask_uploads.IMAGES)
-flask_uploads.configure_uploads(app, (TIMES, PHOTOS))
-# Strange glitch with TJ servers - if you look at the source code this
-# *should* happen already...
+flask_uploads.configure_uploads(app, (forms.times, forms.photos))
+# Strange glitch with TJ servers - if you look at the source code this *should* happen already...
 app.register_blueprint(flask_uploads.uploads_mod)
 
-def alert(msg: str, category: str="success", loc: str="index"):
+def alert(msg: str, category: str="success", loc: str="index") -> Response:
     """ Redirects the user with an alert. """
     flask.flash(msg, category)
     dest = {"self": flask.request.path,
@@ -50,12 +57,9 @@ def alert(msg: str, category: str="success", loc: str="index"):
            }
     return flask.redirect(flask.url_for(loc) if loc not in dest else dest[loc])
 
-def format_exts(exts: list):
-    """ Returns a formatted list of extentions. """
-    return ", ".join(["." + ext for ext in exts])
-
 @app.before_request
-def before_request():
+def before_request() -> None:
+    """ Runs before each request. """
     try:
         vote = cube.load_file("vote")
     except:
@@ -73,11 +77,13 @@ def before_request():
 
 def index() -> dict:
     """ Gives the year to list past TJHSST competitions, handles email signups. """
-    if flask.request.method == "POST":
-        cube.prompt_email(flask.request.form["email"])
+    form = forms.EmailForm()
+
+    if form.validate_on_submit():
+        cube.prompt_email(form.email.data)
         return alert("Check your email for a verification message.", "success")
 
-    return {"year": cube.get_year()}
+    return {"year": cube.get_year(), "form": form}
 
 def competitions() -> dict:
     """ Gets the cached competitions, but will refresh if not updated recently. """
@@ -99,77 +105,37 @@ def result() -> dict:
 # http://flask.pocoo.org/docs/1.0/patterns/fileuploads/
 def stats() -> dict:
     """ Parses a user's .csv / .txt file and returns statistics. """
-    if flask.request.method == "POST":
+    form, file = forms.StatsForm(), forms.UploadForm()
+    rtn = {"form": form, "file": file}
+
+    if form.validate_on_submit():
+        times = statistics.parse_text(form.times.data)
+    elif file.validate_on_submit():
+        times = statistics.parse(file.file.data)
+    else:
         times = None
-        if "times" in flask.request.form:
-            times = statistics.parse_text(flask.request.form["times"])
-        else:
-            if "file" not in flask.request.files:
-                return alert("No file part.", "warning", "self")
-            file = flask.request.files['file']
-            if file.filename == "":
-                return alert("No selected file.", "warning", "self")
-            if file and TIMES.file_allowed(file, secure_filename(file.filename)):
-                times = statistics.parse(file)
 
-        if times:
-            descr, mean, best = statistics.process(times)
-            return {"display": True, "descr": descr, "mean": mean, "best": best}
+    if times:
+        descr, mean, best = statistics.process(times)
+        return cube.add_dict({"descr": descr, "mean": mean, "best": best}, rtn)
 
-    return {"display": False}
+    return rtn
 
 def profile() -> dict:
     """ Allows the user to login as well as register a new account. """
-    if flask.request.method == "POST":
-        users = cube.load_file("users")
-        form = flask.request.form
+    loginForm = forms.LoginForm()
+    signupForm = forms.SignupForm()
+    mailForm = forms.MailForm()
+    httpForm = forms.HTTPForm()
+    rtn = {"loginForm": loginForm, "signupForm": signupForm, "mailForm": mailForm, "httpForm": httpForm}
 
-        if "logout" in form:
-            del flask.session["account"]
-            return {}
-
-        if "delete" in form:
-            del users[flask.session["account"]]
-            del flask.session["account"]
-            cube.dump_file(users, "users")
-            return alert("Account deleted!", "success", "self")
-
-        if "clear" in form:
-            flask.session.clear()
-            return {}
-
-        if "http" in form:
-            flask.abort(int(form["http"]))
-
-        if "email" in form:
-            recipients = form["recipients"].split(", ") if form["recipients"] != "" else cube.load_file("emails")["emails"]
-            body = cube.markdown2.markdown(form["email"]).replace("\n", "")
-            cube.send_email(recipients, form["subject"], body)
-            if "log" in form:
-                cube.save_email(form["subject"], form["email"])
-            return alert("Mail sent.", "success", "meta")
-
-        if "submit" in form:
-            username, password = form["username"], form["password"]
-            if "checkpassword" in form:
-                if username in cube.load_file("users"):
-                    return alert("Username is taken.", "info", "meta")
-                if password != form["checkpassword"] :
-                    return alert("Passwords do not match.", "info", "meta")
-                cube.register(username, password)
-                return alert("Account registered!", "success", "self")
-
-            if not cube.check(username, password):
-                return alert("Username or password is incorrect.", "info", "self")
-
-            # Save login to cookies
-            flask.session["account"] = username
-            flask.session["scope"] = users[username]["scope"]
+    users = cube.load_file("users")
 
     if "account" in flask.session:
         tabs = [["overview", "API"], ["email", "refresh", "develop"], ["edit"]]
         scopes = {"default": 0, "privileged": 1, "admin": 2}
         tab = flask.request.args.get('tab', 'overview')
+        scope = scopes[flask.session["scope"]]
 
         i = None
         for j, group in enumerate(tabs):
@@ -177,16 +143,72 @@ def profile() -> dict:
                 i = j
         if i is None:
             return alert("Invalid tab!", "info", "self")
-        if i > scopes[flask.session["scope"]]:
+        if i > scope:
             return alert("User does not have the valid scope. This incident will be logged.", "danger", "self")
 
-        return {"tabs": tabs,
+        rtn = cube.add_dict(
+               {"tabs": tabs,
                 "scopes": scopes,
                 "clubmailpassword": cube.load_file("secrets")["clubmailpassword"],
                 "emails": cube.load_file("emails")["emails"],
-               }
+               }, rtn)
+    else:
+        scope = 0
 
-    return {}
+    if scope >= 0:
+        if "confirm" in flask.request.form and signupForm.validate_on_submit():
+            username, password = signupForm.username.data, signupForm.password.data
+            if username in cube.load_file("users"):
+                return alert("Username is taken.", "info", "meta")
+            if password != signupForm.confirm.data:
+                return alert("Passwords do not match.", "info", "meta")
+
+            cube.register(username, password)
+            return alert("Account registered!", "success", "self")
+
+        elif "submit" in flask.request.form and loginForm.validate_on_submit():
+            username, password = loginForm.username.data, loginForm.password.data
+            if not cube.check(username, password):
+                return alert("Username or password is incorrect.", "info", "self")
+
+            # Save login to cookies
+            flask.session["account"] = username
+            flask.session["scope"] = users[username]["scope"]
+            return flask.redirect(flask.url_for("profile"))
+
+    if scope >= 1:
+        if mailForm.validate_on_submit():
+            recipients = mailForm.recipients.data.split(", ") if mailForm.recipients.data != "" else cube.load_file("emails")["emails"]
+            body = cube.markdown2.markdown(mailForm.email.data).replace("\n", "")
+            cube.send_email(recipients, mailForm.subject.data, body)
+            if mailForm.log.data:
+                cube.save_email(mailForm.subject.data, mailForm.email.data)
+            return alert("Mail sent.", "success", "meta")
+
+        elif httpForm.validate_on_submit():
+            flask.abort(int(httpForm.http.data))
+
+    if scope >= 2:
+        pass
+
+    if flask.request.method == "POST":
+
+        if "logout" in flask.request.form:
+            del flask.session["account"]
+
+        if "delete" in flask.request.form:
+            del users[flask.session["account"]]
+            del flask.session["account"]
+            cube.dump_file(users, "users")
+            return alert("Account deleted!", "success", "self")
+
+        if "clear" in flask.request.form:
+            # Save CSRF token
+            csrf = flask.session["csrf_token"]
+            flask.session.clear()
+            flask.session["csrf_token"] = csrf
+
+    return rtn
 
 def delete_photo() -> None:
     """ Deletes a photo from the server. """
@@ -198,7 +220,7 @@ def delete_photo() -> None:
         pass
 
     try:
-        os.remove(PHOTOS.path(user["pfpfilename"]))
+        os.remove(forms.photos.path(user["pfpfilename"]))
         del user["pfpfilename"]
     except (KeyError, FileNotFoundError):
         pass
@@ -212,36 +234,36 @@ def settings() -> dict:
 
     users = cube.load_file("users")
     user = users[flask.session["account"]]
+    gpgForm = forms.GPGForm()
+    photoForm = forms.PhotoForm()
+
+    if gpgForm.validate_on_submit():
+        key = cube.gpg.import_keys(gpgForm.gpgkey.data)
+        user["keys"] += cube.gpg.list_keys(keys=[key.fingerprints[0]])
+        curr = user["keys"][-1]
+        curr["fuids"] = ", ".join([uid.split()[-1][1:-1] for uid in curr["uids"]])
+        cube.dump_file(users, "users")
+        return alert("GPG key added.", "success", "meta")
+
+    elif photoForm.validate_on_submit():
+        users = cube.load_file("users")
+        delete_photo() #old profile picture not necessary anymore
+        filename = forms.photos.save(photoForm.photo.data)
+        users[flask.session["account"]]["pfp"] = forms.photos.url(filename)
+        users[flask.session["account"]]["pfpfilename"] = filename
+        cube.dump_file(users, "users")
+        return alert("Profile photo changed.", "success", "profile")
 
     if flask.request.method == "POST":
         if "remove" in flask.request.form:
             delete_photo()
             return alert("Profile picture removed.", "success", "profile")
 
-        if "gpgkey" in flask.request.form:
-            key = cube.gpg.import_keys(flask.request.form["gpgkey"])
-            user["keys"] += cube.gpg.list_keys(keys=[key.fingerprints[0]])
-            curr = user["keys"][-1]
-            curr["fuids"] = ", ".join([uid.split()[-1][1:-1] for uid in curr["uids"]])
-            cube.dump_file(users, "users")
-            return alert("GPG key added.", "success", "meta")
-
         if "delete" in flask.request.form:
             del user["keys"][int(flask.request.form["delete"])]
             cube.dump_file(users, "users")
 
-        if "photo" in flask.request.files:
-            try:
-                users = cube.load_file("users")
-                delete_photo() #old profile picture not necessary anymore
-                filename = PHOTOS.save(flask.request.files["photo"])
-                users[flask.session["account"]]["pfp"] = PHOTOS.url(filename)
-                users[flask.session["account"]]["pfpfilename"] = filename
-                cube.dump_file(users, "users")
-                return alert("Profile photo changed.", "success", "profile")
-            except flask_uploads.UploadNotAllowed:
-                return alert("Only files with the extentions {} are allowed.".format(format_exts(flask_uploads.IMAGES)), "warning", "self")
-    return {}
+    return {"gpgForm": gpgForm, "photoForm": photoForm}
 
 def search() -> dict:
     """ Parses the user's search. Can be POST or GET method. """
@@ -345,7 +367,8 @@ def GLOBALS() -> dict:
     """ Returns all the global variables passed to every template. """
     user = cube.load_file("users").get(flask.session.get("account", None), {})
     vars = {"vote_active": cube.load_file("vote")["vote_active"],
-            "user": user
+            "user": user,
+            "btnform": forms.FlaskForm(),
            }
     return cube.add_dict(GLOBAL, vars)
 
@@ -376,7 +399,7 @@ def make_pages(d: dict, prefix="") -> None:
 # https://stackoverflow.com/questions/14048779/with-flask-how-can-i-serve-robots-txt-and-sitemap-xml-as-static-files
 @app.route("/sitemap.xml")
 @app.route("/robots.txt")
-def static_from_root():
+def static_from_root() -> flask.wrappers.Response:
     """ Serves a file from static, skipping the /static/. """
     return flask.send_from_directory(app.static_folder, flask.request.path[1:])
 
@@ -392,7 +415,7 @@ def cookie() -> dict:
     return data
 
 @app.route("/email")
-def email():
+def email() -> Response:
     """ After requesting to be added to the email list, see if nonce matches. """
     emails = cube.load_file("emails")
     requests = emails["requests"]
@@ -404,11 +427,13 @@ def email():
         cube.dump_file(emails, "emails")
         cube.register_email(email)
         return alert("You have been added to the email list.", "success")
+
     return alert("Wrong nonce. Try registering again?", "danger")
 
 # https://requests-oauthlib.readthedocs.io/en/latest/
 @app.route("/login")
-def login():
+def login() -> Response:
+    """ ION redirect for OAuth API access. """
     oauth = cube.make_oauth()
     authorization_url, state = oauth.authorization_url(cube.AUTHORIZATION_URL)
 
@@ -417,21 +442,24 @@ def login():
     return flask.redirect(authorization_url)
 
 @app.route("/callback")
-def callback():
+def callback() -> Response:
+    """ ION callback for OAuth API access. """
     if 'oauth_state' not in flask.session:
-        return "You shouldn't be here..."
+        return alert("You shouldn't be here...", "danger")
+
     assert flask.request.args.get('state', None) == flask.session['oauth_state']
     code = flask.request.args.get('code', None)
     if flask.request.args.get('error', None) is not None or code is None:
         return alert("You must allow Ion OAuth access to vote!", "danger")
+
     oauth = cube.make_oauth(state=flask.session['oauth_state'])
     token = oauth.fetch_token(cube.TOKEN_URL, code=code, client_secret=cube.CONFIG["client_secret"])
     cube.save_token(token)
 
     return flask.redirect(flask.session.get("action", "profile"))
 
-@app.route("/vote/vote", methods=["GET", "POST"])
-def vote():
+def vote_requirements():
+    """ Checks if the user can view the vote/run pages. """
     if not cube.test_token():
         flask.session["action"] = flask.request.path
         return flask.redirect(flask.url_for("login"))
@@ -442,27 +470,31 @@ def vote():
         return alert("You do not fullfill the requirements to be able to vote.", "warning")
 
     if not vote["vote_active"]:
-        return alert("Stop trying to subvert democracy!!!", "danger")
+        return alert("Stop trying to subvert democracy!", "danger")
+
+    return vote
+
+@app.route("/vote/vote", methods=["GET", "POST"])
+def vote():
+    """ Allows the user to vote. """
+    vote = vote_requirements()
+    if not isinstance(vote, dict):
+        return vote
 
     if flask.request.method == "POST":
         cube.add_vote(cube.get_name(), flask.request.form["vote"])
-        return alert("<strong>Congrats!</strong> You have voted for {}.".format(flask.request.form['vote']))
+        return alert("<strong>Congrats!</strong> You have voted for {}.".format(flask.request.form["vote"]))
 
     return flask.render_template(flask.request.path + cube.FILE, **vote, sorted_candidates=cube.get_candidates(), name=cube.get_name(), title="vote")
 
 @app.route("/vote/run", methods=["GET", "POST"])
 def run():
-    if not cube.test_token():
-        flask.session["action"] = flask.request.path
-        return flask.redirect(flask.url_for("login"))
+    """ Allows the user to run for an officer position. """
+    vote = vote_requirements()
+    if not isinstance(vote, dict):
+        return vote
 
-    vote = cube.load_file("vote")
-
-    if not cube.valid_runner():
-        return alert("You do not fullfill the requirements to be able to run.", "warning")
-
-    if not vote["vote_active"]:
-        return alert("Stop trying to subvert democracy!!!", "danger")
+    form = forms.RunForm()
 
     signups = cube.get_signups()
     params = {"name": cube.get_name(),
@@ -472,12 +504,11 @@ def run():
               "year": cube.get_year(),
              }
 
-    if flask.request.method == "POST":
-        cube.store_candidate(cube.add_dict({"description": flask.request.form['description']}, params))
+    if form.validate_on_submit():
+        cube.store_candidate(cube.add_dict({"description": form.description.data}, params))
         return alert("<strong>Congrats!</strong> Your application has been registered.")
 
-    return flask.render_template(flask.request.path + cube.FILE, **vote, **params, title="run")
-
+    return flask.render_template(flask.request.path + cube.FILE, **vote, **params, title="run", length=forms.LENGTH, form=form)
 
 # http://flask.pocoo.org/docs/1.0/patterns/errorpages/
 # Catch-all exception handler

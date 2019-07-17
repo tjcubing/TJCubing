@@ -1,17 +1,6 @@
 {% extends "helper/base.html.j2" %}
 {% block pageheader %}{% endblock %}
 
-{% macro boxes() %}
-  <div class="form-group">
-    <label for="username">Username</label>
-    <input type="text" class="form-control" id="username" name="username" aria-describedby="usernameHelp" placeholder="Enter username">
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-  </div>
-{% endmacro %}
-
 {% block content %}
   {% if "account" in session %}
     <div class="container">
@@ -25,10 +14,10 @@
           </figure>
 
           <h5> {{ session["scope"] | capitalize }} account </h5>
-          <form id="deleteform" method="POST">{{ f.button("delete", "Delete account", "btn-danger show-alert") }}</form>
+          <form id="deleteform" method="POST">{{ btnform.csrf_token }}{{ f.button("delete", "Delete account", "btn-danger show-alert") }}</form>
         </div>
 
-        {% set curr = request.args.get('tab', 'overview') %}
+        {% set curr = request.args.get("tab", "overview") %}
         <div class="col-9">
           <ul class="nav nav-tabs">
             {% for group in tabs %}
@@ -85,7 +74,7 @@
               </ul>
             </div>
 
-            <form method="POST">{{ f.button("clear", "Clear cookies?", "btn btn-warning") }}</form>
+            <form method="POST">{{ btnform.csrf_token }}{{ f.button("clear", "Clear cookies?", "btn-warning") }}</form>
 
           {% elif curr == "email" %}
             <p class="mt-3 mb-0"> Email: <a href="{{ 'mailto:' + clubmail }}">{{ clubmail }}</a> </p>
@@ -94,23 +83,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-6">
-                  <form method="POST" id="mdform">
-                    <div class="form-group">
-                      <textarea class="form-control" name="recipients" rows="1" placeholder="Recipients: {{ ', '.join(emails) }}" value="hi!"></textarea> 
-                    </div>
-                    <div class="form-group">
-                      <label for="mdemail">Markdown</label>
-                      <input type="text" class="form-control mb-2" name="subject" id="mdsubject" placeholder="Subject"</input>
-                    </div>
-                    <div class="form-group">
-                      <textarea class="form-control" name="email" id="mdemail" rows="10" placeholder="Write the email here"></textarea>
-                    </div>
-                    <div class="form-group form-check">
-                      <input type="checkbox" class="form-check-input" id="log" name="log" checked>
-                      <label class="form-check-label" for="log">Log to archive?</label>
-                    </div>
-                    {{ f.button("send", "Send email", "btn btn-primary prompt") }}
-                  </form>
+                  {{ f.render_form(mailForm, ["recipients", "subject", "email", "log"], f.button("send", "Send email", "btn btn-primary prompt"), id="mdform", recipients={"placeholder": "Recipients: " + ', '.join(emails)}) }}
                 </div>
                 <!-- HTML replaced by markdown render -->
                 <div class="col-6" id="htmlemail"></div>
@@ -119,11 +92,12 @@
 
           {% elif curr == "develop" %}
             <form method="POST">
+              {{ httpForm.csrf_token }}
               <div class="input-group mb-3 mt-4">
                 <div class="input-group-prepend">
                   <button class="btn btn-outline-secondary" type="submit">HTTP Status</button>
                 </div>
-                <input name="http" type="text" class="form-control" placeholder="Type in a HTTP response status code..." aria-label="" aria-describedby="basic-addon1">
+                {{ f.render_field(httpForm.http) }}
               </div>
             </form>
 
@@ -193,8 +167,8 @@
 
         // Update HTML rendering
         var converter = new showdown.Converter();
-        $('#mdemail').keyup(function() {
-          $('#htmlemail').html(converter.makeHtml($('#mdemail').val()));
+        $('#email').keyup(function() {
+          $('#htmlemail').html(converter.makeHtml($('#email').val()));
         });
 
         // Enable tooltips
@@ -205,20 +179,9 @@
 
   {% else %}
     {% if request.args.get("mode") == "register"  %}
-      <form method="POST">
-        {{ boxes() }}
-        <div class="form-group">
-          <label for="checkpassword">Confirm Password</label>
-          <input type="password" class="form-control" id="checkpassword" name="checkpassword" placeholder="Retype the password">
-        </div>
-        {{ f.button() }}
-      </form>
+      {{ f.render_form(signupForm, ["username", "password", "confirm"], f.button()) }}
     {% else %}
-      <form method="POST">
-        {{ boxes() }}
-        {{ f.button() }}
-        ...or register a new account <a href="{{ furl_for('profile', mode='register') }}"> here </a>
-      </form>
+      {{ f.render_form(loginForm, ["username", "password"], f.button(), '...or register a new account <a href="{}"> here </a>'.format(furl_for("profile", mode="register"))) }}
     {% endif %}
   {% endif %}
 {% endblock %}

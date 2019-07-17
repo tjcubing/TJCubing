@@ -7,10 +7,7 @@
     {% for candidate in sorted_candidates %}
       {% set description = f.description(None, candidate["years"], candidate["meetings"], candidate["year"], candidate["annual_meetings"]) %}
       {{ f.make_card(36, candidate["name"], candidate["timestr"], description + candidate["description"],
-      '<form class="form-inline my-2 my-lg-0" method="POST">' +
-      f.button("vote", "Vote", "btn-outline-primary my-2 my-sm-0", candidate['name']))
-      + '</form>'
-      }}
+      '<form method="POST">{}{}</form>'.format(btnform.csrf_token, f.button("vote", "Vote", "btn-outline-primary", candidate["name"]))) }}
     {% endfor %}
 
 {% endblock %}

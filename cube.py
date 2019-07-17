@@ -15,6 +15,7 @@ import requests
 from bs4 import BeautifulSoup
 import flask
 from requests_oauthlib import OAuth2Session
+import forms
 # from oauthlib.oauth2 import TokenExpiredError
 
 # Helper library to query the WCA for competitions and other miscellaneous tasks
@@ -200,7 +201,8 @@ def store_candidate(d: dict) -> None:
     vote = load_file("vote")
     d["time"] = time.time()
     d["timestr"] = unix_to_human(time.time())
-    d["description"] = d["description"][:vote["length"]] #"client side validation big stupid" - Darin Mao
+    #"client side validation big stupid" - Darin Mao
+    d["description"] = d["description"][:forms.LENGTH]
     vote["candidates"][d["name"]] = d
     dump_file(vote, "vote")
 
@@ -224,7 +226,8 @@ def get_winner() -> str:
     winner = max(count, key=lambda v: count[v])
     votes = count[winner]
     del count[winner]
-    if votes in count.values(): #Tie - two instances of the most votes
+    #Tie - two instances of the most votes
+    if votes in count.values():
         return
     return winner
 
@@ -353,7 +356,8 @@ def valid_voter() -> bool:
 def valid_runner() -> bool:
     """ Returns whether or not the user is allowed to run for office. """
     if not flask.session.get("valid_runner", False):
-        flask.session["valid_runner"] = True #why not?
+        #why not?
+        flask.session["valid_runner"] = True
     return flask.session["valid_runner"]
 
 def add_xmltag(soup, element, seen, name, default, update=False):
