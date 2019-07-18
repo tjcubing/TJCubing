@@ -42,6 +42,9 @@ class LoginForm(FlaskForm):
 class SignupForm(LoginForm):
     confirm = PasswordField("Confirm Password", render_kw={"class": "form-control", "placeholder": "Retype the password"})
 
+class APIForm(FlaskForm):
+    call = StringField("", [DataRequired()], render_kw={"class": "form-control"})
+
 class MailForm(FlaskForm):
     recipients = TextAreaField("", render_kw={"class": "form-control", "rows": 1})
     subject = StringField("Markdown", [DataRequired()], render_kw={"class": "form-control", "placeholder": "Subject"})

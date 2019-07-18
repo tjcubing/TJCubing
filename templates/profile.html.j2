@@ -32,20 +32,23 @@
           </ul>
 
           {% if curr == "overview" %}
-            <h3 class="mt-4"> ION API status: {{ f.check('token' in session) }}
+            <h3 class="mt-4"> ION API status: {{ f.check("ion_token" in session) }}
               <p style="font-size:20px"><small class="text-muted"> ION is used to determine voting/running eligibility, as another factor in 2FA,
                 and to scrape data.
               </small></p>
             </h3>
-            {% if "token" not in session %}
-              <a href="{{ furl_for('login') }}"> Log in </a>
+            {% if "ion_token" not in session %}
+              <a href="{{ furl_for('ion_login') }}"> Log in </a>
             {% endif %}
 
-            <h3 class="mt-3"> WCA API status: {{ f.check(False) }}
+            <h3 class="mt-3"> WCA API status: {{ f.check("wca_token" in session) }}
               <p style="font-size:20px"><small class="text-muted"> WCA is used to mark competitions and to determine TJ records.</small></p>
             </h3>
+            {% if "wca_token" not in session %}
+              <a href="{{ furl_for('wca_login') }}"> Log in </a>
+            {% endif %}
 
-            <h3> GPG encryption: {{ f.check(user["encrypt"] and user["keys"] | length > 0) }}
+            <h3 class="mt-3"> GPG encryption: {{ f.check(user["encrypt"] and user["keys"] | length > 0) }}
               <p style="font-size:20px"><small class="text-muted"> Add a GPG key in the <a href="{{ furl_for('settings', tab='GPG keys')}}">settings</a>
               to enable encryption for emails, cookies, and other files.
               </small></p>
@@ -75,6 +78,41 @@
             </div>
 
             <form method="POST">{{ btnform.csrf_token }}{{ f.button("clear", "Clear cookies?", "btn-warning") }}</form>
+
+          {% elif curr == "API" %}
+            {% if "ion_token" in session %}
+              <form method="POST">
+                {{ ionForm.csrf_token }}
+                <div class="input-group mt-4">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">https://ion.tjhsst.edu/api/</span>
+                  </div>
+                  {{ f.render_field(ionForm.call) }}
+                  <div class="input-group-append">
+                    {{ f.button(classes="btn-outline-secondary") }}
+                  </div>
+                </div>
+              </form>
+            {% endif %}
+            {% if "wca_token" in session %}
+              <form method="POST">
+                {{ wcaForm.csrf_token }}
+                <div class="input-group mt-4">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">https://www.worldcubeassociation.org/api/v0/</span>
+                  </div>
+                  {{ f.render_field(wcaForm.call) }}
+                  <div class="input-group-append">
+                    {{ f.button(classes="btn-outline-secondary") }}
+                  </div>
+                </div>
+              </form>
+            {% endif %}
+
+            {% if data %}
+              <h5 class="mt-3"> Output: </h5>
+              {{ data }}
+            {% endif %}
 
           {% elif curr == "email" %}
             <p class="mt-3 mb-0"> Email: <a href="{{ 'mailto:' + clubmail }}">{{ clubmail }}</a> </p>
@@ -179,9 +217,9 @@
 
   {% else %}
     {% if request.args.get("mode") == "register"  %}
-      {{ f.render_form(signupForm, ["username", "password", "confirm"], f.button()) }}
+      {{ f.render_form(signupForm, ["username", "password", "confirm"], f.button("login")) }}
     {% else %}
-      {{ f.render_form(loginForm, ["username", "password"], f.button(), '...or register a new account <a href="{}"> here </a>'.format(furl_for("profile", mode="register"))) }}
+      {{ f.render_form(loginForm, ["username", "password"], f.button("login"), '...or register a new account <a href="{}"> here </a>'.format(furl_for("profile", mode="register"))) }}
     {% endif %}
   {% endif %}
 {% endblock %}

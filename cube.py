@@ -20,7 +20,6 @@ import forms
 
 # Helper library to query the WCA for competitions and other miscellaneous tasks
 # TODO: Database: Postgres?
-# TODO: WCA OAuth
 # TODO: switch all times to arrow times
 
 STR_FUNC = {"load": {"json": json.load, "pickle": pickle.load, "text": lambda f: f.read()},
@@ -53,9 +52,6 @@ TJ = "https://activities.tjhsst.edu/cubing/"
 https = load_file("site")["url"][:5] == "https"
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = str(int(not https))
 os.environ['FLASK_ENV'] = "development"
-
-ION = "https://ion.tjhsst.edu/"
-AUTHORIZATION_URL, TOKEN_URL = ION + "oauth/authorize/", ION + "oauth/token/"
 
 gpg = gnupg.GPG(gnupghome=".gnupg")
 
@@ -231,47 +227,69 @@ def get_winner() -> str:
         return
     return winner
 
-def save_token(token: dict) -> None:
-    """ Saves a token to Flask. """
-    flask.session["token"] = token
+def make_key(name: str, param: str) -> str:
+    """ Formats a key in the API style. """
+    return "{}_{}".format(name, param)
 
-def make_oauth(**kwargs) -> OAuth2Session:
+def make_save_token(name: str):
+    """ Returns a function which will save the token. """
+    def save_token(token: dict) -> None:
+        flask.session[make_key(name, "token")] = token
+
+    return save_token
+
+def make_oauth(name: str, **kwargs) -> OAuth2Session:
     """ Makes an OAuth2Session session. Should auto-refresh. """
-    args = {"client_id": CONFIG["client_id"], "client_secret": CONFIG["client_secret"]}
-    return OAuth2Session(CONFIG["client_id"], token=flask.session.get("token", None), redirect_uri=CONFIG["redirect_uri"], scope=["read"], auto_refresh_url=TOKEN_URL, auto_refresh_kwargs=args, token_updater=save_token, **kwargs)
+    params = {param: CONFIG[make_key(name, param)] for param in ["id", "secret", "redirect_uri", "scope", "url"]}
+    return OAuth2Session(params["id"],
+                         token=flask.session.get(make_key(name, "token"), None),
+                         redirect_uri=params["redirect_uri"],
+                         scope=params["scope"],
+                         auto_refresh_url=params["url"] + "oauth/token",
+                         auto_refresh_kwargs={"client_id": params["id"], "client_secret": params["secret"]},
+                         token_updater=make_save_token(name),
+                         **kwargs
+                        )
 
-def make_api_call(call: str, short=True) -> dict:
+def fetch_token(name: str, oauth: OAuth2Session, code: str) -> dict:
+    """ Returns and saves a token. """
+    token = oauth.fetch_token(CONFIG[make_key(name, "url")] + "oauth/token", code=code, client_secret=CONFIG[make_key(name, "secret")])
+    make_save_token(name)(token)
+    return token
+
+def api_call(name: str, call: str, short=True) -> dict:
     """ Makes an API call and returns a dictionary. """
-    oauth = make_oauth(**{"state": flask.session["oauth_state"]})
-    return json.loads(oauth.get(ION + "api/{}".format(call) if short else call).content.decode())
+    oauth = make_oauth(name, state=flask.session[make_key(name, "state")])
+    extra = "v0/" if name == "wca" else ""
+    return json.loads(oauth.get("{}api/{}{}".format(CONFIG[make_key(name, "url")], extra, call) if short else call).content.decode())
 
-def test_token() -> bool:
+def test_token(name: str) -> bool:
     """ Tests whether or not the user is authenticated. """
-    return "token" in flask.session
+    return make_key(name, "token") in flask.session
 
 def get_name() -> str:
     """ Returns the name of the user. """
     if "name" not in flask.session:
-        flask.session["name"] = make_api_call("profile")["display_name"]
+        flask.session["name"] = api_call("ion", "profile")["display_name"]
     return flask.session["name"]
 
 def get_club_result() -> list:
     """ Returns the club's page. """
-    d = make_api_call("activities")
+    d = api_call("ion", "activities")
     while "next" in d and d["next"] is not None:
         for result in d["results"]:
             if "cube" in result["name"].lower():
                 return result
-        d = make_api_call(d["next"], False)
+        d = api_call("ion", d["next"], False)
 
 # TODO: some sort of legit method of updating these beyond func calls
 # TODO: Admin page to do that: prob just function_name (description): [button to run function]
 # TODO: take into account existing club.json file (i.e cuts down on API calls)
 def save_club_history() -> dict:
     """ Returns the ION page describing the club. """
-    page = make_api_call(CONFIG["club"]["url"], False)
+    page = api_call("ion", CONFIG["club"]["url"], False)
     for key, block in page["scheduled_on"].items():
-        block["subcall"] = make_api_call(block["roster"]["url"], False)
+        block["subcall"] = api_call("ion", block["roster"]["url"], False)
     page["time"] = time.time()
     dump_file(page, "club")
 
@@ -329,7 +347,7 @@ def graph_capacity() -> None:
 
 def get_signups() -> list:
     """ Returns all of the user's 8th pd signups at a specific club. """
-    signups = make_api_call("signups/user")
+    signups = api_call("ion", "signups/user")
     return list(filter(lambda signup: signup["activity"]["id"] == CONFIG["club"]["id"], signups))
 
 def count_meetings(signups=None, left: datetime=datetime(get_year() - 1, 7, 10), right: datetime=datetime.today()) -> int:

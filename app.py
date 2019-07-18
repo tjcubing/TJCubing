@@ -1,4 +1,4 @@
-import time, os, logging
+import time, os, logging, traceback
 from datetime import datetime
 import flask
 from flask_sitemap import Sitemap
@@ -127,7 +127,8 @@ def profile() -> dict:
     signupForm = forms.SignupForm()
     mailForm = forms.MailForm()
     httpForm = forms.HTTPForm()
-    rtn = {"loginForm": loginForm, "signupForm": signupForm, "mailForm": mailForm, "httpForm": httpForm}
+    ionForm, wcaForm = forms.APIForm(prefix="ion"), forms.APIForm(prefix="wca")
+    rtn = {"loginForm": loginForm, "signupForm": signupForm, "mailForm": mailForm, "httpForm": httpForm, "ionForm": ionForm, "wcaForm": wcaForm}
 
     users = cube.load_file("users")
 
@@ -166,7 +167,7 @@ def profile() -> dict:
             cube.register(username, password)
             return alert("Account registered!", "success", "self")
 
-        elif "submit" in flask.request.form and loginForm.validate_on_submit():
+        elif "login" in flask.request.form and loginForm.validate_on_submit():
             username, password = loginForm.username.data, loginForm.password.data
             if not cube.check(username, password):
                 return alert("Username or password is incorrect.", "info", "self")
@@ -175,6 +176,12 @@ def profile() -> dict:
             flask.session["account"] = username
             flask.session["scope"] = users[username]["scope"]
             return flask.redirect(flask.url_for("profile"))
+
+        elif ionForm.validate_on_submit():
+            rtn = cube.add_dict({"data": cube.api_call("ion", ionForm.call.data)}, rtn)
+
+        elif wcaForm.validate_on_submit():
+            rtn = cube.add_dict({"data": cube.api_call("wca", wcaForm.call.data)}, rtn)
 
     if scope >= 1:
         if mailForm.validate_on_submit():
@@ -431,38 +438,55 @@ def email() -> Response:
     return alert("Wrong nonce. Try registering again?", "danger")
 
 # https://requests-oauthlib.readthedocs.io/en/latest/
-@app.route("/login")
-def login() -> Response:
-    """ ION redirect for OAuth API access. """
-    oauth = cube.make_oauth()
-    authorization_url, state = oauth.authorization_url(cube.AUTHORIZATION_URL)
+def make_login(name: str):
+    """ Makes a login route for an Oauth API. """
+    def login() -> Response:
+        oauth = cube.make_oauth(name)
+        authorization_url, state = oauth.authorization_url(cube.CONFIG[cube.make_key(name, "url")] + "oauth/authorize")
 
-    # State is used to prevent CSRF, keep this for later.
-    flask.session["oauth_state"] = state
-    return flask.redirect(authorization_url)
+        # State is used to prevent CSRF, keep this for later.
+        flask.session[cube.make_key(name, "state")] = state
+        return flask.redirect(authorization_url)
 
-@app.route("/callback")
-def callback() -> Response:
-    """ ION callback for OAuth API access. """
-    if 'oauth_state' not in flask.session:
-        return alert("You shouldn't be here...", "danger")
+    login.__name__ = cube.make_key(name, "login")
+    return login
 
-    assert flask.request.args.get('state', None) == flask.session['oauth_state']
-    code = flask.request.args.get('code', None)
-    if flask.request.args.get('error', None) is not None or code is None:
-        return alert("You must allow Ion OAuth access to vote!", "danger")
+def make_callback(name: str):
+    """ Makes a callback route for an Oauth API. """
+    def callback() -> Response:
+        key = cube.make_key(name, "state")
+        if key not in flask.session:
+            return alert("You shouldn't be here...", "danger")
 
-    oauth = cube.make_oauth(state=flask.session['oauth_state'])
-    token = oauth.fetch_token(cube.TOKEN_URL, code=code, client_secret=cube.CONFIG["client_secret"])
-    cube.save_token(token)
+        assert flask.request.args.get("state", None) == flask.session[key]
+        code = flask.request.args.get("code", None)
+        if flask.request.args.get("error", None) is not None or code is None:
+            return alert("You must allow OAuth access for site functions!", "danger")
 
-    return flask.redirect(flask.session.get("action", "profile"))
+        cube.fetch_token(name, cube.make_oauth(name, state=flask.session[key]), code)
+
+        if "action" in flask.session:
+            action = flask.session["action"]
+            del flask.session["action"]
+        else:
+            action = "profile"
+
+        return flask.redirect(action)
+
+    callback.__name__ = cube.make_key(name, "callback")
+    return callback
+
+def make_api(names: list) -> None:
+    """ Makes login and corresponding callback pages for each API. """
+    for name in names:
+         app.route("/" + cube.make_key(name, "login"))(make_login(name))
+         app.route("/" + cube.make_key(name, "callback"))(make_callback(name))
 
 def vote_requirements():
     """ Checks if the user can view the vote/run pages. """
-    if not cube.test_token():
+    if not cube.test_token("ion"):
         flask.session["action"] = flask.request.path
-        return flask.redirect(flask.url_for("login"))
+        return flask.redirect(flask.url_for("ion_login"))
 
     vote = cube.load_file("vote")
 
@@ -514,7 +538,8 @@ def run():
 # Catch-all exception handler
 @app.errorhandler(Exception)
 def exception_handler(e):
-    app.logger.error('{}: {}'.format(type(e).__name__, e))
+    # app.logger.error("{}: {}".format(type(e).__name__, e))
+    app.logger.error(traceback.format_exc())
     return make_error_page(500)(InternalServerError())
 
 def make_error_page(error: int):
@@ -531,6 +556,7 @@ def make_error_pages(errors: list) -> None:
         app.errorhandler(error)(make_error_page(error))
 
 make_error_pages(cube.get_errors())
+make_api(["ion", "wca"])
 make_pages(PAGES)
 
 # https://medium.com/@trstringer/logging-flask-and-gunicorn-the-manageable-way-2e6f0b8beb2f
