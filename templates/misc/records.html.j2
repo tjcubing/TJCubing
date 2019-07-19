@@ -1,0 +1,31 @@
+{% extends "helper/base.html.j2" %}
+
+{% block subtitle %} TJHSST's all time best speedcubers. {% endblock %}
+{% block content %}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        {% set ranks = ["NR", "CR", "WR"] %}
+        {# for header in ["Event"] + ranks + ["Single", "Average"] + ranks[::-1] #}
+        {% for header in ["Event", "Single", "Average"] %}
+          <th scope="col"> {{ header }} </th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for event in events %}
+        <tr>
+          <th scope="row">
+            <span class="cubing-icon {{ times[event]['icon'] }} align-baseline"></span>
+            <span class="align-baseline">{{ event }}</span>
+          </th>
+          {% for mode in ["single", "average"] %}
+            {% set row = times[event][mode][0] %}
+            <td>{{ '<a data-toggle="tooltip" data-placement="right" title="{}">'.format(row[1]) + wca_time(event, row[0]) + '</a>' if row | length > 0 else "" }}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}
