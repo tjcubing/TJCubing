@@ -142,6 +142,14 @@ def parse_time(s: str) -> float:
         return 2*int(solved) - int(attempted.split()[0])
     return round(sum(60**(len(s.split(":")) - 1 - i)*float(token) for i, token in enumerate(s.split(":"))), 2)
 
+def add_zero(s: str, i: int) -> str:
+    """ Adds "0" as a suffix or prefix if it needs it. """
+    if "." in s and len(s.split(".")[1]) == 1:
+        return s + "0"
+    if i != 0 and len(s) == 4:
+        return "0" + s
+    return s
+
 def time_formatted(event:str, mode:str, t: float) -> str:
     """ Reverses parse_time """
     if t == statistics.DNF:
@@ -151,7 +159,8 @@ def time_formatted(event:str, mode:str, t: float) -> str:
             return str(t)
         return str(int(t))
     s = str(timedelta(seconds=t))
-    return ":".join([str(round((float if i == 2 else int)(token), 2)) for i, token in enumerate(s.split(":")) if float(token) != 0])
+    tokens = list(filter(lambda token: float(token) != 0, s.split(":")))
+    return ":".join([add_zero(str(round((float if i == len(tokens) - 1 else int)(token), 2)), i) for i, token in enumerate(tokens)])
 
 def parse_rank(s: str) -> int:
     """ Parses a rank. """

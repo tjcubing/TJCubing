@@ -2,7 +2,7 @@
 
 {% macro render_ranks(mode, event) %}
   {% for rank in (ranks if mode == "sranks" else ranks[::-1]) %}
-    <td class="text-right"> {{ times[event].get(mode)[rank] if times[event].get(mode)[rank] != DNF else "" }} </td>
+    <td class="text-right text-monospace"> {{ times[event].get(mode)[rank] if times[event].get(mode)[rank] != DNF else "" }} </td>
   {% endfor %}
 {% endmacro %}
 
@@ -30,7 +30,7 @@
           {% for mode in ["single", "average"] %}
             {% set row = times[event][mode][0] %}
             {% if row | length > 0 and row[0] != DNF %}
-              <td class="text-right"><a data-toggle="tooltip" data-placement="right" title="{{ row[1] }}"> {{ row[1] + "- "}}<strong>{{ wca_time(event, mode, row[0]) }}</strong></a></td>
+              <td class="text-right"><a data-toggle="tooltip" data-placement="right" title="{{ row[1] }}"> {{ row[1] + " - "}}<strong class="text-monospace">{{ wca_time(event, mode, row[0]) }}</strong></a></td>
             {% else %}
               <td></td>
             {% endif %}
