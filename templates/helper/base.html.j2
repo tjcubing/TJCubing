@@ -28,9 +28,13 @@
         {% block content %}{% endblock %}
       </div>
     </main>
-    <!-- Render feather icons -->
+    <!-- Render feather icons and tooltips -->
     <script>
       feather.replace()
+
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
     </script>
   </body>
 

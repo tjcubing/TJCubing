@@ -272,13 +272,30 @@ def settings() -> dict:
 
     return {"gpgForm": gpgForm, "photoForm": photoForm}
 
+# TODO: add ranks, all students
+def records() -> dict:
+    """ Displays TJ's all time bests. """
+    times = cube.load_file("records")
+    if "wca_token" in flask.session and "ion_token" in flask.session:
+        me = cube.api_call("wca", "me")["me"]
+        prs = cube.wca_profile(me["url"])
+        for event in prs:
+            # PRs can only get better so remove old PR if it exists
+            for mode in ["single", "average"]:
+                times[event][mode] = [time for time in times[event][mode] if me["name"] not in time]
+                times[event][mode].append((prs[event][mode], me["name"]))
+                times[event][mode].sort()
+        cube.dump_file(times, "records")
+
+    return {"times": times, "events": cube.EVENTS}
+
 def search() -> dict:
     """ Parses the user's search. Can be POST or GET method. """
-    query = None
-    if flask.request.method == 'POST':
-        query = flask.request.form['query']
-    elif flask.request.args.get('query', None) is not None:
-        query = flask.request.args['query']
+    form = forms.SearchForm()
+    if form.validate_on_submit():
+        query = form.query.data
+    elif flask.request.args.get("query", None) is not None:
+        query = flask.request.args["query"]
     else:
         return {}
     return {"entries": [(time, NAMES[html], html, preview) for time, html, preview in cube.parse_search(query)]}
@@ -325,6 +342,7 @@ PAGES = {"": (index, ["POST", "GET"]),
          "misc":
              {
                 "stats": (stats, ["POST", "GET"]),
+                "records": records,
              },
          "profile": (profile, ["POST", "GET"]),
          "settings": (settings, ["POST", "GET"]),
@@ -365,6 +383,7 @@ GLOBAL = {"pages": NAV,
           "humanize": cube.humanize,
           "arrow": cube.arrow,
           "clubmail": cube.CONFIG["clubmail"],
+          "wca_time": cube.time_formatted
          }
 
 expose(GLOBAL, [furl, furl_for])
@@ -376,6 +395,7 @@ def GLOBALS() -> dict:
     vars = {"vote_active": cube.load_file("vote")["vote_active"],
             "user": user,
             "btnform": forms.FlaskForm(),
+            "searchForm": forms.SearchForm(),
            }
     return cube.add_dict(GLOBAL, vars)
 

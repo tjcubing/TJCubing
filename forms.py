@@ -45,6 +45,9 @@ class SignupForm(LoginForm):
 class APIForm(FlaskForm):
     call = StringField("", [DataRequired()], render_kw={"class": "form-control"})
 
+class SearchForm(FlaskForm):
+    query = StringField("", [DataRequired()], render_kw={"class": "form-control mr-sm-2", "placeholder": "Search"})
+
 class MailForm(FlaskForm):
     recipients = TextAreaField("", render_kw={"class": "form-control", "rows": 1})
     subject = StringField("Markdown", [DataRequired()], render_kw={"class": "form-control", "placeholder": "Subject"})

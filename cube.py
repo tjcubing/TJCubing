@@ -1,5 +1,6 @@
 import json, pickle, time, os, getpass
 from datetime import datetime
+from datetime import timedelta
 import arrow
 import humanize
 import markdown2
@@ -15,7 +16,7 @@ import requests
 from bs4 import BeautifulSoup
 import flask
 from requests_oauthlib import OAuth2Session
-import forms
+import statistics, forms
 # from oauthlib.oauth2 import TokenExpiredError
 
 # Helper library to query the WCA for competitions and other miscellaneous tasks
@@ -48,6 +49,7 @@ SITEMAP = "static/sitemap.xml"
 REPO = "https://github.com/stephen-huan/TJCubing"
 #alternatively http://cubing.sites.tjhsst.edu
 TJ = "https://activities.tjhsst.edu/cubing/"
+EVENTS = ['3x3x3 Cube', '2x2x2 Cube', '4x4x4 Cube', '5x5x5 Cube', '6x6x6 Cube', '7x7x7 Cube', '3x3x3 Blindfolded', '3x3x3 Fewest Moves', '3x3x3 One-Handed', '3x3x3 With Feet', 'Clock', 'Megaminx', 'Pyraminx', 'Skewb', 'Square-1', '4x4x4 Blindfolded', '5x5x5 Blindfolded', '3x3x3 Multi-Blind']
 
 https = load_file("site")["url"][:5] == "https"
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = str(int(not https))
@@ -129,6 +131,33 @@ def get_comps() -> list:
     dump_file({"time": time.time(), "comps": comps}, "comps")
 
     return comps
+
+def parse_time(s: str) -> float:
+    """ Parses a time string into the number of seconds. """
+    if s == "":
+        return statistics.DNF
+    # MBLD
+    if "/" in s:
+        solved, attempted = s.split("/")
+        return 2*int(solved) - int(attempted.split()[0])
+    return round(sum(60**(len(s.split(":")) - 1 - i)*float(token) for i, token in enumerate(s.split(":"))), 2)
+
+def time_formatted(event:str, t: float) -> str:
+    """ Reverses parse_time """
+    if t == statistics.DNF:
+        return ""
+    if event in ["3x3x3 Fewest Moves", "3x3x3 Multi-Blind"]:
+        return str(int(t))
+    s = str(timedelta(seconds=t))
+    return ":".join([str(round((float if i == 2 else int)(token), 2)) for i, token in enumerate(s.split(":")) if float(token) != 0])
+
+def wca_profile(link: str) -> dict:
+    """ Parses a user's profile. """
+    soup = make_soup(link)
+    table = soup.select(".personal-records")[0].find("table")
+    results = {event.select(".event")[0].text.strip(): {"single": parse_time(event.select(".single")[0].text.strip()), "average": parse_time(event.select(".average")[0].text.strip())}
+               for event in table.find_all("tr")[1:]}
+    return results
 
 def get_lectures() -> list:
     """ Returns a list of past lectures. """

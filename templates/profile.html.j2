@@ -93,6 +93,8 @@
                   </div>
                 </div>
               </form>
+            {% else %}
+              <p class="mt-4"> Please login to ION to enable API calls. </p>
             {% endif %}
             {% if "wca_token" in session %}
               <form method="POST">
@@ -107,7 +109,9 @@
                   </div>
                 </div>
               </form>
-            {% endif %}
+              {% else %}
+                <p class="mt-4"> Please login to the WCA to enable API calls. </p>
+              {% endif %}
 
             {% if data %}
               <h5 class="mt-3"> Output: </h5>
@@ -209,10 +213,6 @@
           $('#htmlemail').html(converter.makeHtml($('#email').val()));
         });
 
-        // Enable tooltips
-        $(function () {
-          $('[data-toggle="tooltip"]').tooltip();
-        })
     </script>
 
   {% else %}

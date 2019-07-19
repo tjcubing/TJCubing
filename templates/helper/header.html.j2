@@ -6,6 +6,9 @@
   <!-- Bootstrap CSS -->
   <link href="{{ furl('css/main.min.css') }}" rel="stylesheet">
 
+  <!-- Cubing icons: https://github.com/cubing/icons -->
+  <link rel="stylesheet" href="{{ furl('css/cubing-icons.css') }}">
+
   <title>{{ title|capitalize }} - TJ Cubing</title>
   <meta name="description" content="TJ's Rubik's Cube Clube website">
 	<meta name="author" content="Stephen Huan">
@@ -53,10 +56,12 @@
     </ul>
 
     <!-- Search bar -->
-    <form class="form-inline my-2 my-lg-0" action="{{ furl_for('search') }}" method="POST">
-      <input class="form-control mr-sm-2" name="query" id="query" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+    <form class="form-inline" action="{{ furl_for('search') }}" method="POST">
+      {{ searchForm.csrf_token }}
+      {{ f.render_field(searchForm.query) }}
+      {{ f.button(text="Search", classes="btn-outline-warning") }}
     </form>
+
   </div>
 </nav>
 
