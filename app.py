@@ -280,15 +280,19 @@ def records() -> dict:
 
     if "wca_token" in flask.session and "ion_token" in flask.session:
         me = cube.api_call("wca", "me")["me"]
+        year = cube.api_call("ion", "profile")["graduation_year"]
         refresh = False
 
-        if [me["url"], me["name"]] not in people:
-            people.append([me["url"], me["name"]])
-            # new person added
+        if [me["url"], me["name"], year] not in people:
+            people.append([me["url"], me["name"], year])
+            # New person added
             refresh = True
 
         if refresh or time.time() - records["time"] > cube.CONFIG["time"]:
-            for url, name in people:
+            # Remove alumni
+            people = [person for person in people if cube.datetime.now() < cube.summer(person[-1])]
+
+            for url, name, year in people:
                 prs = cube.wca_profile(url)
                 for event in prs:
                     # PRs can only get better so remove old PR if it exists

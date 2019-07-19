@@ -90,6 +90,10 @@ def unix_to_human(time: float) -> str:
     """ Returns a human-readable time from a UNIX timestamp. """
     return datetime.fromtimestamp(time).strftime("%A, %B %d, %Y at %I:%M:%S.%f %p")
 
+def summer(year: int) -> datetime:
+    """ Returns a slightly arbitrary date representing the end of school. """
+    return datetime(year, 7, 10)
+
 def make_soup(text: str, mode: str="url", parser: str=PARSER) -> BeautifulSoup:
     """ Returns a soup. """
     if mode == "url" or isinstance(mode, dict):
@@ -402,7 +406,7 @@ def get_signups() -> list:
     signups = api_call("ion", "signups/user")
     return list(filter(lambda signup: signup["activity"]["id"] == CONFIG["club"]["id"], signups))
 
-def count_meetings(signups=None, left: datetime=datetime(get_year() - 1, 7, 10), right: datetime=datetime.today()) -> int:
+def count_meetings(signups=None, left: datetime=summer(get_year() - 1), right: datetime=datetime.today()) -> int:
     """ Retuns the number of meetings the user has been to, between two date ranges. """
     """ Left bound is chosen as an arbitrary date guarenteed to be after any 8th pds from the past year, but before any from the current year. """
     """ Right bound is chosen to be today. """
