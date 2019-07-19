@@ -2,13 +2,14 @@
 
 {% block subtitle %} TJHSST's all time best speedcubers. {% endblock %}
 {% block content %}
+  <h3 class="text-center">Current Personal Records</h3>
   <table class="table table-striped">
     <thead>
       <tr>
         {% set ranks = ["NR", "CR", "WR"] %}
         {# for header in ["Event"] + ranks + ["Single", "Average"] + ranks[::-1] #}
         {% for header in ["Event", "Single", "Average"] %}
-          <th scope="col"> {{ header }} </th>
+          <th scope="col" class="{{'text-right' if loop.index > 1 else 'text-left' }}"> {{ header }} </th>
         {% endfor %}
       </tr>
     </thead>
@@ -21,7 +22,8 @@
           </th>
           {% for mode in ["single", "average"] %}
             {% set row = times[event][mode][0] %}
-            <td>{{ '<a data-toggle="tooltip" data-placement="right" title="{}">'.format(row[1]) + wca_time(event, mode, row[0]) + '</a>' if row | length > 0 else "" }}</td>
+            <td class="text-right">{{ '<a data-toggle="tooltip" data-placement="right" title="{}">'.format(row[1]) + row[1] + "- " + wca_time(event, mode, row[0]) + '</a>'
+                 if row | length > 0 and row[0] != DNF else "" }}</td>
           {% endfor %}
         </tr>
       {% endfor %}
