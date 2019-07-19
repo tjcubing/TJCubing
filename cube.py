@@ -49,6 +49,7 @@ REPO = "https://github.com/stephen-huan/TJCubing"
 #alternatively http://cubing.sites.tjhsst.edu
 TJ = "https://activities.tjhsst.edu/cubing/"
 EVENTS = ['3x3x3 Cube', '2x2x2 Cube', '4x4x4 Cube', '5x5x5 Cube', '6x6x6 Cube', '7x7x7 Cube', '3x3x3 Blindfolded', '3x3x3 Fewest Moves', '3x3x3 One-Handed', '3x3x3 With Feet', 'Clock', 'Megaminx', 'Pyraminx', 'Skewb', 'Square-1', '4x4x4 Blindfolded', '5x5x5 Blindfolded', '3x3x3 Multi-Blind']
+RANKS = ["nr", "cr", "wr"]
 
 https = load_file("site")["url"][:5] == "https"
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = str(int(not https))
@@ -152,12 +153,24 @@ def time_formatted(event:str, mode:str, t: float) -> str:
     s = str(timedelta(seconds=t))
     return ":".join([str(round((float if i == 2 else int)(token), 2)) for i, token in enumerate(s.split(":")) if float(token) != 0])
 
+def parse_rank(s: str) -> int:
+    """ Parses a rank. """
+    if s == "":
+        return statistics.DNF
+    return int(s)
+
 def wca_profile(link: str) -> dict:
     """ Parses a user's profile. """
     soup = make_soup(link)
     table = soup.select(".personal-records")[0].find("table")
-    results = {event.select(".event")[0].text.strip(): {"single": parse_time(event.select(".single")[0].text.strip()), "average": parse_time(event.select(".average")[0].text.strip())}
-               for event in table.find_all("tr")[1:]}
+
+    text = lambda event, cls, i=0: event.select(".{}".format(cls))[i].text.strip()
+    results = {text(event, "event"): add_dict(
+               {cls: parse_time(text(event, cls)) for cls in ["single", "average"]},
+               {name: {abr: parse_rank(text(event, cls, i)) for abr, cls in zip(RANKS, ["country-rank", "continent-rank", "world-rank"])}
+                    for i, name in enumerate(["sranks", "aranks"])})
+               for event in table.find_all("tr")[1:]
+              }
     return results
 
 def get_lectures() -> list:

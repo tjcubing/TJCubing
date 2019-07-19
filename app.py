@@ -272,7 +272,7 @@ def settings() -> dict:
 
     return {"gpgForm": gpgForm, "photoForm": photoForm}
 
-# TODO: add ranks, all students
+# TODO: all students
 def records() -> dict:
     """ Displays TJ's all time bests. """
     records = cube.load_file("records")
@@ -298,9 +298,14 @@ def records() -> dict:
                         # More points is better
                         times[event][mode].sort(reverse=event == "3x3x3 Multi-Blind")
 
+                        if times[event][mode][0][1] == name:
+                            cat = mode[0] + "ranks"
+                            for rank in ["nr", "cr", "wr"]:
+                                times[event][cat][rank] = prs[event][cat][rank]
+
             cube.dump_file({"records": times, "people": people, "time": time.time()}, "records")
 
-    return {"times": times, "events": cube.EVENTS, "DNF": statistics.DNF}
+    return {"times": times, "events": cube.EVENTS, "DNF": statistics.DNF, "ranks": cube.RANKS}
 
 def search() -> dict:
     """ Parses the user's search. Can be POST or GET method. """

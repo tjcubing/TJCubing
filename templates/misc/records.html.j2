@@ -1,15 +1,19 @@
 {% extends "helper/base.html.j2" %}
 
+{% macro render_ranks(mode, event) %}
+  {% for rank in (ranks if mode == "sranks" else ranks[::-1]) %}
+    <td class="text-right"> {{ times[event].get(mode)[rank] if times[event].get(mode)[rank] != DNF else "" }} </td>
+  {% endfor %}
+{% endmacro %}
+
 {% block subtitle %} TJHSST's all time best speedcubers. {% endblock %}
 {% block content %}
   <h3 class="text-center">Current Personal Records</h3>
   <table class="table table-striped">
     <thead>
       <tr>
-        {% set ranks = ["NR", "CR", "WR"] %}
-        {# for header in ["Event"] + ranks + ["Single", "Average"] + ranks[::-1] #}
-        {% for header in ["Event", "Single", "Average"] %}
-          <th scope="col" class="{{'text-right' if loop.index > 1 else 'text-left' }}"> {{ header }} </th>
+        {% for header in ["Event"] + ranks + ["Single", "Average"] + ranks[::-1] %}
+          <th scope="col" class="{{'text-right' if loop.index > 1 else 'text-left' }}"> {{ header.upper() if header in ranks else header }} </th>
         {% endfor %}
       </tr>
     </thead>
@@ -20,6 +24,9 @@
             <span class="cubing-icon {{ times[event]['icon'] }} align-baseline"></span>
             <span class="align-baseline">{{ event }}</span>
           </th>
+
+          {{ render_ranks("sranks", event) }}
+
           {% for mode in ["single", "average"] %}
             {% set row = times[event][mode][0] %}
             {% if row | length > 0 and row[0] != DNF %}
@@ -28,6 +35,8 @@
               <td></td>
             {% endif %}
           {% endfor %}
+
+          {{ render_ranks("aranks", event) }}
         </tr>
       {% endfor %}
     </tbody>
