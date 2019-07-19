@@ -89,7 +89,7 @@ def competitions() -> dict:
     """ Gets the cached competitions, but will refresh if not updated recently. """
     c = cube.load_file("comps")
     last, comps = c["time"], c["comps"]
-    if time.time() - last > cube.WAIT:
+    if time.time() - last > cube.CONFIG["time"]:
         comps = cube.get_comps()
 
     return {"comps": comps, "last": cube.unix_to_human(last)}
@@ -275,19 +275,30 @@ def settings() -> dict:
 # TODO: add ranks, all students
 def records() -> dict:
     """ Displays TJ's all time bests. """
-    times = cube.load_file("records")
+    records = cube.load_file("records")
+    times, people = records["records"], records["people"]
+
     if "wca_token" in flask.session and "ion_token" in flask.session:
         me = cube.api_call("wca", "me")["me"]
-        prs = cube.wca_profile(me["url"])
-        for event in prs:
-            # PRs can only get better so remove old PR if it exists
-            for mode in ["single", "average"]:
-                times[event][mode] = [tuple(time) for time in times[event][mode] if me["name"] not in time]
-                times[event][mode].append((prs[event][mode], me["name"]))
-                # More points is better
-                times[event][mode].sort(reverse=event == "3x3x3 Multi-Blind")
+        refresh = False
 
-        cube.dump_file(times, "records")
+        if [me["url"], me["name"]] not in people:
+            people.append([me["url"], me["name"]])
+            # new person added
+            refresh = True
+
+        if refresh or time.time() - records["time"] > cube.CONFIG["time"]:
+            for url, name in people:
+                prs = cube.wca_profile(url)
+                for event in prs:
+                    # PRs can only get better so remove old PR if it exists
+                    for mode in ["single", "average"]:
+                        times[event][mode] = [tuple(time) for time in times[event][mode] if name not in time]
+                        times[event][mode].append((prs[event][mode], name))
+                        # More points is better
+                        times[event][mode].sort(reverse=event == "3x3x3 Multi-Blind")
+
+            cube.dump_file({"records": times, "people": people, "time": time.time()}, "records")
 
     return {"times": times, "events": cube.EVENTS, "DNF": statistics.DNF}
 

@@ -43,7 +43,6 @@ URL = "https://www.worldcubeassociation.org/competitions"
 LECTURES = "static/pdfs/"
 FILE = ".html.j2"
 PREVIEW = 80
-WAIT = CONFIG["time"]
 PARSER = "lxml"
 SITEMAP = "static/sitemap.xml"
 REPO = "https://github.com/stephen-huan/TJCubing"
