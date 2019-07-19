@@ -282,7 +282,7 @@ def records() -> dict:
         for event in prs:
             # PRs can only get better so remove old PR if it exists
             for mode in ["single", "average"]:
-                times[event][mode] = [time for time in times[event][mode] if me["name"] not in time]
+                times[event][mode] = [tuple(time) for time in times[event][mode] if me["name"] not in time]
                 times[event][mode].append((prs[event][mode], me["name"]))
                 times[event][mode].sort()
         cube.dump_file(times, "records")
