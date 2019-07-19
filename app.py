@@ -279,12 +279,12 @@ def records() -> dict:
     if "wca_token" in flask.session and "ion_token" in flask.session:
         me = cube.api_call("wca", "me")["me"]
         prs = cube.wca_profile(me["url"])
-        for event in cube.EVENTS:
+        for event in prs:
             # PRs can only get better so remove old PR if it exists
             for mode in ["single", "average"]:
                 times[event][mode] = [tuple(time) for time in times[event][mode] if me["name"] not in time]
                 times[event][mode].append((prs[event][mode], me["name"]))
-                # More points is better 
+                # More points is better
                 times[event][mode].sort(reverse=event == "3x3x3 Multi-Blind")
 
         cube.dump_file(times, "records")
