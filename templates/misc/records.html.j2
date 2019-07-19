@@ -21,7 +21,7 @@
           </th>
           {% for mode in ["single", "average"] %}
             {% set row = times[event][mode][0] %}
-            <td>{{ '<a data-toggle="tooltip" data-placement="right" title="{}">'.format(row[1]) + wca_time(event, row[0]) + '</a>' if row | length > 0 else "" }}</td>
+            <td>{{ '<a data-toggle="tooltip" data-placement="right" title="{}">'.format(row[1]) + wca_time(event, mode, row[0]) + '</a>' if row | length > 0 else "" }}</td>
           {% endfor %}
         </tr>
       {% endfor %}

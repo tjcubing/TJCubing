@@ -142,11 +142,13 @@ def parse_time(s: str) -> float:
         return 2*int(solved) - int(attempted.split()[0])
     return round(sum(60**(len(s.split(":")) - 1 - i)*float(token) for i, token in enumerate(s.split(":"))), 2)
 
-def time_formatted(event:str, t: float) -> str:
+def time_formatted(event:str, mode:str, t: float) -> str:
     """ Reverses parse_time """
     if t == statistics.DNF:
         return ""
     if event in ["3x3x3 Fewest Moves", "3x3x3 Multi-Blind"]:
+        if event == "3x3x3 Fewest Moves" and mode == "average":
+            return str(t)
         return str(int(t))
     s = str(timedelta(seconds=t))
     return ":".join([str(round((float if i == 2 else int)(token), 2)) for i, token in enumerate(s.split(":")) if float(token) != 0])
