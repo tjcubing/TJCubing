@@ -92,7 +92,7 @@ def competitions() -> dict:
     if time.time() - last > cube.CONFIG["time"]:
         comps = cube.get_comps()
 
-    return {"comps": comps, "last": cube.unix_to_human(last)}
+    return {"comps": comps, "last": cube.unix_to_human(last), "icons": cube.ICONS}
 
 def lectures() -> dict:
     """ Returns the lectures. """
@@ -215,6 +215,12 @@ def profile() -> dict:
             flask.session.clear()
             flask.session["csrf_token"] = csrf
 
+        if "fb" in flask.request.form:
+            cube.get_pfps(cube.CONFIG["officers"])
+
+        if "comps" in flask.request.form:
+            cube.get_comps()
+
     return rtn
 
 def delete_photo() -> None:
@@ -308,7 +314,7 @@ def records() -> dict:
 
             cube.dump_file({"records": times, "people": people, "time": time.time()}, "records")
 
-    return {"times": times, "events": cube.EVENTS, "DNF": statistics.DNF, "ranks": cube.RANKS}
+    return {"times": times, "events": cube.EVENTS, "icons": cube.ICONS, "DNF": statistics.DNF, "ranks": cube.RANKS}
 
 def rankings() -> dict:
     """ Shows the rankings of all TJ students signed up. """

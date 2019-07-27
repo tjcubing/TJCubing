@@ -150,6 +150,11 @@
               <li> Upload a file greater than {{ humanize.naturalsize(config["MAX_CONTENT_LENGTH"]) }} to cause 413 </li>
               <li> 500 is a general purpose error message. </li>
             </ul>
+
+          {% elif curr == "refresh" %}
+            <form method="POST">{{ btnform.csrf_token }}{{ f.button("fb", "Facebook profile pictures") }}</form>
+            <form method="POST">{{ btnform.csrf_token }}{{ f.button("comps", "Competitions") }}</form>
+
           {% else %}
             There appears to be nothing here...
           {% endif %}

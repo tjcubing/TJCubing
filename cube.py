@@ -39,7 +39,7 @@ def dump_file(obj, fname: str, func:str="json", short: bool=True) -> None:
         STR_FUNC["dump"][func](obj, f, **({"indent": 4, "sort_keys": True} if func == "json" else {}))
 
 CONFIG = load_file("config")
-URL = "https://www.worldcubeassociation.org/competitions"
+WCA = "https://www.worldcubeassociation.org"
 LECTURES = "static/pdfs/"
 FILE = ".html.j2"
 PREVIEW = 80
@@ -49,6 +49,7 @@ REPO = "https://github.com/stephen-huan/TJCubing"
 #alternatively http://cubing.sites.tjhsst.edu
 TJ = "https://activities.tjhsst.edu/cubing/"
 EVENTS = ['3x3x3 Cube', '2x2x2 Cube', '4x4x4 Cube', '5x5x5 Cube', '6x6x6 Cube', '7x7x7 Cube', '3x3x3 Blindfolded', '3x3x3 Fewest Moves', '3x3x3 One-Handed', '3x3x3 With Feet', 'Clock', 'Megaminx', 'Pyraminx', 'Skewb', 'Square-1', '4x4x4 Blindfolded', '5x5x5 Blindfolded', '3x3x3 Multi-Blind']
+ICONS = {'Clock': 'event-clock', '2x2x2 Cube': 'event-222', '3x3x3 Multi-Blind': 'event-333mbf', 'Square-1': 'event-sq1', '4x4x4 Cube': 'event-444', '5x5x5 Cube': 'event-555', 'Megaminx': 'event-minx', '3x3x3 One-Handed': 'event-333oh', 'Pyraminx': 'event-pyram', '6x6x6 Cube': 'event-666', '4x4x4 Blindfolded': 'event-444bf', '3x3x3 Fewest Moves': 'event-333fm', '3x3x3 Blindfolded': 'event-333bf', '3x3x3 Cube': 'event-333', '3x3x3 With Feet': 'event-333ft', '5x5x5 Blindfolded': 'event-555bf', 'Skewb': 'event-skewb', '7x7x7 Cube': 'event-777'}
 RANKS = ["nr", "cr", "wr"]
 
 https = load_file("site")["url"][:5] == "https"
@@ -103,17 +104,17 @@ def make_soup(text: str, mode: str="url", parser: str=PARSER) -> BeautifulSoup:
         text = open(text)
     return BeautifulSoup(text, parser)
 
-#TODO: get events, TJ kids competing.
 def get_comps() -> list:
     """ Parses the WCA website and returns a list of competitors.
         Calls Google's distancematrix API to get distances to the competitions
     """
     comps = []
-    soup = make_soup(URL, {"region": "USA", "state": "present", "display": "list"})
+    people = [t[1] for t in load_file("records")["people"]]
+    soup = make_soup(WCA + "/competitions", {"region": "USA", "state": "present", "display": "list"})
     for comp in soup("li", class_="list-group-item not-past"):
         info = list(filter(lambda x: x != len(x)*" ", comp.get_text().strip().split("\n")))
         if info[2].split(", ")[-1] in CONFIG["states"]:
-            temp = {"url": URL + comp.find("a").get('href')[13:],
+            temp = {"url": WCA + "/competitions" + comp.find("a")["href"][13:],
                     "name": info[1],
                     "location": info[2],
                     "venue": info[3],
@@ -121,6 +122,13 @@ def get_comps() -> list:
                    }
             subsoup = make_soup(temp["url"])
             temp["gps"] = subsoup.find("dt", string="Address").next_sibling.next_sibling.find("a").get('href').split("/")[-1]
+            temp["events"] = [e["title"] for e in subsoup.select(".competition-events-list")[0].find_all("span")]
+
+            competitors = subsoup.find(lambda tag: tag.name == "a" and "Competitors" in tag.get_text())
+            csoup = make_soup(WCA + competitors["href"])
+            names = [row.select(".name")[0].text.strip() for row in csoup.find("tbody").find_all("tr")]
+            temp["people"] = list(filter(lambda name: name in people, names))
+
             comps.append(temp)
 
     param = {'origins': CONFIG["origin"], 'destinations': "|".join([comp["gps"] for comp in comps]), 'key': CONFIG["key"], 'units': 'imperial'}
@@ -481,14 +489,16 @@ def github_commit_time() -> str:
     mtime = soup.find("relative-time")
     return arrow.get(mtime["datetime"]).to('US/Eastern').format('YYYY-MM-DD HH:mm:ss ZZ')
 
+def make_client(tfa=None) -> Client: return Client(CONFIG["email"], getpass.getpass())
+
 def get_pfp(name: str, client: Client=None) -> Client:
     """ Gets the Facebook profile picture of a person, and saves the profile location. """
-    client = Client(CONFIG["email"], getpass.getpass()) if client is None else client
+    client = make_client() if client is None else client
     user = client.searchForUsers(name)[0]
     d = load_file("fb")
     d[name] = user.url
     dump_file(d, "fb")
-    with open("static/img/pfps/{}.png".format(name.replace(" ", "")), "wb") as f:
+    with open("src/img/pfps/{}.png".format(name.replace(" ", "")), "wb") as f:
         f.write(requests.get(user.photo).content)
     return client
 

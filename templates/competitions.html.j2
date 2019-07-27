@@ -9,11 +9,17 @@
 
   {% for comp in comps %}
     <hr style="border: solid 1px grey;">
-    <a href="{{ comp['url'] }}">{{ comp['name'] }}</a>
+    <a href="{{ comp['url'] }}">{{ comp["name"] }}</a>
     <ul>
-      <li> Date: {{ comp['date'] }} </li>
-      <li> Location: {{ comp['venue'] }} in {{ " ".join(comp['location'].split()[2:]) }} </li>
-      <li> Distance from TJ: {{ comp['mi'] }}, approximate time: {{ comp['timestr'] }} </li> <!-- Vishal Kanigicherla: "approximant" to "approximate"-->
+      <li> Date: {{ comp["date"] }} </li>
+      <li> Location: {{ comp["venue"] }} in {{ " ".join(comp["location"].split()[2:]) }} </li>
+      <li> Distance from TJ: {{ comp["mi"] }}, approximate time: {{ comp["timestr"] }} </li> <!-- Vishal Kanigicherla: "approximant" to "approximate"-->
+      <li> Events:
+        {% for event in comp["events"] %}
+          <span class="cubing-icon {{ icons[event] }}"></span>
+        {% endfor %}
+      </li>
+      <li> TJHSST students attending: {{ ", ".join(comp["people"]) }}</li>
     </ul>
   {% endfor %}
 
