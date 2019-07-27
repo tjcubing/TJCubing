@@ -272,7 +272,6 @@ def settings() -> dict:
 
     return {"gpgForm": gpgForm, "photoForm": photoForm}
 
-# TODO: all students
 def records() -> dict:
     """ Displays TJ's all time bests. """
     records = cube.load_file("records")
@@ -311,6 +310,10 @@ def records() -> dict:
 
     return {"times": times, "events": cube.EVENTS, "DNF": statistics.DNF, "ranks": cube.RANKS}
 
+def rankings() -> dict:
+    """ Shows the rankings of all TJ students signed up. """
+    return {"records": cube.load_file("records")["records"], "events": cube.EVENTS}
+
 def search() -> dict:
     """ Parses the user's search. Can be POST or GET method. """
     form = forms.SearchForm()
@@ -328,7 +331,6 @@ def convert(order:list, prefix:str="", new:list=[]) -> list:
         if isinstance(name, list):
             addition, sublist = name
             new.append(("*" + addition, convert(sublist, "{}".format(prefix), [])))
-            #new.append(("*" + addition, convert(sublist, "{}{}/".format(prefix, addition), [])))
         else:
             new.append(("{}{}".format(prefix, name if name != "" else "index"), NAMES[name]))
     return new
@@ -364,8 +366,12 @@ PAGES = {"": (index, ["POST", "GET"]),
          "misc":
              {
                 "stats": (stats, ["POST", "GET"]),
-                "records": records,
              },
+         "results":
+            {
+                "rankings": rankings,
+                "records": records,
+            },
          "profile": (profile, ["POST", "GET"]),
          "settings": (settings, ["POST", "GET"]),
          "search": (search, ["POST", "GET"])
