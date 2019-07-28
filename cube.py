@@ -556,3 +556,28 @@ def save_email(subject: str, body: str) -> None:
     mails = load_file("mails.json", "json", False)
     mails.append({"subject": subject, "body": body, "time": time.time()})
     dump_file(mails, "mails.json", "json", False)
+
+def update_records() -> None:
+    """ Updates the records page. """
+    records = load_file("records")
+    times, people = records["records"], records["people"]
+
+    # Remove alumni
+    people = [person for person in people if datetime.now() < summer(person[-1])]
+
+    for url, name, year in people:
+        prs = wca_profile(url)
+        for event in prs:
+            # PRs can only get better so remove old PR if it exists
+            for mode in ["single", "average"]:
+                times[event][mode] = [tuple(time) for time in times[event][mode] if name not in time]
+                times[event][mode].append((prs[event][mode], name))
+                # More points is better
+                times[event][mode].sort(reverse=event == "3x3x3 Multi-Blind")
+
+                if times[event][mode][0][1] == name:
+                    cat = mode[0] + "ranks"
+                    for rank in ["nr", "cr", "wr"]:
+                        times[event][cat][rank] = prs[event][cat][rank]
+
+    dump_file({"records": times, "people": people, "time": time.time()}, "records")

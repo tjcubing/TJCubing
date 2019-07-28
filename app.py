@@ -14,8 +14,7 @@ import cube, forms, statistics
 # TODO: partial highlighting on mobile
 # TODO: fix mobile login/profile UI
 # TODO: 413 not being rendered in actual site
-# TODO: prevent CSRF + general security
-# TODO: enable autoescaping
+# TODO: general security, enable autoescaping
 # print([rule.endpoint for rule in app.url_map.iter_rules()])
 
 def select_jinja_autoescape(self, filename: str) -> bool:
@@ -221,6 +220,9 @@ def profile() -> dict:
         if "comps" in flask.request.form:
             cube.get_comps()
 
+        if "records" in flask.request.form:
+            cube.update_records()
+
     return rtn
 
 def delete_photo() -> None:
@@ -289,30 +291,13 @@ def records() -> dict:
         refresh = False
 
         if [me["url"], me["name"], year] not in people:
-            people.append([me["url"], me["name"], year])
+            records["people"].append([me["url"], me["name"], year])
             # New person added
             refresh = True
+            cube.dump_file(records, "records")
 
         if refresh or time.time() - records["time"] > cube.CONFIG["time"]:
-            # Remove alumni
-            people = [person for person in people if cube.datetime.now() < cube.summer(person[-1])]
-
-            for url, name, year in people:
-                prs = cube.wca_profile(url)
-                for event in prs:
-                    # PRs can only get better so remove old PR if it exists
-                    for mode in ["single", "average"]:
-                        times[event][mode] = [tuple(time) for time in times[event][mode] if name not in time]
-                        times[event][mode].append((prs[event][mode], name))
-                        # More points is better
-                        times[event][mode].sort(reverse=event == "3x3x3 Multi-Blind")
-
-                        if times[event][mode][0][1] == name:
-                            cat = mode[0] + "ranks"
-                            for rank in ["nr", "cr", "wr"]:
-                                times[event][cat][rank] = prs[event][cat][rank]
-
-            cube.dump_file({"records": times, "people": people, "time": time.time()}, "records")
+            cube.update_records()
 
     return {"times": times, "events": cube.EVENTS, "icons": cube.ICONS, "DNF": statistics.DNF, "ranks": cube.RANKS}
 

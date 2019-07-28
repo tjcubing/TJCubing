@@ -154,6 +154,7 @@
           {% elif curr == "refresh" %}
             <form method="POST">{{ btnform.csrf_token }}{{ f.button("fb", "Facebook profile pictures") }}</form>
             <form method="POST">{{ btnform.csrf_token }}{{ f.button("comps", "Competitions") }}</form>
+            <form method="POST">{{ btnform.csrf_token }}{{ f.button("records", "Records") }}</form>
 
           {% else %}
             There appears to be nothing here...
