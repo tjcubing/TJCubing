@@ -195,3 +195,7 @@
 {% macro format_time(event, mode, time) %}
   <strong class="text-monospace">{{ wca_time(event, mode, time) }}</strong>
 {% endmacro %}
+
+{% macro format_num(num) %}
+  <td class="text-right text-monospace"> {{ num }} </td>
+{% endmacro %}

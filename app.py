@@ -305,6 +305,14 @@ def rankings() -> dict:
     """ Shows the rankings of all TJ students signed up. """
     return {"records": cube.load_file("records")["records"], "events": cube.EVENTS}
 
+def wca_stats() -> dict:
+    return {"events": [cube.ICONS[event][6:] for event in cube.EVENTS],
+            "sor": cube.get_sor(),
+            "sor_rank": cube.get_sor_ranks(),
+            "kinch": cube.get_kinch(),
+            "kinch_rank": cube.get_kinch_rank(),
+           }
+
 def search() -> dict:
     """ Parses the user's search. Can be POST or GET method. """
     form = forms.SearchForm()
@@ -362,6 +370,7 @@ PAGES = {"": (index, ["POST", "GET"]),
             {
                 "rankings": rankings,
                 "records": records,
+                "WCAstats": wca_stats,
             },
          "profile": (profile, ["POST", "GET"]),
          "settings": (settings, ["POST", "GET"]),

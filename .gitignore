@@ -9,3 +9,5 @@ rendered_templates/
 files/
 uploads/
 .gnupg/
+
+WCA_export*

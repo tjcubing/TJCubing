@@ -1,0 +1,67 @@
+{% extends "helper/base.html.j2" %}
+
+{% block content %}
+  <h3 class="text-center"> SoR Single </h3>
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        {% for header in ["Rank", "Person", "Overall"] + events %}
+          <th scope="col" class="{{'text-right' if loop.index > 1 else 'text-left' }}"> {{ header }} </th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {{ f.format_num(sor_rank[0]) }}
+        <td> TJHSST </td>
+        {{ f.format_num(sor["single"].values() | sum) }}
+        {% for event in events %}
+          {{ f.format_num(sor["single"][event]) }}
+        {% endfor %}
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="text-center"> SoR Average </h3>
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        {% for header in ["Rank", "Person", "Overall"] + events[:-1] %}
+          <th scope="col" class="{{'text-right' if loop.index > 1 else 'text-left' }}"> {{ header }} </th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {{ f.format_num(sor_rank[1]) }}
+        <td> TJHSST </td>
+        {{ f.format_num(sor["average"].values() | sum) }}
+        {% for event in events %}
+          {{ f.format_num(sor["average"][event]) }}
+        {% endfor %}
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="text-center"> Kinch </h3>
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        {% for header in ["Rank", "Person", "Overall"] + events %}
+          <th scope="col" class="{{'text-right' if loop.index > 1 else 'text-left' }}"> {{ header }} </th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {{ f.format_num(kinch_rank) }}
+        <td> TJHSST </td>
+        {{ f.format_num(((kinch.values()|sum)/(events|length)) | round(2)) }}
+        {% for event in events %}
+          {{ f.format_num(kinch[event] | round(2)) }}
+        {% endfor %}
+      </tr>
+    </tbody>
+  </table>
+
+{% endblock %}

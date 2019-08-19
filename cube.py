@@ -17,6 +17,9 @@ from bs4 import BeautifulSoup
 import flask
 from requests_oauthlib import OAuth2Session
 import statistics, forms
+#very expensive import
+import wca
+
 # from oauthlib.oauth2 import TokenExpiredError
 
 # Helper library to query the WCA for competitions and other miscellaneous tasks
@@ -125,9 +128,12 @@ def get_comps() -> list:
             temp["events"] = [e["title"] for e in subsoup.select(".competition-events-list")[0].find_all("span")]
 
             competitors = subsoup.find(lambda tag: tag.name == "a" and "Competitors" in tag.get_text())
-            csoup = make_soup(WCA + competitors["href"])
-            names = [row.select(".name")[0].text.strip() for row in csoup.find("tbody").find_all("tr")]
-            temp["people"] = list(filter(lambda name: name in people, names))
+            if competitors is not None:
+                csoup = make_soup(WCA + competitors["href"])
+                names = [row.select(".name")[0].text.strip() for row in csoup.find("tbody").find_all("tr")]
+                temp["people"] = list(filter(lambda name: name in people, names))
+            else:
+                temp["people"] = []
 
             comps.append(temp)
 
@@ -581,3 +587,53 @@ def update_records() -> None:
                         times[event][cat][rank] = prs[event][cat][rank]
 
     dump_file({"records": times, "people": people, "time": time.time()}, "records")
+
+def get_sor() -> dict:
+    """ Gets TJ's single and average sum of ranks (SoR). """
+    times = load_file("records")["records"]
+    d = {"single": {}, "average": {}}
+    for event in EVENTS:
+        short = ICONS[event][6:]
+
+        rank = times[event]["sranks"]["wr"] if "sranks" in times[event] else statistics.DNF
+        d["single"][short] = wca.rankd["Single"][short] + 1 if rank == statistics.DNF else rank
+
+        rank = times[event]["aranks"]["wr"] if "aranks" in times[event] else statistics.DNF
+        if event != "3x3x3 Multi-Blind":
+            d["average"][short] = wca.rankd["Average"][short] + 1 if rank == statistics.DNF else rank
+
+    return d
+
+def get_sor_ranks() -> tuple:
+    """ Gets the rank of TJ's SoR. """
+    ranks = get_sor()
+    return wca.sor_rank(sum(ranks["single"].values()), "Single"), wca.sor_rank(sum(ranks["average"].values()), "Average")
+
+def kinch(event: str, mode: str, sing: float) -> float:
+    """ Calculates the kinch score for a particular event. """
+    if sing == statistics.DNF:
+        return 0
+    return 100*((wca.wrd[mode][event]/100)/sing if event != "333mbf" else sing/wca.wrd[mode][event])
+
+def get_kinch() -> dict:
+    """ Gets TJ's kinch score. """
+    times = load_file("records")["records"]
+    d = {}
+
+    for event in EVENTS:
+        single, average = times[event]["single"][0][0] if len(times[event]["single"]) > 0 else statistics.DNF, times[event]["average"][0][0] if len(times[event]["average"]) > 0 else statistics.DNF
+
+        event = ICONS[event][6:]
+        score = kinch(event, "Average", average)
+        if event in ["333mbf"]:
+            score = kinch(event, "Single", single)
+        elif event in ["333bf", "333fm", "444bf", "555bf"]:
+            score = max(score, kinch(event, "Single", single))
+
+        d[event] = score
+
+    return d
+
+def get_kinch_rank() -> int:
+    """ Gets the rank of TJ's kinch. """
+    return wca.kinch_rank(sum(get_kinch().values())/len(EVENTS))
