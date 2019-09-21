@@ -1,26 +1,30 @@
 {% extends "helper/base.html.j2" %}
-{% block content %}
 
-<table class="table table-hover">
-  <thead class="thead-dark">
-    <tr>
-      {% for header in headers %}
-        <th scope="col"> {{ header }} </th>
-      {% endfor %}
-    </tr>
-  </thead>
-  <tbody>
-    {% for lecture in lectures %}
+{% block intro %} We now do in-house WCA competition simulations (compsims)! {% endblock %}
+{% block rest %} This includes judging, scrambling, computer-generated scrambles, stackmat starts, etc. {% endblock %}
+
+{% block content %}
+  <caption> Competition at {{ arrow.get(date).to("US/Eastern").format("MM/DD/YYYY") }} ({{ arrow.get(date).to("US/Eastern").humanize() }})
+  <p>Scrambles available <a href="{{ furl('txt/{}scr'.format(arrow.get(date).to('US/Eastern').format('M.D.YYYY'))) }}">here</a>. </p> </caption>
+  <table class="table table-hover">
+    <thead class="thead-dark">
       <tr>
-        <th scope="row"> {{ loop.index }} </th>
-        {% for header in headers[1:4] %}
-          <td> {{ lecture[header|lower] }} </td>
-        {% endfor %}
-        {% for header in headers[4:] %}
-          <td> <a href="{{ furl('pdfs/{}/{}'.format(lecture['title'], lecture[header|lower])) if header != "URL" else lecture[header|lower] }}"> {{ header }} </a> </td>
+        {% for header in ["Rank", "Person", "t1", "t2", "t3", "t4", "t5", "Ao5"] %}
+          <th scope="col"> {{ header }} </th>
         {% endfor %}
       </tr>
-    {% endfor %}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {% for result in results %}
+        <tr>
+          <th scope="row"> {{ loop.index }} </th>
+          <td> {{ result[1] }} </td>
+          {% for d in result[2:] %}
+            {{ f.format_weak_time("333", "average", d) }}
+          {% endfor %}
+          <td> {{ f.format_time("333", "average", result[0]) }} </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}

@@ -196,6 +196,10 @@
   <strong class="text-monospace">{{ wca_time(event, mode, time) }}</strong>
 {% endmacro %}
 
+{% macro format_weak_time(event, mode, time) %}
+  <td class="text-left text-monospace">{{ wca_time(event, mode, time, True) }}</td>
+{% endmacro %}
+
 {% macro format_num(num) %}
   <td class="text-right text-monospace"> {{ num }} </td>
 {% endmacro %}

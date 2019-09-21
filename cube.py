@@ -1,4 +1,4 @@
-import json, pickle, time, os, getpass
+import json, pickle, time, os, getpass, glob
 from datetime import datetime
 from datetime import timedelta
 import arrow
@@ -18,7 +18,7 @@ import flask
 from requests_oauthlib import OAuth2Session
 import statistics, forms
 #very expensive import
-import wca
+# import wca
 
 # from oauthlib.oauth2 import TokenExpiredError
 
@@ -89,6 +89,10 @@ def ion_date(date: str) -> datetime:
 def short_date(date: str) -> float:
     """ Converts my arbitrary shorthand date to a UNIX time. """
     return datetime.strptime(date, "%m/%d/%y %I:%M %p").timestamp()
+
+def jchoi_date(date: str) -> float:
+    """ Converts Justin Choi's file naming scheme to a UNIX time. """
+    return datetime.strptime(date, "%m.%d.%Y").timestamp()
 
 def unix_to_human(time: float) -> str:
     """ Returns a human-readable time from a UNIX timestamp. """
@@ -168,10 +172,10 @@ def add_zero(s: str, i: int) -> str:
         return "0" + s
     return s
 
-def time_formatted(event:str, mode:str, t: float) -> str:
+def time_formatted(event:str, mode:str, t: float, dnf: bool=False) -> str:
     """ Reverses parse_time """
     if t == statistics.DNF:
-        return ""
+        return "DNF" if dnf else ""
     if event in ["3x3x3 Fewest Moves", "3x3x3 Multi-Blind"]:
         if event == "3x3x3 Fewest Moves" and mode == "average":
             return str(t)
@@ -637,3 +641,17 @@ def get_kinch() -> dict:
 def get_kinch_rank() -> int:
     """ Gets the rank of TJ's kinch. """
     return wca.kinch_rank(sum(get_kinch().values())/len(EVENTS))
+
+# TODO: write this
+def get_latest_inhouse() -> str:
+    """ Returns the latest inhouse competition. """
+    return "9.18.2019"
+
+def get_inhouse_results(date: str=get_latest_inhouse()) -> tuple:
+    """ Returns a tuple of a list of tuples sorted by average and a list of scrambles. """
+    return (sorted(list(map(lambda x: [statistics.ao(list(map(parse_time, [t if t != "DNF" else "" for t in x.split()[2:]])))] + [" ".join(x.split()[:2])] + list(map(parse_time, [t if t != "DNF" else "" for t in x.split()[2:]])), load_file("static/txt/{}res".format(date), "text", False).split("\n")[2:-1]))), list(map(lambda x: " ".join(x.split()[1:]), load_file("static/txt/{}scr".format(date), "text", False).split("\n"))))
+
+def get_photos() -> list:
+    """ Returns a list of paths to photos. """
+    path = "static/img/conklin/"
+    return list(map(lambda x: "/".join(x.split("/")[1:]), glob.glob("{}*.jpg".format(path)) + glob.glob("{}*.JPG".format(path))))

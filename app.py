@@ -10,7 +10,6 @@ from flask_talisman import Talisman
 from flask_wtf.csrf import CSRFProtect
 import cube, forms, statistics
 
-# TODO: in house comps page
 # TODO: partial highlighting on mobile
 # TODO: fix mobile login/profile UI
 # TODO: 413 not being rendered in actual site
@@ -96,6 +95,13 @@ def competitions() -> dict:
 def lectures() -> dict:
     """ Returns the lectures. """
     return {"lectures": cube.get_lectures()}
+
+# TODO: add pagination / date selector for past comps
+def in_house() -> dict:
+    """ Returns the results of the weekly competition. """
+    date = cube.get_latest_inhouse()
+    res, scr = cube.get_inhouse_results(date)
+    return {"results": res, "scrambles": scr, "date": cube.jchoi_date(date)}
 
 def result() -> dict:
     """ Displays the result of the election. """
@@ -344,7 +350,7 @@ PAGES = {"": (index, ["POST", "GET"]),
          "algorithms": None,
          "weekly": {
              "lectures": lectures,
-             "inhouse": None,
+             "inhouse": in_house,
              },
          "contact": lambda: {"fb": cube.load_file("fb")},
          "archive":
@@ -355,6 +361,7 @@ PAGES = {"": (index, ["POST", "GET"]),
                                   },
                 "history": lambda: cube.parse_club(),
                 "tips": None,
+                "media": lambda: {"photos": cube.get_photos()},
              },
          "vote":
              {
