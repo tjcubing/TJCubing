@@ -356,7 +356,7 @@ PAGES = {"": (index, ["POST", "GET"]),
          "archive":
              {
                 "emails": lambda: {"emails": [{k: v if k != "body" else cube.markdown2.markdown(v) for k, v in email.items()}
-                                              for email in cube.load_file("mails.json", "json", False)
+                                              for email in reversed(cube.load_file("mails.json", "json", False))
                                              ]
                                   },
                 "history": lambda: cube.parse_club(),

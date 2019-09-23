@@ -18,7 +18,7 @@ import flask
 from requests_oauthlib import OAuth2Session
 import statistics, forms
 #very expensive import
-# import wca
+import wca
 
 # from oauthlib.oauth2 import TokenExpiredError
 
@@ -556,6 +556,7 @@ def register_email(email: str) -> None:
         emails["emails"].append(email)
     dump_file(emails, "emails")
 
+# TODO: blind cc
 def send_email(recipients: list, subject: str, body: str) -> None:
     """ Sends an email. """
     yag = yagmail.SMTP(CONFIG["clubmail"], oauth2_file=os.getcwd() + "/files/oauth2_creds.json")
