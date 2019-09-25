@@ -18,7 +18,7 @@ import flask
 from requests_oauthlib import OAuth2Session
 import statistics, forms
 #very expensive import
-import wca
+# import wca
 
 # from oauthlib.oauth2 import TokenExpiredError
 
@@ -643,10 +643,9 @@ def get_kinch_rank() -> int:
     """ Gets the rank of TJ's kinch. """
     return wca.kinch_rank(sum(get_kinch().values())/len(EVENTS))
 
-# TODO: write this
 def get_latest_inhouse() -> str:
     """ Returns the latest inhouse competition. """
-    return "9.18.2019"
+    return max((file.split("/")[-1][:-3] for file in glob.glob("src/txt/*res")), key=lambda file: jchoi_date(file))
 
 def get_inhouse_results(date: str=get_latest_inhouse()) -> tuple:
     """ Returns a tuple of a list of tuples sorted by average and a list of scrambles. """
