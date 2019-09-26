@@ -18,7 +18,7 @@ import flask
 from requests_oauthlib import OAuth2Session
 import statistics, forms
 #very expensive import
-# import wca
+import wca
 
 # from oauthlib.oauth2 import TokenExpiredError
 
@@ -649,7 +649,7 @@ def get_latest_inhouse() -> str:
 
 def get_inhouse_results(date: str=get_latest_inhouse()) -> tuple:
     """ Returns a tuple of a list of tuples sorted by average and a list of scrambles. """
-    return (sorted(list(map(lambda x: [statistics.ao(list(map(parse_time, [t if t != "DNF" else "" for t in x.split()[2:]])))] + [" ".join(x.split()[:2])] + list(map(parse_time, [t if t != "DNF" else "" for t in x.split()[2:]])), load_file("static/txt/{}res".format(date), "text", False).split("\n")[2:-1]))), list(map(lambda x: " ".join(x.split()[1:]), load_file("static/txt/{}scr".format(date), "text", False).split("\n"))))
+    return (sorted(list(map(lambda x: [statistics.ao(list(map(parse_time, [t if t != "DNF" else "" for t in x.split()[2:]])))] + [" ".join(x.split()[:2])] + list(map(parse_time, [t if t != "DNF" else "" for t in x.split()[2:]])), load_file("static/txt/{}res".format(date), "text", False).split("\n")[:-1]))), list(map(lambda x: " ".join(x.split()[1:]), load_file("static/txt/{}scr".format(date), "text", False).split("\n"))))
 
 def get_photos() -> list:
     """ Returns a list of paths to photos. """
