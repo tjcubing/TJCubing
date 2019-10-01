@@ -117,6 +117,7 @@ def get_comps() -> list:
     """
     comps = []
     people = [t[1] for t in load_file("records")["people"]]
+    alumni = load_file("alumni")
     soup = make_soup(WCA + "/competitions", {"region": "USA", "state": "present", "display": "list"})
     for comp in soup("li", class_="list-group-item not-past"):
         info = list(filter(lambda x: x != len(x)*" ", comp.get_text().strip().split("\n")))
@@ -136,6 +137,7 @@ def get_comps() -> list:
                 csoup = make_soup(WCA + competitors["href"])
                 names = [row.select(".name")[0].text.strip() for row in csoup.find("tbody").find_all("tr")]
                 temp["people"] = list(filter(lambda name: name in people, names))
+                temp["alumni"] = list(filter(lambda name: name in alumni, names))
             else:
                 temp["people"] = []
 
