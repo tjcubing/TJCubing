@@ -4,8 +4,23 @@
 {% block rest %} This includes judging, scrambling, computer-generated scrambles, stackmat starts, etc. {% endblock %}
 
 {% block content %}
-  <caption> Competition at {{ arrow.get(date).to("US/Eastern").format("MM/DD/YYYY") }} ({{ arrow.get(date).to("US/Eastern").humanize() }})
-  <p>Scrambles available <a href="{{ furl('txt/{}scr'.format(arrow.get(date).to('US/Eastern').format('M.D.YYYY'))) }}">here</a>. </p> </caption>
+
+  <form method="POST">
+    {{ btnform.csrf_token }}
+    <div class="input-group mb-3">
+        <select class="custom-select" id="selectdate" name="date" onchange="form.submit()">
+          {% for d in dates %}
+            <option {{ "selected" if d == date else "value" }}="{{ d }}">Competition at {{ parser(d).format("MM/DD/YYYY") }} ({{ parser(d).humanize() }})</option>
+          {% endfor %}
+        </select>
+      <div class="input-group-append">
+        <label class="input-group-text" for="selectdate">Date</label>
+      </div>
+    </div>
+  </form>
+
+  {% set d = parser(date) %}
+  <p>Scrambles available <a href="{{ furl('txt/{}scr'.format(d.format('M.D.YYYY'))) }}">here</a>. </p> </caption>
   <table class="table table-hover">
     <thead class="thead-dark">
       <tr>

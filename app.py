@@ -96,12 +96,12 @@ def lectures() -> dict:
     """ Returns the lectures. """
     return {"lectures": cube.get_lectures()}
 
-# TODO: add pagination / date selector for past comps
 def in_house() -> dict:
     """ Returns the results of the weekly competition. """
-    date = cube.get_latest_inhouse()
+    dates = cube.get_inhouse_dates()
+    date = flask.request.form.get("date", dates[-1])
     res, scr = cube.get_inhouse_results(date)
-    return {"results": res, "scrambles": scr, "date": cube.jchoi_date(date)}
+    return {"results": res, "scrambles": scr, "date": date, "dates": dates, "parser": lambda date: cube.arrow.get(cube.jchoi_date(date)).to("US/Eastern")}
 
 def result() -> dict:
     """ Displays the result of the election. """
@@ -350,7 +350,7 @@ PAGES = {"": (index, ["POST", "GET"]),
          "algorithms": None,
          "weekly": {
              "lectures": lectures,
-             "inhouse": in_house,
+             "inhouse": (in_house, ["POST", "GET"]),
              },
          "contact": lambda: {"fb": cube.load_file("fb")},
          "archive":

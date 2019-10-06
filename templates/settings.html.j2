@@ -44,9 +44,6 @@
                       <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <form method="POST" enctype="multipart/form-data">
                           {{ photoForm.csrf_token }}
-                          <!-- <label class="dropdown-item">
-                              Upload a photo <input type="file" name="photo" style="display: none;" onchange="form.submit()">
-                          </label> -->
                           <label class="dropdown-item">
                               Upload a photo {{ f.render_field(photoForm.photo) }}
                           </label>

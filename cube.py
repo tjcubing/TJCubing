@@ -645,11 +645,11 @@ def get_kinch_rank() -> int:
     """ Gets the rank of TJ's kinch. """
     return wca.kinch_rank(sum(get_kinch().values())/len(EVENTS))
 
-def get_latest_inhouse() -> str:
-    """ Returns the latest inhouse competition. """
-    return max((file.split("/")[-1][:-3] for file in glob.glob("src/txt/*res")), key=lambda file: jchoi_date(file))
+def get_inhouse_dates() -> list:
+    """ Returns a list of all the past inhouse competitions, sorted by date. """
+    return sorted([file.split("/")[-1][:-3] for file in glob.glob("src/txt/*res")], key=lambda file: jchoi_date(file))
 
-def get_inhouse_results(date: str=get_latest_inhouse()) -> tuple:
+def get_inhouse_results(date: str=get_inhouse_dates()[-1]) -> tuple:
     """ Returns a tuple of a list of tuples sorted by average and a list of scrambles. """
     return (sorted(list(map(lambda x: [statistics.ao(list(map(parse_time, [t if t != "DNF" else "" for t in x.split()[2:]])))] + [" ".join(x.split()[:2])] + list(map(parse_time, [t if t != "DNF" else "" for t in x.split()[2:]])), load_file("static/txt/{}res".format(date), "text", False).split("\n")[:-1]))), list(map(lambda x: " ".join(x.split()[1:]), load_file("static/txt/{}scr".format(date), "text", False).split("\n"))))
 
