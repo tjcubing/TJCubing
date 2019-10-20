@@ -16,7 +16,7 @@ import requests
 from bs4 import BeautifulSoup
 import flask
 from requests_oauthlib import OAuth2Session
-from rdoclient import RandomOrgClient
+from rdoclient_py3 import RandomOrgClient
 import statistics, forms
 #very expensive import
 import wca
