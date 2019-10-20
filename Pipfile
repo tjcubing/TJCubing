@@ -27,6 +27,7 @@ python-gnupg = "*"
 yagmail = "*"
 flask-talisman = "*"
 flask-wtf = "*"
+rdoclient = "*"
 
 [requires]
 python_version = "3.5"

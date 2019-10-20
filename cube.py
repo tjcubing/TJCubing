@@ -16,6 +16,7 @@ import requests
 from bs4 import BeautifulSoup
 import flask
 from requests_oauthlib import OAuth2Session
+from rdoclient import RandomOrgClient
 import statistics, forms
 #very expensive import
 import wca
@@ -59,7 +60,8 @@ https = load_file("site")["url"][:5] == "https"
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = str(int(not https))
 os.environ['FLASK_ENV'] = "development"
 
-gpg = gnupg.GPG(gnupghome=".gnupg")
+gpg = gnupg.GPG(gnupghome=CONFIG["gnupg_home"])
+r = RandomOrgClient(CONFIG["random_key"], blocking_timeout=2.0, http_timeout=10.0)
 
 # Overwrite markdown2.markdown function to include extras
 markdown = markdown2.markdown
