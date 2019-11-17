@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# refreshes the WCA export
+
+wget -O wca.zip $1
+
+# remove contents of old folder
+rm WCA_export/*
+
+mv wca.zip WCA_export/wca.zip
+cd WCA_export
+
+unzip wca.zip
+
+rm wca.zip
