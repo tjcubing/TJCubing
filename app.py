@@ -461,6 +461,7 @@ def make_pages(d: dict, prefix="") -> None:
 # https://stackoverflow.com/questions/14048779/with-flask-how-can-i-serve-robots-txt-and-sitemap-xml-as-static-files
 @app.route("/sitemap.xml")
 @app.route("/robots.txt")
+@app.route("/keybase.txt")
 def static_from_root() -> flask.wrappers.Response:
     """ Serves a file from static, skipping the /static/. """
     return flask.send_from_directory(app.static_folder, flask.request.path[1:])

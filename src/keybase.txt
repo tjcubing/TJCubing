@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/stephenhuan
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://cubing.sites.tjhsst.edu
+  * I am stephenhuan (https://keybase.io/stephenhuan) on keybase.
+  * I have a public key ASChn-H2Isi0q7z8QjThBdRKuFdSCST1Vg2et6gvB7bj7go
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120a19fe1f622c8b4abbcfc4234e105d44ab857520924f5560d9eb7a82f07b6e3ee0a",
+      "host": "keybase.io",
+      "kid": "0120a19fe1f622c8b4abbcfc4234e105d44ab857520924f5560d9eb7a82f07b6e3ee0a",
+      "uid": "de92ddb0c0e5ff5533de16b269d14819",
+      "username": "stephenhuan"
+    },
+    "merkle_root": {
+      "ctime": 1574011126,
+      "hash": "0dcaef8b7b0eaa9490c4d144072d424fe70e16344e0d88dce8a1ae87448d1576b525914935a3c7bbd753c74d96dfd7499e82990bf1ee99e70aa6ac4aaaca76a7",
+      "hash_meta": "58890923352e591f04e6689fcbcedfa2b03c7e5d82bef52faa2ca31038754b9d",
+      "seqno": 9964627
+    },
+    "service": {
+      "entropy": "W4bbVgs4BDkL/HknxuMO2xDb",
+      "hostname": "cubing.sites.tjhsst.edu",
+      "protocol": "http:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "5.0.0"
+  },
+  "ctime": 1574011241,
+  "expire_in": 504576000,
+  "prev": "9c06b6d265854b67570c8d6d7d3b471666cfaeec89d019e9a1aed5c7d35cd3c6",
+  "seqno": 30,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgoZ/h9iLItKu8/EI04QXUSrhXUgkk9VYNnreoLwe24+4Kp3BheWxvYWTESpcCHsQgnAa20mWFS2dXDI1tfTtHFmbPruyJ0Bnpoa7Vx9Nc08bEIBpt5BcvY5feL7dU+LoAIO63jiFnP9ZS5bpwaryLsPjxAgHCo3NpZ8RA/bTrUZOcmF7cjr4ChijiR6ka+aOsGv57oeQ6QLFSWxL0FIzYCQVB0tqSaLt4XO3clvWUbIlJpimUCSxz/sDQAahzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEILCdT3fanVkjoB+pA92Nuk8oBYBZoPMkuoMLtjl/sW4Po3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/stephenhuan
+
+==================================================================

@@ -114,7 +114,8 @@ var copy = gulp.parallel(copyFile('bootstrap-SCSS', 'node_modules/bootstrap/scss
                          copyFolder('css'),
                          copyFolder('txt'),
                          copyFile('robots.txt', 'src/robots.txt', 'static'),
-                         copyFile('sitemap.xml', 'src/sitemap.xml', 'static')
+                         copyFile('sitemap.xml', 'src/sitemap.xml', 'static'),
+                         copyFile('keybase.txt', 'src/keybase.txt', 'static')
                         );
 
 exports.build = gulp.series('clean', gulp.series(copy, gulp.parallel('img', 'scripts', 'sass'), 'css'))
