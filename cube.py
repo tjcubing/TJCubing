@@ -1,12 +1,10 @@
-import json, pickle, time, os, getpass, glob
-from datetime import datetime
-from datetime import timedelta
-import arrow
-import humanize
+import json, pickle, os, getpass, glob
 import markdown2
 import yagmail
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
+import calmap
 from sklearn import linear_model
 from sklearn.metrics import r2_score
 from passlib.hash import pbkdf2_sha512
@@ -18,6 +16,8 @@ import flask
 from requests_oauthlib import OAuth2Session
 from rdoclient_py3 import RandomOrgClient
 import statistics, forms
+# TODO: remove star import
+from dates import *
 # very expensive import
 # import wca
 
@@ -75,38 +75,6 @@ def add_dict(d1: dict, d2: dict) -> dict:
 def gen_secret(length=16) -> str:
     """ Generates a random secret key. """
     return os.urandom(length).hex()
-
-def get_year() -> int:
-    """ Returns the year as a number """
-    return datetime.today().year
-
-def footer_time() -> float:
-    """ Returns the current time in the footer format. """
-    return time.strftime("%Y-%m-%d %X %z", time.localtime())
-
-def ion_date(date: str) -> datetime:
-    """ Converts an ION formatted date to a datetime object. """
-    return datetime.strptime(date, "%Y-%m-%d")
-
-def short_date(date: str) -> float:
-    """ Converts my arbitrary shorthand date to a UNIX time. """
-    return datetime.strptime(date, "%m/%d/%y %I:%M %p").timestamp()
-
-def jchoi_date(date: str) -> float:
-    """ Converts Justin Choi's file naming scheme to a UNIX time. """
-    return datetime.strptime(date, "%m.%d.%Y").timestamp()
-
-def unix_to_human(time: float) -> str:
-    """ Returns a human-readable time from a UNIX timestamp. """
-    return datetime.fromtimestamp(time).strftime("%A, %B %d, %Y at %I:%M:%S.%f %p")
-
-def unix_to_date(time: float) -> str:
-    """ Returns a date from a UNIX timestamp. """
-    return datetime.fromtimestamp(time).strftime("%m/%d/%Y")
-
-def summer(year: int) -> datetime:
-    """ Returns a slightly arbitrary date representing the end of school. """
-    return datetime(year, 7, 10)
 
 def make_soup(text: str, mode: str="url", parser: str=PARSER) -> BeautifulSoup:
     """ Returns a soup. """
@@ -667,6 +635,7 @@ def get_photos() -> list:
 def graph_vists():
     """ Graphs the frequency of page visits. """
     vists = load_file("vists")
-    # plt.plot(vists["/"])
-    plt.plot([1, 2], [3, 4])
-    plt.savefig("test.png")
+    keys = [day for day in vists["/"]]
+    days = pd.to_datetime(keys)
+    calmap.yearplot(pd.Series([vists["/"][k] for k in keys], index=days), year=get_year())
+    plt.savefig("static/img/heatmap.png", bbox_inches="tight") #pad_inches=0)

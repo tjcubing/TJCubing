@@ -15,29 +15,34 @@
     <li> <a href="{{ TJ }}">This site</a>, <a href="{{ repo }}">Source</a> made by Stephen Huan. Currently the official site.</li>
   </ul>
 
+  <figure class="figure">
+    <img src="{{ furl('img/heatmap.png') }} " class="figure-img img-fluid rounded" alt="...">
+    <figcaption class="figure-caption text-center"> Heatmap of page vists </figcaption>
+  </figure>
+
   <h1 class="mt-5"> {{ name }} </h1>
   <h2> <small class="text-muted"> {{ description }} </small> </h2>
 
   <h4 class="mt-4 mb-2"> At a Glance </h4>
-  <ul>
-    <!-- TODO: average capacity, most popular block, most popular day -->
+  <ul style="list-style-type:none;"> <!-- no bullet points -->
+    <!-- TODO: average capacity -->
     <li> Number of meetings: {{ blocks|length }} </li>
     <li>
       <figure class="figure">
         <img src="{{ furl('img/capacity.png') }} " class="figure-img img-fluid rounded" alt="...">
-        <!-- <figcaption class="figure-caption">A caption for the above image.</figcaption> -->
+        <figcaption class="figure-caption text-center"> Attendence over time, with a linear fit </figcaption>
       </figure>
     </li>
     <li>
       <figure class="figure">
         <img src="{{ furl('img/blocksby_x.png') }} " class="figure-img img-fluid rounded" alt="...">
-        <!-- <figcaption class="figure-caption">A caption for the above image.</figcaption> -->
+        <figcaption class="figure-caption text-center"> Sorted by day </figcaption>
       </figure>
     </li>
     <li>
       <figure class="figure">
         <img src="{{ furl('img/blocksby_y.png') }} " class="figure-img img-fluid rounded" alt="...">
-        <!-- <figcaption class="figure-caption">A caption for the above image.</figcaption> -->
+        <figcaption class="figure-caption text-center"> Sorted by frequency </figcaption>
       </figure>
     </li>
   </ul>

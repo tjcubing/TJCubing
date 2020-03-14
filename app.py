@@ -75,6 +75,12 @@ def before_request() -> None:
         date = cube.unix_to_date(time.time())
         vists[path] = vists.get(path, {})
         vists[path][date] = vists[path].get(date, 0) + 1
+
+        # more than one day
+        if time.time() - vists["time"] > 60*60*24:
+            cube.graph_vists()
+            vists["time"] = time.time()
+
         cube.dump_file(vists, "vists")
 
 # @app.after_request
