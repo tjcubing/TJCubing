@@ -18,8 +18,8 @@ import flask
 from requests_oauthlib import OAuth2Session
 from rdoclient_py3 import RandomOrgClient
 import statistics, forms
-#very expensive import
-import wca
+# very expensive import
+# import wca
 
 # from oauthlib.oauth2 import TokenExpiredError
 
@@ -99,6 +99,10 @@ def jchoi_date(date: str) -> float:
 def unix_to_human(time: float) -> str:
     """ Returns a human-readable time from a UNIX timestamp. """
     return datetime.fromtimestamp(time).strftime("%A, %B %d, %Y at %I:%M:%S.%f %p")
+
+def unix_to_date(time: float) -> str:
+    """ Returns a date from a UNIX timestamp. """
+    return datetime.fromtimestamp(time).strftime("%m/%d/%Y")
 
 def summer(year: int) -> datetime:
     """ Returns a slightly arbitrary date representing the end of school. """
@@ -659,3 +663,10 @@ def get_photos() -> list:
     """ Returns a list of paths to photos. """
     path = "static/img/conklin/"
     return list(map(lambda x: "/".join(x.split("/")[1:]), glob.glob("{}*.jpg".format(path)) + glob.glob("{}*.JPG".format(path))))
+
+def graph_vists():
+    """ Graphs the frequency of page visits. """
+    vists = load_file("vists")
+    # plt.plot(vists["/"])
+    plt.plot([1, 2], [3, 4])
+    plt.savefig("test.png")

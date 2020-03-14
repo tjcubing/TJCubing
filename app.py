@@ -10,7 +10,7 @@ from flask_talisman import Talisman
 from flask_wtf.csrf import CSRFProtect
 import cube, forms, statistics
 
-# TODO: partial highlighting on mobile
+# TODO: partial highlighting in footer on mobile
 # TODO: fix mobile login/profile UI
 # TODO: 413 not being rendered in actual site
 # TODO: general security, enable autoescaping
@@ -67,6 +67,15 @@ def before_request() -> None:
         if time.time() > cube.short_date(vote["ends_at"]):
             vote["vote_active"] = False
             cube.dump_file(vote, "vote")
+
+    # record number of times each page has been visted
+    path = flask.request.path
+    if path.split("/")[1] != "static" and path.split("/")[1] != "_uploads":
+        vists = cube.load_file("vists")
+        date = cube.unix_to_date(time.time())
+        vists[path] = vists.get(path, {})
+        vists[path][date] = vists[path].get(date, 0) + 1
+        cube.dump_file(vists, "vists")
 
 # @app.after_request
 # def do_something_whenever_a_request_has_been_handled(response):
@@ -616,7 +625,7 @@ make_api(["ion", "wca"])
 make_pages(PAGES)
 
 # https://medium.com/@trstringer/logging-flask-and-gunicorn-the-manageable-way-2e6f0b8beb2f
-if __name__ != '__main__':
-    gunicorn_logger = logging.getLogger('gunicorn.error')
+if __name__ != "__main__":
+    gunicorn_logger = logging.getLogger("gunicorn.error")
     app.logger.handlers = gunicorn_logger.handlers
     app.logger.setLevel(gunicorn_logger.level)
