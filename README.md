@@ -83,3 +83,32 @@ Website primarily made through [Bootstrap](https://getbootstrap.com).
 - /static/img: Images.
 - /static/pdfs: LaTeX Lectures.
 - /static/js: Includes jQuery and Popper.js.
+
+## Future Plans
+- Recreate Twisttheweb (used to be an online timer for racing your friends, now is a mosaic site)
+- Switch from JSON to SQLAlchemy database
+- Add optional breadcrumbs
+- Python tests
+- New pages
+  - Hardware page (links to Cubicle, SCS, my hardware table)
+  - Hardware, Boron treatment, magnetization (in misc/guides)
+  - Make nav bar recursive
+- Admin Page
+  - Ability to edit files through a file editor 
+  - Refresh buttons
+    - meetings in history
+    - sitemap
+    - rendered templates for search
+      - suffix trees for search feature
+  - Simulate jumps forward in time
+  - Request increase in power, requests go to logfile, logfile parsed and delivered as notifications page to admin
+- 2FA for profile logins
+  - Yubikey auth
+- Ability to delete emails from the archive
+- Congratulate when a new TJ record is set
+- Caculate sum of ranks (SOR) and Kinch score relative to TJ rankings
+- Ability to click on an event and see the TJ ranking, similar to the WCA site
+- Hall of Fame (each person with name + year + WCA profile + picture)
+- Stronger profiles
+  - Click on a name and it shows their history in all the weekly comps, graph of ao5 over time, TJ records held, etc.
+- GPG sign emails
