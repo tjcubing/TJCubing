@@ -55,6 +55,7 @@ TJ = "https://activities.tjhsst.edu/cubing/"
 EVENTS = ['3x3x3 Cube', '2x2x2 Cube', '4x4x4 Cube', '5x5x5 Cube', '6x6x6 Cube', '7x7x7 Cube', '3x3x3 Blindfolded', '3x3x3 Fewest Moves', '3x3x3 One-Handed', '3x3x3 With Feet', 'Clock', 'Megaminx', 'Pyraminx', 'Skewb', 'Square-1', '4x4x4 Blindfolded', '5x5x5 Blindfolded', '3x3x3 Multi-Blind']
 ICONS = {'Clock': 'event-clock', '2x2x2 Cube': 'event-222', '3x3x3 Multi-Blind': 'event-333mbf', 'Square-1': 'event-sq1', '4x4x4 Cube': 'event-444', '5x5x5 Cube': 'event-555', 'Megaminx': 'event-minx', '3x3x3 One-Handed': 'event-333oh', 'Pyraminx': 'event-pyram', '6x6x6 Cube': 'event-666', '4x4x4 Blindfolded': 'event-444bf', '3x3x3 Fewest Moves': 'event-333fm', '3x3x3 Blindfolded': 'event-333bf', '3x3x3 Cube': 'event-333', '3x3x3 With Feet': 'event-333ft', '5x5x5 Blindfolded': 'event-555bf', 'Skewb': 'event-skewb', '7x7x7 Cube': 'event-777'}
 RANKS = ["nr", "cr", "wr"]
+NAME_DELIM = "|"
 
 https = load_file("site")["url"][:5] == "https"
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = str(int(not https))
@@ -625,7 +626,11 @@ def get_inhouse_dates() -> list:
 
 def get_inhouse_results(date: str=get_inhouse_dates()[-1]) -> tuple:
     """ Returns a tuple of a list of tuples sorted by average and a list of scrambles. """
-    return (sorted(list(map(lambda x: [statistics.ao(list(map(parse_time, [t if t != "DNF" else "" for t in x.split()[2:]])))] + [" ".join(x.split()[:2])] + list(map(parse_time, [t if t != "DNF" else "" for t in x.split()[2:]])), load_file("static/txt/{}res".format(date), "text", False).split("\n")[:-1]))), list(map(lambda x: " ".join(x.split()[1:]), load_file("static/txt/{}scr".format(date), "text", False).split("\n"))))
+    return (sorted(list(map(\
+    lambda x: [statistics.ao(list(map(parse_time, [t if t != "DNF" else "" for t in x.split(NAME_DELIM)[1].split()])))] + [x.split(NAME_DELIM)[0]] \
+    + list(map(parse_time, [t if t != "DNF" else "" for t in x.split(NAME_DELIM)[1].split()])), \
+    load_file("static/txt/{}res".format(date), "text", False).split("\n")[:-1]))), \
+    list(map(lambda x: " ".join(x.split()[1:]), load_file("static/txt/{}scr".format(date), "text", False).split("\n"))))
 
 def get_photos() -> list:
     """ Returns a list of paths to photos. """
