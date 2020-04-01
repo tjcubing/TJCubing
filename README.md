@@ -14,6 +14,8 @@ Website primarily made through [Bootstrap](https://getbootstrap.com).
 
 [TJ Oauth](https://ion.readthedocs.io/en/latest/developing/oauth.html) is used for the voting system.
 
+[WCA Oauth](https://github.com/thewca/worldcubeassociation.org/wiki/OAuth-documentation-notes) is used for verifying TJ records.
+
 ## File Structure
 
 - /app.py: Main file which actually serves the website. Don't use:
