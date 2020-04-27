@@ -26,7 +26,7 @@
             {% for header in headers[4:] %}
               {% set h = header|lower %}
               {% if h in lecture %}
-                <td> <a href="{{ furl('pdfs/{}/{}'.format(lecture['title'].replace(' ', ''), lecture[h])) if h != "url" else lecture[h] }}"> {{ header }} </a> </td>
+                <td> <a href="{{ furl('pdfs/cubing-lectures/{}/{}'.format(lecture['title'].replace(' ', ''), lecture[h])) if h != "url" else lecture[h] }}"> {{ header }} </a> </td>
               {% else %}
                 <td></td>
               {% endif %}

@@ -1,0 +1,3 @@
+[submodule "src/pdfs/cubing-lectures"]
+	path = src/pdfs/cubing-lectures
+	url = https://github.com/stephen-huan/cubing-lectures

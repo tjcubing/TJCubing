@@ -44,7 +44,7 @@ def dump_file(obj, fname: str, func:str="json", short: bool=True) -> None:
 
 CONFIG = load_file("config")
 WCA = "https://www.worldcubeassociation.org"
-LECTURES = "static/pdfs/"
+LECTURES = "static/pdfs/cubing-lectures/"
 FILE = ".html.j2"
 PREVIEW = 80
 PARSER = "lxml"
