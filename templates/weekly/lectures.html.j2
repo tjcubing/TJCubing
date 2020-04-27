@@ -1,6 +1,8 @@
 {% extends "helper/base.html.j2" %}
 
-{% block intro %} After discussing methods to attract recurring members with the esteemed Justin Choi we decided that having something more to do than just cubing (which could be done at any study hall) would be interesting. Therefore, we are piloting a guest lecture system. Message one of the <a href="{{ furl_for('contact') }}">officers</a> if you want to lecture. {% endblock %}
+{% block intro %} After discussing methods to attract recurring members with the esteemed Justin Choi we decided that having something more to do than just cubing (which could be done at any study hall) would be interesting. Therefore, we are piloting a guest lecture system.
+If you want to lecture, either visit <a href="https://github.com/stephen-huan/cubing-lectures">here</a> to submit a pull request (be sure to read the format specification)
+or message one of the <a href="{{ furl_for('contact') }}">officers</a> if you are not familiar with <a href="https://git-scm.com/">Git</a>. {% endblock %}
 {% block rest %} This is a list of all the past lectures. {% endblock %}
 {% block line %}{% endblock %}
 
