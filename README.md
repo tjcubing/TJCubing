@@ -114,3 +114,4 @@ Website primarily made through [Bootstrap](https://getbootstrap.com).
 - Stronger profiles
   - Click on a name and it shows their history in all the weekly comps, graph of ao5 over time, TJ records held, etc.
 - GPG sign emails
+- nested git repo for lectures 
