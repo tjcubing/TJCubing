@@ -1,7 +1,11 @@
 \documentclass[11pt, oneside]{article}
-\usepackage{titling, hyperref, geometry, amsmath, amssymb, algorithm, graphicx, textcomp, subcaption, CJKutf8}
-\usepackage[noend]{algpseudocode}
-\usepackage[cache=false]{minted}
+\usepackage{titling, geometry, hyperref, algorithm}
+\usepackage{amsmath, amssymb, amsthm}              % mathematical packages
+\usepackage{graphicx, subcaption}                  % images
+\usepackage{textcomp, CJKutf8}                     % misc. text formatting
+\usepackage[noend]{algpseudocode}                  % algorithm psuedocode
+\usepackage[cache=true]{minted}                    % source code
+\usepackage[style=numeric, sorting=none]{biblatex} % bibliography
 \geometry{a4paper}
 
 \hypersetup{
@@ -18,6 +22,12 @@
 \newcommand{\emphasis}[1]{\textbf{\textit{#1}}}
 \newcommand{\dash}{\textquotesingle}
 \newcommand{\ve}[1]{\mathbf{#1}}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\renewcommand\qedsymbol{$\square$}
 
 \title{Linearization of the Rubik's Cube}
 \author{Stephen Huan}
@@ -348,8 +358,12 @@ print(apply(mat_exp(T, 100000), c))
 
 \section{Mathematical Proofs}
 
-Lemma 1: The transpose of a permutation matrix is its inverse.
-\\ Proof: By definition of the inverse, \( A A^{-1} = I \).
+\begin{lemma}
+The transpose of a permutation matrix is its inverse.
+\end{lemma}
+
+\begin{proof}
+By definition of the inverse, \( A A^{-1} = I \).
 Thus, it suffices to calculate \( AA^T \).
 Think of this product as the sum of the outer products between
 each column in \( A \) and each row in \( A^T \).
@@ -363,55 +377,84 @@ Adding them up yields a matrix which has a 1 on each entry on the diagonal (beca
 position in the columns of \( A \) is distinct).
 
 Thus, \( col_1(A) row_1(A^T) + \dots + col_n(A) row_n(A^T) = I_n \)
+\end{proof}
 
-\noindent
-Collorary to lemma 1: Because every matrix can be transposed,
-every permutation matrix is invertible.
+\begin{corollary}
+Because every matrix can be transposed, every permutation matrix is invertible.
+\end{corollary}
 
 \newpage
 
-\noindent
-Lemma 2: The mutiplication of permutation matricies is closed,
+\begin{lemma}
+The mutiplication of permutation matricies is closed,
 that is, for a permutation matrix \( A \) and permutation matrix \( B \),
 \( AB \) is a permutation matrix.
-\\ Proof: Multiplying a matrix by a permutation matrix is equivalent to
+\end{lemma}
+
+\begin{proof}
+An alternative definition of a permutation matrix is a matrix containing
+exactly one entry of 1 in each row and each column and 0s elsewhere.
+Multiplying a matrix by a permutation matrix is equivalent to
 permuting the rows of the matrix. If the rows are swapped, then they
 must still have exactly one 1 in each row. Since swapping rows doesn't
 change the number of 1's in each column, each column must also still
 have exactly one 1. Thus, the product is a permutation matrix.
+\end{proof}
 
-\noindent
-\\ Lemma 3: There are a finite number of permutation matricies,
+\begin{lemma}
+There are a finite number of permutation matricies,
 namely, there are \( N! \) permutation matricies for matricies of size NxN.
-\\ Proof: Each permutation matrix is uniquely determined by \( \pi \).
+\end{lemma}
+
+\begin{proof}
+Each permutation matrix is uniquely determined by \( \pi \).
 There are \( N! \) possible \( \pi \)'s, so there are \( N! \) permutation matricies.
+\end{proof}
 
-\noindent
-\\ Lemma 4: \( (P^k)^{-1} = (P^{-1})^k \)
-\\ Proof: \( (A_1 A_2 \dots A_n)^{-1} = A_n^{-1} A_{n - 1}^{-1} \dots A_1^{-1} \)
-\\
-\( (P P \dots P)^{-1} = P^{-1} P^{-1} \dots P^{-1} = (P^{-1})^k  \)
+\begin{lemma}
+\( (P^k)^{-1} = (P^{-1})^k \)
+\end{lemma}
 
-\noindent
-\\ Theorem 1: For every permutation matrix \( P \), there exists a  \( k \) such that
-\( P^k = I \).
-\\ Proof:
+\begin{proof}
+\begin{align*}
+(A_1 A_2 \dots A_n)^{-1} &= A_n^{-1} A_{n - 1}^{-1} \dots A_1^{-1} \\
+(P P \dots P)^{-1} &= P^{-1} P^{-1} \dots P^{-1} = (P^{-1})^k
+\end{align*}
+\end{proof}
+
+\begin{theorem}
+For every permutation matrix \( P \), there exists a \( k \) such that \( P^k = I \).
+\end{theorem}
+
+\begin{proof}
 By lemma 2, each power of \( P \) must be a permutation matrix.
 By lemma 3, there are a finite number of permutation matrices, thus
 there must be point \( x \) where \( \forall z \geq x \) \( P^z = P^y \)
 for some \( y < x \). Picking a particular \( z > x \), if \( P^z = P^y \), then \( P^z (P^y)^{-1} = I \)
 so \( P^z (P^{-1})^y = I \), thus \( P^{z - y} = I \), completing the proof.
+\end{proof}
 
-This proves that repeating any sequence of moves on a solved Rubik's cube will bring
-the cube backed to a solved state eventually.
+\begin{corollary}
+Repeating any sequence of moves on a solved Rubik's cube will bring
+the cube back to a solved state eventually.
+\end{corollary}
 
-\noindent
-\\ Theorem 2: The inverse of a series of moves is the the series formed by reversing the original series, inversing each move.
-\\ Proof: Let \( S = A_1 A_2 \dots A_n \). \( S^{-1} =  A_n^{-1} A_{n - 1}^{-1} \dots A_1^{-1} \).
+\begin{theorem}
+The inverse of a series of moves is the the series formed by reversing the original series, inversing each move.
+\end{theorem}
 
-\noindent
-\\ Theorem 3: NISS. The ``scramble'' and ``solution'' lie in a cycle.
-\\ Proof: Let a scramble be \( ABCD \) and a solution be \( pqrs \).
+\begin{proof}
+Let \( S = A_1 A_2 \dots A_n \). \( S^{-1} =  A_n^{-1} A_{n - 1}^{-1} \dots A_1^{-1} \).
+\end{proof}
+
+\newpage
+
+\begin{theorem}
+NISS. The ``scramble'' and ``solution'' lie in a cycle.
+\end{theorem}
+
+\begin{proof}
+Proof: Let a scramble be \( ABCD \) and a solution be \( pqrs \).
 By the definition of a solution, \( ABCDpqrs = I \).
 \( sABCDpqrs = s \) and \( sABCDpqrss^{-1} = ss^{-1} \), so
 \( sABCDpqr = I \).
@@ -422,6 +465,7 @@ Repeating these operations,
 \[ qrsABCDp = I \]
 \[ pqrsABCD = I \]
 \[ \dots \]
+\end{proof}
 
 Thus, one can either think of the scramble as \( ABCD \) and the solution as
 \( pqrs \), or the scramble as \( qrsA \) and the solution as \( BCDp \),
