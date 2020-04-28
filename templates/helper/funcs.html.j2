@@ -203,3 +203,13 @@
 {% macro format_num(num) %}
   <td class="text-right text-monospace"> {{ num }} </td>
 {% endmacro %}
+
+{% macro carousel_item(data, title="", descr="", active="") %}
+  <div class="carousel-item {{ active }}" data-interval="5000">
+    {{ data }}
+    <div class="carousel-caption d-none d-md-block">
+      <h5 class="bg-dark"> {{ title }}</h5>
+      <p class="bg-dark" style="color:LightGray"> {{ descr }}</p>
+    </div>
+  </div>
+{% endmacro %}

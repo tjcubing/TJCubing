@@ -3,7 +3,38 @@
 {% block pageheader %}{% endblock %}
 
 {% block content %}
-  <a href="https://alg.cubing.net/?alg=y_D_L_D_B2_D-_U-_L_F-_D_F_D-_F_U2_R2_U-&type=reconstruction&view=playback"> <img class="img-fluid mx-auto d-block" src="{{ furl('img/cubing.png')}}" width="300" height="300" alt="" title="Credits to Albert Chuang (c2015)"> </a>
+  <div class="" style="width: 550px; margin: 0 auto">
+  <!-- <div class=""> -->
+    {% set images = [(furl('img/conklin/IMG_5724.jpg'), "2018-2019", "46.252 seconds"), (furl('img/conklin/IMG_5719.jpg'), "2018-2019"),
+    (furl('img/conklin/IMG_4034.jpg'), "2017-2018", "49.162 seconds"), (furl('img/conklin/IMG_4039.jpg'), "2017-2018"),
+    (furl('img/conklin/IMG_1623.jpg'), "2016-2017", "58.851 seconds"), (furl('img/conklin/IMG_4533.jpg'), "2016-2017", "")] %}
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators" id="indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        {% for img in images %}
+          <li data-target="#myCarousel" data-slide-to="{{ loop.index }}"></li>
+        {% endfor %}
+      </ol>
+
+      <div class="carousel-inner" id="innerCarousel">
+        {{ f.carousel_item('<a href="https://alg.cubing.net/?alg=y_D_L_D_B2_D-_U-_L_F-_D_F_D-_F_U2_R2_U-&type=reconstruction&view=playback"> <img class="img-fluid mx-auto d-block" src="{}" width="300" height="300" alt="" title="Credits to Albert Chuang (c2015)"> </a>'.format(furl("img/cubing.png")), active="active") }}
+
+        {% for img in images %}
+          {{ f.carousel_item("<img src='{}' width='300' height='300' class='d-block w-100' alt='...'>".format(img[0]), img[1], img[2]) }}
+        {% endfor %}
+      </div>
+
+      <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
 
   <div style="text-align:center;">
     <!-- Classes documented at https://getbootstrap.com/docs/4.0/utilities/spacing/ and https://getbootstrap.com/docs/4.0/content/typography/-->
@@ -56,5 +87,33 @@
         {{ f.render_form(form, ["email"], '<small id="emailHelp" class="form-text text-muted">We\'ll never share your email with anyone else.</small>', f.button()) }}
       </div>
   </div>
+
+  <script>
+  $('.carousel').carousel({
+    interval: 1000          // default start time before starting to slide
+  })
+
+  $('#myCarousel').on('slid.bs.carousel', '', checkitem); // on carousel move
+
+  $(document).ready(function(){               // on document ready
+      checkitem();
+  });
+
+  function checkitem()                        // check function
+  {
+      var $this = $('#myCarousel');
+      // if first slide, hide controls
+      if($('#innerCarousel').children(".carousel-item").eq(0).hasClass("active")) {
+          $this.children('.carousel-control-prev').hide();
+          $this.children('.carousel-control-next').hide();
+          $('#indicators').hide();
+      } else {
+          $this.children('.carousel-control-prev').show();
+          $this.children('.carousel-control-next').show();
+          $('#indicators').show();
+      }
+  }
+
+  </script>
 
 {% endblock %}
