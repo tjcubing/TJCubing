@@ -237,12 +237,26 @@ def profile() -> dict:
 
         if "fb" in flask.request.form:
             cube.get_pfps(cube.CONFIG["officers"])
+            alert("Updated the profile pictures!")
 
         if "comps" in flask.request.form:
             cube.get_comps()
+            alert("Updated the competitions!")
 
         if "records" in flask.request.form:
             cube.update_records()
+            alert("Updated the records!")
+
+        if "history" in flask.request.form:
+            cube.save_club_history()
+            cube.graph_capacity()
+            cube.graph_blocks("by_x")
+            cube.graph_blocks("by_y")
+            alert("Updated the club history!")
+
+        if "heatmap" in flask.request.form:
+            cube.graph_vists()
+            alert("Updated the heatmap!")
 
     return rtn
 

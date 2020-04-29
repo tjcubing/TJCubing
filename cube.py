@@ -333,8 +333,6 @@ def get_club_result() -> list:
                 return result
         d = api_call("ion", d["next"], False)
 
-# TODO: some sort of legit method of updating these beyond func calls
-# TODO: Admin page to do that: prob just function_name (description): [button to run function]
 # TODO: take into account existing club.json file (i.e cuts down on API calls)
 def save_club_history() -> dict:
     """ Returns the ION page describing the club. """
@@ -376,7 +374,7 @@ def graph_blocks(s) -> None:
     plt.title("Block Frequency")
     plt.xlabel("Day and Block")
     plt.ylabel("Frequency (number)")
-    plt.savefig("static/img/blocks{}.png".format(s))
+    plt.savefig("src/img/blocks{}.png".format(s))
 
 def graph_capacity() -> None:
     """ Graphs actual over capacity over time. """
@@ -386,6 +384,7 @@ def graph_capacity() -> None:
     regr = linear_model.LinearRegression()
     regr.fit(xp, y)
     yp = regr.predict(xp)
+    print(regr.coef_)
 
     fig, ax = plt.subplots()
     ax.plot(x, y)
@@ -394,7 +393,7 @@ def graph_capacity() -> None:
     plt.title("Rubik's Cube Club Attendance Over Time")
     plt.xlabel("Time")
     plt.ylabel("Percentage of People Attending (%)")
-    plt.savefig("static/img/capacity.png")
+    plt.savefig("src/img/capacity.png")
 
 def get_signups() -> list:
     """ Returns all of the user's 8th pd signups at a specific club. """
@@ -643,4 +642,4 @@ def graph_vists():
     keys = [day for day in vists["/"]]
     days = pd.to_datetime(keys)
     calmap.yearplot(pd.Series([vists["/"][k] for k in keys], index=days), year=get_year())
-    plt.savefig("static/img/heatmap.png", bbox_inches="tight") #pad_inches=0)
+    plt.savefig("src/img/heatmap.png", bbox_inches="tight") #pad_inches=0)

@@ -152,9 +152,11 @@
             </ul>
 
           {% elif curr == "refresh" %}
-            <form method="POST">{{ btnform.csrf_token }}{{ f.button("fb", "Facebook profile pictures") }}</form>
+            <form method="POST">{{ btnform.csrf_token }}{{ f.button("fb", "Facebook profile pictures (will break if done on the website [need some way of inputting 2fa])") }}</form>
             <form method="POST">{{ btnform.csrf_token }}{{ f.button("comps", "Competitions") }}</form>
             <form method="POST">{{ btnform.csrf_token }}{{ f.button("records", "Records") }}</form>
+            <form method="POST">{{ btnform.csrf_token }}{{ f.button("heatmap", "Heatmap") }}</form>
+            <form method="POST">{{ btnform.csrf_token }}{{ f.button("history", "Club meeting history (requires Ion OAuth)") }}</form>
 
           {% else %}
             There appears to be nothing here...

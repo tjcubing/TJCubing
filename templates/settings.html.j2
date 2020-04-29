@@ -35,6 +35,7 @@
               <div class="col-2">
                 <figure class="figure">
                   <figcaption class="mt-2"><h6>Profile picture</h6></figcaption>
+                    <div class="dropdown dropleft"> <!-- TODO: debug why it goes so far down -->
                       <a class="link-unstyled" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="svgcontainer">
                           <i class="svg-icon" fill="white" stroke="white" data-feather="edit-3"></i>
@@ -53,6 +54,7 @@
                           {{ f.button("remove", "Remove photo", "dropdown-item show-alert") }}
                         </form>
                       </div>
+                    </div>
                 </figure>
               </div>
             </div>
