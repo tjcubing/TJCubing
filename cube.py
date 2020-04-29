@@ -384,11 +384,10 @@ def graph_capacity() -> None:
     regr = linear_model.LinearRegression()
     regr.fit(xp, y)
     yp = regr.predict(xp)
-    print(regr.coef_)
 
     fig, ax = plt.subplots()
     ax.plot(x, y)
-    ax.plot(x, yp, label="Line of best fit\n{}\n{}".format(r"$r^2 = {}$".format(round(r2_score(y, yp), 4)), r"$m = {}$".format(round(regr.coef_[0], 4))))
+    ax.plot(x, yp, label="Line of best fit\n{}\n{}".format(r"$r^2 = {}$".format(round(r2_score(y, yp), 4)), r"$m = {}$".format(round(31536000*regr.coef_[0], 4))))
     ax.legend(loc="upper right")
     plt.title("Rubik's Cube Club Attendance Over Time")
     plt.xlabel("Time")
@@ -643,3 +642,5 @@ def graph_vists():
     days = pd.to_datetime(keys)
     calmap.yearplot(pd.Series([vists["/"][k] for k in keys], index=days), year=get_year())
     plt.savefig("src/img/heatmap.png", bbox_inches="tight") #pad_inches=0)
+
+graph_capacity()
