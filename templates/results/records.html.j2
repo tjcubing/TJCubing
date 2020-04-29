@@ -9,37 +9,39 @@
 {% block subtitle %} TJHSST's all time best speedcubers. {% endblock %}
 {% block content %}
   <h3 class="text-center">Current Personal Records</h3>
-  <table class="table table-striped table-sm">
-    <thead>
-      <tr>
-        {% for header in ["Event"] + ranks + ["Single", "Average"] + ranks[::-1] %}
-          <th scope="col" class="{{'text-right' if loop.index > 1 else 'text-left' }}"> {{ header.upper() if header in ranks else header }} </th>
-        {% endfor %}
-      </tr>
-    </thead>
-    <tbody>
-      {% for event in events %}
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
         <tr>
-          <th scope="row">
-            <span class="cubing-icon {{ icons[event] }} align-baseline"></span>
-            <span class="align-baseline">{{ event }}</span>
-          </th>
-
-          {{ render_ranks("sranks", event) }}
-
-          {% for mode in ["single", "average"] %}
-            {% set row = times[event][mode][0] %}
-            {% if row | length > 0 and row[0] != DNF %}
-              <td class="text-right"><a data-toggle="tooltip" data-placement="right" title="{{ row[1] }}"> {{ row[1] + " - "}}{{ f.format_time(event, mode, row[0]) }}</a></td>
-            {% else %}
-              <td></td>
-            {% endif %}
+          {% for header in ["Event"] + ranks + ["Single", "Average"] + ranks[::-1] %}
+            <th scope="col" class="{{'text-right' if loop.index > 1 else 'text-left' }}"> {{ header.upper() if header in ranks else header }} </th>
           {% endfor %}
-
-          {{ render_ranks("aranks", event) }}
         </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        {% for event in events %}
+          <tr>
+            <th scope="row">
+              <span class="cubing-icon {{ icons[event] }} align-baseline"></span>
+              <span class="align-baseline">{{ event }}</span>
+            </th>
+
+            {{ render_ranks("sranks", event) }}
+
+            {% for mode in ["single", "average"] %}
+              {% set row = times[event][mode][0] %}
+              {% if row | length > 0 and row[0] != DNF %}
+                <td class="text-right"><a data-toggle="tooltip" data-placement="right" title="{{ row[1] }}"> {{ row[1] + " - "}}{{ f.format_time(event, mode, row[0]) }}</a></td>
+              {% else %}
+                <td></td>
+              {% endif %}
+            {% endfor %}
+
+            {{ render_ranks("aranks", event) }}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
 {% endblock %}

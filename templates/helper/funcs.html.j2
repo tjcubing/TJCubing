@@ -98,7 +98,7 @@
   </li>
 {% endmacro %}
 
-{% macro button(name="submit", text="Submit", classes="btn-primary mt-3", value="") %}
+{% macro button(name="submit", text="Submit", classes="btn-primary mt-3 mb-3", value="") %}
   <button class="btn {{ classes }}" name="{{ name }}" id="{{ name }}" value="{{ value }}" type="submit">{{ text }}</button>
 {% endmacro %}
 
@@ -113,7 +113,7 @@
 {% endmacro %}
 
 {% macro make_card(width, title, subtitle, body, extra) %}
-  <div class="card mt-5 mb-5" style="width: {{ width }}rem;">
+  <div class="card mt-5 mb-5 w-100" style="width: {{ width }}rem;">
     <div class="card-body">
       <h5 class="card-title">{{ title }}</h5>
       <h6 class="card-subtitle mb-2 text-muted">{{ subtitle }}</h6>

@@ -50,7 +50,7 @@
         {{ f.dropdown("* ", children, [], False, '<div class="dropdown-divider"></div><form action={} method="POST">{}{}</form>'.format(furl_for('profile'), btnform.csrf_token, f.button("logout", "Logout", "btn")), f.img(30, False)) }}
       {% else %}
         <li class="nav-item">
-          <a class="btn btn-outline-light {{ f.active('profile') }} mr-4" href="{{ furl_for('profile') }}" role="button">Sign in</a>
+          <a class="btn btn-outline-light mb-3 mb-lg-0 {{ f.active('profile') }} mr-4" href="{{ furl_for('profile') }}" role="button">Sign in</a>
         </li>
       {% endif %}
     </ul>
@@ -59,7 +59,7 @@
     <form class="form-inline" action="{{ furl_for('search') }}" method="POST">
       {{ searchForm.csrf_token }}
       {{ f.render_field(searchForm.query) }}
-      {{ f.button(text="Search", classes="btn-outline-warning") }}
+      {{ f.button(text="Search", classes="btn-outline-warning mt-3 mt-md-0") }}
     </form>
 
   </div>
