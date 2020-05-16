@@ -115,7 +115,7 @@ var copy = gulp.parallel(copyFile('bootstrap-SCSS', 'node_modules/bootstrap/scss
                          copyFolder('txt'),
                          copyFile('robots.txt', 'src/robots.txt', 'static'),
                          copyFile('sitemap.xml', 'src/sitemap.xml', 'static'),
-                         copyFile('keybase.txt', 'src/keybase.txt', 'static')
+                         copyFile('keybase.txt', 'src/keybase.txt', 'static'),
                          copyFile('dnt-policy.txt', 'src/dnt-policy.txt', 'static')
                         );
 

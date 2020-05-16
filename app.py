@@ -491,6 +491,7 @@ def make_pages(d: dict, prefix="") -> None:
 @app.route("/sitemap.xml")
 @app.route("/robots.txt")
 @app.route("/keybase.txt")
+@app.route("/dnt-policy.txt")
 def static_from_root() -> flask.wrappers.Response:
     """ Serves a file from static, skipping the /static/. """
     return flask.send_from_directory(app.static_folder, flask.request.path[1:])
