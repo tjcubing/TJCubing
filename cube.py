@@ -381,7 +381,6 @@ def graph_capacity() -> None:
     x, y = zip(*[(ion_date(block["date"]), 100*block["count"]/block["capacity"]) for block in parse_club()["blocks"] if block["capacity"] != 0])
 
     xp = np.array(list(map(lambda d: d.timestamp(), x))).reshape(-1, 1)
-    print(len(xp))
     regr = linear_model.LinearRegression()
     regr.fit(xp, y)
     yp = regr.predict(xp)
@@ -643,3 +642,4 @@ def graph_vists():
     days = pd.to_datetime(keys)
     calmap.yearplot(pd.Series([vists["/"][k] for k in keys], index=days), year=get_year())
     plt.savefig("src/img/heatmap.png", bbox_inches="tight") #pad_inches=0)
+
