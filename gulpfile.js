@@ -120,7 +120,7 @@ var copy = gulp.parallel(copyFile('bootstrap-SCSS', 'node_modules/bootstrap/scss
                          copyFile('sitemap.xml', 'src/sitemap.xml', 'static'),
                          copyFile('keybase.txt', 'src/keybase.txt', 'static'),
                          copyFile('dnt-policy.txt', 'src/dnt-policy.txt', 'static'),
-                         copyFile('favicon.ico', 'src/favicon.ico', 'static')
+                         copyFile('logo.ico', 'src/logo.ico', 'static')
                         );
 
 exports.build = gulp.series('clean', gulp.series(copy, gulp.parallel('img', 'scripts', 'sass'), 'css'))
