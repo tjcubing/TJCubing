@@ -115,7 +115,7 @@
 
           {# if 2fa is just turned on, need to show code to user  #}
           {% if secret|length > 0 %}
-            <p> Either scan the QR code or put in the secret. </p>
+            <p> Either scan the QR code or record the secret. </p>
             <p> {{ secret }} </p>
 
             {# format documented here: https://github.com/google/google-authenticator/wiki/Key-Uri-Format #}
@@ -131,15 +131,62 @@
 
             {{ f.btn_form("done", "Done", "btn-success mt-3") }}
 
-          {% elif "2fa" in user %}
-            <p> やった you have 2fa! </p>
-
-            {{ f.btn_form("disable_2fa", "Disable", "btn-danger") }}
-
           {% else %}
-            <p> You don't have 2fa enabled. <p>
+              
+            {% if "2fa" in user %}
+              <p> Yay you have TOTP 2fa! </p>
+              {{ f.btn_form("disable_2fa", "Disable", "btn-danger") }}
+            {% else %}
+              <p> You don't have TOTP 2fa enabled. <p>
+              {{ f.btn_form("enable_2fa", "Enable", "btn-success") }}
+            {% endif %}
 
-            {{ f.btn_form("enable_2fa", "Enable", "btn-success") }}
+            <hr>
+
+            {% if request.args.get("mode") == "register"%} 
+              <p> Touch your authenticator device now... </p>
+
+              <a href="{{ furl_for('settings', tab='security') }}">Cancel</a>
+
+              <script>
+                fetch('/api/register/begin', {
+                  headers: {
+                    'X-CSRF-Token': "{{ csrf_token() }}"
+                  },
+                  method: 'POST',
+                }).then(function(response) {
+                  if(response.ok) return response.arrayBuffer();
+                  throw new Error('Error getting registration data!');
+                }).then(CBOR.decode).then(function(options) {
+                  return navigator.credentials.create(options);
+                }).then(function(attestation) {
+                  return fetch('/api/register/complete', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/cbor',
+                              'X-CSRF-Token': "{{ csrf_token() }}"
+                    },
+                    body: CBOR.encode({
+                      "attestationObject": new Uint8Array(attestation.response.attestationObject),
+                      "clientDataJSON": new Uint8Array(attestation.response.clientDataJSON),
+                    })
+                  });
+                }).then(function(response) {
+                  var stat = response.ok ? 'successful' : 'unsuccessful';
+                  alert('Registration ' + stat);
+                }, function(reason) {
+                  alert(reason);
+                }).then(function() {
+                  window.location = "{{ furl_for('settings', tab='security') }}";
+                });
+              </script>
+
+            {% elif "yubi" in user %}
+              <p> やった you have U2F 2fa! </p>
+              {{ f.btn_form("disable_yubi", "Disable", "btn-danger") }}
+            {% else %}
+              <p> You don't have U2F 2fa enabled. <p>
+              <a href="{{ furl_for('settings', tab='security', mode='register') }}"> Enable </a>
+            {% endif %}
 
           {% endif %}
 

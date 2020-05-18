@@ -32,6 +32,8 @@ calmap = "*"
 pyotp = "*"
 werkzeug = "==0.16"
 wtforms = {extras = ["email"],version = "*"}
+fido2 = "*"
+pyopenssl = "*"
 
 [requires]
 python_version = "3.5"

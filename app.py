@@ -8,6 +8,13 @@ from werkzeug.exceptions import InternalServerError
 from werkzeug.wrappers.response import Response
 from flask_talisman import Talisman
 from flask_wtf.csrf import CSRFProtect
+from fido2.webauthn import PublicKeyCredentialRpEntity
+from fido2.client import ClientData
+from fido2.server import Fido2Server
+from fido2.ctap2 import AttestationObject, AuthenticatorData
+from fido2 import cbor
+from fido2.utils import websafe_encode, websafe_decode
+from fido2.ctap2 import AttestedCredentialData
 import cube, forms, statistics
 
 # TODO: partial highlighting in footer on mobile
@@ -46,6 +53,9 @@ CSRFProtect(app)
 flask_uploads.configure_uploads(app, (forms.times, forms.photos))
 # Strange glitch with TJ servers - if you look at the source code this *should* happen already...
 app.register_blueprint(flask_uploads.uploads_mod)
+
+rp = PublicKeyCredentialRpEntity(cube.load_file("site")["domain"], "2fa server")
+server = Fido2Server(rp)
 
 def alert(msg: str, category: str="success", loc: str="index") -> Response:
     """ Redirects the user with an alert. """
@@ -197,27 +207,38 @@ def profile() -> dict:
                 return alert("Username or password is incorrect.", "info", "self")
 
             # Save login to cookies if 2fa is not enabled, otherwise don't
-            if "2fa" not in users[username]:
+            if "2fa" not in users[username] and "yubi" not in users[username]:
                 flask.session["account"] = username
                 flask.session["scope"] = users[username]["scope"]
             else:
-                flask.session["2fa"] = True
+                if "2fa" in users[username]:
+                    flask.session["2fa"] = True
                 flask.session["username"] = username
+
+            # load U2F challenge if it exists
+            if "yubi" in users[username]:
+                flask.session["yubi"] = websafe_decode(users[username]["yubi"])
 
             return flask.redirect(flask.url_for("profile"))
 
-        elif "login_2fa" in flask.request.form and codeForm.validate_on_submit():
+        elif "yubi_check" in flask.session or ("login_2fa" in flask.request.form and codeForm.validate_on_submit()):
             username = flask.session["username"]
-            if not cube.check_2fa(username, codeForm.code.data):
+            if "yubi_check" not in flask.session and not cube.check_2fa(username, codeForm.code.data):
                 return alert("2FA code is incorrect.", "info", "self")
+
+            if "yubi_check" in flask.session:
+                del flask.session["yubi_check"]
 
             # actually login
             flask.session["account"] = username
             flask.session["scope"] = users[username]["scope"]
             return flask.redirect(flask.url_for("profile"))
 
-        elif "cancel" in flask.request.form:
+        elif "cancel_2fa" in flask.request.form:
             del flask.session["2fa"]
+
+        elif "cancel_yubi" in flask.request.form:
+            del flask.session["yubi"]
 
         elif ionForm.validate_on_submit():
             rtn = cube.add_dict({"data": cube.api_call("ion", ionForm.call.data)}, rtn)
@@ -246,6 +267,8 @@ def profile() -> dict:
             del flask.session["account"]
             if "2fa" in flask.session:
                 del flask.session["2fa"]
+            if "yubi" in flask.session:
+                del flask.session["yubi"]
 
         if "delete" in flask.request.form:
             del users[flask.session["account"]]
@@ -340,11 +363,15 @@ def settings() -> dict:
 
         if "enable_2fa" in flask.request.form:
             secret = cube.pyotp.random_base32()
-            user["2fa"] =  secret
+            user["2fa"] = secret
             cube.dump_file(users, "users")
 
         if "disable_2fa" in flask.request.form:
             del user["2fa"]
+            cube.dump_file(users, "users")
+
+        if "disable_yubi" in flask.request.form:
+            del user["yubi"]
             cube.dump_file(users, "users")
 
     return {"gpgForm": gpgForm, "photoForm": photoForm, "secret": secret}
@@ -653,6 +680,86 @@ def run():
         return alert("<strong>Congrats!</strong> Your application has been registered.")
 
     return flask.render_template(flask.request.path + cube.FILE, **vote, **params, title="run", length=forms.LENGTH, form=form)
+
+# https://github.com/Yubico/python-fido2/blob/master/examples/server/server.py
+
+@app.route("/api/register/begin", methods=["POST"])
+def register_begin():
+    if "credentials" not in flask.session:
+        flask.session["credentials"] = []
+
+    registration_data, state = server.register_begin(
+        {
+            "id": b"user_id",
+            "name": "a_user",
+            "displayName": "A. User",
+            "icon": "https://example.com/image.png",
+        },
+        flask.session["credentials"],
+        user_verification="discouraged",
+        authenticator_attachment="cross-platform",
+    )
+
+    flask.session["state"] = state
+    # print("\n\n\n\n")
+    # print(registration_data)
+    # print("\n\n\n\n")
+    return cbor.encode(registration_data)
+
+@app.route("/api/register/complete", methods=["POST"])
+def register_complete():
+    data = cbor.decode(flask.request.get_data())
+    client_data = ClientData(data["clientDataJSON"])
+    att_obj = AttestationObject(data["attestationObject"])
+    # print("clientData", client_data)
+    # print("AttestationObject:", att_obj)
+
+    auth_data = server.register_complete(flask.session["state"], client_data, att_obj)
+
+    flask.session["credentials"].append(auth_data.credential_data)
+    encoded = websafe_encode(auth_data.credential_data)
+    users = cube.load_file("users")
+    users[flask.session["account"]]["yubi"] = encoded
+    cube.dump_file(users, "users")
+
+    # print("REGISTERED CREDENTIAL:", auth_data.credential_data)
+    return cbor.encode({"status": "OK"})
+
+@app.route("/api/authenticate/begin", methods=["POST"])
+def authenticate_begin():
+    credentials = [AttestedCredentialData(flask.session["yubi"])]
+    if not credentials:
+        abort(404)
+
+    auth_data, state = server.authenticate_begin(credentials)
+    flask.session["state"] = state
+    return cbor.encode(auth_data)
+
+@app.route("/api/authenticate/complete", methods=["POST"])
+def authenticate_complete():
+    credentials = [AttestedCredentialData(flask.session["yubi"])]
+    if not credentials:
+        abort(404)
+
+    data = cbor.decode(flask.request.get_data())
+    credential_id = data["credentialId"]
+    client_data = ClientData(data["clientDataJSON"])
+    auth_data = AuthenticatorData(data["authenticatorData"])
+    signature = data["signature"]
+    # print("clientData", client_data)
+    # print("AuthenticatorData", auth_data)
+
+    server.authenticate_complete(
+        flask.session.pop("state"),
+        credentials,
+        credential_id,
+        client_data,
+        auth_data,
+        signature,
+    )
+    # print("ASSERTION OK")
+    flask.session["yubi_check"] = True
+    return cbor.encode({"status": "OK"})
 
 # http://flask.pocoo.org/docs/1.0/patterns/errorpages/
 # Catch-all exception handler

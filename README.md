@@ -37,6 +37,16 @@ Website primarily made through [Bootstrap](https://getbootstrap.com).
     pipenv run flask run --host='0.0.0.0'
     ```
 
+    or, to use https (this is necessary for testing [Fido U2F](https://www.yubico.com/authentication-standards/fido-u2f/)):
+    ```bash
+    pipenv run flask run --cert=adhoc
+    ```
+    Also, be sure to go to https://localhost:5000/ instead of https://127.0.0.1:5000/.
+
+    Using https will make Chrome say "Your connection is not private".
+    Recently, Google removed the ability to click "Advanced" -> proceed anyways. 
+    To get around this, type "thisisunsafe" and hit enter.
+
     You might be tempted to background the process. 
     On my computer, this makes the website run _incredibly_ slowly.
     Instead, open a terminal window and just let it vibe there.
@@ -110,8 +120,7 @@ Website primarily made through [Bootstrap](https://getbootstrap.com).
       - suffix trees for search feature
   - Simulate jumps forward in time
   - Request increase in power, requests go to logfile, logfile parsed and delivered as notifications page to admin
-- 2FA for profile logins
-  - Yubikey auth
+- Yubikey U2F 2FA
 - Ability to delete emails from the archive
 - Congratulate when a new TJ record is set
 - Calculate sum of ranks (SOR) and Kinch score relative to TJ rankings

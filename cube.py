@@ -20,7 +20,7 @@ import statistics, forms
 # TODO: remove star import
 from dates import *
 # very expensive import
-# import wca
+import wca
 
 # from oauthlib.oauth2 import TokenExpiredError
 
