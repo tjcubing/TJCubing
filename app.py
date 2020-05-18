@@ -224,7 +224,7 @@ def profile() -> dict:
 
         elif "yubi_check" in flask.session or ("login_2fa" in flask.request.form and codeForm.validate_on_submit()):
             username = flask.session["username"]
-            if "yubi_check" not in flask.session and not cube.check_2fa(username, codeForm.code.data):
+            if "yubi_check" not in flask.session and not cube.check_2fa(username, str(codeForm.code.data)):
                 return alert("2FA code is incorrect.", "info", "self")
 
             if "yubi_check" in flask.session:

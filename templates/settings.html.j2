@@ -4,7 +4,7 @@
 {% block content %}
   <div class="container">
     <div class="row">
-      <div class="col-3">
+      <div class="col-sm-3 mb-3">
         <ul class="nav flex-column nav-pills">
           <li class="nav-item list-group-item-secondary">
             <a class="nav-link">Settings</a>
@@ -16,14 +16,14 @@
           {% endfor %}
         </ul>
       </div>
-      <div class="col-9">
+      <div class="col-sm-9">
         {% set tab = request.args.get("tab", "profile") %}
         {% if tab == "profile" %}
           <h3> Public profile </h3>
           <hr>
           <div class="container">
             <div class="row">
-              <div class="col-8">
+              <div class="col-sm-8">
                 <form>
                   <div class="form-group">
                     <label for="name"><h6>Name</h6></label>
@@ -32,10 +32,10 @@
                   </div>
                 </form>
               </div>
-              <div class="col-2">
+              <div class="col-sm-4">
                 <figure class="figure">
                   <figcaption class="mt-2"><h6>Profile picture</h6></figcaption>
-                    <div class="dropdown dropleft"> <!-- TODO: debug why it goes so far down -->
+                    <div class="dropdown"> 
                       <a class="link-unstyled" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="svgcontainer">
                           <i class="svg-icon" fill="white" stroke="white" data-feather="edit-3"></i>
@@ -71,7 +71,7 @@
           <hr>
 
           <div class="collapse" id="newgpg">
-            {{ f.render_form(gpgForm, ["gpgkey"], f.button(text="Add GPG key", classes="btn-success")) }}
+            {{ f.render_form(gpgForm, ["gpgkey"], f.button(text="Add GPG key", classes="btn-success mb-3")) }}
           </div>
 
           <div id="list">
@@ -82,16 +82,16 @@
             {% endif %}
 
             {% for key in user["keys"] %}
-              <div class="card mt-4" style="width: 50rem;">
+              <div class="card mt-4 w-100 mb-3" style="width: 50rem;">
                 <div class="card-body">
                   <div class="row align-items-center">
-                    <div class="col-10">
+                    <div class="col-sm-10">
                       <div class="media">
                         <figure class="figure">
                           {{ f.svg("key", "black", 50, False, "align-self-center mr-3 figure-img img-fluid") }}
                           <figcaption class="figure-caption text-left">GPG</figcaption>
                         </figure>
-                        <div class="media-body">
+                        <div class="media-body ">
                           <p class="mb-1"><strong>Email addresses:</strong> {{ key["fuids"] | e }} </p>
                           <p class="mb-1"><strong>Fingerprint:</strong> {{ key["fingerprint"][-16:] }} </p>
                           <p class="mb-1"><strong>Subkeys:</strong> {{ ", ".join(key["subkey_info"].keys() | sort) }} </p>
@@ -100,8 +100,8 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-2">
-                      {{ f.btn_form("delete", "Delete", "btn btn-outline-danger align-self-center", loop.index - 1) }}
+                    <div class="col-sm-2">
+                      {{ f.btn_form("delete", "Delete", "btn-outline-danger align-self-center", loop.index - 1) }}
                     </div>
                   </div>
                 </div>

@@ -47,7 +47,10 @@
     <ul class="navbar-nav navbar-right">
       {% if 'account' in session %}
         {% set children = [('profile', 'profile'), ('settings', 'settings')] %}
-        {{ f.dropdown("* ", children, [], False, '<div class="dropdown-divider"></div><form action={} method="POST">{}{}</form>'.format(furl_for('profile'), btnform.csrf_token, f.button("logout", "Logout", "btn")), f.img(30, False)) }}
+        {{ f.dropdown("* ", children, [], False, 
+        '<div class="dropdown-divider"></div><a class="dropdown-item">{}</a>'.format(
+          f.btn_form("logout", "Logout", "btn", "", "padding: 0; border: none; background: none;", action=furl_for('profile'))
+        ), f.img(30, False)) }}
       {% else %}
         <li class="nav-item">
           <a class="btn btn-outline-light mb-3 mb-lg-0 {{ f.active('profile') }} mr-4" href="{{ furl_for('profile') }}" role="button">Sign in</a>

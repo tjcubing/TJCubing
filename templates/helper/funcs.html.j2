@@ -51,7 +51,7 @@
 {% endmacro %}
 
 {% macro btn_form() %}
-<form method="POST">
+<form action="{{ kwargs.get('action', '') }}" method="POST">
   {{ btnform.csrf_token }}
   {{ button(*varargs) }}
 </form>
@@ -98,8 +98,8 @@
   </li>
 {% endmacro %}
 
-{% macro button(name="submit", text="Submit", classes="btn-primary mt-3 mb-3", value="") %}
-  <button class="btn {{ classes }}" name="{{ name }}" id="{{ name }}" value="{{ value }}" type="submit">{{ text }}</button>
+{% macro button(name="submit", text="Submit", classes="btn-primary mt-3 mb-3", value="", style="") %}
+<button class="btn {{ classes }}" name="{{ name }}" id="{{ name }}" value="{{ value }}" type="submit" style="{{ style }}">{{ text }}</button>
 {% endmacro %}
 
 {% macro rbr() %}
@@ -151,7 +151,7 @@
 {% endmacro %}
 
 {% macro img(size, border=True) %}
-  {% set format = 'class="{} rounded" style="width: {}px; height: {}px;"'.format('border' if border else '', size, size) %}
+  {% set format = 'class="{} img-fluid rounded" style="width: {}px; height: {}px;"'.format('border' if border else '', size, size) %}
   {% if "pfp" in user %}
     <img {{ format }} src="{{ user['pfp'] }}"></img>
   {% else %}

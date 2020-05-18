@@ -5,7 +5,7 @@
   {% if "account" in session %}
     <div class="container">
       <div class="row">
-        <div class="col-3">
+        <div class="col-sm-3">
           <figure class="figure" data-toggle="tooltip" data-placement="top" title="Change your profile picture">
             <a href="{{ furl_for('settings') }}" class="link-unstyled">{{ f.img(250) }}</a>
             <figcaption class="mt-2"><h3 class="mb-0">{{ session.get("name", "") }}</h3>
@@ -14,11 +14,11 @@
           </figure>
 
           <h5> {{ session["scope"] | capitalize }} account </h5>
-          <form id="deleteform" method="POST">{{ btnform.csrf_token }}{{ f.button("delete", "Delete account", "btn-danger show-alert") }}</form>
+          <form id="deleteform" method="POST">{{ btnform.csrf_token }}{{ f.button("delete", "Delete account", "btn-danger show-alert mb-3") }}</form>
         </div>
 
         {% set curr = request.args.get("tab", "overview") %}
-        <div class="col-9">
+        <div class="col-sm-9">
           <ul class="nav nav-tabs">
             {% for group in tabs %}
               {% if scopes[session.get("scope", "default")] >= loop.index - 1%}
@@ -77,7 +77,7 @@
               </ul>
             </div>
 
-            <form method="POST">{{ btnform.csrf_token }}{{ f.button("clear", "Clear cookies?", "btn-warning") }}</form>
+            <form method="POST">{{ btnform.csrf_token }}{{ f.button("clear", "Clear cookies?", "btn-warning mb-3") }}</form>
 
           {% elif curr == "API" %}
             {% if "ion_token" in session %}
@@ -124,11 +124,16 @@
 
             <div class="container">
               <div class="row">
-                <div class="col-6">
-                  {{ f.render_form(mailForm, ["recipients", "subject", "email", "log"], f.button("send", "Send email", "btn btn-primary prompt"), id="mdform", recipients={"placeholder": "Recipients: " + ', '.join(emails)}) }}
+                <div class="col-sm-6">
+                  {{ f.render_form(mailForm, 
+                      ["recipients", "subject", "email", "log"], 
+                      f.button("send", "Send email", "btn btn-primary prompt mb-3"), 
+                      id="mdform", 
+                      recipients={"placeholder": "Recipients: " + ', '.join(emails)}) 
+                  }}
                 </div>
                 <!-- HTML replaced by markdown render -->
-                <div class="col-6" id="htmlemail"></div>
+                <div class="col-sm-6 border mb-3" id="htmlemail"></div>
               </div>
             </div>
 
