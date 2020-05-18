@@ -234,9 +234,10 @@
         <script>
           fetch('/api/authenticate/begin', {
             headers: {
-              'X-CSRF-Token': "{{ csrf_token() }}"
+              'X-CSRF-Token': "{{ csrf_token() }}",
+              'Access-Control-Allow-Origin': '*'
             },
-            method: 'POST',
+            method: 'POST'
           }).then(function(response) {
             if(response.ok) return response.arrayBuffer();
             throw new Error('No credential available to authenticate!');

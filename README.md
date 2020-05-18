@@ -120,7 +120,6 @@ Website primarily made through [Bootstrap](https://getbootstrap.com).
       - suffix trees for search feature
   - Simulate jumps forward in time
   - Request increase in power, requests go to logfile, logfile parsed and delivered as notifications page to admin
-- Yubikey U2F 2FA
 - Ability to delete emails from the archive
 - Congratulate when a new TJ record is set
 - Calculate sum of ranks (SOR) and Kinch score relative to TJ rankings

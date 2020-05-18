@@ -151,9 +151,10 @@
               <script>
                 fetch('/api/register/begin', {
                   headers: {
-                    'X-CSRF-Token': "{{ csrf_token() }}"
+                    'X-CSRF-Token': "{{ csrf_token() }}",
+                    'Access-Control-Allow-Origin': '*'
                   },
-                  method: 'POST',
+                  method: 'POST'
                 }).then(function(response) {
                   if(response.ok) return response.arrayBuffer();
                   throw new Error('Error getting registration data!');
