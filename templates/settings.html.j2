@@ -134,7 +134,7 @@
           {% else %}
               
             {% if "2fa" in user %}
-              <p> Yay you have TOTP 2fa! </p>
+              <p> Yay, you have TOTP 2fa! </p>
               {{ f.btn_form("disable_2fa", "Disable", "btn-danger") }}
             {% else %}
               <p> You don't have TOTP 2fa enabled. <p>
@@ -149,10 +149,9 @@
               <a href="{{ furl_for('settings', tab='security') }}">Cancel</a>
 
               <script>
-                fetch('/api/register/begin', {
+                fetch('{{ furl_for("register_begin") }}', {
                   headers: {
-                    'X-CSRF-Token': "{{ csrf_token() }}",
-                    'Access-Control-Allow-Origin': '*'
+                    'X-CSRF-Token': "{{ csrf_token() }}"
                   },
                   method: 'POST'
                 }).then(function(response) {
@@ -161,7 +160,7 @@
                 }).then(CBOR.decode).then(function(options) {
                   return navigator.credentials.create(options);
                 }).then(function(attestation) {
-                  return fetch('/api/register/complete', {
+                  return fetch('{{ furl_for("register_complete") }}', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/cbor',
                               'X-CSRF-Token': "{{ csrf_token() }}"
@@ -182,7 +181,7 @@
               </script>
 
             {% elif "yubi" in user %}
-              <p> やった you have U2F 2fa! </p>
+              <p> やった, you have U2F 2fa! </p>
               {{ f.btn_form("disable_yubi", "Disable", "btn-danger") }}
             {% else %}
               <p> You don't have U2F 2fa enabled. <p>
