@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, PasswordField, BooleanField, DecimalField
+from wtforms import StringField, TextAreaField, PasswordField, BooleanField, DecimalField, IntegerField
 from flask_wtf.file import FileField, FileAllowed, FileRequired
-from wtforms.validators import DataRequired, Email
+from wtforms.validators import DataRequired, Email, Length
 import flask_uploads
 
 # Library that contains all the forms and upload patterns
@@ -55,4 +55,7 @@ class MailForm(FlaskForm):
     log = BooleanField("Log to archive?", default="checked")
 
 class HTTPForm(FlaskForm):
-    http = DecimalField("", [DataRequired()], render_kw={"class": "form-control", "placeholder": "Type in a HTTP response status code..."})
+    http = IntegerField("", [DataRequired()], render_kw={"class": "form-control", "placeholder": "Type in a HTTP response status code..."})
+
+class TFAForm(FlaskForm):
+    code = IntegerField("", render_kw={"class": "form-control", "placeholder": "Type the 6 digit 2FA code..."})

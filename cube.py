@@ -8,6 +8,7 @@ import calmap
 from sklearn import linear_model
 from sklearn.metrics import r2_score
 from passlib.hash import pbkdf2_sha512
+import pyotp
 import gnupg
 from fbchat import Client
 import requests
@@ -19,7 +20,7 @@ import statistics, forms
 # TODO: remove star import
 from dates import *
 # very expensive import
-import wca
+# import wca
 
 # from oauthlib.oauth2 import TokenExpiredError
 
@@ -511,6 +512,11 @@ def check(username: str, password: str) -> bool:
     """ Determines whether a login is legitimate or not. """
     user = load_file("users").get(username, None)
     return user is not None and pbkdf2_sha512.verify(password, user["hash"])
+
+def check_2fa(username: str, code: str) -> bool:
+    """ Determines whether the 2fa code is valid. """
+    user = load_file("users").get(username, None)
+    return user is not None and pyotp.TOTP(user["2fa"]).verify(code) 
 
 def prompt_email(email: str) -> None:
     """ Sends a email asking for verification. """

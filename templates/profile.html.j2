@@ -224,10 +224,16 @@
     </script>
 
   {% else %}
-    {% if request.args.get("mode") == "register"  %}
+    {% if request.args.get("mode") == "register" %}
       {{ f.render_form(signupForm, ["username", "password", "confirm"], f.button("login")) }}
+    
+    {% elif "2fa" in session %}
+      <p> You have 2fa enabled! </p>
+      {{ f.render_form(codeForm, ["code"], f.button("login_2fa"), f.button("cancel", "Cancel", "btn-danger ml-3")) }}
+
     {% else %}
       {{ f.render_form(loginForm, ["username", "password"], f.button("login"), '...or register a new account <a href="{}"> here </a>'.format(furl_for("profile", mode="register"))) }}
+    
     {% endif %}
   {% endif %}
 {% endblock %}

@@ -71,7 +71,7 @@
           <hr>
 
           <div class="collapse" id="newgpg">
-            {{ f.render_form(gpgForm, ["gpgkey"], f.button(text="Add GPG key", classes="btn-success") )}}
+            {{ f.render_form(gpgForm, ["gpgkey"], f.button(text="Add GPG key", classes="btn-success")) }}
           </div>
 
           <div id="list">
@@ -95,21 +95,53 @@
                           <p class="mb-1"><strong>Email addresses:</strong> {{ key["fuids"] | e }} </p>
                           <p class="mb-1"><strong>Fingerprint:</strong> {{ key["fingerprint"][-16:] }} </p>
                           <p class="mb-1"><strong>Subkeys:</strong> {{ ", ".join(key["subkey_info"].keys() | sort) }} </p>
-                          <h6><small class="text-muted">Created {{  arrow.get(key["date"]).humanize() }} </small></h6>
+                          {# timestamp format depends on the version of gpg, try to convert to int, defaulting to the orignal string #}
+                          <h6><small class="text-muted">Created {{  arrow.get(key["date"]|int(key["date"])).humanize() }} </small></h6>
                         </div>
                       </div>
                     </div>
                     <div class="col-2">
-                      <form method="POST">
-                        {{ btnform.csrf_token }}
-                        {{ f.button("delete", "Delete", "btn btn-outline-danger align-self-center", loop.index - 1)}}
-                      </form>
+                      {{ f.btn_form("delete", "Delete", "btn btn-outline-danger align-self-center", loop.index - 1) }}
                     </div>
                   </div>
                 </div>
               </div>
             {% endfor %}
           </div>
+
+        {% elif tab == "security" %}
+          <h3> Security </h3>
+          <hr>
+
+          {# if 2fa is just turned on, need to show code to user  #}
+          {% if secret|length > 0 %}
+            <p> Either scan the QR code or put in the secret. </p>
+            <p> {{ secret }} </p>
+
+            {# format documented here: https://github.com/google/google-authenticator/wiki/Key-Uri-Format #}
+            <canvas id="qr"></canvas>
+            <script>
+              (function() {
+                var qr = new QRious({
+                  element: document.getElementById('qr'),
+                  value: 'otpauth://totp/TJCubing:{{ session["account"] }}?secret={{ secret }}&issuer=TJCubing&algorithm=SHA1&digits=6&period=30'
+                });
+              })();
+            </script>
+
+            {{ f.btn_form("done", "Done", "btn-success mt-3") }}
+
+          {% elif "2fa" in user %}
+            <p> やった you have 2fa! </p>
+
+            {{ f.btn_form("disable_2fa", "Disable", "btn-danger") }}
+
+          {% else %}
+            <p> You don't have 2fa enabled. <p>
+
+            {{ f.btn_form("enable_2fa", "Enable", "btn-success") }}
+
+          {% endif %}
 
         {% else %}
         {% endif %}

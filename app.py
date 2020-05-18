@@ -144,11 +144,15 @@ def stats() -> dict:
 def profile() -> dict:
     """ Allows the user to login as well as register a new account. """
     loginForm = forms.LoginForm()
+    codeForm = forms.TFAForm()
     signupForm = forms.SignupForm()
     mailForm = forms.MailForm()
     httpForm = forms.HTTPForm()
     ionForm, wcaForm = forms.APIForm(prefix="ion"), forms.APIForm(prefix="wca")
-    rtn = {"loginForm": loginForm, "signupForm": signupForm, "mailForm": mailForm, "httpForm": httpForm, "ionForm": ionForm, "wcaForm": wcaForm}
+    rtn = {"loginForm": loginForm, "codeForm": codeForm,
+           "signupForm": signupForm, "mailForm": mailForm, 
+           "httpForm": httpForm, "ionForm": ionForm, "wcaForm": wcaForm
+          }
 
     users = cube.load_file("users")
 
@@ -192,10 +196,28 @@ def profile() -> dict:
             if not cube.check(username, password):
                 return alert("Username or password is incorrect.", "info", "self")
 
-            # Save login to cookies
+            # Save login to cookies if 2fa is not enabled, otherwise don't
+            if "2fa" not in users[username]:
+                flask.session["account"] = username
+                flask.session["scope"] = users[username]["scope"]
+            else:
+                flask.session["2fa"] = True
+                flask.session["username"] = username
+
+            return flask.redirect(flask.url_for("profile"))
+
+        elif "login_2fa" in flask.request.form and codeForm.validate_on_submit():
+            username = flask.session["username"]
+            if not cube.check_2fa(username, codeForm.code.data):
+                return alert("2FA code is incorrect.", "info", "self")
+
+            # actually login
             flask.session["account"] = username
             flask.session["scope"] = users[username]["scope"]
             return flask.redirect(flask.url_for("profile"))
+
+        elif "cancel" in flask.request.form:
+            del flask.session["2fa"]
 
         elif ionForm.validate_on_submit():
             rtn = cube.add_dict({"data": cube.api_call("ion", ionForm.call.data)}, rtn)
@@ -222,6 +244,8 @@ def profile() -> dict:
 
         if "logout" in flask.request.form:
             del flask.session["account"]
+            if "2fa" in flask.session:
+                del flask.session["2fa"]
 
         if "delete" in flask.request.form:
             del users[flask.session["account"]]
@@ -286,6 +310,7 @@ def settings() -> dict:
     user = users[flask.session["account"]]
     gpgForm = forms.GPGForm()
     photoForm = forms.PhotoForm()
+    secret = ""
 
     if gpgForm.validate_on_submit():
         key = cube.gpg.import_keys(gpgForm.gpgkey.data)
@@ -313,7 +338,16 @@ def settings() -> dict:
             del user["keys"][int(flask.request.form["delete"])]
             cube.dump_file(users, "users")
 
-    return {"gpgForm": gpgForm, "photoForm": photoForm}
+        if "enable_2fa" in flask.request.form:
+            secret = cube.pyotp.random_base32()
+            user["2fa"] =  secret
+            cube.dump_file(users, "users")
+
+        if "disable_2fa" in flask.request.form:
+            del user["2fa"]
+            cube.dump_file(users, "users")
+
+    return {"gpgForm": gpgForm, "photoForm": photoForm, "secret": secret}
 
 def records() -> dict:
     """ Displays TJ's all time bests. """

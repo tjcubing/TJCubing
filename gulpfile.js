@@ -72,7 +72,8 @@ gulp.task('scripts', function() {
                    'node_modules/katex/dist/katex.min.js',
                    'node_modules/feather-icons/dist/feather.min.js',
                    'node_modules/bootbox/dist/bootbox.min.js',
-                   'node_modules/showdown/dist/showdown.min.js'
+                   'node_modules/showdown/dist/showdown.min.js',
+                   // 'node_modules/qrious/dist/qrious.min.js' 
                    // 'node_modules/katex/dist/contrib/auto-render.min.js'
                   ])
     .pipe(concat('main.min.js'))
@@ -108,6 +109,7 @@ function defaultTask(cb) {
 var copy = gulp.parallel(copyFile('bootstrap-SCSS', 'node_modules/bootstrap/scss/**/*', SCSS + '/bootstrap'),
                          copyFile('KaTeX-fonts', 'node_modules/katex/dist/fonts/*', CSS + '/fonts'),
                          copyFile('KaTeX-auto-render', 'node_modules/katex/dist/contrib/auto-render.min.js', JS),
+                         copyFile('qrious', 'node_modules/qrious/dist/qrious.min.js', JS),  
                          copyFolder('img'),
                          copyFolder('pdfs'),
                          copyFolder('misc'),

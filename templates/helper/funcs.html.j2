@@ -53,7 +53,7 @@
 {% macro btn_form() %}
 <form method="POST">
   {{ btnform.csrf_token }}
-  {{ f.button(*args) }}
+  {{ button(*varargs) }}
 </form>
 {% endmacro %}
 
