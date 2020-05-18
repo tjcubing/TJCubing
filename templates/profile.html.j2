@@ -229,6 +229,7 @@
     {% elif "yubi" in session or "2fa" in session %}
       {% if "yubi" in session %}
         <p> You have U2F enabled! </p>
+        <p> Touch your authenticator device now... </p>
         {{ f.btn_form("cancel_yubi", "Cancel", "btn-danger") }}
 
         <script>
@@ -244,7 +245,11 @@
             return navigator.credentials.get(options);
           }).catch(function (err) {
             // on error, exit
-            document.getElementById("cancel_yubi").click(); 
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "{{ furl_for('profile') }}", true);
+            xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhttp.setRequestHeader("X-CSRF-Token", "{{ csrf_token() }}");
+            xhttp.send("cancel_yubi=cancel_yubi");
             throw new Error('Operation canceled!');
           }).then(function(assertion) {
             return fetch('{{ furl_for("authenticate_complete") }}', {

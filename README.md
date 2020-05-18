@@ -1,6 +1,7 @@
-# TJ Cubing Website
+# TJCubing Website
 
-Currently the official [website for Rubik's Cube Club](https://activities.tjhsst.edu/cubing/) at [Thomas Jefferson High School for Science and Technology](https://tjhsst.fcps.edu/).
+Currently the official [website for Rubik's Cube Club](https://activities.tjhsst.edu/cubing/) 
+at [Thomas Jefferson High School for Science and Technology](https://tjhsst.fcps.edu/) (TJHSST).
 
 ## Setup
 This project uses [Flask](http://flask.pocoo.org/) as a Python backend.  
@@ -16,43 +17,57 @@ Website primarily made through [Bootstrap](https://getbootstrap.com).
 
 [WCA Oauth](https://github.com/thewca/worldcubeassociation.org/wiki/OAuth-documentation-notes) is used for verifying TJ records.
 
+## Running
+
+Don't use:
+
+```python
+if __name__ == "__main__":
+  app.run()
+```
+
+as there are [glitches with the automatic file reloading](http://flask.pocoo.org/docs/1.0/server/#in-code).
+Instead use: 
+
+```bash
+pipenv run flask run 
+```
+
+or, make it available to other devices on the same network:
+```bash
+pipenv run flask run --host='0.0.0.0'
+```
+
+or, to use HTTPS (this is necessary for testing [Fido U2F](https://www.yubico.com/authentication-standards/fido-u2f/)):
+```bash
+pipenv run flask run --cert=adhoc
+```
+
+When testing U2F,  be sure to go to https://localhost:5000/ 
+instead of https://127.0.0.1:5000/.
+
+Using HTTPS will make Chrome say "Your connection is not private".
+Recently, Google removed the ability to click "Advanced" -> proceed anyways. 
+To get around this, type "thisisunsafe" and hit enter.
+
+To debug on mobile, follow the instructions 
+[here](https://appletoolbox.com/use-web-inspector-debug-mobile-safari/).
+If the phone doesn't appear in the develop menu, 
+install the Safari technology preview with `brew cask install safari-technology-preview`
+and follow the tips given 
+[here](https://forums.developer.apple.com/thread/123530).
+This enables a console and inspect element.
+
+You might be tempted to background the process. 
+On my computer, this makes the website run _incredibly_ slowly.
+Instead, open a terminal window and just let it vibe there.
+
+
+
 ## File Structure
 
-- /app.py: Main file which actually serves the website. Don't use:
-
-    ```python
-    if __name__ == '__main__':
-      app.run()
-    ```
-
-    as there are [glitches with the automatic file reloading](http://flask.pocoo.org/docs/1.0/server/#in-code).
-    Instead use: 
-    
-    ```bash
-    pipenv run flask run 
-    ```
-
-    or, make it available to other devices on the same network:
-    ```bash
-    pipenv run flask run --host='0.0.0.0'
-    ```
-
-    or, to use https (this is necessary for testing [Fido U2F](https://www.yubico.com/authentication-standards/fido-u2f/)):
-    ```bash
-    pipenv run flask run --cert=adhoc
-    ```
-    Also, be sure to go to https://localhost:5000/ instead of https://127.0.0.1:5000/.
-
-    Using https will make Chrome say "Your connection is not private".
-    Recently, Google removed the ability to click "Advanced" -> proceed anyways. 
-    To get around this, type "thisisunsafe" and hit enter.
-
-    You might be tempted to background the process. 
-    On my computer, this makes the website run _incredibly_ slowly.
-    Instead, open a terminal window and just let it vibe there.
-
+- /app.py: Main file which actually serves the website. 
 - /cube.py: Miscellaneous helper library.
-
 - /files/: Folder for *.json and *.py configuration and disk files.
   - config.json: File not git committed (API keys).
     - "states": List of strings specifying which states competitions can be from.
@@ -120,6 +135,7 @@ Website primarily made through [Bootstrap](https://getbootstrap.com).
       - suffix trees for search feature
   - Simulate jumps forward in time
   - Request increase in power, requests go to logfile, logfile parsed and delivered as notifications page to admin
+- Passwordless login
 - Ability to delete emails from the archive
 - Congratulate when a new TJ record is set
 - Calculate sum of ranks (SOR) and Kinch score relative to TJ rankings

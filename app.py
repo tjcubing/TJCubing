@@ -221,6 +221,7 @@ def profile() -> dict:
 
             return flask.redirect(flask.url_for("profile"))
 
+
         elif "yubi_check" in flask.session or ("login_2fa" in flask.request.form and codeForm.validate_on_submit()):
             username = flask.session["username"]
             if "yubi_check" not in flask.session and not cube.check_2fa(username, codeForm.code.data):
@@ -234,10 +235,10 @@ def profile() -> dict:
             flask.session["scope"] = users[username]["scope"]
             return flask.redirect(flask.url_for("profile"))
 
-        elif "cancel_2fa" in flask.request.form:
+        elif "cancel_2fa" in flask.request.form and "2fa" in flask.session:
             del flask.session["2fa"]
 
-        elif "cancel_yubi" in flask.request.form:
+        elif "cancel_yubi" in flask.request.form and "yubi" in flask.session:
             del flask.session["yubi"]
 
         elif ionForm.validate_on_submit():
@@ -691,6 +692,7 @@ def register_begin():
         flask.session["credentials"] = []
 
     registration_data, state = server.register_begin(
+        # this information is currently unused, could be used for passwordless login
         {
             "id": b"user_id",
             "name": "a_user",

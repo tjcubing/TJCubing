@@ -30,7 +30,7 @@ flask-wtf = "*"
 rdoclient-py3 = "*"
 calmap = "*"
 pyotp = "*"
-werkzeug = "==0.16"
+werkzeug = "==0.16.1"
 wtforms = {extras = ["email"],version = "*"}
 fido2 = "*"
 pyopenssl = "*"
