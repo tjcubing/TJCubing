@@ -118,6 +118,7 @@ Instead, open a terminal window and just let it vibe there.
 - /static/js: Includes jQuery and Popper.js.
 
 ## Future Plans
+- Create a GitHub organization and user, move access from me to this organization
 - Recreate Twisttheweb (used to be an online timer for racing your friends, now is a mosaic site)
 - Switch from JSON to SQLAlchemy database
 - Add optional breadcrumbs
