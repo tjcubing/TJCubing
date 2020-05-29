@@ -17,9 +17,6 @@ from fido2.utils import websafe_encode, websafe_decode
 from fido2.ctap2 import AttestedCredentialData
 import cube, forms, statistics
 
-# TODO: partial highlighting in footer on mobile
-# TODO: fix mobile login/profile UI
-# TODO: 413 not being rendered in actual site
 # TODO: general security, enable autoescaping
 # print([rule.endpoint for rule in app.url_map.iter_rules()])
 

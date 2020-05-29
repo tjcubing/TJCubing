@@ -62,8 +62,6 @@ You might be tempted to background the process.
 On my computer, this makes the website run _incredibly_ slowly.
 Instead, open a terminal window and just let it vibe there.
 
-
-
 ## File Structure
 
 - /app.py: Main file which actually serves the website. 
