@@ -143,3 +143,6 @@ Instead, open a terminal window and just let it vibe there.
 - Stronger profiles
   - Click on a name and it shows their history in all the weekly comps, graph of ao5 over time, TJ records held, etc.
 - GPG sign emails
+- A [Warrant canary](https://www.eff.org/deeplinks/2014/04/warrant-canary-faq) 
+in the vein of [rsync](https://www.rsync.net/resources/notices/canary.txt)
+

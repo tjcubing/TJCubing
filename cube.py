@@ -53,8 +53,17 @@ SITEMAP = "static/sitemap.xml"
 REPO = "https://github.com/stephen-huan/TJCubing"
 #alternatively http://cubing.sites.tjhsst.edu
 TJ = "https://activities.tjhsst.edu/cubing/"
-EVENTS = ['3x3x3 Cube', '2x2x2 Cube', '4x4x4 Cube', '5x5x5 Cube', '6x6x6 Cube', '7x7x7 Cube', '3x3x3 Blindfolded', '3x3x3 Fewest Moves', '3x3x3 One-Handed', '3x3x3 With Feet', 'Clock', 'Megaminx', 'Pyraminx', 'Skewb', 'Square-1', '4x4x4 Blindfolded', '5x5x5 Blindfolded', '3x3x3 Multi-Blind']
-ICONS = {'Clock': 'event-clock', '2x2x2 Cube': 'event-222', '3x3x3 Multi-Blind': 'event-333mbf', 'Square-1': 'event-sq1', '4x4x4 Cube': 'event-444', '5x5x5 Cube': 'event-555', 'Megaminx': 'event-minx', '3x3x3 One-Handed': 'event-333oh', 'Pyraminx': 'event-pyram', '6x6x6 Cube': 'event-666', '4x4x4 Blindfolded': 'event-444bf', '3x3x3 Fewest Moves': 'event-333fm', '3x3x3 Blindfolded': 'event-333bf', '3x3x3 Cube': 'event-333', '3x3x3 With Feet': 'event-333ft', '5x5x5 Blindfolded': 'event-555bf', 'Skewb': 'event-skewb', '7x7x7 Cube': 'event-777'}
+EVENTS = ['3x3x3 Cube', '2x2x2 Cube', '4x4x4 Cube', '5x5x5 Cube', '6x6x6 Cube', '7x7x7 Cube',
+          '3x3x3 Blindfolded', '3x3x3 Fewest Moves', '3x3x3 One-Handed', '3x3x3 With Feet',
+          'Clock', 'Megaminx', 'Pyraminx', 'Skewb', 'Square-1',
+          '4x4x4 Blindfolded', '5x5x5 Blindfolded', '3x3x3 Multi-Blind'
+         ]
+ICONS = ['event-333', 'event-222', 'event-444', 'event-555', 'event-666', 'event-777',
+         'event-333bf', 'event-333fm', 'event-333oh', 'event-333ft',
+         'event-clock', 'event-minx', 'event-pyram', 'event-skewb', 'event-sq1',
+         'event-444bf', 'event-555bf', 'event-333mbf'
+         ]
+ICONS = zip(EVENTS, ICONS)
 RANKS = ["nr", "cr", "wr"]
 NAME_DELIM = "|"
 
@@ -89,7 +98,7 @@ def make_soup(text: str, mode: str="url", parser: str=PARSER) -> BeautifulSoup:
 
 def get_comps() -> list:
     """ Parses the WCA website and returns a list of competitors.
-        Calls Google's distancematrix API to get distances to the competitions
+        Calls Google's distancematrix API to get distances to the competitions.
     """
     comps = []
     people = [t[1] for t in load_file("records")["people"]]
@@ -105,7 +114,7 @@ def get_comps() -> list:
                     "date": info[0],
                    }
             subsoup = make_soup(temp["url"])
-            temp["gps"] = subsoup.find("dt", string="Address").next_sibling.next_sibling.find("a").get('href').split("/")[-1]
+            temp["gps"] = subsoup.find("dt", string="Address").next_sibling.next_sibling.find("a").get("href").split("/")[-1]
             temp["events"] = [e["title"] for e in subsoup.select(".competition-events-list")[0].find_all("span")]
 
             competitors = subsoup.find(lambda tag: tag.name == "a" and "Competitors" in tag.get_text())
@@ -119,15 +128,18 @@ def get_comps() -> list:
 
             comps.append(temp)
 
-    param = {'origins': CONFIG["origin"], 'destinations': "|".join([comp["gps"] for comp in comps]), 'key': CONFIG["key"], 'units': 'imperial'}
+    param = {"origins": CONFIG["origin"],
+             'destinations': "|".join([comp["gps"] for comp in comps]),
+             "key": CONFIG["key"], "units": "imperial"
+            }
 
-    for i, thing in enumerate(requests.get("https://maps.googleapis.com/maps/api/distancematrix/json", params=param).json()['rows'][0]['elements']):
-        comps[i]["mi"] = thing['distance']['text']
-        comps[i]["timestr"] = thing['duration']['text']
-        comps[i]["time"] = thing['duration']['value']
+    for i, thing in enumerate(requests.get("https://maps.googleapis.com/maps/api/distancematrix/json", params=param).json()["rows"][0]["elements"]):
+        comps[i]["mi"] = thing["distance"]["text"]
+        comps[i]["timestr"] = thing["duration"]["text"]
+        comps[i]["time"] = thing["duration"]["value"]
 
-    #TODO: sort by user-determined feature
-    comps.sort(key=lambda comp: comp["time"]) #sort by time to travel
+    # TODO: sort by user-determined feature
+    comps.sort(key=lambda comp: comp["time"]) # sort by time to travel
     dump_file({"time": time.time(), "comps": comps}, "comps")
 
     return comps
@@ -516,7 +528,7 @@ def check(username: str, password: str) -> bool:
 def check_2fa(username: str, code: str) -> bool:
     """ Determines whether the 2fa code is valid. """
     user = load_file("users").get(username, None)
-    return user is not None and pyotp.TOTP(user["2fa"]).verify(code) 
+    return user is not None and pyotp.TOTP(user["2fa"]).verify(code)
 
 def prompt_email(email: str) -> None:
     """ Sends a email asking for verification. """

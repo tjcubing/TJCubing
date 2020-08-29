@@ -157,7 +157,7 @@ def profile() -> dict:
     httpForm = forms.HTTPForm()
     ionForm, wcaForm = forms.APIForm(prefix="ion"), forms.APIForm(prefix="wca")
     rtn = {"loginForm": loginForm, "codeForm": codeForm,
-           "signupForm": signupForm, "mailForm": mailForm, 
+           "signupForm": signupForm, "mailForm": mailForm,
            "httpForm": httpForm, "ionForm": ionForm, "wcaForm": wcaForm
           }
 
