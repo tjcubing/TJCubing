@@ -1,0 +1,9 @@
+# Python 3.8 (Alpine)
+# py3-pandas py3-scikit-learn don't work
+# C stuff: gcc musl-dev openssl-dev libffi-dev python3-dev py3-numpy-dev 
+# right click at the bottom of files pane to see log
+fish bash tmux ranger vim fzf ncdu w3m curl gnupg git npm py3-gunicorn py3-gevent py3-numpy py3-scipy py3-matplotlib py3-cryptography py3-pillow py3-lxml 
+# Python 3.8 (Debian)
+# very slow
+fish tmux vim fzf ncdu curl gnupg git npm 
+

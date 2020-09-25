@@ -15,7 +15,8 @@ from fido2.ctap2 import AttestationObject, AuthenticatorData
 from fido2 import cbor
 from fido2.utils import websafe_encode, websafe_decode
 from fido2.ctap2 import AttestedCredentialData
-import cube, forms, statistics
+# import cube, forms, statistics
+import cube, forms
 
 # TODO: general security, enable autoescaping
 # print([rule.endpoint for rule in app.url_map.iter_rules()])
@@ -792,3 +793,4 @@ if __name__ != "__main__":
     gunicorn_logger = logging.getLogger("gunicorn.error")
     app.logger.handlers = gunicorn_logger.handlers
     app.logger.setLevel(gunicorn_logger.level)
+

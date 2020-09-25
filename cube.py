@@ -2,11 +2,15 @@ import json, pickle, os, getpass, glob
 import markdown2
 import yagmail
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
-import calmap
-from sklearn import linear_model
-from sklearn.metrics import r2_score
+try:
+    import pandas as pd
+    import calmap
+    from sklearn import linear_model
+    from sklearn.metrics import r2_score
+    import statistics
+except ModuleNotFoundError:
+    print("Scientific libraries not found...")
 from passlib.hash import pbkdf2_sha512
 import pyotp
 import gnupg
@@ -16,7 +20,7 @@ from bs4 import BeautifulSoup
 import flask
 from requests_oauthlib import OAuth2Session
 from rdoclient_py3 import RandomOrgClient
-import statistics, forms
+import forms
 # TODO: remove star import
 from dates import *
 # very expensive import
@@ -655,9 +659,12 @@ def get_photos() -> list:
 
 def graph_vists():
     """ Graphs the frequency of page visits. """
-    vists = load_file("vists")
-    keys = [day for day in vists["/"]]
-    days = pd.to_datetime(keys)
-    calmap.yearplot(pd.Series([vists["/"][k] for k in keys], index=days), year=get_year())
-    plt.savefig("src/img/heatmap.png", bbox_inches="tight") #pad_inches=0)
+    try:
+        vists = load_file("vists")
+        keys = [day for day in vists["/"]]
+        days = pd.to_datetime(keys)
+        calmap.yearplot(pd.Series([vists["/"][k] for k in keys], index=days), year=get_year())
+        plt.savefig("src/img/heatmap.png", bbox_inches="tight") #pad_inches=0)
+    except:
+        pass
 
