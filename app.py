@@ -682,8 +682,8 @@ def run():
 
     return flask.render_template(flask.request.path + cube.FILE, **vote, **params, title="run", length=forms.LENGTH, form=form)
 
-@app.route("/vote/check", methods=["GET", "POST"])
-def check():
+@app.route("/vote/check/<int:club_id>", methods=["GET", "POST"])
+def check(club_id):
     """ Checks the signups for a user on ION. """
     # may be subject to change, check: https://ion.tjhsst.edu/api/activities
     # 152 - Rubik's cube club, 198 - Computer vision, 204 - SCT
@@ -691,7 +691,6 @@ def check():
         flask.session["action"] = flask.request.path
         return flask.redirect(flask.url_for("ion_login"))
 
-    club_id = cube.CONFIG["club"]["id"]
     club_name = cube.api_call("ion", f"activities/{club_id}")["name"]
     fname = f"signups_{club_id}"
     record = cube.load_file(fname)
