@@ -28,13 +28,13 @@ def ao(l: list, k: float=0.05) -> list:
 def block(l: list, k: int=5, roll=False) -> list:
     """ Combines a list into k size buckets. """
     if not roll:
-        return [l[i: i + k] for i in range(0, len(l) - 4, k)]
+        return [l[k*i: k*(i + 1)] for i in range(len(l)//k)]
     bucket = l[:k]
-    times = []
+    times = [bucket]
     for i in range(k, len(l)):
-        times.append(bucket)
         bucket = bucket[1:]
         bucket.append(l[i])
+        times.append(bucket)
     return times
 
 def process(times: list) -> tuple:

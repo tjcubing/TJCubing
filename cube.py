@@ -24,7 +24,7 @@ import forms
 # TODO: remove star import
 from dates import *
 # very expensive import
-import wca
+# import wca
 
 # from oauthlib.oauth2 import TokenExpiredError
 
@@ -411,21 +411,33 @@ def graph_capacity() -> None:
     plt.ylabel("Percentage of People Attending (%)")
     plt.savefig("src/img/capacity.png")
 
-def get_signups() -> list:
+def get_signups(club_id=CONFIG["club"]["id"]) -> list:
     """ Returns all of the user's 8th pd signups at a specific club. """
     signups = api_call("ion", "signups/user")
-    return list(filter(lambda signup: signup["activity"]["id"] == CONFIG["club"]["id"], signups))
+    return list(filter(lambda signup: signup["activity"]["id"] == club_id, signups))
 
-def count_meetings(signups=None, left: datetime=summer(get_year() - 1), right: datetime=datetime.today()) -> int:
-    """ Retuns the number of meetings the user has been to, between two date ranges. """
-    """ Left bound is chosen as an arbitrary date guarenteed to be after any 8th pds from the past year, but before any from the current year. """
-    """ Right bound is chosen to be today. """
-    signups = list(filter(lambda signup: left < ion_date(signup["block"]["date"]) < right, get_signups() if signups is None else signups))
-    return len(signups)
+def count_meetings(signups=None, left: datetime=None, right: datetime=None) -> int:
+    """ Returns the number of meetings the user has been to, between two
+    date ranges. Left bound is chosen as an arbitrary date guaranteed to
+    be after any 8th periods from the past year, but before any from the
+    current year. Right bound is chosen to be today. """
+    # can't use default arguments initialized at function definition
+    # in a long-running app right would be the date of last reset not "today"
+    if signups is None:
+        signups = get_signups()
+    if left is None:
+        left = summer(get_year() - 1)
+    if right is None:
+        right = datetime.today()
+    return len(list(
+        filter(lambda signup: left < ion_date(signup["block"]["date"]) < right,
+               signups)))
 
 def count_years(signups=None) -> int:
-    """ Returns the number of distinct years the user has been to the club """
-    return len(set([ion_date(signup["block"]["date"]).year for signup in (get_signups() if signups is None else signups)]))
+    """ Returns the number of distinct years the user has been to the club. """
+    return len(set([ion_date(signup["block"]["date"]).year
+                    for signup in
+                    (get_signups() if signups is None else signups)]))
 
 def valid_voter() -> bool:
     """ Returns whether not not the user is allowed to vote. """
@@ -440,7 +452,7 @@ def valid_voter() -> bool:
 def valid_runner() -> bool:
     """ Returns whether or not the user is allowed to run for office. """
     if not flask.session.get("valid_runner", False):
-        #why not?
+        # why not?
         flask.session["valid_runner"] = True
     return flask.session["valid_runner"]
 

@@ -61,7 +61,7 @@ def alert(msg: str, category: str="success", loc: str="index") -> Response:
     dest = {"self": flask.request.path,
             "meta": flask.request.full_path
            }
-    return flask.redirect(flask.url_for(loc) if loc not in dest else dest[loc])
+    return flask.redirect(flask.url_for(dest.get(loc, loc)))
 
 @app.before_request
 def before_request() -> None:
@@ -102,7 +102,7 @@ def index() -> dict:
 
     if form.validate_on_submit():
         cube.prompt_email(form.email.data)
-        return alert("Check your email for a verification message.", "success")
+        return alert("Check your email for a verification message.")
 
     return {"year": cube.get_year(), "form": form}
 
@@ -681,6 +681,29 @@ def run():
         return alert("<strong>Congrats!</strong> Your application has been registered.")
 
     return flask.render_template(flask.request.path + cube.FILE, **vote, **params, title="run", length=forms.LENGTH, form=form)
+
+@app.route("/vote/check", methods=["GET", "POST"])
+def check():
+    """ Checks the signups for a user on ION. """
+    # may be subject to change, check: https://ion.tjhsst.edu/api/activities
+    # 152 - Rubik's cube club, 198 - Computer vision, 204 - SCT
+    if not cube.test_token("ion"):
+        flask.session["action"] = flask.request.path
+        return flask.redirect(flask.url_for("ion_login"))
+
+    club_id = cube.CONFIG["club"]["id"]
+    club_name = cube.api_call("ion", f"activities/{club_id}")["name"]
+    fname = f"signups_{club_id}"
+    record = cube.load_file(fname)
+
+    username = cube.api_call("ion", "profile")["ion_username"]
+    signups = cube.get_signups(club_id)
+    number = cube.count_meetings(signups)
+    record[username] = number
+
+    cube.dump_file(record, fname)
+
+    return alert(f"Recorded for {username} {number} attendances at {club_name}")
 
 # https://github.com/Yubico/python-fido2/blob/master/examples/server/server.py
 
