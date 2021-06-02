@@ -485,9 +485,13 @@ def URL() -> str:
     """ Dynamically generates a URL based on the request. """
     return params["url"] if cube.https else flask.request.url_root[:-1]
 
+url_for = flask.url_for
+
 def furl_for(endpoint: str, filename: str=None, **kwargs: dict) -> str:
     """ Replacement for url_for. """
-    return URL() + (flask.url_for(endpoint, filename=filename) if filename != None else ("/" if endpoint == "" else flask.url_for(endpoint, **kwargs)))
+    return URL() + (url_for(endpoint, filename=filename) if filename != None else ("/" if endpoint == "" else url_for(endpoint, **kwargs)))
+
+flask.url_for = furl_for
 
 def furl(filename: str) -> str:
     """ Assumes a static endpoint. """
@@ -618,7 +622,8 @@ def make_callback(name: str):
             del flask.session["action"]
         else:
             action = "profile"
-
+            
+        action = URL() + action
         return flask.redirect(action)
 
     callback.__name__ = cube.make_key(name, "callback")
