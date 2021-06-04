@@ -4,18 +4,25 @@ Currently the official [website for Rubik's Cube Club](https://activities.tjhsst
 at [Thomas Jefferson High School for Science and Technology](https://tjhsst.fcps.edu/) (TJHSST).
 
 ## Setup
-This project uses [Flask](http://flask.pocoo.org/) as a Python backend.  
-Install [Pipenv](https://docs.pipenv.org/en/latest/install/#installing-pipenv) and then run `pipenv install` to install all of the Python dependencies.
+This project uses [Flask](http://flask.pocoo.org/) as a Python backend.
+Install [Pipenv](https://docs.pipenv.org/en/latest/install/#installing-pipenv)
+and then run `pipenv install` to install all of the Python dependencies.
 
-Styling is done through [Sass](https://sass-lang.com/). Compile the custom sass (.SCSS) file into CSS via `gulp watch`.
+Styling is done through [Sass](https://sass-lang.com/). Compile
+the custom sass (.SCSS) file into CSS via `gulp watch`.
 
 Website primarily made through [Bootstrap](https://getbootstrap.com).
 
-[Gulp](https://gulpjs.com/) is used in a hacky way to copy files from `node_modules` to `static/` as well as do some other miscellaneous tasks, including concatenating and minimizing JavaScript, and images. Run `gulp build` to build the website. 
+[Gulp](https://gulpjs.com/) is used in a hacky way to copy files from
+`node_modules` to `static/` as well as do some other miscellaneous
+tasks, including concatenating and minimizing JavaScript, and images.
+Run `gulp build` to build the website.
 
-[TJ Oauth](https://ion.readthedocs.io/en/latest/developing/oauth.html) is used for the voting system.
+[TJ Oauth](https://ion.readthedocs.io/en/latest/developing/oauth.html)
+is used for the voting system.
 
-[WCA Oauth](https://github.com/thewca/worldcubeassociation.org/wiki/OAuth-documentation-notes) is used for verifying TJ records.
+[WCA Oauth](https://github.com/thewca/worldcubeassociation.org/wiki/OAuth-documentation-notes)
+is used for verifying TJ records.
 
 ## Running
 
@@ -43,24 +50,19 @@ or, to use HTTPS (this is necessary for testing [Fido U2F](https://www.yubico.co
 pipenv run flask run --cert=adhoc
 ```
 
-When testing U2F,  be sure to go to https://localhost:5000/ 
-instead of https://127.0.0.1:5000/.
+When testing U2F and the Oauth APIs, be sure to go to
+https://localhost:5000/ instead of https://127.0.0.1:5000/.
 
 Using HTTPS will make Chrome say "Your connection is not private".
 Recently, Google removed the ability to click "Advanced" -> proceed anyways. 
 To get around this, type "thisisunsafe" and hit enter.
 
-To debug on mobile, follow the instructions 
-[here](https://appletoolbox.com/use-web-inspector-debug-mobile-safari/).
-If the phone doesn't appear in the develop menu, 
-install the Safari technology preview with `brew cask install safari-technology-preview`
-and follow the tips given 
-[here](https://forums.developer.apple.com/thread/123530).
+To debug on mobile, follow the instructions
+[here](https://appletoolbox.com/use-web-inspector-debug-mobile-safari/). If
+the phone doesn't appear in the develop menu, install the Safari technology
+preview with `brew cask install safari-technology-preview` and follow
+the tips given [here](https://forums.developer.apple.com/thread/123530).
 This enables a console and inspect element.
-
-You might be tempted to background the process. 
-On my computer, this makes the website run _incredibly_ slowly.
-Instead, open a terminal window and just let it vibe there.
 
 ## File Structure
 
@@ -116,8 +118,6 @@ Instead, open a terminal window and just let it vibe there.
 - /static/js: Includes jQuery and Popper.js.
 
 ## Future Plans
-- Create a GitHub organization and user, move access from me to this organization
-- Recreate Twisttheweb (used to be an online timer for racing your friends, now is a mosaic site)
 - Switch from JSON to SQLAlchemy database
 - Add optional breadcrumbs
 - Python tests
@@ -136,6 +136,7 @@ Instead, open a terminal window and just let it vibe there.
   - Request increase in power, requests go to logfile, logfile parsed and delivered as notifications page to admin
 - Passwordless login
 - Ability to delete emails from the archive
+- Unsubscribing from the email list
 - Congratulate when a new TJ record is set
 - Calculate sum of ranks (SOR) and Kinch score relative to TJ rankings
 - Ability to click on an event and see the TJ ranking, similar to the WCA site

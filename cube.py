@@ -51,8 +51,8 @@ FILE = ".html.j2"
 PREVIEW = 80
 PARSER = "lxml"
 SITEMAP = "static/sitemap.xml"
-REPO = "https://github.com/stephen-huan/TJCubing"
-#alternatively http://cubing.sites.tjhsst.edu
+REPO = "https://github.com/tjcubing/TJCubing"
+# alternatively https://cubing.sites.tjhsst.edu
 TJ = "https://activities.tjhsst.edu/cubing/"
 EVENTS = ['3x3x3 Cube', '2x2x2 Cube', '4x4x4 Cube', '5x5x5 Cube', '6x6x6 Cube', '7x7x7 Cube',
           '3x3x3 Blindfolded', '3x3x3 Fewest Moves', '3x3x3 One-Handed', '3x3x3 With Feet',
