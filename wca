@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # refreshes the WCA export
+# provide a link to the most recent *.tsv database export found here:
+# https://www.worldcubeassociation.org/results/misc/export.html
 
 wget -O wca.zip $1
 
