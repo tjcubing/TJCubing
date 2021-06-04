@@ -1,4 +1,4 @@
-import os
+import os, sys, json
 
 # Parses the WCA export files
 # TODO: autodownload latest WCA export
@@ -107,9 +107,18 @@ funcs = {"sor": sor, "kinch": kinch}
 
 sor_scores, kinch_scores = find_scores("sor"), find_scores("kinch")
 
-# display("sor", sor_scores, "Single", False, 30)
-# display("kinch", kinch_scores, "Average", True, 30)
+with open("files/wca/cache.json", "w") as f:
+    json.dump({"wrs": wrd, "ranks": rankd}, f, indent=4, sort_keys=True)
 
-# print(sor_rank(3805, "Single"))
-# print(sor_rank(1483, "Average"))
-# print(kinch_rank(59.57))
+if __name__ == "__main__":
+    print(sor_rank(int(sys.argv[1]), "Single"),
+          sor_rank(int(sys.argv[2]), "Average"),
+          kinch_rank(float(sys.argv[3])))
+
+    # display("sor", sor_scores, "Single", False, 30)
+    # display("kinch", kinch_scores, "Average", True, 30)
+
+    # print(sor_rank(3805, "Single"))
+    # print(sor_rank(1483, "Average"))
+    # print(kinch_rank(59.57))
+

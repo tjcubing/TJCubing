@@ -15,8 +15,7 @@ from fido2.ctap2 import AttestationObject, AuthenticatorData
 from fido2 import cbor
 from fido2.utils import websafe_encode, websafe_decode
 from fido2.ctap2 import AttestedCredentialData
-# import cube, forms, statistics
-import cube, forms
+import cube, forms, statistics
 
 # TODO: general security, enable autoescaping
 # print([rule.endpoint for rule in app.url_map.iter_rules()])
@@ -379,11 +378,10 @@ def records() -> dict:
     """ Displays TJ's all time bests. """
     records = cube.load_file("records")
     times, people = records["records"], records["people"]
-
+    refresh = False
     if "wca_token" in flask.session and "ion_token" in flask.session:
         me = cube.api_call("wca", "me")["me"]
         year = cube.api_call("ion", "profile")["graduation_year"]
-        refresh = False
 
         if [me["url"], me["name"], year] not in people:
             records["people"].append([me["url"], me["name"], year])
@@ -391,8 +389,12 @@ def records() -> dict:
             refresh = True
             cube.dump_file(records, "records")
 
-        if refresh or time.time() - records["time"] > cube.CONFIG["time"]:
-            cube.update_records()
+    if refresh or time.time() - records["time"] > cube.CONFIG["time"]:
+        cube.update_records()
+        (sing_rank, avg_rank), kinch_rank = cube.get_ranks()
+        cube.dump_file({"sor_single": sing_rank,
+                        "sor_average": avg_rank,
+                        "kinch": kinch_rank}, "wca/ranks")
 
     return {"times": times, "events": cube.EVENTS, "icons": cube.ICONS, "DNF": statistics.DNF, "ranks": cube.RANKS}
 
@@ -401,11 +403,13 @@ def rankings() -> dict:
     return {"records": cube.load_file("records")["records"], "events": cube.EVENTS}
 
 def wca_stats() -> dict:
+    """ Computes WCA summary statistics for TJ. """
+    ranks = cube.load_file("wca/ranks")
     return {"events": [cube.ICONS[event][6:] for event in cube.EVENTS],
             "sor": cube.get_sor(),
-            "sor_rank": cube.get_sor_ranks(),
+            "sor_rank": (ranks["sor_single"], ranks["sor_average"]),
             "kinch": cube.get_kinch(),
-            "kinch_rank": cube.get_kinch_rank(),
+            "kinch_rank": ranks["kinch"]
            }
 
 def search() -> dict:

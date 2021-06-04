@@ -1,4 +1,4 @@
-import json, pickle, os, getpass, glob
+import json, pickle, os, getpass, glob, subprocess
 import markdown2
 import yagmail
 import numpy as np
@@ -8,7 +8,6 @@ try:
     import calmap
     from sklearn import linear_model
     from sklearn.metrics import r2_score
-    import statistics
 except ModuleNotFoundError:
     print("Scientific libraries not found...")
 from passlib.hash import pbkdf2_sha512
@@ -20,11 +19,9 @@ from bs4 import BeautifulSoup
 import flask
 from requests_oauthlib import OAuth2Session
 from rdoclient_py3 import RandomOrgClient
-import forms
+import forms, statistics
 # TODO: remove star import
 from dates import *
-# very expensive import
-# import wca
 
 # from oauthlib.oauth2 import TokenExpiredError
 
@@ -67,7 +64,7 @@ ICONS = ['event-333', 'event-222', 'event-444', 'event-555', 'event-666', 'event
          'event-clock', 'event-minx', 'event-pyram', 'event-skewb', 'event-sq1',
          'event-444bf', 'event-555bf', 'event-333mbf'
          ]
-ICONS = zip(EVENTS, ICONS)
+ICONS = dict(zip(EVENTS, ICONS))
 RANKS = ["nr", "cr", "wr"]
 NAME_DELIM = "|"
 
@@ -582,6 +579,12 @@ def update_records() -> None:
     records = load_file("records")
     times, people = records["records"], records["people"]
 
+    # If graduated, add to alumni list 
+    graduated = [person for person in people if datetime.now() > summer(person[-1])]
+    if len(graduated) > 0:
+        alumni = load_file("alumni")
+        # first entry is WCA profile url, second is name
+        dump_file(alumni + [person[1] for person in graduated], "alumni")
     # Remove alumni
     people = [person for person in people if datetime.now() < summer(person[-1])]
 
@@ -605,16 +608,17 @@ def update_records() -> None:
 def get_sor() -> dict:
     """ Gets TJ's single and average sum of ranks (SoR). """
     times = load_file("records")["records"]
+    rankd = load_file("wca/cache")["ranks"]
     d = {"single": {}, "average": {}}
     for event in EVENTS:
         short = ICONS[event][6:]
 
         rank = times[event]["sranks"]["wr"] if "sranks" in times[event] else statistics.DNF
-        d["single"][short] = wca.rankd["Single"][short] + 1 if rank == statistics.DNF else rank
+        d["single"][short] = rankd["Single"][short] + 1 if rank == statistics.DNF else rank
 
         rank = times[event]["aranks"]["wr"] if "aranks" in times[event] else statistics.DNF
         if event != "3x3x3 Multi-Blind":
-            d["average"][short] = wca.rankd["Average"][short] + 1 if rank == statistics.DNF else rank
+            d["average"][short] = rankd["Average"][short] + 1 if rank == statistics.DNF else rank
 
     return d
 
@@ -623,26 +627,27 @@ def get_sor_ranks() -> tuple:
     ranks = get_sor()
     return wca.sor_rank(sum(ranks["single"].values()), "Single"), wca.sor_rank(sum(ranks["average"].values()), "Average")
 
-def kinch(event: str, mode: str, sing: float) -> float:
+def kinch(wrd: dict, event: str, mode: str, sing: float) -> float:
     """ Calculates the kinch score for a particular event. """
     if sing == statistics.DNF:
         return 0
-    return 100*((wca.wrd[mode][event]/100)/sing if event != "333mbf" else sing/wca.wrd[mode][event])
+    return 100*((wrd[mode][event]/100)/sing if event != "333mbf" else sing/wrd[mode][event])
 
 def get_kinch() -> dict:
     """ Gets TJ's kinch score. """
     times = load_file("records")["records"]
+    wrd = load_file("wca/cache")["wrs"]
     d = {}
 
     for event in EVENTS:
         single, average = times[event]["single"][0][0] if len(times[event]["single"]) > 0 else statistics.DNF, times[event]["average"][0][0] if len(times[event]["average"]) > 0 else statistics.DNF
 
         event = ICONS[event][6:]
-        score = kinch(event, "Average", average)
+        score = kinch(wrd, event, "Average", average)
         if event in ["333mbf"]:
-            score = kinch(event, "Single", single)
+            score = kinch(wrd, event, "Single", single)
         elif event in ["333bf", "333fm", "444bf", "555bf"]:
-            score = max(score, kinch(event, "Single", single))
+            score = max(score, kinch(wrd, event, "Single", single))
 
         d[event] = score
 
@@ -651,6 +656,15 @@ def get_kinch() -> dict:
 def get_kinch_rank() -> int:
     """ Gets the rank of TJ's kinch. """
     return wca.kinch_rank(sum(get_kinch().values())/len(EVENTS))
+
+def get_ranks() -> tuple:
+    """ Returns the rank of SoR and Kinch. """
+    ranks, kinch = get_sor(), sum(get_kinch().values())/len(EVENTS)
+    sing, avg = sum(ranks["single"].values()), sum(ranks["average"].values())
+    out = subprocess.run(["python", "wca.py", str(sing), str(avg), str(kinch)],
+                         capture_output=True).stdout.decode()
+    sing_rank, avg_rank, kinch_rank = map(int, out.split())
+    return ((sing_rank, avg_rank), kinch_rank)
 
 def get_inhouse_dates() -> list:
     """ Returns a list of all the past inhouse competitions, sorted by date. """

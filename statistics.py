@@ -1,5 +1,5 @@
 import math
-import pandas as pd
+# import pandas as pd
 
 # Computes various statistics
 
@@ -72,3 +72,4 @@ def parse_text(text: str) -> list:
         return parsers[mode](text.strip())
     except:
         return []
+
