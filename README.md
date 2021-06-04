@@ -136,7 +136,6 @@ This enables a console and inspect element.
   - Request increase in power, requests go to logfile, logfile parsed and delivered as notifications page to admin
 - Passwordless login
 - Ability to delete emails from the archive
-- Unsubscribing from the email list
 - Congratulate when a new TJ record is set
 - Calculate sum of ranks (SOR) and Kinch score relative to TJ rankings
 - Ability to click on an event and see the TJ ranking, similar to the WCA site

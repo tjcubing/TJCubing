@@ -549,17 +549,36 @@ def prompt_email(email: str) -> None:
     nonce = gen_secret()
     emails["requests"][nonce] = email
     dump_file(emails, "emails")
-    body = """Please click on this link to be added to the mailing list.
-<a href="{}">Add</a>
+    body = f"""Please click <a href="{load_file("site")["url"] + f"/email?nonce={nonce}"}">here</a> to be added to the mailing list.
 
-<p><small>If you did not request this email, discard this message.</small><p>""".format(load_file("site")["url"] + "/email?nonce={}".format(nonce))
-    send_email(email, "Request to join mailing list", body)
+--
+If you did not request this email, discard this message."""
+    send_email(email, "Request to join the TJ Cubing mailing list", body)
+
+def unsubscribe_email(email: str) -> None:
+    """ Sends a email confirming the unsubscription. """
+    emails = load_file("emails")
+    nonce = gen_secret()
+    emails["unsubscribe-requests"][nonce] = email
+    dump_file(emails, "emails")
+    body = f"""Please click <a href="{load_file("site")["url"] + f"/email?nonce={nonce}"}">here</a> to be removed from the mailing list.
+
+--
+If you did not request this email, discard this message."""
+    send_email(email, "Unsubscribing from the TJ Cubing mailing list", body)
 
 def register_email(email: str) -> None:
     """ Stores an email in the mailing list. """
     emails = load_file("emails")
     if email not in emails["emails"]:
         emails["emails"].append(email)
+    dump_file(emails, "emails")
+
+def remove_email(email: str) -> None:
+    """ Removes an email from the mailing list. """
+    emails = load_file("emails")
+    if email in emails["emails"]:
+        emails["emails"].remove(email)
     dump_file(emails, "emails")
 
 # TODO: blind cc

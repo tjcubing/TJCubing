@@ -100,8 +100,12 @@ def index() -> dict:
     form = forms.EmailForm()
 
     if form.validate_on_submit():
-        cube.prompt_email(form.email.data)
-        return alert("Check your email for a verification message.")
+        if "subscribe" in flask.request.form:
+            cube.prompt_email(form.email.data)
+            return alert("Check your email for a verification message.")
+        if "unsubscribe" in flask.request.form:
+            cube.unsubscribe_email(form.email.data)
+            return alert("Check your email for a verification message.")
 
     return {"year": cube.get_year(), "form": form}
 
@@ -247,7 +251,14 @@ def profile() -> dict:
     if scope >= 1:
         if mailForm.validate_on_submit():
             recipients = mailForm.recipients.data.split(", ") if mailForm.recipients.data != "" else cube.load_file("emails")["emails"]
-            body = cube.markdown2.markdown(mailForm.email.data).replace("\n", "")
+            # add footer with unsubscribe information
+            body = mailForm.email.data.replace("\n", "") + \
+f"""
+
+--
+If you're tired of seeing these emails, unsubscribe [here]({cube.TJ}).
+"""
+            body = cube.markdown2.markdown(body)
             cube.send_email(recipients, mailForm.subject.data, body)
             if mailForm.log.data:
                 cube.save_email(mailForm.subject.data, mailForm.email.data)
@@ -583,6 +594,7 @@ def email() -> Response:
     emails = cube.load_file("emails")
     requests = emails["requests"]
     nonce = flask.request.args.get("nonce", None)
+    # subscribing
     if nonce in requests:
         email = requests[nonce]
         # Remove previous attempts
@@ -590,6 +602,15 @@ def email() -> Response:
         cube.dump_file(emails, "emails")
         cube.register_email(email)
         return alert("You have been added to the email list.", "success")
+    requests = emails["unsubscribe-requests"]
+    # unsubscribing
+    if nonce in requests:
+        email = requests[nonce]
+        # Remove previous attempts
+        emails["unsubscribe-requests"] = {nonce: value for nonce, value in requests.items() if value != email}
+        cube.dump_file(emails, "emails")
+        cube.remove_email(email)
+        return alert("You have been removed from the email list.", "success")
 
     return alert("Wrong nonce. Try registering again?", "danger")
 

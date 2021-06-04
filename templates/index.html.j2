@@ -83,7 +83,8 @@
       <div class="col-sm">
         <h1> Mailing List </h1>
         <p class="mb-0"> To stay updated, consider joining our mailing list! </p>
-        {{ f.render_form(form, ["email"], '<small id="emailHelp" class="form-text text-muted">We\'ll never share your email with anyone else.</small>', f.button()) }}
+        {{ f.render_form(form, ["email"], '<small id="emailHelp" class="form-text text-muted">We\'ll never share your email with anyone else.</small>',
+                         f.button("subscribe", "Subscribe"), f.button("unsubscribe", "Unsubscribe", "btn-danger mt-3 mb-3")) }}
       </div>
   </div>
 
